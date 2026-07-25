@@ -1,6 +1,6 @@
 ---
 name: avoid-ai-slop-writing
-description: Audit, draft, rewrite, edit, and translate technical prose and naming surfaces so they are direct, specific, and natural without changing facts, voice, commands, identifiers, citations, or justified domain terms. Use for documentation, READMEs, issues, pull requests, commits, release notes, reports, code comments, filenames, flags, and multilingual developer writing in English, German, Polish, French, or Japanese.
+description: Use this skill when drafting, auditing, rewriting, editing, or translating technical prose and naming surfaces for documentation, READMEs, issues, pull requests, commits, release notes, reports, code comments, filenames, flags, or multilingual developer writing in English, German, Polish, French, or Japanese. Keep facts, voice, commands, identifiers, citations, uncertainty, and justified domain terms unchanged.
 ---
 
 # Avoid AI Slop Writing

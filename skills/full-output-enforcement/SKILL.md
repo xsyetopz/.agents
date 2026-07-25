@@ -1,6 +1,6 @@
 ---
 name: full-output-enforcement
-description: Overrides default LLM truncation behavior. Enforces complete code generation, bans placeholder patterns, and handles token-limit splits cleanly. Apply to any task requiring exhaustive, unabridged output.
+description: Use this skill when a task requires exhaustive, unabridged output such as a complete file, implementation, document, or enumerated deliverable. Preserve every requested item, reject placeholder omissions, and use the documented pause-and-resume protocol when the response limit is reached.
 ---
 
 # Full-Output Enforcement

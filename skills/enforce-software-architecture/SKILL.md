@@ -1,6 +1,6 @@
 ---
 name: enforce-software-architecture
-description: Enforce production-grade software architecture while designing, reviewing, refactoring, migrating, or decomposing repositories. Use for ownership and dependency boundaries, architecture styles and design patterns, language-family paradigms, API and data contracts, naming across source and public surfaces, CMake/Make/Ninja/Xmake/Conan and other build or package topology, quality attributes, security and reliability constraints, and executable architecture verification across polyglot systems.
+description: Use this skill when designing, reviewing, refactoring, migrating, or decomposing repository architecture, packages, modules, deployables, APIs, schemas, build graphs, or cross-language boundaries. Enforce ownership, dependency direction, public contracts, quality attributes, security and reliability, naming, toolchain topology, separation of tests and benchmarks, and executable verification without inventing layers or suppressing findings.
 ---
 
 # Enforce Software Architecture
@@ -48,6 +48,39 @@ name as architecture proof by itself.
 
 ## 1. Establish context and evidence
 
+### Mandatory audit protocol
+
+When this skill is triggered for a repository change, the bundled checks are a
+required part of the work rather than optional advice. Before editing, resolve
+the repository root and run both commands below from this skill directory:
+
+```bash
+python3 scripts/architecture_tools.py capabilities --root <repo> --format json
+python3 scripts/audit_architecture.py <repo> --format json
+```
+
+Run the same checks again after editing and before claiming completion. Record
+the exact scope, gate, provider status, findings, and exit codes. A source read,
+test run, or model-produced claim that the audit was used is not evidence that
+the commands ran. If a required provider is unavailable or the bundled audit
+cannot execute, report the check as blocked and do not claim architectural
+acceptance.
+
+Do not narrow, weaken, or hide the audit to make a change pass. Do not use
+`--exclude`, `--fail-on never`, an external `--exceptions` file, or an edited
+exception/configuration entry without explicit user approval for that exact
+scope and reason. The CLI requires acknowledgement flags for scoped and
+inventory-only modes; those flags are not user approval. Never add an exception,
+move a file into an ignored/artifact directory, rename a finding away, or edit
+the checker to suppress a finding as a workaround. Escalate a genuine contract
+conflict to the user and leave the failing evidence visible.
+
+The bundled audit rejects authored inline tests and benchmarks. Test source must
+be a runner-recognized file or source set, not a block, function, annotation,
+macro, or DSL embedded in production code. Generated and vendored output stays
+under its existing provenance policy; it is not a loophole for authored tests.
+The inline-test rule has no naming-exception escape hatch.
+
 Before proposing a structural change:
 
 1. Read all applicable repository instructions, ADRs, manifests, CI entrypoints,
@@ -70,10 +103,10 @@ Before proposing a structural change:
    or compiler APIs for symbols/types/references, and the build/package graph
    for resolved dependencies. Treat regex or filename scans as untrusted
    inventories, never as proof of syntax, ownership, or dependency direction.
-7. Run `python3 scripts/architecture_tools.py capabilities --root <repo>` and
-   record unavailable providers before relying on a syntax or graph gate. Use
-   `ast-query` for a read-only structural query; configure repeatable queries
-   under `syntax_rules` in `.architecture-enforcement.json`.
+7. Run the mandatory capability preflight above and record unavailable providers
+   before relying on a syntax or graph gate. Use `ast-query` for a read-only
+   structural query; configure repeatable queries under `syntax_rules` in
+   `.architecture-enforcement.json` without replacing bundled invariants.
 8. Baseline the narrowest available build, tests, packaging, and runtime smoke
    before editing; record known failures separately.
 
@@ -247,7 +280,8 @@ Read `references/quality-attributes.md`.
 
 Run the cheapest causal proof first and increase cost only as needed:
 
-1. formatter, manifest, package-content, schema, and generated-output checks;
+1. capability preflight, the full bundled architecture audit, formatter, manifest,
+   package-content, schema, and generated-output checks;
 2. compiler/type checker and focused unit/contract tests;
 3. module visibility, forbidden-import, dependency-cycle, API/ABI, architecture,
    and policy checks;
@@ -255,13 +289,16 @@ Run the cheapest causal proof first and increase cost only as needed:
    supply-chain gates;
 5. runtime smoke through the changed production entrypoint, then full QA.
 
-Use `scripts/audit_architecture.py <repo>` for deterministic inventory signals
-and configured tool-backed rules. Filename, line-size, generic/flat-bucket,
-artifact, and lockfile checks are advisory inventory; they cannot prove
-semantic cohesion, dependency direction, quality attributes, or runtime
-correctness. A required syntax rule fails closed when its provider is missing,
-times out, exits unexpectedly, or emits malformed output. Configure thresholds,
-provider rules, and exact exceptions rather than mistaking heuristics for law.
+Use `scripts/audit_architecture.py <repo>` for deterministic inventory signals,
+the mandatory inline-test/benchmark gate, and configured tool-backed rules.
+Filename, line-size, generic/flat-bucket, artifact, and lockfile checks are
+advisory inventory; they cannot prove semantic ownership, dependency direction,
+quality attributes, or runtime correctness. Inline-test findings are policy
+errors and cannot be waived through naming exceptions. A required syntax rule
+fails closed when its provider is missing, times out, exits unexpectedly, or
+emits malformed output. Configure thresholds, provider rules, and exact
+exceptions only for reviewed contracts; never use configuration to hide a
+finding.
 Read `references/verification.md`.
 
 ## 8. Refactor and migrate safely
@@ -307,7 +344,8 @@ Report:
   impact;
 - files/packages/targets added, moved, split, consolidated, or retained;
 - production-quality gates, fitness functions, focused checks, runtime proof,
-  and exact outcomes;
+  and exact outcomes, including the mandatory capability preflight and full
+  architecture-audit command;
 - exceptions, unresolved debt, unverified contracts, and material uncertainty.
 
 ## Resources
@@ -336,3 +374,26 @@ Report:
 - `scripts/audit_architecture.py`: deterministic structural-risk scanner.
 - `scripts/architecture_tools.py`: capability discovery and read-only
   ast-grep queries with strict structured-output validation.
+
+### Agent Skills package profile
+
+Treat an Agent Skills directory as a plugin boundary: `SKILL.md` front matter
+is the trigger surface, its Markdown body is the instruction surface, and
+`scripts/`, `references/`, `assets/`, and `evals/` are optional owned resources.
+Do not impose a custom heading schema on the body. Validate the package with
+the reference implementation:
+
+```sh
+uvx --from skills-ref agentskills validate <skill-path>
+```
+
+Keep references one level deep and relative to the skill root. Use
+`evals/evals.json` for realistic prompts and expected outcomes, compare with a
+no-skill or previous-version baseline, and add assertions only after observing
+initial outputs. Follow the current [Agent Skills specification](https://agentskills.io/specification),
+[best practices](https://agentskills.io/skill-creation/best-practices),
+[description guidance](https://agentskills.io/skill-creation/optimizing-descriptions),
+[evaluation guidance](https://agentskills.io/skill-creation/evaluating-skills), and
+[script guidance](https://agentskills.io/skill-creation/using-scripts) as the
+external contract; this skill owns repository architecture and proof, not a
+replacement package format.

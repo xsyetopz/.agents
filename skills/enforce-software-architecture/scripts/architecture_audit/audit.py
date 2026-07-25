@@ -8,8 +8,14 @@ from pathlib import Path, PurePosixPath
 from architecture_tools import run_ast_grep
 
 from .discovery import artifact_class, count_lines, iter_audited_files
-from .exceptions import apply_exceptions, load_exceptions, load_syntax_rules
+from .exceptions import (
+    apply_exceptions,
+    load_exceptions,
+    load_syntax_rules,
+    load_test_source_roots,
+)
 from .findings import directory_findings, filename_findings, package_manager_findings
+from .inline_tests import inline_test_findings
 from .records import AnalyzerStatus, ArtifactException, AuditReport, Finding
 from .rules import SEVERITY_RANK, SOURCE_EXTENSIONS
 
@@ -35,12 +41,22 @@ def audit_report(
 ) -> AuditReport:
     files = sorted(iter_audited_files(root, excludes))
     exceptions, artifact_exceptions, exception_findings = load_exceptions(root, exceptions_path)
-    syntax_rules, syntax_findings = load_syntax_rules(root, exceptions_path)
+    configured_test_roots, test_root_findings = load_test_source_roots(root, exceptions_path)
+    external_exception_contract = False
+    if exceptions_path is not None:
+        try:
+            exceptions_path.resolve().relative_to(root.resolve())
+        except ValueError:
+            exception_findings.append(Finding("error", "invalid-exception-file", exceptions_path, "exception contract must be inside the audited repository"))
+            exceptions, artifact_exceptions, configured_test_roots = [], [], []
+            external_exception_contract = True
+    syntax_rules, syntax_findings = ([], []) if external_exception_contract else load_syntax_rules(root, exceptions_path)
     authored: list[Path] = []
-    findings: list[Finding] = [*exception_findings, *syntax_findings]
+    findings: list[Finding] = [*exception_findings, *test_root_findings, *syntax_findings]
     analyzers: list[AnalyzerStatus] = []
     artifact_targets: list[tuple[Path, ArtifactException]] = []
     matched_artifact_targets: set[Path] = set()
+    matched_test_roots: set[Path] = set()
     for exception in artifact_exceptions:
         target = root / PurePosixPath(exception.path)
         if not target.exists():
@@ -53,7 +69,17 @@ def audit_report(
                 findings.append(Finding("error", "overlapping-artifact-exemption", root, f"artifact exemption paths overlap: {left.relative_to(root)} and {right.relative_to(root)}"))
     for pattern in excludes:
         findings.append(Finding("warning", "excluded-scope", root, f"excluded glob '{pattern}' makes this a scoped audit, not full-repository acceptance proof"))
+    for configured in configured_test_roots:
+        target = root / PurePosixPath(configured.path)
+        if not target.exists():
+            findings.append(Finding("error", "stale-test-source-root", target, f"configured test source root does not exist: {configured.path}"))
+        else:
+            findings.append(Finding("notice", "configured-test-source-root", target, f"custom test source root excepted; reason={configured.reason}; owner={configured.owner}; control={configured.control}; review={configured.review}"))
     for path in files:
+        for configured in configured_test_roots:
+            target = root / PurePosixPath(configured.path)
+            if path == target or target in path.parents:
+                matched_test_roots.add(target)
         recorded = next((item for item in artifact_targets if path == item[0] or item[0] in path.parents), None)
         if recorded and not include_generated:
             target, exception = recorded
@@ -65,6 +91,7 @@ def audit_report(
             findings.append(Finding("notice", "exempt-artifact", path, f"{kind} artifact is visibly exempt from authored structural checks"))
             continue
         authored.append(path)
+        findings.extend(inline_test_findings(path, root, configured_test_roots))
         if path.suffix.lower() in SOURCE_EXTENSIONS:
             try:
                 lines = count_lines(path)
@@ -81,6 +108,10 @@ def audit_report(
     for target, exception in artifact_targets:
         if target not in matched_artifact_targets and not include_generated:
             findings.append(Finding("error", "stale-artifact-exemption", target, f"{exception.artifact_class} artifact exemption contains no audited files"))
+    for configured in configured_test_roots:
+        target = root / PurePosixPath(configured.path)
+        if target.exists() and target not in matched_test_roots:
+            findings.append(Finding("error", "stale-test-source-root", target, f"configured test source root contains no audited files: {configured.path}"))
     findings.extend(directory_findings(root, authored, flat_limit))
     findings.extend(package_manager_findings(root, excludes))
     for rule in syntax_rules:

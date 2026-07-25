@@ -63,3 +63,12 @@ class ArtifactException:
     owner: str
     control: str
     review: str
+
+
+@dataclass(frozen=True)
+class TestSourceRoot:
+    path: str
+    reason: str
+    owner: str
+    control: str
+    review: str

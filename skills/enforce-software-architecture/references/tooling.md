@@ -34,8 +34,10 @@ timeout/resource failure, and `6` for malformed output.
 
 ## Repository rules
 
-Add repeatable syntax gates to `.architecture-enforcement.json` without putting
-commands in repository configuration:
+The bundled audit always runs its inline-test/benchmark detector independently
+of repository configuration. Add repeatable supplemental syntax gates to
+`.architecture-enforcement.json` without putting commands in repository
+configuration:
 
 ```json
 {
@@ -54,10 +56,33 @@ commands in repository configuration:
 }
 ```
 
+If a runner owns a custom test source set that cannot use the exact bundled
+path conventions, declare only its exact root in a reviewed contract. This is
+an exemption, not a way to turn off the detector:
+
+```json
+{
+  "test_source_roots": [
+    {
+      "path": "qa",
+      "reason": "JUnit source set declared by the build runner",
+      "owner": "quality platform",
+      "control": "JUnit source-set discovery check",
+      "review": "remove on build runner upgrade"
+    }
+  ]
+}
+```
+
+The path is root-relative, exact, and must exist. The audit emits a visible
+notice for every configured root, rejects globs and stale roots, and requires
+explicit user approval before agents add or edit the contract.
+
 `required` rules fail closed on `blocked`, `timeout`, `tool-failed`, or
 `invalid-output`. `advisory` rules report the same condition as a warning but
 never claim proof. The filename and regex checks remain `inventory` evidence;
-they cannot satisfy a syntax, symbol, package-graph, or build-graph gate.
+they cannot satisfy a syntax, symbol, package-graph, or build-graph gate. A
+supplemental rule cannot replace or waive a bundled inline-test finding.
 
 ## Package graph
 

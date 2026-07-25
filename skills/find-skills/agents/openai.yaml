@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find Skills"
+  short_description: "Discover and verify agent skills"
+  default_prompt: "Use $find-skills to discover, compare, and verify an agent skill before recommending or installing it."

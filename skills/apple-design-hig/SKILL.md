@@ -1,6 +1,6 @@
 ---
 name: apple-design-hig
-description: Apply and audit the current Apple Human Interface Guidelines across iOS, iPadOS, macOS, tvOS, visionOS, watchOS, and games. Use for Apple-platform UI, UX, interaction, accessibility, typography, layout, color, motion, components, inputs, system experiences, or Apple technology design decisions; use the live HIG and cite the exact guidance rather than relying on memory or stale summaries.
+description: Use this skill when designing or auditing Apple-platform UI, UX, interaction, accessibility, typography, layout, color, motion, components, inputs, system experiences, or Apple technology decisions across iOS, iPadOS, macOS, tvOS, visionOS, watchOS, and games. Check the live HIG and cite exact guidance; distinguish HIG recommendations from SDK, API, entitlement, and accessibility implementation contracts.
 ---
 
 # Apple Design HIG

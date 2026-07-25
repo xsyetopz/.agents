@@ -18,8 +18,10 @@ from .exceptions import (
     exception_quality_error,
     load_exceptions,
     load_syntax_rules,
+    load_test_source_roots,
 )
 from .findings import directory_findings, filename_findings, package_manager_findings
+from .inline_tests import inline_test_findings, is_test_source
 from .records import (
     AnalyzerStatus,
     ArtifactException,
@@ -27,6 +29,7 @@ from .records import (
     Finding,
     NamingException,
     SyntaxRule,
+    TestSourceRoot,
 )
 from .rules import *
 
@@ -58,6 +61,7 @@ __all__ = [
     "Finding",
     "NamingException",
     "SyntaxRule",
+    "TestSourceRoot",
     "apply_exceptions",
     "artifact_class",
     "audit",
@@ -67,9 +71,12 @@ __all__ = [
     "exception_path_is_overbroad",
     "exception_quality_error",
     "filename_findings",
+    "inline_test_findings",
+    "is_test_source",
     "iter_audited_files",
     "load_exceptions",
     "load_syntax_rules",
+    "load_test_source_roots",
     "main",
     "matches_any",
     "normalized_leaf",

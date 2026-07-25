@@ -1,6 +1,6 @@
 ---
 name: scaffold-agent-governance
-description: Audit, create, or update standard repository governance for people and coding agents. Use when adding CONTRIBUTING.md, AGENTS.md, provider imports, a pull request template, CODEOWNERS, multilingual governance, tool-assistance disclosure with Git trailers, or strict project-only and external-write rules for agents.
+description: Use this skill when auditing, creating, or updating repository governance for people and coding agents, including CONTRIBUTING.md, AGENTS.md, provider imports, pull-request templates, CODEOWNERS, multilingual policy, Git assistance trailers, or project-only and external-write rules. Keep human policy separate from agent execution rules and require explicit authorization for hosted changes.
 ---
 
 # Scaffold Agent Governance

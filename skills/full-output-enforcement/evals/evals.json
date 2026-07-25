@@ -1,0 +1,20 @@
+{
+  "skill_name": "full-output-enforcement",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Generate the complete contents of this three-file Python package, including every function and test. Do not use placeholders or omit repeated sections.",
+      "expected_output": "All requested files and functions are present in full, with runnable code and no omission markers."
+    },
+    {
+      "id": 2,
+      "prompt": "List all twelve requested API endpoints with their full request and response schemas, even if several are similar.",
+      "expected_output": "Exactly twelve complete endpoint entries with no collapsed repetition or prose standing in for schemas."
+    },
+    {
+      "id": 3,
+      "prompt": "Write the full implementation, but stop if the response limit prevents completion.",
+      "expected_output": "A complete implementation or an exact pause marker naming how many deliverables are complete and the next section to resume, without pretending the work is finished."
+    }
+  ]
+}

@@ -7,7 +7,13 @@ import re
 from collections.abc import Sequence
 from pathlib import Path, PurePosixPath
 
-from .records import ArtifactException, Finding, NamingException, SyntaxRule
+from .records import (
+    ArtifactException,
+    Finding,
+    NamingException,
+    SyntaxRule,
+    TestSourceRoot,
+)
 from .rules import (
     ARTIFACT_EXCEPTION_CLASSES,
     LOW_QUALITY_EXCEPTION_VALUES,
@@ -17,7 +23,7 @@ from .rules import (
 
 def exception_path_is_overbroad(value: str) -> bool:
     pure = PurePosixPath(value)
-    return pure.is_absolute() or ".." in pure.parts or value in {"", "."} or pure.as_posix() != value or any(char in value for char in "*?[]\\")
+    return pure.is_absolute() or ".." in pure.parts or "\x00" in value or value in {"", "."} or pure.as_posix() != value or any(char in value for char in "*?[]\\")
 
 
 def exception_quality_error(raw: dict[str, str]) -> str | None:
@@ -45,9 +51,9 @@ def load_exceptions(root: Path, path: Path | None) -> tuple[list[NamingException
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         return [], [], [Finding("error", "invalid-exception-file", path, f"cannot read exception contract: {exc}")]
-    allowed_keys = {"artifact_exemptions", "naming_exceptions", "syntax_rules"}
+    allowed_keys = {"artifact_exemptions", "naming_exceptions", "syntax_rules", "test_source_roots"}
     if not isinstance(payload, dict) or not payload or not set(payload) <= allowed_keys:
-        return [], [], [Finding("error", "invalid-exception-file", path, "top-level object may contain only naming_exceptions, artifact_exemptions, and syntax_rules arrays")]
+        return [], [], [Finding("error", "invalid-exception-file", path, "top-level object may contain only naming_exceptions, artifact_exemptions, syntax_rules, and test_source_roots arrays")]
     naming_records, artifact_records = payload.get("naming_exceptions", []), payload.get("artifact_exemptions", [])
     if not isinstance(naming_records, list) or not isinstance(artifact_records, list):
         return [], [], [Finding("error", "invalid-exception-file", path, "exception collections must be arrays")]
@@ -79,6 +85,40 @@ def load_exceptions(root: Path, path: Path | None) -> tuple[list[NamingException
         else:
             artifacts.append(ArtifactException(raw["class"].strip(), raw["path"].strip(), raw["reason"].strip(), raw["owner"].strip(), raw["control"].strip(), raw["review"].strip()))
     return valid, artifacts, findings
+
+
+def load_test_source_roots(root: Path, path: Path | None) -> tuple[list[TestSourceRoot], list[Finding]]:
+    """Load exact, reviewed custom test-source roots without accepting globs."""
+    if path is None:
+        path = root / ".architecture-enforcement.json"
+        if not path.exists():
+            return [], []
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return [], []
+    if not isinstance(payload, dict) or "test_source_roots" not in payload:
+        return [], []
+    records = payload["test_source_roots"]
+    if not isinstance(records, list):
+        return [], [Finding("error", "invalid-test-source-root", path, "test_source_roots must be an array")]
+    required = {"path", "reason", "owner", "control", "review"}
+    roots: list[TestSourceRoot] = []
+    findings: list[Finding] = []
+    for index, raw in enumerate(records):
+        if (
+            not isinstance(raw, dict)
+            or set(raw) != required
+            or any(not isinstance(raw.get(key), str) or not raw[key].strip() for key in required)
+        ):
+            findings.append(Finding("error", "invalid-test-source-root", path, f"test source root {index} must contain exactly five nonempty string fields"))
+        elif exception_path_is_overbroad(raw["path"]):
+            findings.append(Finding("error", "invalid-test-source-root", path, f"test source root {index} path must be exact and root-relative"))
+        elif quality_error := exception_quality_error(raw):
+            findings.append(Finding("error", "invalid-test-source-root", path, f"test source root {index} {quality_error}"))
+        else:
+            roots.append(TestSourceRoot(**{key: raw[key].strip() for key in required}))
+    return roots, findings
 
 
 def load_syntax_rules(root: Path, path: Path | None) -> tuple[list[SyntaxRule], list[Finding]]:

@@ -7,13 +7,27 @@ that ownership visible.
 ## Contents
 
 - General ownership; Deno; Node/Bun; Go; Rust; Python; Swift
-- Java/Kotlin; C/C++; C#/F#; declaration/platform companions; Zig; D; Odin/C3
+- Java/Kotlin; C/C++; C#/F#; declaration/platform companions; Zig; D; Nim; Odin/C3
 - Ruby; PHP; architecture fitness tests; test-support boundaries
 
 ## General rule
 
 Place tests where their ownership is obvious and where the ecosystem's normal
-tooling discovers them without custom configuration.
+tooling discovers them without custom configuration. Test code and benchmark
+code must be separate source units: do not embed test blocks, test functions,
+annotations, macros, or runner DSL calls in authored production modules. A test
+file remains a separate source unit even when it shares a package, namespace, or
+target.
+
+The bundled architecture audit rejects native inline forms and framework forms
+for which the file carries explicit runner evidence. Actual test files and
+exact test/benchmark roots are exempt. A custom source set is exempt only when
+the repository's `.architecture-enforcement.json` contains an exact,
+reviewed `test_source_roots` contract with owner, control, reason, and review
+trigger; the audit reports that exemption and rejects globs or stale roots. A
+directory whose name merely contains `test` is not a test location. If a runner
+uses an unrecognized form, add a reviewed syntax rule rather than weakening or
+bypassing the bundled audit.
 
 Treat a runner-recognized test prefix/suffix as a technical marker for the
 filename rules in `naming.md`: `test_parser.py`, `parser_test.go`,
@@ -26,8 +40,15 @@ companion, or platform variant form one logical family for prefix-colony counts.
 A test tree should either sit beside source or mirror it exactly. It should not
 invent a competing architecture.
 
-Do not classify tests by directory name alone. Classify them by the boundary
-crossed:
+Benchmarks follow the same separation rule. Use a runner-recognized benchmark
+source set or an exact `bench`/`benches` root; source-adjacent files may use
+`*_bench.*`, `*_benchmarks.*`, `*.bench.*`, or `*.benchmark.*` when the runner
+supports them. Do not place benchmark blocks or benchmark annotations in a
+production module.
+
+Do not infer test ownership or test type from a directory label alone. The
+bundled scanner uses exact runner conventions only to avoid false inline-test
+alarms; classify the test itself by the boundary crossed:
 
 - **unit:** one cohesive source unit or package-internal behavior;
 - **contract:** a stable API, ABI, protocol, plugin, or consumer/provider agreement;
@@ -101,10 +122,10 @@ global unit-test root.
 
 ## Rust
 
-Keep Rust unit tests in separate, source-owned files by default. This skill's
-opinionated rule prevents production modules from growing into mixed
-implementation/test files; treat inline tests as a recorded exception only
-when a toolchain or existing contract requires them.
+Keep Rust unit tests in separate, source-owned files. This skill rejects
+production modules that contain inline tests or benchmarks; there is no
+inline-test exception. The companion file remains part of the same source owner
+and is connected through an external module declaration.
 
 ```text
 src/
@@ -234,21 +255,23 @@ a syntactically valid rename cannot silently remove tests from the suite.
 
 ## Zig
 
-Small unit tests may remain in the same source file because Zig's `test` blocks
-are a native convention. For larger files, extract owned test modules and
-import them from the package's test root while preserving source-tree correspondence.
+Zig `test` blocks are still test code and must not remain in authored production
+modules. Put them in a dedicated test root or source-owned test file and compose
+that file through the build graph. Preserve package ownership and keep the
+production module free of `test { ... }` declarations.
 
 ## D
 
-Use the repository's unit-test model. Small `unittest` blocks may stay beside
-implementation. When tests become substantial, use source-adjacent `_test.d`
-modules or a mirrored test package accepted by the selected Dub configuration.
+Use the repository's unit-test model, but keep D `unittest { ... }` blocks out
+of authored implementation modules. Use source-adjacent `_test.d` modules or a
+mirrored test package accepted by the selected Dub configuration.
 
-## Odin and C3
+## Nim, Odin, and C3
 
-Follow the package and test-runner conventions available in the repository.
-Prefer source-adjacent test files named consistently by the toolchain, and
-preserve package ownership. Do not invent a global tests hierarchy unless
+Follow the package and test-runner conventions available in the repository, but
+keep Nim `unittest`, `suite`, and `test` blocks out of authored implementation
+modules. Prefer source-adjacent test files named consistently by the toolchain,
+and preserve package ownership. Do not invent a global tests hierarchy unless
 required by the build system.
 
 ## Ruby
