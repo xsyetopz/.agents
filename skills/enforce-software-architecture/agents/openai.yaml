@@ -1,0 +1,4 @@
+interface:
+  display_name: "Enforce Software Architecture"
+  short_description: "Enforce production-grade architecture and boundaries"
+  default_prompt: "Use $enforce-software-architecture to enforce production-grade ownership, dependencies, patterns, quality attributes, naming, and verification in this repository."

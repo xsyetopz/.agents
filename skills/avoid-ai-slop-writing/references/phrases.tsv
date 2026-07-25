@@ -1,0 +1,260 @@
+# category	severity	literal candidate	replacement hint (TSV)
+# Matches are advisory. Code, quotes, and technical terms are protected by the scanner.
+filler	hard	furthermore	and or remove
+filler	hard	moreover	and or remove
+filler	hard	additionally	and or remove
+filler	hard	in summary	state the result
+filler	hard	in conclusion	state the result
+filler	hard	to sum up	stop at the last real point
+filler	hard	it is worth noting that	remove or state the fact
+filler	hard	it should be noted that	remove or state the fact
+filler	hard	that being said	state the contrast
+filler	hard	with that said	state the contrast
+filler	hard	generally speaking	remove
+filler	hard	needless to say	remove
+filler	hard	as mentioned above	name the reference
+filler	hard	it goes without saying	remove
+filler	hard	certainly	state the evidence
+filler	hard	great question	remove chat residue
+filler	hard	i hope this helps	remove
+filler	hard	feel free to reach out	state the next action
+filler	hard	as an ai language model	remove
+filler	hard	in today's fast-paced world	start with the subject
+filler	hard	in this day and age	start with the subject
+filler	hard	at the end of the day	state the result
+filler	hard	the following sections	name the sections or remove
+filler	hard	key takeaways	name the actual points
+filler	hard	overall,	state the result
+filler	hard	in essence,	state the claim
+filler	hard	ultimately,	state the result
+filler	hard	importantly,	state the fact
+filler	hard	interestingly,	state the fact
+filler	hard	notably,	state the fact
+filler	hard	needless to say	remove
+jargon	hard	utilize	use
+jargon	hard	utilizes	uses
+jargon	hard	utilized	used
+jargon	hard	utilizing	using
+jargon	hard	leverage	use
+jargon	hard	leverages	uses
+jargon	hard	leveraged	used
+jargon	hard	leveraging	using
+jargon	hard	synergize	describe the combined effect
+jargon	hard	synergy	name the relationship
+jargon	hard	facilitate	help or enable
+jargon	hard	facilitates	helps or enables
+jargon	hard	facilitated	helped or enabled
+jargon	hard	facilitating	helping or enabling
+jargon	contextual	robust	name the property
+jargon	contextual	seamless	name the behavior
+jargon	contextual	seamlessly	name the behavior
+jargon	contextual	actionable	name the action
+jargon	contextual	best practices	name the practice
+jargon	contextual	move the needle	name the measure
+jargon	contextual	circle back	return or follow up
+jargon	contextual	touch base	contact
+jargon	contextual	align on	agree on
+jargon	contextual	low-hanging fruit	easy first change
+jargon	contextual	bandwidth	time or capacity
+jargon	contextual	value proposition	specific benefit
+jargon	contextual	thought leadership	specific expertise
+jargon	contextual	stakeholders	people who use or own it
+inflation	hard	delve	look at or explain
+inflation	hard	delving	looking at or explaining
+inflation	hard	deep dive	detailed review
+inflation	hard	dive into	examine
+inflation	contextual	crucial	name the dependency or evidence
+inflation	contextual	essential	name the dependency or evidence
+inflation	contextual	vital	name the dependency or evidence
+inflation	contextual	paramount	name the constraint
+inflation	contextual	fundamental	name the mechanism
+inflation	contextual	foundational	name the dependency
+inflation	contextual	transformative	name the measured change
+inflation	contextual	groundbreaking	name the result
+inflation	contextual	game-changing	name the result
+inflation	contextual	unparalleled	name the comparison
+inflation	contextual	unprecedented	name the baseline
+inflation	contextual	invaluable	name the use
+inflation	contextual	indispensable	name the dependency
+inflation	contextual	pivotal	name the effect
+inflation	contextual	notable	name the fact
+inflation	contextual	significant	name the measure
+inflation	contextual	intricate	name the parts
+inflation	contextual	meticulous	name the steps
+inflation	contextual	meticulously	name the steps
+inflation	contextual	quietly	name the manner
+inflation	contextual	deeply	name the degree
+inflation	contextual	fundamentally	name the mechanism
+inflation	contextual	remarkably	name the measure
+inflation	contextual	arguably	state the evidence
+inflation	contextual	thoughtfully	name the decision
+inflation	contextual	meaningfully	name the effect
+inflation	contextual	strategically	name the strategy
+inflation	contextual	comprehensive	name the scope
+inflation	contextual	multifaceted	name the parts
+inflation	contextual	myriad	name the count
+inflation	contextual	plethora	name the count
+inflation	contextual	thereby	state the causal link
+inflation	contextual	herein	state the subject
+structure	contextual	it's not just	state the positive claim
+structure	contextual	it is not just	state the positive claim
+structure	contextual	this isn't	state the positive claim
+structure	contextual	this is not	state the positive claim
+structure	contextual	not because	state the cause
+structure	contextual	less about	state the subject
+structure	contextual	more about	state the subject
+structure	contextual	despite its challenges	state the limit
+structure	contextual	despite these challenges	state the limit
+structure	contextual	the question is not	state the positive claim
+structure	contextual	the result?	state the result
+structure	contextual	the catch?	state the constraint
+structure	contextual	the kicker?	state the result
+structure	contextual	the problem?	state the problem
+structure	contextual	the best part?	state the fact
+structure	contextual	the bottom line?	state the result
+structure	contextual	the takeaway?	state the point
+structure	contextual	why does this matter?	state the consequence
+structure	contextual	why should you care?	state the consequence
+structure	contextual	what this really means is	state the meaning
+structure	contextual	the truth is	state the claim
+structure	contextual	the real story is	state the evidence
+structure	contextual	here's the thing	state the claim
+structure	contextual	here's the kicker	state the result
+structure	contextual	here's the catch	state the constraint
+structure	contextual	here's the deal	state the terms
+structure	contextual	here's where it gets interesting	state the fact
+structure	contextual	let that sink in	remove
+structure	contextual	read that again	remove
+structure	contextual	full stop	remove or join
+structure	contextual	period.	remove or join
+structure	contextual	imagine a world where	state the scenario
+structure	contextual	think of it as	state the mapping
+structure	contextual	think of it like	state the mapping
+structure	contextual	it's like	state the mapping
+structure	contextual	a swiss army knife for	name the functions
+structure	contextual	from innovation to transformation	name the actual range
+structure	contextual	from the code to the culture	name the actual range
+authority	contextual	studies show	name the study
+authority	contextual	experts believe	name the source
+authority	contextual	widely regarded	name who regards it so
+authority	contextual	research proves	name the evidence
+authority	contextual	everyone knows	state the fact
+authority	contextual	nobody talks about	name the overlooked evidence
+authority	contextual	what most people miss	name the evidence
+authority	contextual	the hidden cost	name the cost
+authority	contextual	the silent killer	name the failure
+authority	contextual	the only real solution	name the alternatives
+authority	contextual	the one thing you need to know	state the key fact
+register	contextual	serve as	use is or a concrete verb
+register	contextual	serves as	use is or a concrete verb
+register	contextual	functions as	use is or a concrete verb
+register	contextual	acts as	use is or a concrete verb
+register	contextual	stands as	use is or a concrete verb
+register	contextual	represents	state the relation
+register	contextual	constitutes	use is or names the parts
+register	contextual	boasts	has
+register	contextual	features	has or lists
+register	contextual	landscape	name the field
+register	contextual	realm	name the field
+register	contextual	tapestry	name the parts
+register	contextual	ecosystem	name the actors
+register	contextual	paradigm	name the model
+register	contextual	cornerstone	name the dependency
+register	contextual	catalyst	name the cause
+register	contextual	testament	name the evidence
+register	contextual	holistic	name the scope
+register	contextual	granular	name the granularity
+register	contextual	impactful	name the effect
+register	contextual	innovative	name the change
+register	contextual	state-of-the-art	name the version or measure
+register	contextual	best-in-class	name the comparison
+register	contextual	unlock the potential	state the capability
+register	contextual	unleash	state the action
+register	contextual	democratize	name who gains access
+register	contextual	supercharge	improve or measure
+register	contextual	harness	use
+register	contextual	foster	help or create
+register	contextual	empower	enable or give control
+register	contextual	elevate	raise or improve
+register	contextual	bolster	support
+register	contextual	showcase	show
+register	contextual	navigate	examine or move through
+register	contextual	streamline	remove steps or state the path
+register	contextual	enhance	improve or name the change
+register	contextual	validate	check
+register	contextual	validates	checks
+register	contextual	validated	checked
+register	contextual	validating	checking
+register	contextual	validation	check
+register	contextual	validations	checks
+register	contextual	verify	check or prove
+register	contextual	verifies	checks or proves
+register	contextual	verified	checked or proven
+register	contextual	verifying	checking or proving
+register	contextual	verification	check or proof
+register	contextual	implement	add, build, or name the change
+register	contextual	implements	adds, builds, or names the change
+register	contextual	implemented	added, built, or changed
+register	contextual	implementing	adding, building, or changing
+register	contextual	execute	run
+register	contextual	execution	run
+register	contextual	perform	do or run
+register	contextual	performs	does or runs
+register	contextual	performed	did or ran
+register	contextual	performing	doing or running
+register	contextual	ensure	make sure or name the guarantee
+register	contextual	ensures	makes sure or names the guarantee
+register	contextual	ensured	made sure or named the guarantee
+register	contextual	ensuring	making sure or naming the guarantee
+register	contextual	determine	find or name the rule
+register	contextual	determines	finds or names the rule
+register	contextual	determined	found or named the rule
+register	contextual	determining	finding or naming the rule
+register	contextual	optimize	improve, tune, or name the measure
+register	contextual	optimizes	improves, tunes, or names the measure
+register	contextual	optimized	improved, tuned, or measured
+register	contextual	optimizing	improving, tuning, or measuring
+register	contextual	initialize	init or set up
+register	contextual	initializes	inits or sets up
+register	contextual	initialized	started or set up
+register	contextual	initializing	starting or setting up
+process	hard	as requested	state the finished result
+process	hard	per review feedback	state the finished result
+process	hard	now also handles	state the behavior
+process	hard	the user asked	state the requirement
+process	hard	in this pass	state the change
+process	contextual	the next step is	state the action
+process	contextual	as mentioned above	name the reference
+process	contextual	feel free to reach out	state the owner
+process	contextual	i may be biased	state the evidence
+process	contextual	to be honest	state the claim
+process	contextual	this is not a rant	state the claim
+process	contextual	great suggestion	state the judgment
+process	contextual	solid step in the right direction	state the evidence
+format	structural	phase 1	name the topic
+format	structural	phase 2	name the topic
+format	structural	phase 3	name the topic
+format	structural	stage 1	name the topic
+format	structural	stage 2	name the topic
+format	structural	step 1	name the topic
+format	structural	step 2	name the topic
+format	structural	first takeaway	name the point
+format	structural	second takeaway	name the point
+format	structural	third takeaway	name the point
+metaphor	contextual	rich tapestry	name the relation
+metaphor	contextual	intricate interplay	name the relation
+metaphor	contextual	delicate balance	name the constraint
+metaphor	contextual	double-edged sword	name both effects
+metaphor	contextual	tip of the iceberg	name the unseen scope
+metaphor	contextual	perfect storm	name the causes
+metaphor	contextual	game changer	name the result
+metaphor	contextual	paradigm shift	name the model change
+metaphor	contextual	tipping point	name the threshold
+metaphor	contextual	at the forefront	name the position
+metaphor	contextual	sets the stage	state the precondition
+metaphor	contextual	moves the needle	name the measure
+metaphor	contextual	at the intersection of	name the relation
+metaphor	contextual	smoking gun	name the evidence
+metaphor	contextual	bridge the gap	name the missing link
+metaphor	contextual	journey	name the sequence
+metaphor	contextual	journey from	name the sequence
