@@ -1,0 +1,487 @@
+{
+  "schemaVersion": "3.0.0",
+  "corpusVersion": "3.0.0",
+  "evaluationOptions": {
+    "now": "2026-07-18T12:00:00Z",
+    "policy": {
+      "version": "policy-2",
+      "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "model": {
+      "version": "model-2",
+      "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "validator": {
+      "id": "deterministic.context",
+      "version": "3.0.0"
+    },
+    "objective": {
+      "id": "goal.architecture",
+      "version": "2",
+      "digest": "65b6db3627be4d3e8185336fec17d64b1f8c6f5b75db0490524d74fc569cf321"
+    },
+    "acceptance": {
+      "version": "acceptance-3",
+      "digest": "fa45921710ca6406998bd50dfe2cbad6f15a12ab4263b4dcb2337c199300002c",
+      "ref": "contracts/acceptance.json"
+    },
+    "judge": {
+      "version": "judge-2",
+      "promptSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "enabled": true,
+      "ranAfterObjectiveGates": true,
+      "decision": "pass"
+    },
+    "maxRetries": 2,
+    "expectedArtifacts": [
+      {
+        "ref": "artifacts/implementation.js",
+        "kind": "implementation",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+      },
+      {
+        "ref": "artifacts/verifier.ts",
+        "kind": "verifier",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+      },
+      {
+        "ref": "artifacts/tests.ts",
+        "kind": "test-suite",
+        "sha256": "3333333333333333333333333333333333333333333333333333333333333333"
+      }
+    ],
+    "expectedEffects": [],
+    "review": {
+      "author": "author-agent",
+      "reviewer": "review-agent",
+      "eligibleReviewers": ["review-agent"]
+    },
+    "run": {
+      "id": "run/architecture/001",
+      "startedAt": "2026-07-18T10:00:00Z",
+      "completedAt": "2026-07-18T11:00:00Z",
+      "expiresAt": "2026-07-18T13:00:00Z",
+      "priorRunIds": []
+    },
+    "expectedTests": [
+      {
+        "evidenceId": "evidence/tests",
+        "evidenceRef": "evidence/tests.json",
+        "artifactRef": "artifacts/tests.ts",
+        "artifactSha256": "3333333333333333333333333333333333333333333333333333333333333333",
+        "resultSha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "outcome": "pass"
+      }
+    ],
+    "expectedFindings": []
+  },
+  "controls": [
+    {
+      "id": "FW-CONTEXT-CONTROL",
+      "contract": "context-envelope",
+      "input": {
+        "schemaVersion": "3.0.0",
+        "contextId": "context.architecture",
+        "properties": [
+          {
+            "name": "summary",
+            "value": {
+              "summary": "validated context"
+            },
+            "origin": {
+              "kind": "repository",
+              "ref": "docs/architecture.md"
+            },
+            "createdAt": "2026-07-18T10:00:00Z",
+            "retrievedAt": "2026-07-18T10:01:00Z",
+            "trustClass": "validated",
+            "integrity": {
+              "algorithm": "sha-256",
+              "canonicalization": "canonical-json-v1",
+              "coverage": "property-value",
+              "sha256": "778bb30cb229f13de40eb553287898c78f46937c1d407a56d0859fcad5d4d3f5"
+            },
+            "scope": "architectural-cohesion",
+            "objective": {
+              "id": "goal.architecture",
+              "version": "2",
+              "digest": "65b6db3627be4d3e8185336fec17d64b1f8c6f5b75db0490524d74fc569cf321"
+            },
+            "policy": {
+              "version": "policy-2",
+              "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "retention": {
+              "class": "session",
+              "expiresAt": "2026-07-19T12:00:00Z"
+            },
+            "sensitivity": "internal",
+            "redaction": {
+              "required": false,
+              "applied": false,
+              "method": ""
+            },
+            "transformations": [
+              {
+                "kind": "summarize",
+                "producer": {
+                  "kind": "model",
+                  "id": "summarizer",
+                  "version": "model-2",
+                  "digest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                },
+                "at": "2026-07-18T10:02:00Z"
+              }
+            ],
+            "validation": {
+              "property": "summary",
+              "status": "valid",
+              "validator": {
+                "id": "deterministic.context",
+                "version": "3.0.0"
+              },
+              "validatedAt": "2026-07-18T10:03:00Z",
+              "evidence": [
+                {
+                  "kind": "parser",
+                  "ref": "evidence/context-parser.json",
+                  "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "inputSha256": "492c13aff4f35feb5401a63690df70dbda2f0d3ddd8507840fb7c0eb502040bd"
+    },
+    {
+      "id": "FW-HANDOFF-CONTROL",
+      "contract": "handoff-review",
+      "input": {
+        "schemaVersion": "3.0.0",
+        "createdAt": "2026-07-18T10:00:00Z",
+        "expiresAt": "2026-07-19T12:00:00Z",
+        "objective": {
+          "id": "goal.architecture",
+          "version": "2",
+          "digest": "65b6db3627be4d3e8185336fec17d64b1f8c6f5b75db0490524d74fc569cf321",
+          "statement": "Complete the architectural cohesion contract."
+        },
+        "inputs": [
+          {
+            "ref": "inputs/task.json",
+            "sha256": "5555555555555555555555555555555555555555555555555555555555555555"
+          }
+        ],
+        "artifacts": [
+          {
+            "ref": "artifacts/change.patch",
+            "sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+          }
+        ],
+        "acceptance": {
+          "ref": "contracts/acceptance.json",
+          "version": "acceptance-3",
+          "digest": "fa45921710ca6406998bd50dfe2cbad6f15a12ab4263b4dcb2337c199300002c"
+        },
+        "policy": {
+          "version": "policy-2",
+          "digest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "modelVersion": "model-2",
+          "modelDigest": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "authors": {
+          "author": "author-agent",
+          "reviewer": "review-agent",
+          "selfReview": false
+        },
+        "evidence": [
+          {
+            "ref": "artifacts/change.patch",
+            "kind": "hash",
+            "sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+          }
+        ]
+      },
+      "inputSha256": "851bdabde57bba29cfb45d5ccb872f432143d6770e3bea4b497c7520cac77092"
+    }
+  ],
+  "cases": [
+    {
+      "id": "FW-001",
+      "ordinal": 1,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [],
+      "inputSha256": "492c13aff4f35feb5401a63690df70dbda2f0d3ddd8507840fb7c0eb502040bd",
+      "expected": {
+        "decision": "accept",
+        "code": null
+      }
+    },
+    {
+      "id": "FW-002",
+      "ordinal": 2,
+      "contract": "handoff-review",
+      "control": "FW-HANDOFF-CONTROL",
+      "mutations": [],
+      "inputSha256": "851bdabde57bba29cfb45d5ccb872f432143d6770e3bea4b497c7520cac77092",
+      "expected": {
+        "decision": "accept",
+        "code": null
+      }
+    },
+    {
+      "id": "FW-003",
+      "ordinal": 3,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "remove",
+          "path": "/properties/0/objective",
+          "value": null
+        }
+      ],
+      "inputSha256": "920dc8dc3ff1574c6c96a4185b2327ab1eabb057cdf8e2c1235d4e35c5250d1e",
+      "expected": {
+        "decision": "reject",
+        "code": "INSTANCE_SHAPE"
+      }
+    },
+    {
+      "id": "FW-004",
+      "ordinal": 4,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "copy",
+          "path": "/properties/0",
+          "value": "/properties/1"
+        }
+      ],
+      "inputSha256": "551a318d29fbfaeaa59a07cd3598d50002d18c0143e61cbf8a7c1ca993c49c90",
+      "expected": {
+        "decision": "reject",
+        "code": "CONTEXT_PROPERTY_DUPLICATE"
+      }
+    },
+    {
+      "id": "FW-005",
+      "ordinal": 5,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/integrity/sha256",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "inputSha256": "9fb498fc07da3f4e0d18826022bb3b7fc705401afc35e6dabaf1dc1e6d87619c",
+      "expected": {
+        "decision": "reject",
+        "code": "INTEGRITY_MISMATCH"
+      }
+    },
+    {
+      "id": "FW-006",
+      "ordinal": 6,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/validation/evidence",
+          "value": []
+        }
+      ],
+      "inputSha256": "2313df5634fbd39d85ccd0567b803c81ca777665770fee4dde2098e56f778d1c",
+      "expected": {
+        "decision": "reject",
+        "code": "LLM_TRANSFORM_UNVALIDATED"
+      }
+    },
+    {
+      "id": "FW-007",
+      "ordinal": 7,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/retention/expiresAt",
+          "value": "2026-07-18T11:00:00Z"
+        }
+      ],
+      "inputSha256": "c57f44d5f8989442f9192fb9c0c557d7e0c071f63649b4d7c26d9a19e95ad980",
+      "expected": {
+        "decision": "reject",
+        "code": "CONTEXT_EXPIRED"
+      }
+    },
+    {
+      "id": "FW-008",
+      "ordinal": 8,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/sensitivity",
+          "value": "secret"
+        }
+      ],
+      "inputSha256": "808dda5a9bfe3d96c4bfcaed00531cf24b357828332b61d3501804426eb1838b",
+      "expected": {
+        "decision": "reject",
+        "code": "SECRET_REDACTION_REQUIRED"
+      }
+    },
+    {
+      "id": "FW-009",
+      "ordinal": 9,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/policy/digest",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "inputSha256": "b5adb93ca72cf1ae9ed8e4eeb5dd8d4ed7e255facc89e418018de10c67d7895a",
+      "expected": {
+        "decision": "reject",
+        "code": "POLICY_MISMATCH"
+      }
+    },
+    {
+      "id": "FW-010",
+      "ordinal": 10,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/transformations/0/producer/digest",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "inputSha256": "a8988b89adb496e3f8dcd22029985e56bb75e7b1ebd960282ba40232ff926ff4",
+      "expected": {
+        "decision": "reject",
+        "code": "MODEL_MISMATCH"
+      }
+    },
+    {
+      "id": "FW-011",
+      "ordinal": 11,
+      "contract": "handoff-review",
+      "control": "FW-HANDOFF-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/authors/reviewer",
+          "value": "author-agent"
+        }
+      ],
+      "inputSha256": "47daf8f7d2c9ac92eb6131d31f1dba5e1b2220824e8e4a08f704269f148c8c9e",
+      "expected": {
+        "decision": "reject",
+        "code": "SELF_REVIEW"
+      }
+    },
+    {
+      "id": "FW-012",
+      "ordinal": 12,
+      "contract": "handoff-review",
+      "control": "FW-HANDOFF-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/objective/digest",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "inputSha256": "a2100248b0bff6acd023eeca6c8fe6249324c5230048dbc6047aca8ac2623795",
+      "expected": {
+        "decision": "reject",
+        "code": "OBJECTIVE_MISMATCH"
+      }
+    },
+    {
+      "id": "FW-013",
+      "ordinal": 13,
+      "contract": "handoff-review",
+      "control": "FW-HANDOFF-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/acceptance/digest",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "inputSha256": "2de4c98b1c3c664acbe3e005421bbfdb3314882858b417605f70c4835282a207",
+      "expected": {
+        "decision": "reject",
+        "code": "ACCEPTANCE_MISMATCH"
+      }
+    },
+    {
+      "id": "FW-014",
+      "ordinal": 14,
+      "contract": "handoff-review",
+      "control": "FW-HANDOFF-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/evidence/0/ref",
+          "value": "artifacts/unknown.patch"
+        }
+      ],
+      "inputSha256": "55f9571eefaa3ee96473372967f13b311192c98aa117824c6650034f5d82d7a0",
+      "expected": {
+        "decision": "reject",
+        "code": "REFERENCE_MISSING"
+      }
+    },
+    {
+      "id": "FW-015",
+      "ordinal": 15,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/validation/validator/version",
+          "value": "2.0.0"
+        }
+      ],
+      "inputSha256": "b6bb56d9c082fe1d25d7390011cd1cf7fe7ac3816e87e7b1aec93f72d0c8ad2c",
+      "expected": {
+        "decision": "reject",
+        "code": "VALIDATOR_MISMATCH"
+      }
+    },
+    {
+      "id": "FW-016",
+      "ordinal": 16,
+      "contract": "context-envelope",
+      "control": "FW-CONTEXT-CONTROL",
+      "mutations": [
+        {
+          "op": "replace",
+          "path": "/properties/0/validation/property",
+          "value": "other"
+        }
+      ],
+      "inputSha256": "447dc7fc0873f7cf8e63adc4f9d9421d76b7ecea7a77d35af4c84312cb865751",
+      "expected": {
+        "decision": "reject",
+        "code": "VALIDATOR_MISMATCH"
+      }
+    }
+  ]
+}

@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://xsyetopz.github.io/skizzles/contracts/context-envelope/v3.schema.json",
+  "title": "Fourth Wall context envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contextId", "properties"],
+  "properties": {
+    "schemaVersion": {
+      "const": "3.0.0"
+    },
+    "contextId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,127}$"
+    },
+    "properties": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/contextProperty"
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "versionedDigest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "digest"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "digest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "contextProperty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value",
+        "origin",
+        "createdAt",
+        "retrievedAt",
+        "trustClass",
+        "integrity",
+        "scope",
+        "objective",
+        "policy",
+        "retention",
+        "sensitivity",
+        "redaction",
+        "transformations",
+        "validation"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-zA-Z0-9._-]{0,63}$"
+        },
+        "value": {},
+        "origin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "ref"],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "user",
+                "repository",
+                "tool",
+                "agent",
+                "generated",
+                "external"
+              ]
+            },
+            "ref": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9._/-]{1,200}$"
+            }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "retrievedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "trustClass": {
+          "type": "string",
+          "enum": ["untrusted", "validated", "trusted"]
+        },
+        "integrity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "canonicalization", "coverage", "sha256"],
+          "properties": {
+            "algorithm": {
+              "const": "sha-256"
+            },
+            "canonicalization": {
+              "const": "canonical-json-v1"
+            },
+            "coverage": {
+              "const": "property-value"
+            },
+            "sha256": {
+              "$ref": "#/$defs/digest"
+            }
+          }
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version", "digest"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9._/-]{1,200}$"
+            },
+            "version": {
+              "type": "string",
+              "minLength": 1
+            },
+            "digest": {
+              "$ref": "#/$defs/digest"
+            }
+          }
+        },
+        "policy": {
+          "$ref": "#/$defs/versionedDigest"
+        },
+        "retention": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["class", "expiresAt"],
+          "properties": {
+            "class": {
+              "type": "string",
+              "enum": ["ephemeral", "session", "persistent"]
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "sensitivity": {
+          "type": "string",
+          "enum": ["public", "internal", "confidential", "secret"]
+        },
+        "redaction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "applied", "method"],
+          "properties": {
+            "required": {
+              "type": "boolean"
+            },
+            "applied": {
+              "type": "boolean"
+            },
+            "method": {
+              "type": "string"
+            }
+          }
+        },
+        "transformations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "producer", "at"],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "parse",
+                  "summarize",
+                  "translate",
+                  "redact",
+                  "normalize"
+                ]
+              },
+              "producer": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "id", "version", "digest"],
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": ["deterministic", "model"]
+                  },
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "version": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "digest": {
+                    "$ref": "#/$defs/digest"
+                  }
+                }
+              },
+              "at": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "property",
+            "status",
+            "validator",
+            "validatedAt",
+            "evidence"
+          ],
+          "properties": {
+            "property": {
+              "type": "string",
+              "minLength": 1
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "unvalidated",
+                "valid",
+                "invalid",
+                "stale",
+                "expired",
+                "redacted"
+              ]
+            },
+            "validator": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["id", "version"],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "version": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              ]
+            },
+            "validatedAt": {
+              "anyOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              ]
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["kind", "ref", "sha256"],
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": ["parser", "hash", "runtime"]
+                  },
+                  "ref": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9._/-]{1,200}$"
+                  },
+                  "sha256": {
+                    "$ref": "#/$defs/digest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
