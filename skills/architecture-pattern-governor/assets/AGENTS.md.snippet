@@ -1,0 +1,11 @@
+## Architecture governance
+
+For architecture selection, system decomposition, design documents, cross-domain pattern mapping, or architecture review, invoke `$architecture-pattern-governor` and follow its gates before broad implementation.
+
+Repository-specific additions:
+
+- Preserve explicit user constraints and exclusions.
+- Ground claims in repository evidence and primary documentation.
+- Do not create large scaffolds before architecture Gate G6 passes.
+- Place generated architecture artifacts under `<project architecture path>`.
+- Run `python <skill path>/scripts/validate_architecture_report.py <report>` before acceptance.
