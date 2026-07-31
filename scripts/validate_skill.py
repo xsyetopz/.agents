@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the portable structure and internal references of an Agent Skill.
-
-Usage: run from the skill root directory, or pass it as an argument:
-
-    python3 scripts/validate_skill.py              # uses CWD as skill root
-    python3 scripts/validate_skill.py /path/to/skill
-"""
+"""Validate the portable structure and internal references of an Agent Skill."""
 
 from __future__ import annotations
 
@@ -16,13 +10,14 @@ import sys
 from pathlib import Path
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-REL_REF_RE = re.compile(r"(?<![A-Za-z0-9_])((?:references|assets|scripts)/[A-Za-z0-9_.-]+)")
+REL_REF_RE = re.compile(
+    r"(?<![A-Za-z0-9_])((?:references|assets|scripts)/[A-Za-z0-9_.-]+)"
+)
 MARKDOWN_LINK_RE = re.compile(r"\[[^\]]*\]\((?!https?://|#|mailto:)([^)]+)\)")
 FENCE_RE = re.compile(r"^[ \t]{0,3}(`{3,}|~{3,})", re.MULTILINE)
 
 
 def strip_fenced_blocks(text: str) -> str:
-    """Remove fenced code blocks so regexes don't match inside them."""
     result: list[str] = []
     in_fence: str | None = None
     for line in text.splitlines(keepends=True):
@@ -30,7 +25,7 @@ def strip_fenced_blocks(text: str) -> str:
             m = FENCE_RE.match(line)
             if m:
                 in_fence = m.group(1)[0]
-                result.append("\n")  # replace fence with blank line
+                result.append("\n")
             else:
                 result.append(line)
         else:
@@ -55,16 +50,15 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
         if not raw.strip() or raw.lstrip().startswith("#"):
             continue
         if raw.startswith((" ", "\t")):
-            continue  # nested metadata
+            continue
         if ":" not in raw:
             raise ValueError(f"Malformed frontmatter line: {raw!r}")
         key, value = raw.split(":", 1)
         data[key.strip()] = value.strip().strip('"').strip("'")
-    return data, "\n".join(lines[end + 1:])
+    return data, "\n".join(lines[end + 1 :])
 
 
 def load_config(root: Path) -> dict:
-    """Load optional per-skill validation config."""
     config_path = root / ".skill-validator.json"
     if config_path.is_file():
         try:
@@ -74,67 +68,61 @@ def load_config(root: Path) -> dict:
     return {}
 
 
-def validate(root: Path) -> tuple[list[str], list[str]]:
-    errors: list[str] = []
-    warnings: list[str] = []
-    config = load_config(root)
-    skill_file = root / "SKILL.md"
-
-    if not skill_file.is_file():
-        return [f"Missing required file: {skill_file}"], warnings
-
-    text = skill_file.read_text(encoding="utf-8")
-    try:
-        fm, body = parse_frontmatter(text)
-    except ValueError as exc:
-        return [str(exc)], warnings
-
-    # --- Frontmatter checks ---
+def check_frontmatter(fm: dict, root: Path, errors: list[str]) -> None:
     name = fm.get("name", "")
     description = fm.get("description", "")
-
     if not name:
         errors.append("Frontmatter requires non-empty 'name'.")
     elif not NAME_RE.fullmatch(name):
-        errors.append("'name' must contain lowercase letters/digits separated by single hyphens.")
+        errors.append(
+            "'name' must contain lowercase letters/digits separated by single hyphens."
+        )
     if len(name) > 64:
         errors.append("'name' exceeds 64 characters.")
     if root.name != name:
         errors.append(f"Folder name {root.name!r} must match skill name {name!r}.")
-
     if not description:
         errors.append("Frontmatter requires non-empty 'description'.")
     if len(description) > 1024:
         errors.append("'description' exceeds 1024 characters.")
 
-    # --- Size checks ---
+
+def check_size(text: str, warnings: list[str]) -> None:
     line_count = len(text.splitlines())
     if line_count > 500:
-        warnings.append(f"SKILL.md has {line_count} lines; keep the core under 500 where possible.")
+        warnings.append(
+            f"SKILL.md has {line_count} lines; keep the core under 500 where possible."
+        )
     rough_tokens = len(re.findall(r"\w+|[^\w\s]", text))
     if rough_tokens > 7000:
-        warnings.append(f"SKILL.md rough token count is {rough_tokens}; progressive disclosure may be weakened.")
+        warnings.append(
+            f"SKILL.md rough token count is {rough_tokens}; progressive disclosure may be weakened."
+        )
 
-    # --- Required headings (from config, unfenced only) ---
-    unfenced_text = strip_fenced_blocks(text)
+
+def check_required_headings(text: str, config: dict, errors: list[str]) -> None:
+    unfenced = strip_fenced_blocks(text)
     for heading in config.get("required_headings", []):
-        if heading not in unfenced_text:
+        if heading not in unfenced:
             errors.append(f"Missing required heading: {heading}")
 
-    # --- Required files (from config) ---
+
+def check_required_files(root: Path, config: dict, errors: list[str]) -> None:
     for relative in config.get("required_files", []):
         if not (root / relative).is_file():
             errors.append(f"Missing required file: {relative}")
 
-    # --- Broken relative references (unfenced only) ---
-    refs = set(REL_REF_RE.findall(unfenced_text))
-    refs.update(link.split("#", 1)[0] for link in MARKDOWN_LINK_RE.findall(unfenced_text))
+
+def check_broken_references(text: str, root: Path, errors: list[str]) -> None:
+    unfenced = strip_fenced_blocks(text)
+    refs = set(REL_REF_RE.findall(unfenced))
+    refs.update(link.split("#", 1)[0] for link in MARKDOWN_LINK_RE.findall(unfenced))
     for rel in sorted(refs):
-        target = root / rel
-        if not target.exists():
+        if not (root / rel).exists():
             errors.append(f"Broken relative reference in SKILL.md: {rel}")
 
-    # --- Broken Markdown links in all .md files ---
+
+def check_markdown_links(root: Path, errors: list[str], warnings: list[str]) -> None:
     for md in sorted(root.rglob("*.md")):
         md_text = md.read_text(encoding="utf-8")
         md_unfenced = strip_fenced_blocks(md_text)
@@ -153,9 +141,34 @@ def validate(root: Path) -> tuple[list[str], list[str]]:
             if not target.exists():
                 errors.append(f"Broken Markdown link in {md.relative_to(root)}: {link}")
 
-    # --- LICENSE check ---
+
+def warn_missing_license(root: Path, warnings: list[str]) -> None:
     if not (root / "LICENSE").exists():
         warnings.append("No LICENSE file is present.")
+
+
+def validate(root: Path) -> tuple[list[str], list[str]]:
+    errors: list[str] = []
+    warnings: list[str] = []
+    config = load_config(root)
+    skill_file = root / "SKILL.md"
+
+    if not skill_file.is_file():
+        return [f"Missing required file: {skill_file}"], warnings
+
+    text = skill_file.read_text(encoding="utf-8")
+    try:
+        fm, _body = parse_frontmatter(text)
+    except ValueError as exc:
+        return [str(exc)], warnings
+
+    check_frontmatter(fm, root, errors)
+    check_size(text, warnings)
+    check_required_headings(text, config, errors)
+    check_required_files(root, config, errors)
+    check_broken_references(text, root, errors)
+    check_markdown_links(root, errors, warnings)
+    warn_missing_license(root, warnings)
 
     return errors, warnings
 
@@ -163,12 +176,14 @@ def validate(root: Path) -> tuple[list[str], list[str]]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate an Agent Skill structure.")
     parser.add_argument(
-        "root", nargs="?", type=Path, default=Path.cwd(),
-        help="Skill root directory (default: current working directory)."
+        "root",
+        nargs="?",
+        type=Path,
+        default=Path.cwd(),
+        help="Skill root directory (default: current working directory).",
     )
     args = parser.parse_args()
-    root = args.root.resolve()
-    errors, warnings = validate(root)
+    errors, warnings = validate(args.root.resolve())
 
     for warning in warnings:
         print(f"WARNING: {warning}")
@@ -178,7 +193,7 @@ def main() -> int:
     if errors:
         print(f"FAILED: {len(errors)} error(s), {len(warnings)} warning(s).")
         return 1
-    print(f"PASS: {root} ({len(warnings)} warning(s)).")
+    print(f"PASS: {args.root.resolve()} ({len(warnings)} warning(s)).")
     return 0
 
 
