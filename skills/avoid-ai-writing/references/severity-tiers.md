@@ -89,7 +89,7 @@ worst offenders.
 Rules not listed in the table apply at full strength across all profiles.
 
 | Rule | linkedin | blog | technical-blog | investor-email | docs | casual |
-| ------ | ---------- | ------ | ---------------- | ---------------- | ------ | -------- |
+| --- | --- | --- | ---- | --- | --- | --- |
 | Em dashes | relaxed (2/post OK) | strict | strict | strict | relaxed | skip |
 | Bold overuse | relaxed (bold hooks OK) | strict | strict | strict | relaxed | skip |
 | Emoji in headers | relaxed (1-2 end-of-line OK) | strict | strict | strict | skip | skip |
