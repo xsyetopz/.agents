@@ -1,6 +1,6 @@
 # Architecture Pattern Selection Catalog
 
-Select an architecture from product constraints, operating model, and enforceable dependency rules—not fashion, framework defaults, or a desire to look "enterprise." A pattern is accepted only when its boundary can be named, its invariants can be tested or reviewed, and its operational cost has an accountable owner. Prefer the smallest coherent model; add a boundary only when it protects a real change, failure, scaling, security, data, or ownership concern.
+Select an architecture from product constraints, operating model, and enforceable dependency rules--not fashion, framework defaults, or a desire to look "enterprise." A pattern is accepted only when its boundary can be named, its invariants can be tested or reviewed, and its operational cost has an accountable owner. Prefer the smallest coherent model; add a boundary only when it protects a real change, failure, scaling, security, data, or ownership concern.
 
 ## Contents
 
@@ -59,7 +59,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 - A bounded context has a named model, language, owner, public contract, and persistence authority.
 - Terms retain one meaning within a context; translation happens at explicit integration boundaries.
 - Aggregates protect stated consistency rules; they are not object graphs loaded by default.
-- Cross-context integration uses published contracts, events, or an orchestration owner—not shared tables, private imports, or leaked entities.
+- Cross-context integration uses published contracts, events, or an orchestration owner--not shared tables, private imports, or leaked entities.
 
 **Operational trade-offs:** reduces semantic coupling and makes ownership legible, but demands domain discovery, contract versioning, and deliberate integration work.
 
@@ -118,7 +118,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 **Required invariants:**
 
 - State ownership is single-writer: an actor owns its state, or synchronization and invariants are explicitly documented.
-- Messages, cancellation, deadlines, mailbox/capacity limits, backpressure, supervision, and restart semantics are designed—not delegated to defaults.
+- Messages, cancellation, deadlines, mailbox/capacity limits, backpressure, supervision, and restart semantics are designed--not delegated to defaults.
 - Blocking work is isolated from event loops, executors, and scheduler threads.
 - Shared mutable state, hidden global caches, and fire-and-forget tasks are forbidden unless their lifecycle and failure ownership are explicit.
 - Concurrency correctness is proven with race, load, failure, and shutdown tests appropriate to the runtime.
@@ -201,7 +201,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 
 ## Functional Core, Imperative Shell
 
-**Use when:** policy can be expressed as deterministic transformations while I/O, time, randomness, and lifecycle are edge concerns. It complements—not replaces—modular, layered, or pipeline boundaries.
+**Use when:** policy can be expressed as deterministic transformations while I/O, time, randomness, and lifecycle are edge concerns. It complements--not replaces--modular, layered, or pipeline boundaries.
 
 **Required invariants:**
 

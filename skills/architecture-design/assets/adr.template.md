@@ -17,14 +17,14 @@
 
 ## Considered options
 
-### Option A — Do-less baseline
+### Option A - Do-less baseline
 
 - Description:
 - Benefits:
 - Liabilities:
 - Evidence:
 
-### Option B — <name>
+### Option B - <name>
 
 <same fields>
 
@@ -48,7 +48,7 @@
 
 ### Risks and mitigations
 
-- <risk → mitigation / experiment>
+- <risk -> mitigation / experiment>
 
 ## Compliance and verification
 

@@ -1,6 +1,6 @@
 ---
 name: architecture-enforce
-description: Use when designing, reviewing, refactoring, migrating, or decomposing repository architecture — packages, modules, deployables, APIs, schemas, build graphs, or cross-language boundaries. Enforce ownership, dependency direction, public contracts, quality attributes, security and reliability, naming, toolchain topology, separation of tests and benchmarks, and executable verification without inventing layers or suppressing findings.
+description: Use when designing, reviewing, refactoring, migrating, or decomposing repository architecture - packages, modules, deployables, APIs, schemas, build graphs, or cross-language boundaries. Enforce ownership, dependency direction, public contracts, quality attributes, security and reliability, naming, toolchain topology, separation of tests and benchmarks, and executable verification without inventing layers or suppressing findings.
 ---
 
 # Architecture Enforce
@@ -23,7 +23,7 @@ This skill owns architectural enforcement. For architecture *decisions*
 
 ## When NOT to use
 
-- Making architecture *decisions* (patterns, ADRs, decomposition) — use `architecture-design`
+- Making architecture *decisions* (patterns, ADRs, decomposition) - use `architecture-design`
 - A single-line fix or rename with no structural impact
 - Inventing layers or interfaces solely to match a diagram
 
@@ -42,7 +42,7 @@ Every changed architectural unit must have:
 Do not accept compilation, green unit tests, a diagram, or a familiar pattern
 name as architecture proof by itself.
 
-## Quick start — mandatory audit protocol
+## Quick start - mandatory audit protocol
 
 From this skill directory, run both commands before and after every repository change:
 
@@ -93,7 +93,7 @@ stated force the simpler profile cannot satisfy.
 
 ## Related skills
 
-- `architecture-design` — Before enforcing boundaries, use this to make the
+- `architecture-design` - Before enforcing boundaries, use this to make the
   architecture decisions (ADRs, pattern selection, decomposition). Enforcement
   without design has no target to enforce against.
 

@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 — 2026-07-27
+## 1.0.0 - 2026-07-27
 
 - Added strict gate-based architecture workflow G0–G7.
 - Added cross-domain pattern catalog and 50 domain mappings.

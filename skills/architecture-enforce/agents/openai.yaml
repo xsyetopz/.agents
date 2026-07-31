@@ -1,4 +1,4 @@
 interface:
-  display_name: "Enforce Software Architecture"
+  display_name: "Architecture Enforce"
   short_description: "Enforce production-grade architecture and boundaries"
   default_prompt: "Use $architecture-enforce as a mandatory contract: read SKILL.md, run the capability preflight and full architecture audit before and after repository changes, and reject authored inline tests or benchmarks unless they are in exact runner-recognized test sources. Do not narrow or suppress findings without explicit user approval."

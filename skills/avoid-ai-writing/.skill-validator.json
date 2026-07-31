@@ -1,0 +1,17 @@
+{
+  "required_headings": [
+    "# Avoid AI Writing",
+    "## When to use",
+    "## When NOT to use",
+    "## Modes",
+    "## Quick start",
+    "## Reference map",
+    "## Output format",
+    "## Related skills"
+  ],
+  "required_files": [
+    "agents/openai.yaml",
+    "references/patterns.md",
+    "references/severity-tiers.md"
+  ]
+}

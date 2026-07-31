@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Design"
+  short_description: "Evidence-based architecture design across domains"
+  default_prompt: "Use $architecture-design to produce architecture decisions traceable to evidence, domain semantics, and quality attributes."

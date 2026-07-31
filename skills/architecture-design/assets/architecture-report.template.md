@@ -9,19 +9,19 @@
 
 ### Objective
 
-- `OBJ-001` — <objective>
+- `OBJ-001` - <objective>
 
 ### Requirements
 
-- `REQ-001` — <requirement>
+- `REQ-001` - <requirement>
 
 ### Constraints
 
-- `CON-001` — <constraint>
+- `CON-001` - <constraint>
 
 ### Explicit exclusions
 
-- `EXC-001` — <not in scope>
+- `EXC-001` - <not in scope>
 
 ### Definition of done
 
@@ -62,7 +62,7 @@ flowchart LR
 
 ## 5. Candidate Architectures
 
-### Candidate A — Do-less baseline
+### Candidate A - Do-less baseline
 
 - State owner:
 - Control authority:
@@ -73,11 +73,11 @@ flowchart LR
 - Liabilities:
 - Validation evidence:
 
-### Candidate B — <name>
+### Candidate B - <name>
 
 <same fields>
 
-### Candidate C — <name>
+### Candidate C - <name>
 
 <same fields>
 
@@ -116,7 +116,7 @@ flowchart LR
 
 ## 9. Critical Flows
 
-### Flow F-001 — Success
+### Flow F-001 - Success
 
 ```mermaid
 sequenceDiagram
@@ -126,25 +126,25 @@ sequenceDiagram
   B-->>A: result
 ```
 
-### Flow F-002 — Invalid input
+### Flow F-002 - Invalid input
 
 <diagram and expected response>
 
-### Flow F-003 — Dependency failure
+### Flow F-003 - Dependency failure
 
 <diagram and expected response>
 
-### Flow F-004 — Timeout or cancellation
+### Flow F-004 - Timeout or cancellation
 
 <diagram and expected response>
 
-### Flow F-005 — Recovery or partial completion
+### Flow F-005 - Recovery or partial completion
 
 <diagram and expected response>
 
 ## 10. Component Contracts and Invariants
 
-### CMP-001 — <component>
+### CMP-001 - <component>
 
 - Purpose:
 - Inputs:

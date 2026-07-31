@@ -99,7 +99,7 @@ A *zone* represents an area in the home that contains multiple rooms, such as *u
 
 - Don’t include emojis.
 
-|  | Example service names |
+| | Example service names |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Reading lamp |
 | *Image description: An X in a circle to indicate incorrect usage.* | 📚 lamp |
@@ -126,27 +126,27 @@ To illustrate the power and flexibility of Siri commands, here are some examples
 | “Show me the entryway camera” | Service (*entryway camera*) |
 | “Turn on the light” | Accessory category (*light*) |
 | “Turn off the living room light” | Room (*living room*) |
-|  | Accessory category (*light*) |
+| | Accessory category (*light*) |
 | “Make the living room a little bit brighter” | Room (*living room*) |
-|  | Accessory category (implied) |
-|  | Brightness characteristic (*brighter*) |
+| | Accessory category (implied) |
+| | Brightness characteristic (*brighter*) |
 | “Turn on the recessed lights” | Service group (*recessed lights*) |
 | “Turn off the lights upstairs” | Accessory category (*lights*) |
-|  | Zone (*upstairs*) |
+| | Zone (*upstairs*) |
 | “Dim the lights in the bedroom and nursery” | Accessory category (*lights*) |
-|  | Brightness characteristic (*dim*) |
-|  | Rooms (*bedroom*, *nursery*) |
+| | Brightness characteristic (*dim*) |
+| | Rooms (*bedroom*, *nursery*) |
 | “Run Good night” | Scene (*Good night*) |
 | “Is someone in the living room?” | Accessory category (implied) |
-|  | Occupancy detection characteristic (implied) |
+| | Occupancy detection characteristic (implied) |
 | “Is my security system tripped?” | Accessory category (*security system*) |
 | “Did I leave the garage door open?” | Accessory category (*garage door*) |
-|  | Open characteristic (*open*) |
+| | Open characteristic (*open*) |
 | “Did I forget to turn off the lights in the Tahoe House?” | Accessory category (*lights*) |
-|  | Home (*Tahoe House*) |
+| | Home (*Tahoe House*) |
 | “It’s dark in here” | Current home (*here*) |
-|  | Current room (via HomePod) |
-|  | Accessory category (implied) |
+| | Current room (via HomePod) |
+| | Accessory category (implied) |
 
 **Recommend that people create zones and service groups, if they make sense for your accessory.** If people might benefit from using context-specific voice commands to control your accessory, suggest these types of interactions and help people set them up. For example, if you provide an accessory such as a light, switch, or thermostat, you could suggest setting up a zone named “upstairs” or a service group named “media center” to support commands like “Siri, turn off the upstairs lights,” or “Siri, activate the media center.”
 
@@ -158,7 +158,7 @@ To illustrate the power and flexibility of Siri commands, here are some examples
 
 Your app is a great place to help people appreciate the unique functionality of your accessory. For example, an app for a light that displays different colors could help people create HomeKit scenes using colors imported from their photos.
 
-**Be clear about what people can do in your app and when they might want to use the Home app.** For example, if your app supports only lights, consider encouraging people to create a “Movie Time” scene that not only dims the lights, but also closes the shades, and turns on the TV to a specific input. To do this, first guide people to set up a scene that includes only your accessory’s actions — in this scenario, dimming the lights. Then, your app can suggest that people open the Home app to add their HomeKit-compatible shades and TV to the scene you helped them create. For guidance on how to refer to the Home app, see [Referring to HomeKit](https://developer.apple.com/design/human-interface-guidelines/homekit#Referring-to-HomeKit).
+**Be clear about what people can do in your app and when they might want to use the Home app.** For example, if your app supports only lights, consider encouraging people to create a “Movie Time” scene that not only dims the lights, but also closes the shades, and turns on the TV to a specific input. To do this, first guide people to set up a scene that includes only your accessory’s actions - in this scenario, dimming the lights. Then, your app can suggest that people open the Home app to add their HomeKit-compatible shades and TV to the scene you helped them create. For guidance on how to refer to the Home app, see [Referring to HomeKit](https://developer.apple.com/design/human-interface-guidelines/homekit#Referring-to-HomeKit).
 
 **Defer to HomeKit if your database differs from the HomeKit database.** Give people a seamless experience by automatically reflecting changes made in the Home app or in other third-party HomeKit apps. If you must ask people to manage conflicts in your app, present the conflict visually so that they have a clear picture of the choice they need to confirm. For example, if someone changes an accessory’s service name in the Home app, your app can detect this change and could show both names side by side to confirm that the person wants to use the new name in your app, too.
 
@@ -258,7 +258,7 @@ Use a custom color when other technology icons appear in the same color.
 
 - Refer to Apple devices and operating systems only in technical specifications or compatibility descriptions.
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Use HomeKit to turn on your lights from your iPhone or iPad. |
 | *Image description: An X in a circle to indicate incorrect usage.* | Use HomeKit to turn on your lights from your iOS devices. |
@@ -271,7 +271,7 @@ See [Guidelines for Using Apple Trademarks](https://www.apple.com/legal/intellec
 
 **Don’t use the name *HomeKit* as a descriptor.** Instead use terms like *works with*, *use*, *supports*, or *compatible*.
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | [Brand] lightbulbs work with HomeKit. |
 | *Image description: A checkmark in a circle to indicate correct usage.* | HomeKit-enabled thermostat. |
@@ -280,26 +280,26 @@ See [Guidelines for Using Apple Trademarks](https://www.apple.com/legal/intellec
 
 **Don’t suggest that HomeKit is performing an action or function.**
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Back door is unlocked with HomeKit. |
 | *Image description: An X in a circle to indicate incorrect usage.* | HomeKit unlocked the back door. |
 
 **Use the name *Apple* with the name *HomeKit*, if desired.**
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Compatible with Apple HomeKit. |
 
 **Use the name *HomeKit* for setup, configuration, and instructions, if desired.**
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Open HomeKit settings. |
 
 **Use the app name *Apple Home* whenever referring specifically to the app.** On the first mention of the app in body copy, use the complete name *Apple Home*. Subsequent mentions can refer to the Home app.
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Open the Apple Home app. |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Open the Apple Home app. Your accessory and room will now appear in the Home app. |

@@ -29,7 +29,7 @@ AirPlay lets people stream media content wirelessly from iOS, iPadOS, macOS, and
 
 **Let people use other parts of your app during playback.** When AirPlay is active, your app needs to remain functional. If people navigate away from the playback screen, make sure other in-app videos don’t begin playing and interrupt the streaming content.
 
-**If necessary, provide a custom interface for controlling media playback.** If you can’t use the system-provided media player, you can create a custom media player that gives people an intuitive way to enter AirPlay. If you need to do this, be sure to provide custom buttons that match the appearance and behavior of the system-provided ones, including distinct visual states that indicate when playback starts, is occurring, or is unavailable. Use only Apple-provided symbols in custom controls that initiate AirPlay, and position the AirPlay icon correctly in your custom player — that is, in the lower-right corner (in iOS 16 and iPadOS 16 and later).
+**If necessary, provide a custom interface for controlling media playback.** If you can’t use the system-provided media player, you can create a custom media player that gives people an intuitive way to enter AirPlay. If you need to do this, be sure to provide custom buttons that match the appearance and behavior of the system-provided ones, including distinct visual states that indicate when playback starts, is occurring, or is unavailable. Use only Apple-provided symbols in custom controls that initiate AirPlay, and position the AirPlay icon correctly in your custom player - that is, in the lower-right corner (in iOS 16 and iPadOS 16 and later).
 
 ## Using AirPlay icons
 
@@ -67,7 +67,7 @@ Use a custom color when other technology icons also appear in the same color.
 
 **Always use *AirPlay* as a noun.**
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Use AirPlay to listen on your speaker |
 | *Image description: An X in a circle to indicate incorrect usage.* | AirPlay to your speaker |
@@ -75,7 +75,7 @@ Use a custom color when other technology icons also appear in the same color.
 
 **Use terms like *works with*, *use*, *supports*, and *compatible*.**
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | [App Name] is compatible with AirPlay |
 | *Image description: A checkmark in a circle to indicate correct usage.* | AirPlay-enabled speaker |
@@ -84,13 +84,13 @@ Use a custom color when other technology icons also appear in the same color.
 
 **Use the name *Apple* with the name *AirPlay* if desired.**
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | Compatible with Apple AirPlay |
 
 **Refer to AirPlay if appropriate and to add clarity.** If your content is specific to AirPlay, you can use Airplay to make that clear. You can also refer to AirPlay in technical specifications.
 
-|  | Example text |
+| | Example text |
 | --- | --- |
 | *Image description: A checkmark in a circle to indicate correct usage.* | [App Name] now supports AirPlay |
 

@@ -11,7 +11,7 @@ A physical keyboard can be an essential input device for entering text, playing 
 
 People can connect a physical keyboard to any device except Apple Watch. Mac users tend to use a physical keyboard all the time and iPad users often do. Many games work well with a physical keyboard, and people can prefer using one instead of a [virtual keyboard](https://developer.apple.com/design/human-interface-guidelines/virtual-keyboards) when entering a lot of text.
 
-Keyboard users often appreciate using keyboard shortcuts to speed up their interactions with apps and games. A *keyboard shortcut* is a combination of a primary key and one or more modifier keys (Control, Option, Shift, and Command) that map to a specific command. A keyboard shortcut in a game — called a *key binding* — often consists of a single key.
+Keyboard users often appreciate using keyboard shortcuts to speed up their interactions with apps and games. A *keyboard shortcut* is a combination of a primary key and one or more modifier keys (Control, Option, Shift, and Command) that map to a specific command. A keyboard shortcut in a game - called a *key binding* - often consists of a single key.
 
 Apple defines standard keyboard shortcuts to work consistently across the system and most apps, helping people transfer their knowledge to new experiences. Some apps define custom keyboard shortcuts for the app-specific commands people use most; most games define custom key bindings that make it quick and efficient to use the keyboard to control the game. For guidance, see [Game controls](https://developer.apple.com/design/human-interface-guidelines/game-controls#Keyboards).
 
@@ -21,7 +21,7 @@ Apple defines standard keyboard shortcuts to work consistently across the system
 
 > Although iPadOS supports keyboard navigation in text fields, text views, and sidebars, and provides APIs you can use to support it in collection views and other custom views, avoid supporting keyboard navigation for controls, such as buttons, segmented controls, and switches. Instead, let people use Full Keyboard Access to activate controls, navigate to all onscreen components, and perform gesture-based interactions like drag and drop. For guidance, see [iPadOS](https://developer.apple.com/design/human-interface-guidelines/focus-and-selection#iPadOS); for developer guidance, see [Focus-based navigation](https://developer.apple.com/documentation/uikit/focus-based_navigation).
 
-**Respect standard keyboard shortcuts.** While using most apps, people generally expect to rely on the standard keyboard shortcuts that work in other apps and throughout the system. If your app offers a unique action that people perform frequently, prefer creating a [custom](https://developer.apple.com/design/human-interface-guidelines/keyboards#Custom-keyboard-shortcuts) shortcut for it instead of repurposing a standard one that people associate with a different action. While playing a game, people may expect to use certain standard keyboard shortcuts — such as Command–Q to quit the game — but they also expect to be able to modify each game’s key bindings to fit their personal play style. For guidance, see [Game controls](https://developer.apple.com/design/human-interface-guidelines/game-controls#Keyboards).
+**Respect standard keyboard shortcuts.** While using most apps, people generally expect to rely on the standard keyboard shortcuts that work in other apps and throughout the system. If your app offers a unique action that people perform frequently, prefer creating a [custom](https://developer.apple.com/design/human-interface-guidelines/keyboards#Custom-keyboard-shortcuts) shortcut for it instead of repurposing a standard one that people associate with a different action. While playing a game, people may expect to use certain standard keyboard shortcuts - such as Command–Q to quit the game - but they also expect to be able to modify each game’s key bindings to fit their personal play style. For guidance, see [Game controls](https://developer.apple.com/design/human-interface-guidelines/game-controls#Keyboards).
 
 ## Standard keyboard shortcuts
 
@@ -32,121 +32,121 @@ People expect each of the following standard keyboard shortcuts to perform the a
 | Primary key | Keyboard shortcut | Action |
 | --- | --- | --- |
 | Space | Command-Space | Show or hide the Spotlight search field. |
-|  | Shift-Command-Space | Varies. |
-|  | Option-Command-Space | Show the Spotlight search results window. |
-|  | Control-Command-Space | Show the Special Characters window. |
+| | Shift-Command-Space | Varies. |
+| | Option-Command-Space | Show the Spotlight search results window. |
+| | Control-Command-Space | Show the Special Characters window. |
 | Tab | Shift-Tab | Navigate through controls in a reverse direction. |
-|  | Command-Tab | Move forward to the next most recently used app in a list of open apps. |
-|  | Shift-Command-Tab | Move backward through a list of open apps (sorted by recent use). |
-|  | Control-Tab | Move focus to the next group of controls in a dialog or the next table (when Tab moves to the next cell). |
-|  | Control-Shift-Tab | Move focus to the previous group of controls. |
+| | Command-Tab | Move forward to the next most recently used app in a list of open apps. |
+| | Shift-Command-Tab | Move backward through a list of open apps (sorted by recent use). |
+| | Control-Tab | Move focus to the next group of controls in a dialog or the next table (when Tab moves to the next cell). |
+| | Control-Shift-Tab | Move focus to the previous group of controls. |
 | Esc | Esc | Cancel the current action or process. |
 | Esc | Option-Command-Esc | Open the Force Quit dialog. |
 | Eject | Control-Command-Eject | Quit all apps (after changes have been saved to open documents) and restart the computer. |
-|  | Control-Option-Command-Eject | Quit all apps (after changes have been saved to open documents) and shut the computer down. |
+| | Control-Option-Command-Eject | Quit all apps (after changes have been saved to open documents) and shut the computer down. |
 | F1 | Control-F1 | Toggle full keyboard access on or off. |
 | F2 | Control-F2 | Move focus to the menu bar. |
 | F3 | Control- F3 | Move focus to the Dock. |
 | F4 | Control-F4 | Move focus to the active (or next) window. |
-|  | Control-Shift-F4 | Move focus to the previously active window. |
+| | Control-Shift-F4 | Move focus to the previously active window. |
 | F5 | Control-F5 | Move focus to the toolbar. |
-|  | Command-F5 | Turn VoiceOver on or off. |
+| | Command-F5 | Turn VoiceOver on or off. |
 | F6 | Control-F6 | Move focus to the first (or next) panel. |
-|  | Control-Shift-F6 | Move focus to the previous panel. |
+| | Control-Shift-F6 | Move focus to the previous panel. |
 | F7 | Control-F7 | Temporarily override the current keyboard access mode in windows and dialogs. |
-| F8 |  | Varies. |
-| F9 |  | Varies. |
-| F10 |  | Varies. |
-| F11 |  | Show desktop. |
-| F12 |  | Hide or display Dashboard. |
+| F8 | | Varies. |
+| F9 | | Varies. |
+| F10 | | Varies. |
+| F11 | | Show desktop. |
+| F12 | | Hide or display Dashboard. |
 | Grave accent (`) | Command-Grave accent | Activate the next open window in the frontmost app. |
-|  | Shift-Command-Grave accent | Activate the previous open window in the frontmost app. |
-|  | Option-Command-Grave accent | Move focus to the window drawer. |
+| | Shift-Command-Grave accent | Activate the previous open window in the frontmost app. |
+| | Option-Command-Grave accent | Move focus to the window drawer. |
 | Hyphen (-) | Command-Hyphen | Decrease the size of the selection. |
-|  | Option-Command-Hyphen | Zoom out when screen zooming is on. |
+| | Option-Command-Hyphen | Zoom out when screen zooming is on. |
 | Left bracket ({) | Command-Left bracket | Left-align a selection. |
 | Right bracket (}) | Command-Right bracket | Right-align a selection. |
 | Pipe (\|) | Command-Pipe | Center-align a selection. |
 | Colon (:) | Command-Colon | Display the Spelling window. |
 | Semicolon (;) | Command-Semicolon | Find misspelled words in the document. |
 | Comma (,) | Command-Comma | Open the app’s settings window. |
-|  | Control-Option-Command-Comma | Decrease screen contrast. |
+| | Control-Option-Command-Comma | Decrease screen contrast. |
 | Period (.) | Command-Period | Cancel an operation. |
-|  | Control-Option-Command-Period | Increase screen contrast. |
+| | Control-Option-Command-Period | Increase screen contrast. |
 | Question mark (?) | Command-Question mark | Open the app’s Help menu. |
 | Forward slash (/) | Option-Command-Forward slash | Turn font smoothing on or off. |
 | Equal sign (=) | Shift-Command-Equal sign | Increase the size of the selection. |
-|  | Option-Command-Equal sign | Zoom in when screen zooming is on. |
+| | Option-Command-Equal sign | Zoom in when screen zooming is on. |
 | 3 | Shift-Command-3 | Capture the screen to a file. |
-|  | Control-Shift-Command-3 | Capture the screen to the Clipboard. |
+| | Control-Shift-Command-3 | Capture the screen to the Clipboard. |
 | 4 | Shift-Command-4 | Capture a selection to a file. |
-|  | Control-Shift-Command-4 | Capture a selection to the Clipboard. |
+| | Control-Shift-Command-4 | Capture a selection to the Clipboard. |
 | 8 | Option-Command-8 | Turn screen zooming on or off. |
-|  | Control-Option-Command-8 | Invert the screen colors. |
+| | Control-Option-Command-8 | Invert the screen colors. |
 | A | Command-A | Select every item in a document or window, or all characters in a text field. |
-|  | Shift-Command-A | Deselect all selections or characters. |
+| | Shift-Command-A | Deselect all selections or characters. |
 | B | Command-B | Boldface the selected text or toggle boldfaced text on and off. |
 | C | Command-C | Copy the selection to the Clipboard. |
-|  | Shift-Command-C | Display the Colors window. |
-|  | Option-Command-C | Copy the style of the selected text. |
-|  | Control-Command-C | Copy the formatting settings of the selection and store on the Clipboard. |
+| | Shift-Command-C | Display the Colors window. |
+| | Option-Command-C | Copy the style of the selected text. |
+| | Control-Command-C | Copy the formatting settings of the selection and store on the Clipboard. |
 | D | Option-Command-D | Show or hide the Dock. |
-|  | Control-Command-D | Display the definition of the selected word in the Dictionary app. |
+| | Control-Command-D | Display the definition of the selected word in the Dictionary app. |
 | E | Command-E | Use the selection for a find operation. |
 | F | Command-F | Open a Find window. |
-|  | Option-Command-F | Jump to the search field control. |
-|  | Control-Command-F | Enter full screen. |
+| | Option-Command-F | Jump to the search field control. |
+| | Control-Command-F | Enter full screen. |
 | G | Command-G | Find the next occurrence of the selection. |
-|  | Shift-Command-G | Find the previous occurrence of the selection. |
+| | Shift-Command-G | Find the previous occurrence of the selection. |
 | H | Command-H | Hide the windows of the currently running app. |
-|  | Option-Command-H | Hide the windows of all other running apps. |
+| | Option-Command-H | Hide the windows of all other running apps. |
 | I | Command-I | Italicize the selected text or toggle italic text on or off. |
-|  | Command-I | Display an Info window. |
-|  | Option-Command-I | Display an inspector window. |
+| | Command-I | Display an Info window. |
+| | Option-Command-I | Display an inspector window. |
 | J | Command-J | Scroll to a selection. |
 | M | Command-M | Minimize the active window to the Dock. |
-|  | Option-Command-M | Minimize all windows of the active app to the Dock. |
+| | Option-Command-M | Minimize all windows of the active app to the Dock. |
 | N | Command-N | Open a new document. |
 | O | Command-O | Display a dialog for choosing a document to open. |
 | P | Command-P | Display the Print dialog. |
-|  | Shift-Command-P | Display the Page Setup dialog. |
+| | Shift-Command-P | Display the Page Setup dialog. |
 | Q | Command-Q | Quit the app. |
-|  | Shift-Command-Q | Log out the person currently logged in. |
-|  | Option-Shift-Command-Q | Log out the person currently logged in without confirmation. |
+| | Shift-Command-Q | Log out the person currently logged in. |
+| | Option-Shift-Command-Q | Log out the person currently logged in without confirmation. |
 | S | Command-S | Save a new document or save a version of a document. |
-|  | Shift-Command-S | Duplicate the active document or initiate a Save As. |
+| | Shift-Command-S | Duplicate the active document or initiate a Save As. |
 | T | Command-T | Display the Fonts window. |
-|  | Option-Command-T | Show or hide a toolbar. |
+| | Option-Command-T | Show or hide a toolbar. |
 | U | Command-U | Underline the selected text or turn underlining on or off. |
 | V | Command-V | Paste the Clipboard contents at the insertion point. |
-|  | Shift-Command-V | Paste as (Paste as Quotation, for example). |
-|  | Option-Command-V | Apply the style of one object to the selection. |
-|  | Option-Shift-Command-V | Paste the Clipboard contents at the insertion point and apply the style of the surrounding text to the inserted object. |
-|  | Control-Command-V | Apply formatting settings to the selection. |
+| | Shift-Command-V | Paste as (Paste as Quotation, for example). |
+| | Option-Command-V | Apply the style of one object to the selection. |
+| | Option-Shift-Command-V | Paste the Clipboard contents at the insertion point and apply the style of the surrounding text to the inserted object. |
+| | Control-Command-V | Apply formatting settings to the selection. |
 | W | Command-W | Close the active window. |
-|  | Shift-Command-W | Close a file and its associated windows. |
-|  | Option-Command-W | Close all windows in the app. |
+| | Shift-Command-W | Close a file and its associated windows. |
+| | Option-Command-W | Close all windows in the app. |
 | X | Command-X | Remove the selection and store on the Clipboard. |
 | Z | Command-Z | Undo the previous operation. |
-|  | Shift-Command-Z | Redo (when Undo and Redo are separate commands rather than toggled using Command-Z). |
+| | Shift-Command-Z | Redo (when Undo and Redo are separate commands rather than toggled using Command-Z). |
 | Right arrow | Command-Right arrow | Change the keyboard layout to current layout of Roman script. |
-|  | Shift-Command-Right arrow | Extend selection to the next semantic unit, typically the end of the current line. |
-|  | Shift-Right arrow | Extend selection one character to the right. |
-|  | Option-Shift-Right arrow | Extend selection to the end of the current word, then to the end of the next word. |
-|  | Control-Right arrow | Move focus to another value or cell within a view, such as a table. |
+| | Shift-Command-Right arrow | Extend selection to the next semantic unit, typically the end of the current line. |
+| | Shift-Right arrow | Extend selection one character to the right. |
+| | Option-Shift-Right arrow | Extend selection to the end of the current word, then to the end of the next word. |
+| | Control-Right arrow | Move focus to another value or cell within a view, such as a table. |
 | Left arrow | Command-Left arrow | Change the keyboard layout to current layout of system script. |
-|  | Shift-Command-Left arrow | Extend selection to the previous semantic unit, typically the beginning of the current line. |
-|  | Shift-Left arrow | Extend selection one character to the left. |
-|  | Option-Shift-Left arrow | Extend selection to the beginning of the current word, then to the beginning of the previous word. |
-|  | Control-Left arrow | Move focus to another value or cell within a view, such as a table. |
+| | Shift-Command-Left arrow | Extend selection to the previous semantic unit, typically the beginning of the current line. |
+| | Shift-Left arrow | Extend selection one character to the left. |
+| | Option-Shift-Left arrow | Extend selection to the beginning of the current word, then to the beginning of the previous word. |
+| | Control-Left arrow | Move focus to another value or cell within a view, such as a table. |
 | Up arrow | Shift-Command-Up arrow | Extend selection upward in the next semantic unit, typically the beginning of the document. |
-|  | Shift-Up arrow | Extend selection to the line above, to the nearest character boundary at the same horizontal location. |
-|  | Option-Shift-Up arrow | Extend selection to the beginning of the current paragraph, then to the beginning of the next paragraph. |
-|  | Control-Up arrow | Move focus to another value or cell within a view, such as a table. |
+| | Shift-Up arrow | Extend selection to the line above, to the nearest character boundary at the same horizontal location. |
+| | Option-Shift-Up arrow | Extend selection to the beginning of the current paragraph, then to the beginning of the next paragraph. |
+| | Control-Up arrow | Move focus to another value or cell within a view, such as a table. |
 | Down arrow | Shift-Command-Down arrow | Extend selection downward in the next semantic unit, typically the end of the document. |
-|  | Shift-Down arrow | Extend selection to the line below, to the nearest character boundary at the same horizontal location. |
-|  | Option-Shift-Down arrow | Extend selection to the end of the current paragraph, then to the end of the next paragraph (include the paragraph terminator, such as Return, in cut, copy, and paste operations). |
-|  | Control-Down arrow | Move focus to another value or cell within a view, such as a table. |
+| | Shift-Down arrow | Extend selection to the line below, to the nearest character boundary at the same horizontal location. |
+| | Option-Shift-Down arrow | Extend selection to the end of the current paragraph, then to the end of the next paragraph (include the paragraph terminator, such as Return, in cut, copy, and paste operations). |
+| | Control-Down arrow | Move focus to another value or cell within a view, such as a table. |
 
 The system also defines several keyboard shortcuts for use with localized versions of the system, localized keyboards, keyboard layouts, and input methods. These shortcuts don’t correspond directly to menu commands.
 
@@ -209,13 +209,13 @@ In visionOS, an app’s keyboard shortcuts appear in the shortcut interface that
 
 #### Developer documentation
 
-[KeyboardShortcut](https://developer.apple.com/documentation/SwiftUI/KeyboardShortcut) — SwiftUI
+[KeyboardShortcut](https://developer.apple.com/documentation/SwiftUI/KeyboardShortcut) - SwiftUI
 
-[Input events](https://developer.apple.com/documentation/SwiftUI/Input-events) — SwiftUI
+[Input events](https://developer.apple.com/documentation/SwiftUI/Input-events) - SwiftUI
 
-[Handling key presses made on a physical keyboard](https://developer.apple.com/documentation/UIKit/handling-key-presses-made-on-a-physical-keyboard) — UIKit
+[Handling key presses made on a physical keyboard](https://developer.apple.com/documentation/UIKit/handling-key-presses-made-on-a-physical-keyboard) - UIKit
 
-[Mouse, Keyboard, and Trackpad](https://developer.apple.com/documentation/AppKit/mouse-keyboard-and-trackpad) — AppKit
+[Mouse, Keyboard, and Trackpad](https://developer.apple.com/documentation/AppKit/mouse-keyboard-and-trackpad) - AppKit
 
 ## Change log
 

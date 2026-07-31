@@ -15,7 +15,7 @@ An iMessage app or sticker pack is available within the context of a Messages co
 
 **Prefer providing one primary experience in your iMessage app.** People are in a conversational flow when they choose your app, so your functionality or content needs to be easy to understand and immediately available. If you want to provide multiple types of functionality or different collections of content, consider creating a separate iMessage app for each one.
 
-**Consider surfacing content from your iOS or iPadOS app.** For example, your iMessage app could offer app-specific information that people might want to share — such as a shopping list or a trip itinerary — or support a simple, collaborative task, like deciding where to go for a meal or which movie to watch.
+**Consider surfacing content from your iOS or iPadOS app.** For example, your iMessage app could offer app-specific information that people might want to share - such as a shopping list or a trip itinerary - or support a simple, collaborative task, like deciding where to go for a meal or which movie to watch.
 
 **Present essential features in the compact view.** People can experience your iMessage app in a compact view that appears below the message transcript, or they can expand the view to occupy most of the window. Make sure the most frequently used items are available in the compact view, reserving additional content and features for the expanded view.
 
@@ -38,10 +38,10 @@ To ensure that your icon looks great in any context and on various devices, crea
 | Usage | @2x (pixels) | @3x (pixels) |
 | --- | --- | --- |
 | Messages, notifications | 148x110 | - |
-|  | 143x100 | - |
-|  | 120x90 | 180x135 |
-|  | 64x48 | 96x72 |
-|  | 54x40 | 81x60 |
+| | 143x100 | - |
+| | 120x90 | 180x135 |
+| | 64x48 | 96x72 |
+| | 54x40 | 81x60 |
 | Settings | 58x58 | 87x87 |
 | App Store | 1024x1024 | 1024x1024 |
 
@@ -86,7 +86,7 @@ A sticker file must be 500 KB or smaller in size. For each supported format, the
 
 [Messages](https://developer.apple.com/documentation/Messages)
 
-[Adding Sticker packs and iMessage apps to the system Stickers app, Messages camera, and FaceTime](https://developer.apple.com/documentation/Messages/adding-sticker-packs-and-imessage-apps-to-the-system-stickers-app-messages-camera-and-facetime) — Messages
+[Adding Sticker packs and iMessage apps to the system Stickers app, Messages camera, and FaceTime](https://developer.apple.com/documentation/Messages/adding-sticker-packs-and-imessage-apps-to-the-system-stickers-app-messages-camera-and-facetime) - Messages
 
 #### Videos
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Toolkit"
+  short_description: "Rebase, bisect, worktree, reflog, hooks, and signing"
+  default_prompt: "Use $git-toolkit for advanced local git operations - interactive rebase, bisect, worktree, stash workflows, hooks, signing, and patch manipulation."

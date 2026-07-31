@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Workflows"
+  short_description: "Branching models, merge strategies, and workflow enforcement"
+  default_prompt: "Use $git-workflows to select, design, or audit branching models and merge strategies for your team."

@@ -17,7 +17,7 @@ When you submit a new or updated app, you must provide details about your privac
 
 ## Best practices
 
-**Request access only to data that you actually need.** Asking for more data than a feature needs — or asking for data before a person shows interest in the feature — can make it hard for people to trust your app. Give people precise control over their data by making your permission requests as specific as possible.
+**Request access only to data that you actually need.** Asking for more data than a feature needs - or asking for data before a person shows interest in the feature - can make it hard for people to trust your app. Give people precise control over their data by making your permission requests as specific as possible.
 
 **Be transparent about how your app collects and uses people’s data.** People are less likely to be comfortable sharing data with your app if they don’t understand exactly how you plan to use it. Always respect people’s choices to use system features like Hide My Email and Mail Privacy Protection, and be sure you understand your obligations with regard to app tracking. To learn more about Apple privacy features, see [Privacy](https://www.apple.com/privacy/); for developer guidance, see [User privacy and data use](https://developer.apple.com/app-store/user-privacy-and-data-use/).
 
@@ -41,7 +41,7 @@ Here are several examples of the things you must request permission to access:
 
 - The device’s advertising identifier, which supports app tracking
 
-The system provides a standard alert that lets people view each request you make. You supply copy that describes why your app needs access, and the system displays your description in the alert. People can also view the description — and update their choice — in Settings > Privacy.
+The system provides a standard alert that lets people view each request you make. You supply copy that describes why your app needs access, and the system displays your description in the alert. People can also view the description - and update their choice - in Settings > Privacy.
 
 **Request permission only when your app clearly needs access to the data or resource.** It’s natural for people to be suspicious of a request for personal information or access to a device capability, especially if there’s no obvious need for it. Ideally, wait to request permission until people actually use an app feature that requires access. For example, you can use the [location button](https://developer.apple.com/design/human-interface-guidelines/privacy#Location-button) to give people a way to share their location after they indicate interest in a feature that needs that information.
 
@@ -49,7 +49,7 @@ The system provides a standard alert that lets people view each request you make
 
 **Write copy that clearly describes how your app uses the ability, data, or resource you’re requesting.** The standard alert displays your copy (called a *purpose string* or *usage description string*) after your app name and before the buttons people use to grant or deny their permission. Aim for a brief, complete sentence that’s straightforward, specific, and easy to understand. Use sentence case, avoid passive voice, and include a period at the end. For developer guidance, see [Requesting access to protected resources](https://developer.apple.com/documentation/UIKit/requesting-access-to-protected-resources) and [App Tracking Transparency](https://developer.apple.com/documentation/AppTrackingTransparency).
 
-|  | Example purpose string | Notes |
+| | Example purpose string | Notes |
 | --- | --- | --- |
 | *Image description: A checkmark in a circle to indicate a correct example.* | The app records during the night to detect snoring sounds. | An active sentence that clearly describes how and why the app collects the data. |
 | *Image description: An X in a circle to indicate an incorrect example.* | Microphone access is needed for a better experience. | A passive sentence that provides a vague, undefined justification. |
@@ -73,7 +73,7 @@ Ideally, the current context helps people understand why you’re requesting the
 
 *Image description: A checkmark in a circle to indicate a correct example.*
 
-**Don’t include additional actions in your custom screen or window.** For example, don’t provide a way for people to leave the screen or window without viewing the system alert — like offering an option to close or cancel.
+**Don’t include additional actions in your custom screen or window.** For example, don’t provide a way for people to leave the screen or window without viewing the system alert - like offering an option to close or cancel.
 
 *Image description: A screenshot of an app’s pre-alert screen that includes a button titled Cancel that appears below the Next button.*
 
@@ -111,7 +111,7 @@ There are several prohibited custom-screen designs that will cause rejection. So
 
 In iOS, iPadOS, and watchOS, Core Location provides a button so people can grant your app temporary authorization to access their location at the moment a task needs it. A location button’s appearance can vary to match your app’s UI and it always communicates the action of location sharing in a way that’s instantly recognizable.
 
-*Image description: An image of a lozenge-shaped blue button that displays a white location indicator — that is, a narrow arrow head shape that points to the top right — followed by the text Current Location.*
+*Image description: An image of a lozenge-shaped blue button that displays a white location indicator - that is, a narrow arrow head shape that points to the top right - followed by the text Current Location.*
 
 The first time people open your app and tap a location button, the system displays a standard alert. The alert helps people understand how using the button limits your app’s access to their location, and reminds them of the location indicator that appears when sharing starts.
 
@@ -133,7 +133,7 @@ After people confirm their understanding of the button’s action, simply tappin
 
 - Adjust the button’s corner radius.
 
-To help people recognize and trust location buttons, you can’t customize the button’s other visual attributes. The system also ensures a location button remains legible by warning you about problems like low-contrast color combinations or too much translucency. In addition to fixing such problems, you’re responsible for making sure the text fits in the button — for example, button text needs to fit without truncation at all accessibility text sizes and when translated into other languages.
+To help people recognize and trust location buttons, you can’t customize the button’s other visual attributes. The system also ensures a location button remains legible by warning you about problems like low-contrast color combinations or too much translucency. In addition to fixing such problems, you’re responsible for making sure the text fits in the button - for example, button text needs to fit without truncation at all accessibility text sizes and when translated into other languages.
 
 > If the system identifies consistent problems with your customized location button, it won’t give your app access to the device location when people tap it. Although such a button can perform other app-specific actions, people may lose trust in your app if your location button doesn’t work as they expect.
 
@@ -183,11 +183,11 @@ Developer access to device cameras works differently in visionOS than it does in
 
 #### Developer documentation
 
-[Requesting access to protected resources](https://developer.apple.com/documentation/UIKit/requesting-access-to-protected-resources) — UIKit
+[Requesting access to protected resources](https://developer.apple.com/documentation/UIKit/requesting-access-to-protected-resources) - UIKit
 
 [Security](https://developer.apple.com/documentation/Security)
 
-[Requesting authorization to use location services](https://developer.apple.com/documentation/CoreLocation/requesting-authorization-to-use-location-services) — CoreLocation
+[Requesting authorization to use location services](https://developer.apple.com/documentation/CoreLocation/requesting-authorization-to-use-location-services) - CoreLocation
 
 [App Tracking Transparency](https://developer.apple.com/documentation/AppTrackingTransparency)
 

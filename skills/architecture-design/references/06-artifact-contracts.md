@@ -1,6 +1,6 @@
 # Artifact Contracts
 
-The templates in `assets/` are normative starting points. Remove unused sections only with an explicit `Not applicable — reason` entry when the omission could otherwise hide risk.
+The templates in `assets/` are normative starting points. Remove unused sections only with an explicit `Not applicable - reason` entry when the omission could otherwise hide risk.
 
 ## 1. Architecture report contract
 

@@ -13,7 +13,7 @@ An action sheet is a modal view that presents choices related to an action peopl
 
 ## Best practices
 
-**Use an action sheet — not an alert — to offer choices related to an intentional action.** For example, when people cancel the message they’re editing in Mail on iPhone, an action sheet provides two choices: delete the draft, or save the draft. Although an alert can also help people confirm or cancel an action that has destructive consequences, it doesn’t provide additional choices related to the action. More importantly, an alert is usually unexpected, generally telling people about a problem or a change in the current situation that might require them to act. For guidance, see [Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts).
+**Use an action sheet - not an alert - to offer choices related to an intentional action.** For example, when people cancel the message they’re editing in Mail on iPhone, an action sheet provides two choices: delete the draft, or save the draft. Although an alert can also help people confirm or cancel an action that has destructive consequences, it doesn’t provide additional choices related to the action. More importantly, an alert is usually unexpected, generally telling people about a problem or a change in the current situation that might require them to act. For guidance, see [Alerts](https://developer.apple.com/design/human-interface-guidelines/alerts).
 
 *Image description: A partial screenshot of a new message being composed in Mail on iPhone.*
 
@@ -23,7 +23,7 @@ An action sheet is a modal view that presents choices related to an action peopl
 
 **Aim to keep titles short enough to display on a single line.** A long title is difficult to read quickly and might get truncated or require people to scroll.
 
-**Provide a message only if necessary.** In general, the title — combined with the context of the current action — provides enough information to help people understand their choices.
+**Provide a message only if necessary.** In general, the title - combined with the context of the current action - provides enough information to help people understand their choices.
 
 **If necessary, provide a Cancel button that lets people reject an action that might destroy data.** Place the Cancel button at the bottom of the action sheet (or in the upper-left corner of the sheet in watchOS). A SwiftUI confirmation dialog includes a Cancel button by default.
 
@@ -35,7 +35,7 @@ An action sheet is a modal view that presents choices related to an action peopl
 
 ### iOS, iPadOS
 
-**Use an action sheet — not a menu — to provide choices related to an action.** People are accustomed to having an action sheet appear when they perform an action that might require clarifying choices. In contrast, people expect a menu to appear when they choose to reveal it.
+**Use an action sheet - not a menu - to provide choices related to an action.** People are accustomed to having an action sheet appear when they perform an action that might require clarifying choices. In contrast, people expect a menu to appear when they choose to reveal it.
 
 **Avoid letting an action sheet scroll.** The more buttons an action sheet has, the more time and effort it takes for people to make a choice. Also, scrolling an action sheet can be hard to do without inadvertently tapping a button.
 
@@ -67,9 +67,9 @@ Each button has an associated style that conveys information about the button’
 
 #### Developer documentation
 
-[confirmationDialog(_:isPresented:titleVisibility:actions:)](https://developer.apple.com/documentation/SwiftUI/View/confirmationDialog(_:isPresented:titleVisibility:actions:)-46zbb) — SwiftUI
+[confirmationDialog(_:isPresented:titleVisibility:actions:)](https://developer.apple.com/documentation/SwiftUI/View/confirmationDialog(_:isPresented:titleVisibility:actions:)-46zbb) - SwiftUI
 
-[UIAlertController.Style.actionSheet](https://developer.apple.com/documentation/UIKit/UIAlertController/Style/actionSheet) — UIKit
+[UIAlertController.Style.actionSheet](https://developer.apple.com/documentation/UIKit/UIAlertController/Style/actionSheet) - UIKit
 
 ## References
 

@@ -31,9 +31,9 @@ Ask people to create an account only if your core functionality requires it; oth
 
 If you help people create an account within your app or game, you must also help them delete it, not just deactivate it. In addition to following the guidelines below, be sure to understand and comply with your region’s legal requirements related to account deletion and the right to be forgotten.
 
-> If legal requirements compel your app to maintain accounts or information — such as digital health records — or to follow a specific account-deletion process, clearly describe the situation so people can understand the information or accounts you must maintain and the process you must follow.
+> If legal requirements compel your app to maintain accounts or information - such as digital health records - or to follow a specific account-deletion process, clearly describe the situation so people can understand the information or accounts you must maintain and the process you must follow.
 
-**Provide a clear way to initiate account deletion within your app or game.** If people can’t perform account deletion within your app, you must provide a direct link to the webpage on which people can do so. Make the link easy to discover — for example, don’t bury it in your Privacy Policy or Terms of Service pages.
+**Provide a clear way to initiate account deletion within your app or game.** If people can’t perform account deletion within your app, you must provide a direct link to the webpage on which people can do so. Make the link easy to discover - for example, don’t bury it in your Privacy Policy or Terms of Service pages.
 
 > If people used [Sign in with Apple](https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple) to create an account within your app, you revoke the associated tokens when they delete their account. See [Token revocation](https://developer.apple.com/documentation/SigninwithAppleRESTAPI/Revoke-tokens).
 
@@ -89,7 +89,7 @@ Use iCloud synchronization to provide access to the Keychain, letting people aut
 
 #### Developer documentation
 
-[Supporting passkeys](https://developer.apple.com/documentation/AuthenticationServices/supporting-passkeys) — Authentication Services
+[Supporting passkeys](https://developer.apple.com/documentation/AuthenticationServices/supporting-passkeys) - Authentication Services
 
 #### Videos
 

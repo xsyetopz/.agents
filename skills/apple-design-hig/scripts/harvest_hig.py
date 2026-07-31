@@ -11,18 +11,20 @@ import shutil
 import sys
 import time
 from collections import deque
+from collections.abc import Iterable
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urljoin, urlparse
 from urllib.request import Request, urlopen
 
-
 CANONICAL_BASE = "https://developer.apple.com/design/human-interface-guidelines"
-DATA_BASE = "https://developer.apple.com/tutorials/data/design/human-interface-guidelines"
+DATA_BASE = (
+    "https://developer.apple.com/tutorials/data/design/human-interface-guidelines"
+)
 WHATS_NEW_URL = "https://developer.apple.com/design/whats-new/"
 HIG_PREFIXES = (
     "doc://com.apple.HIG/design/Human-Interface-Guidelines/",
@@ -35,7 +37,19 @@ ROOT_IDENTIFIERS = {
 USER_AGENT = "apple-design-hig-markdown/2.0 (Codex skill)"
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = ROOT / "references"
-MEDIA_SUFFIXES = (".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp", ".mp4", ".mov", ".m4v", ".wav", ".mp3")
+MEDIA_SUFFIXES = (
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".gif",
+    ".svg",
+    ".webp",
+    ".mp4",
+    ".mov",
+    ".m4v",
+    ".wav",
+    ".mp3",
+)
 EXPECTED_UNAVAILABLE = {"messages-for-business", "navigation-bars", "touch-bar"}
 LINK_PATTERN = re.compile(r"\[[^\]\n]+\]\(([^\s)]+)(?:\s+[^)]*)?\)")
 
@@ -49,7 +63,9 @@ def retrieved_date() -> str:
 
 
 def request_bytes(url: str, timeout: float) -> bytes:
-    request = Request(url, headers={"Accept": "application/json, text/html", "User-Agent": USER_AGENT})
+    request = Request(
+        url, headers={"Accept": "application/json, text/html", "User-Agent": USER_AGENT}
+    )
     last_error: HarvestError | None = None
     for attempt in range(3):
         try:
@@ -100,7 +116,11 @@ def fetch_json(slug: str, timeout: float, data_base: str = DATA_BASE) -> dict[st
         raise HarvestError(f"invalid JSON: {url}") from error
     if not isinstance(payload, dict):
         raise HarvestError(f"non-object JSON document: {url}")
-    actual = document_slug((payload.get("identifier") or {}).get("url")) if isinstance(payload.get("identifier"), dict) else None
+    actual = (
+        document_slug((payload.get("identifier") or {}).get("url"))
+        if isinstance(payload.get("identifier"), dict)
+        else None
+    )
     requested = slug.strip("/")
     if actual != requested:
         raise HarvestError(f"{requested or '<root>'} redirects to {actual!r}")
@@ -123,7 +143,7 @@ def child_slugs(payload: dict[str, Any]) -> set[str]:
         slug = document_slug(node.get("identifier"))
         if slug:
             result.add(slug)
-    for identifier in (payload.get("references") or {}):
+    for identifier in payload.get("references") or {}:
         slug = document_slug(identifier)
         if slug:
             result.add(slug)
@@ -143,7 +163,13 @@ class WhatsNewParser(HTMLParser):
         values = dict(attrs)
         classes = set((values.get("class") or "").split())
         if tag == "tr" and "topic-item" in classes:
-            self.row = {"title": "", "url": "", "date": "", "type": "", "description": ""}
+            self.row = {
+                "title": "",
+                "url": "",
+                "date": "",
+                "type": "",
+                "description": "",
+            }
         elif self.row is not None and tag == "a" and values.get("href"):
             self.row["url"] = urljoin(WHATS_NEW_URL, values["href"] or "")
             self.capture = "title"
@@ -165,7 +191,9 @@ class WhatsNewParser(HTMLParser):
             self.capture = None
         elif tag == "tr":
             entry = {key: " ".join(value.split()) for key, value in self.row.items()}
-            entry["type"] = re.sub(r"searchterm$", "", entry["type"], flags=re.IGNORECASE)
+            entry["type"] = re.sub(
+                r"searchterm$", "", entry["type"], flags=re.IGNORECASE
+            )
             if entry["title"] and entry["url"]:
                 self.entries.append(entry)
             self.row = None
@@ -186,7 +214,9 @@ def whats_new_hig_slugs(entries: Iterable[dict[str, str]]) -> set[str]:
     }
 
 
-def discover(timeout: float, workers: int, data_base: str) -> tuple[dict[str, dict[str, Any]], list[dict[str, str]], set[str]]:
+def discover(
+    timeout: float, workers: int, data_base: str
+) -> tuple[dict[str, dict[str, Any]], list[dict[str, str]], set[str]]:
     entries = whats_new_entries(timeout)
     queue: deque[str] = deque([""])
     queue.extend(sorted(whats_new_hig_slugs(entries)))
@@ -199,7 +229,10 @@ def discover(timeout: float, workers: int, data_base: str) -> tuple[dict[str, di
             if slug not in documents and slug not in failures and slug not in batch:
                 batch.append(slug)
         with ThreadPoolExecutor(max_workers=workers) as executor:
-            futures = {executor.submit(fetch_json, slug, timeout, data_base): slug for slug in batch}
+            futures = {
+                executor.submit(fetch_json, slug, timeout, data_base): slug
+                for slug in batch
+            }
             for future in as_completed(futures):
                 slug = futures[future]
                 try:
@@ -240,11 +273,20 @@ def inline_markdown(items: Any, references: dict[str, Any]) -> str:
             text = inline_markdown(item.get("inlineContent"), references)
             if kind == "codeVoice" and not text and isinstance(item.get("code"), str):
                 text = item["code"]
-            marker = {"strong": "**", "emphasis": "*", "strikethrough": "~~", "codeVoice": "`"}[kind]
+            marker = {
+                "strong": "**",
+                "emphasis": "*",
+                "strikethrough": "~~",
+                "codeVoice": "`",
+            }[kind]
             parts.append(f"{marker}{text}{marker}" if text else "")
         elif kind in {"reference", "link"}:
-            identifier = item.get("identifier") or item.get("destination") or item.get("url")
-            reference = references.get(identifier, {}) if isinstance(identifier, str) else {}
+            identifier = (
+                item.get("identifier") or item.get("destination") or item.get("url")
+            )
+            reference = (
+                references.get(identifier, {}) if isinstance(identifier, str) else {}
+            )
             text = (
                 inline_markdown(item.get("inlineContent"), references)
                 or inline_markdown(item.get("overridingTitleInlineContent"), references)
@@ -252,17 +294,27 @@ def inline_markdown(items: Any, references: dict[str, Any]) -> str:
                 or str(item.get("text", ""))
                 or (reference.get("title", "") if isinstance(reference, dict) else "")
             )
-            url = item.get("url") or (reference.get("url") if isinstance(reference, dict) else "")
+            url = item.get("url") or (
+                reference.get("url") if isinstance(reference, dict) else ""
+            )
             if isinstance(url, str) and url:
                 parts.append(f"[{text or url}]({absolute_reference_url(url)})")
             elif text:
                 parts.append(text)
         elif kind in {"image", "video", "audio"}:
             identifier = item.get("identifier")
-            reference = references.get(identifier, {}) if isinstance(identifier, str) else {}
-            alt = item.get("alt") or (reference.get("alt") if isinstance(reference, dict) else "")
+            reference = (
+                references.get(identifier, {}) if isinstance(identifier, str) else {}
+            )
+            alt = item.get("alt") or (
+                reference.get("alt") if isinstance(reference, dict) else ""
+            )
             metadata = item.get("metadata")
-            caption = inline_markdown(metadata.get("abstract"), references) if isinstance(metadata, dict) else ""
+            caption = (
+                inline_markdown(metadata.get("abstract"), references)
+                if isinstance(metadata, dict)
+                else ""
+            )
             alt_text = str(alt).strip() if alt else ""
             caption_text = caption.strip()
             description_parts = [alt_text] if alt_text else []
@@ -270,7 +322,11 @@ def inline_markdown(items: Any, references: dict[str, Any]) -> str:
                 description_parts.append(caption_text)
             description = " ".join(description_parts)
             if description:
-                label = {"image": "Image description", "video": "Video description", "audio": "Audio description"}[kind]
+                label = {
+                    "image": "Image description",
+                    "video": "Video description",
+                    "audio": "Audio description",
+                }[kind]
                 parts.append(f"*{label}: {description}*")
         else:
             nested = inline_markdown(item.get("inlineContent"), references)
@@ -288,7 +344,15 @@ def table_cell(value: Any, references: dict[str, Any]) -> str:
         return ""
     if isinstance(value.get("inlineContent"), list):
         return inline_markdown(value["inlineContent"], references)
-    return " ".join(filter(None, (table_cell(value.get(key), references) for key in ("content", "items", "columns", "tabs"))))
+    return " ".join(
+        filter(
+            None,
+            (
+                table_cell(value.get(key), references)
+                for key in ("content", "items", "columns", "tabs")
+            ),
+        )
+    )
 
 
 def markdown_table(rows: Any, references: dict[str, Any]) -> str:
@@ -298,7 +362,10 @@ def markdown_table(rows: Any, references: dict[str, Any]) -> str:
     for row in rows:
         cells = row.get("cells") if isinstance(row, dict) else row
         if isinstance(cells, list):
-            values = [table_cell(cell, references).replace("|", "\\|").replace("\n", "<br>") for cell in cells]
+            values = [
+                table_cell(cell, references).replace("|", "\\|").replace("\n", "<br>")
+                for cell in cells
+            ]
             if any(values):
                 rendered.append(values)
     if not rendered:
@@ -310,7 +377,9 @@ def markdown_table(rows: Any, references: dict[str, Any]) -> str:
     return "\n".join(output)
 
 
-def render_content(nodes: Any, references: dict[str, Any], indent: int = 0) -> list[str]:
+def render_content(
+    nodes: Any, references: dict[str, Any], indent: int = 0
+) -> list[str]:
     if not isinstance(nodes, list):
         return []
     output: list[str] = []
@@ -321,7 +390,9 @@ def render_content(nodes: Any, references: dict[str, Any], indent: int = 0) -> l
         if kind == "heading":
             text = str(node.get("text", "")).strip()
             if text:
-                output.append(f"{'#' * min(6, max(2, int(node.get('level', 2))))} {text}")
+                output.append(
+                    f"{'#' * min(6, max(2, int(node.get('level', 2))))} {text}"
+                )
         elif kind == "paragraph":
             text = inline_markdown(node.get("inlineContent"), references)
             if text:
@@ -336,31 +407,50 @@ def render_content(nodes: Any, references: dict[str, Any], indent: int = 0) -> l
                 output.append(table)
         elif kind == "links":
             for identifier in node.get("items", []):
-                reference = references.get(identifier, {}) if isinstance(identifier, str) else {}
-                if not isinstance(reference, dict) or not isinstance(reference.get("url"), str):
+                reference = (
+                    references.get(identifier, {})
+                    if isinstance(identifier, str)
+                    else {}
+                )
+                if not isinstance(reference, dict) or not isinstance(
+                    reference.get("url"), str
+                ):
                     continue
                 title = str(reference.get("title") or reference["url"])
-                output.append(f"- [{title}]({absolute_reference_url(reference['url'])})")
+                output.append(
+                    f"- [{title}]({absolute_reference_url(reference['url'])})"
+                )
         elif kind in {"unorderedList", "orderedList"}:
             marker = "1." if kind == "orderedList" else "-"
             for item in node.get("items", []):
                 if not isinstance(item, dict):
                     continue
                 content = item.get("content")
-                text = " ".join(
-                    inline_markdown(child.get("inlineContent"), references)
-                    for child in content or []
-                    if isinstance(child, dict) and child.get("type") == "paragraph"
-                ) if isinstance(content, list) else inline_markdown(item.get("inlineContent"), references)
+                text = (
+                    " ".join(
+                        inline_markdown(child.get("inlineContent"), references)
+                        for child in content or []
+                        if isinstance(child, dict) and child.get("type") == "paragraph"
+                    )
+                    if isinstance(content, list)
+                    else inline_markdown(item.get("inlineContent"), references)
+                )
                 if text:
                     output.append(f"{' ' * indent}{marker} {text}")
                 if isinstance(content, list):
-                    nested = [child for child in content if isinstance(child, dict) and child.get("type") in {"unorderedList", "orderedList"}]
+                    nested = [
+                        child
+                        for child in content
+                        if isinstance(child, dict)
+                        and child.get("type") in {"unorderedList", "orderedList"}
+                    ]
                     output.extend(render_content(nested, references, indent + 4))
         elif kind in {"codeListing", "code"}:
             code = node.get("code") or node.get("text")
             if isinstance(code, str) and code.strip():
-                language = node.get("syntax") if isinstance(node.get("syntax"), str) else ""
+                language = (
+                    node.get("syntax") if isinstance(node.get("syntax"), str) else ""
+                )
                 output.append(f"```{language}\n{code.strip()}\n```")
         elif kind == "aside":
             text = inline_markdown(node.get("content"), references)
@@ -370,7 +460,17 @@ def render_content(nodes: Any, references: dict[str, Any], indent: int = 0) -> l
             text = inline_markdown([node], references)
             if text:
                 output.append(text)
-        if kind not in {"unorderedList", "orderedList", "aside", "small", "table", "links", "video", "audio", "image"}:
+        if kind not in {
+            "unorderedList",
+            "orderedList",
+            "aside",
+            "small",
+            "table",
+            "links",
+            "video",
+            "audio",
+            "image",
+        }:
             for key in ("content", "columns", "items", "tabs"):
                 output.extend(render_content(node.get(key), references))
     return output
@@ -393,8 +493,12 @@ def topic_sections(payload: dict[str, Any], references: dict[str, Any]) -> list[
             continue
         links: list[str] = []
         for identifier in section.get("identifiers", []):
-            reference = references.get(identifier, {}) if isinstance(identifier, str) else {}
-            if not isinstance(reference, dict) or not isinstance(reference.get("url"), str):
+            reference = (
+                references.get(identifier, {}) if isinstance(identifier, str) else {}
+            )
+            if not isinstance(reference, dict) or not isinstance(
+                reference.get("url"), str
+            ):
                 continue
             title = str(reference.get("title") or reference["url"])
             links.append(f"- [{title}]({absolute_reference_url(reference['url'])})")
@@ -416,12 +520,23 @@ def reference_urls(payload: dict[str, Any]) -> list[tuple[str, str]]:
 
 
 def front_matter(title: str, source: str, retrieved: str) -> str:
-    return "\n".join(("---", f"title: {json.dumps(title, ensure_ascii=False)}", f"source: {source}", f"retrieved: {retrieved}", "---", ""))
+    return "\n".join(
+        (
+            "---",
+            f"title: {json.dumps(title, ensure_ascii=False)}",
+            f"source: {source}",
+            f"retrieved: {retrieved}",
+            "---",
+            "",
+        )
+    )
 
 
 def markdown_page(slug: str, payload: dict[str, Any], retrieved: str) -> str:
     title = title_for(payload, slug)
-    refs = payload.get("references") if isinstance(payload.get("references"), dict) else {}
+    refs = (
+        payload.get("references") if isinstance(payload.get("references"), dict) else {}
+    )
     abstract = inline_markdown(payload.get("abstract"), refs)
     body = render_content(payload.get("primaryContentSections"), refs)
     content = [f"# {title}"]
@@ -431,18 +546,33 @@ def markdown_page(slug: str, payload: dict[str, Any], retrieved: str) -> str:
     content.extend(topic_sections(payload, refs))
     rendered = "\n\n".join(content).rstrip()
     linked = set(LINK_PATTERN.findall(rendered))
-    extra = [(url, title) for url, title in reference_urls(payload) if url not in linked]
+    extra = [
+        (url, title) for url, title in reference_urls(payload) if url not in linked
+    ]
     if extra:
-        rendered += "\n\n## References\n\n" + "\n".join(f"- [{title}]({url})" for url, title in extra)
+        rendered += "\n\n## References\n\n" + "\n".join(
+            f"- [{title}]({url})" for url, title in extra
+        )
     return front_matter(title, canonical_url(slug), retrieved) + rendered + "\n"
 
 
 def markdown_whats_new(entries: list[dict[str, str]], retrieved: str) -> str:
     lines = ["# What’s New in Apple Design"]
     for entry in entries:
-        metadata = "; ".join(value for value in (entry["date"], entry["type"], entry["description"]) if value)
-        lines.append(f"- [{entry['title']}]({entry['url']})" + (f" — {metadata}" if metadata else ""))
-    return front_matter("What’s New in Apple Design", WHATS_NEW_URL, retrieved) + "\n\n".join(lines) + "\n"
+        metadata = "; ".join(
+            value
+            for value in (entry["date"], entry["type"], entry["description"])
+            if value
+        )
+        lines.append(
+            f"- [{entry['title']}]({entry['url']})"
+            + (f" - {metadata}" if metadata else "")
+        )
+    return (
+        front_matter("What’s New in Apple Design", WHATS_NEW_URL, retrieved)
+        + "\n\n".join(lines)
+        + "\n"
+    )
 
 
 def harvest(args: argparse.Namespace) -> int:
@@ -454,14 +584,23 @@ def harvest(args: argparse.Namespace) -> int:
     shutil.rmtree(staging, ignore_errors=True)
     staging.mkdir(parents=True)
     for slug, payload in sorted(documents.items()):
-        (staging / safe_filename(slug)).write_text(markdown_page(slug, payload, retrieved), encoding="utf-8")
-    (staging / "whats-new.md").write_text(markdown_whats_new(entries, retrieved), encoding="utf-8")
+        (staging / safe_filename(slug)).write_text(
+            markdown_page(slug, payload, retrieved), encoding="utf-8"
+        )
+    (staging / "whats-new.md").write_text(
+        markdown_whats_new(entries, retrieved), encoding="utf-8"
+    )
     if output.exists():
         shutil.rmtree(output)
     staging.rename(output)
-    print(f"harvested {len(documents)} HIG pages and {len(entries)} What’s New entries into {output}")
+    print(
+        f"harvested {len(documents)} HIG pages and {len(entries)} What’s New entries into {output}"
+    )
     if failures:
-        print(f"historical/unavailable HIG slugs: {', '.join(sorted(failures))}", file=sys.stderr)
+        print(
+            f"historical/unavailable HIG slugs: {', '.join(sorted(failures))}",
+            file=sys.stderr,
+        )
     return 0
 
 
@@ -481,7 +620,9 @@ def parse_front_matter(text: str) -> dict[str, str]:
 
 def validate(args: argparse.Namespace) -> int:
     try:
-        documents, entries, failures = discover(args.timeout, args.workers, args.data_base)
+        documents, entries, failures = discover(
+            args.timeout, args.workers, args.data_base
+        )
         reject_unexpected_failures(failures)
     except HarvestError as error:
         print(f"validation unavailable: {error}", file=sys.stderr)
@@ -491,14 +632,20 @@ def validate(args: argparse.Namespace) -> int:
     actual = {path.name for path in output.glob("*.md")} if output.is_dir() else set()
     errors: list[str] = []
     if expected != actual:
-        errors.append(f"reference inventory differs (expected {len(expected)}, found {len(actual)})")
+        errors.append(
+            f"reference inventory differs (expected {len(expected)}, found {len(actual)})"
+        )
     for slug, payload in documents.items():
         path = output / safe_filename(slug)
         if not path.is_file():
             continue
         text = path.read_text(encoding="utf-8")
         metadata = parse_front_matter(text)
-        if metadata.get("title") != title_for(payload, slug) or metadata.get("source") != canonical_url(slug) or not metadata.get("retrieved"):
+        if (
+            metadata.get("title") != title_for(payload, slug)
+            or metadata.get("source") != canonical_url(slug)
+            or not metadata.get("retrieved")
+        ):
             errors.append(f"invalid front matter: {path.name}")
     whats_new = output / "whats-new.md"
     if not whats_new.is_file():
@@ -508,7 +655,9 @@ def validate(args: argparse.Namespace) -> int:
         metadata = parse_front_matter(text)
         count = sum(line.startswith("- [") for line in text.splitlines())
         if metadata.get("source") != WHATS_NEW_URL or count != len(entries):
-            errors.append(f"What's New mismatch (expected {len(entries)}, found {count})")
+            errors.append(
+                f"What's New mismatch (expected {len(entries)}, found {count})"
+            )
     for path in output.glob("*.md") if output.is_dir() else []:
         text = path.read_text(encoding="utf-8")
         for line_number, target in enumerate(LINK_PATTERN.findall(text), 1):
@@ -516,12 +665,16 @@ def validate(args: argparse.Namespace) -> int:
             if not parsed.scheme and not target.startswith("#"):
                 errors.append(f"relative link in {path.name}:{line_number}: {target}")
             if parsed.scheme and parsed.scheme not in {"http", "https", "mailto"}:
-                errors.append(f"unsupported link in {path.name}:{line_number}: {target}")
+                errors.append(
+                    f"unsupported link in {path.name}:{line_number}: {target}"
+                )
     if errors:
         print("validation failed:", file=sys.stderr)
         print("\n".join(f"- {error}" for error in errors), file=sys.stderr)
         return 1
-    print(f"validated {len(actual)} Markdown references against {len(documents)} live HIG pages and {len(entries)} What's New entries")
+    print(
+        f"validated {len(actual)} Markdown references against {len(documents)} live HIG pages and {len(entries)} What's New entries"
+    )
     if failures:
         print(f"historical/unavailable HIG slugs: {', '.join(sorted(failures))}")
     return 0
@@ -536,7 +689,9 @@ def table_smoke(args: argparse.Namespace) -> int:
         "playing-haptics": ("**Success.**",),
     }
     for slug, required in checks.items():
-        rendered = markdown_page(slug, fetch_json(slug, args.timeout, args.data_base), "smoke-test")
+        rendered = markdown_page(
+            slug, fetch_json(slug, args.timeout, args.data_base), "smoke-test"
+        )
         missing = [text for text in required if text not in rendered]
         if missing:
             print(f"table smoke failed for {slug}: {missing}", file=sys.stderr)

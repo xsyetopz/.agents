@@ -1,6 +1,6 @@
 ---
 name: repo-governance
-description: Use when auditing, creating, or updating repository governance files for humans and coding agents — CONTRIBUTING.md, AGENTS.md, provider imports, pull-request templates, CODEOWNERS, multilingual policy, or Git assistance trailers.
+description: Use when auditing, creating, or updating repository governance files for humans and coding agents - CONTRIBUTING.md, AGENTS.md, provider imports, pull-request templates, CODEOWNERS, multilingual policy, or Git assistance trailers.
 ---
 
 # Repo Governance
@@ -20,7 +20,7 @@ Hosted enforcement lives in repository rulesets, branch protection, and `CODEOWN
 
 ## When NOT to use
 
-- Writing a code of conduct, security policy, or support guide — requires real contact data
+- Writing a code of conduct, security policy, or support guide - requires real contact data
 - Inventing `CODEOWNERS`, teams, or hosted rules from guessed values
 - Generating non-standard files like `llms.txt` or deprecated `.cursorrules`
 
@@ -46,10 +46,11 @@ Hosted enforcement lives in repository rulesets, branch protection, and `CODEOWN
 | Understand agent execution rule requirements | `references/agent-governance.md` |
 | See the full human and agent contract templates | `references/contracts.md` |
 | Check standards and file format requirements | `references/standards.md` |
+| Issue templates: bug report, feature request, config | `references/issue-templates.md` |
 
 ## Related skills
 
-None — this skill is self-contained. For architecture governance, use `architecture-design` or `architecture-enforce`.
+None - this skill is self-contained. For architecture governance, use `architecture-design` or `architecture-enforce`.
 
 ## Validate
 

@@ -2,7 +2,7 @@
 
 Choose the least expensive mode that can still make the architectural decision safely. Raise rigor when uncertainty, irreversibility, blast radius, novelty, or coordination cost rises.
 
-## R0 — Orientation
+## R0 - Orientation
 
 Use for vocabulary clarification or an initial map where no decision will be implemented.
 
@@ -20,7 +20,7 @@ Forbidden:
 - Detailed implementation plans
 - Framework recommendations presented as decisions
 
-## R1 — Local design
+## R1 - Local design
 
 Use for a contained component or command with low blast radius and easy rollback.
 
@@ -39,7 +39,7 @@ May omit:
 - Full ATAM review
 - Context map when there is one vocabulary and one boundary
 
-## R2 — Subsystem design
+## R2 - Subsystem design
 
 Use for a subsystem, compiler pass family, CLI/TUI application, protocol implementation, service, or agent workflow.
 
@@ -54,7 +54,7 @@ Required:
 - Vertical implementation slices
 - Architecture conformance checks
 
-## R3 — Enterprise or cross-domain architecture
+## R3 - Enterprise or cross-domain architecture
 
 Default for broad requests spanning domains, teams, persistence, extensibility, or multiple runtimes.
 
@@ -71,7 +71,7 @@ Required:
 - Negative and adversarial evaluation cases
 - Independent review or review-agent pass
 
-## R4 — High-assurance or safety/security critical
+## R4 - High-assurance or safety/security critical
 
 Use where failure may cause serious security, safety, legal, financial, or irreversible data harm.
 

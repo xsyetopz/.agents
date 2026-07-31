@@ -19,7 +19,7 @@ You can create a workout experience for Apple Watch, iPhone, or iPad that helps 
 
 **Avoid distracting people from a workout with information that’s not relevant.** For example, people don’t need to review the list of workouts you offer or access other parts of your app while they’re working out. Here is an arrangement that many watchOS workout apps use, including Workout:
 
-*Image description: A screenshot of the leftmost Workout screen for an Outdoor Walk workout. Clockwise from the top-left corner are the End, Resume, New, and Segment buttons. Large buttons that control the in-progress session — such as End, Resume, and New — appear on the leftmost screen.*
+*Image description: A screenshot of the leftmost Workout screen for an Outdoor Walk workout. Clockwise from the top-left corner are the End, Resume, New, and Segment buttons. Large buttons that control the in-progress session - such as End, Resume, and New - appear on the leftmost screen.*
 
 *Image description: A screenshot of the middle Workout screen for an Outdoor Walk workout. Five lines of data are visible. From the top, the screen shows the elapsed time, the active calories, the current heart rate, the average pace, and the elevation. Metrics and other data appear on a dedicated screen that people can read at a glance.*
 
@@ -59,7 +59,7 @@ You can create a workout experience for Apple Watch, iPhone, or iPad that helps 
 
 [WorkoutKit](https://developer.apple.com/documentation/WorkoutKit)
 
-[Workouts and activity rings](https://developer.apple.com/documentation/HealthKit/workouts-and-activity-rings) — HealthKit
+[Workouts and activity rings](https://developer.apple.com/documentation/HealthKit/workouts-and-activity-rings) - HealthKit
 
 #### Videos
 

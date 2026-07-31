@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Creator"
+  short_description: "Author, validate, and maintain agent skills"
+  default_prompt: "Use $skill-creator to create, edit, or validate an agent skill following the repository conventions."

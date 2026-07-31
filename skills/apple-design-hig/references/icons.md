@@ -11,7 +11,7 @@ An effective icon is a graphic asset that expresses a single concept in ways peo
 
 Apps and games use a variety of simple icons to help people understand the items, actions, and modes they can choose. Unlike [app icons](https://developer.apple.com/design/human-interface-guidelines/app-icons), which can use rich visual details like shading, texturing, and highlighting to evoke the app’s personality, an *interface icon* typically uses streamlined shapes and touches of color to communicate a straightforward idea.
 
-You can design interface icons — also called *glyphs* — or you can choose symbols from the SF Symbols app, using them as-is or customizing them to suit your needs. Both interface icons and symbols use black and clear colors to define their shapes; the system can apply other colors to the black areas in each image. For guidance, see [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols).
+You can design interface icons - also called *glyphs* - or you can choose symbols from the SF Symbols app, using them as-is or customizing them to suit your needs. Both interface icons and symbols use black and clear colors to define their shapes; the system can apply other colors to the black areas in each image. For guidance, see [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols).
 
 ## Best practices
 
@@ -25,9 +25,9 @@ You can design interface icons — also called *glyphs* — or you can choose sy
 
 **In general, match the weights of interface icons and adjacent text.** Unless you want to emphasize either the icons or the text, using the same weight for both gives your content a consistent appearance and level of emphasis.
 
-**If necessary, add padding to a custom interface icon to achieve optical alignment.** Some icons — especially asymmetric ones — can look unbalanced when you center them geometrically instead of optically. For example, the download icon shown below has more visual weight on the bottom than on the top, which can make it look too low if it’s geometrically centered.
+**If necessary, add padding to a custom interface icon to achieve optical alignment.** Some icons - especially asymmetric ones - can look unbalanced when you center them geometrically instead of optically. For example, the download icon shown below has more visual weight on the bottom than on the top, which can make it look too low if it’s geometrically centered.
 
-*Image description: Two images of a white arrow that points down to a white horizontal line segment within a black disk. The image on the right includes two horizontal pink bars — one between the top of the glyph and the top of the disk and the other between the bottom of the glyph and the bottom of the disk — that show the glyph is geometrically centered within the disk. An asymmetric icon can look off center even though it’s not.*
+*Image description: Two images of a white arrow that points down to a white horizontal line segment within a black disk. The image on the right includes two horizontal pink bars - one between the top of the glyph and the top of the disk and the other between the bottom of the glyph and the bottom of the disk - that show the glyph is geometrically centered within the disk. An asymmetric icon can look off center even though it’s not.*
 
 In such cases, you can slightly adjust the position of the icon until it’s optically centered. When you create an asset that includes your adjustments as padding around an interface icon (as shown below on the right), you can optically center the icon by geometrically centering the asset.
 
@@ -49,9 +49,9 @@ Adjustments for optical centering are typically very small, but they can have a 
 
 *Image description: A partial screenshot of the SF Symbols app showing the info panel for the text dot page symbol, which looks like three left-aligned horizontal lines inside a rounded rectangle. Below the image, the left-to-right and right-to-left localized versions are shown. Create a flipped version of an icon that suggests reading direction.*
 
-**If you create a custom interface icon, use a vector format like PDF or SVG.** The system automatically scales a vector-based interface icon for high-resolution displays, so you don’t need to provide high-resolution versions of it. In contrast, PNG — used for app icons and other images that include effects like shading, textures, and highlighting — doesn’t support scaling, so you have to supply multiple versions for each PNG-based interface icon. Alternatively, you can create a custom SF Symbol and specify a scale that ensures the symbol’s emphasis matches adjacent text. For guidance, see [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols).
+**If you create a custom interface icon, use a vector format like PDF or SVG.** The system automatically scales a vector-based interface icon for high-resolution displays, so you don’t need to provide high-resolution versions of it. In contrast, PNG - used for app icons and other images that include effects like shading, textures, and highlighting - doesn’t support scaling, so you have to supply multiple versions for each PNG-based interface icon. Alternatively, you can create a custom SF Symbol and specify a scale that ensures the symbol’s emphasis matches adjacent text. For guidance, see [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols).
 
-**Provide alternative text labels for custom interface icons.** Alternative text labels — or accessibility descriptions — aren’t visible, but they let VoiceOver audibly describe what’s onscreen, simplifying navigation for people with visual disabilities. For guidance, see [VoiceOver](https://developer.apple.com/design/human-interface-guidelines/voiceover).
+**Provide alternative text labels for custom interface icons.** Alternative text labels - or accessibility descriptions - aren’t visible, but they let VoiceOver audibly describe what’s onscreen, simplifying navigation for people with visual disabilities. For guidance, see [VoiceOver](https://developer.apple.com/design/human-interface-guidelines/voiceover).
 
 **Avoid using replicas of Apple hardware products.** Hardware designs tend to change frequently and can make your interface icons and other content appear dated. If you must display Apple hardware, use only the images available in [Apple Design Resources](https://developer.apple.com/design/resources/) or the SF Symbols that represent various Apple products.
 
@@ -66,10 +66,10 @@ For icons to represent common actions in [menus](https://developer.apple.com/des
 | Cut | *Image description: An icon showing a pair of scissors.* | `scissors` |
 | Copy | *Image description: An icon showing two copies of a document.* | `document.on.document` |
 | Paste | *Image description: An icon showing a document in front of a clipboard.* | `document.on.clipboard` |
-| Done | *Image description: An icon showing a checkmark.* | `checkmark ` |
-| Save |  |  |
+| Done | *Image description: An icon showing a checkmark.* | `checkmark` |
+| Save | | |
 | Cancel | *Image description: An icon showing an X.* | `xmark` |
-| Close |  |  |
+| Close | | |
 | Delete | *Image description: An icon showing a trash can.* | `trash` |
 | Undo | *Image description: An icon showing an arrow curving toward the top left.* | `arrow.uturn.backward` |
 | Redo | *Image description: An icon showing an arrow curving toward the top right.* | `arrow.uturn.forward` |
@@ -77,7 +77,7 @@ For icons to represent common actions in [menus](https://developer.apple.com/des
 | Duplicate | *Image description: An icon showing a square with a plus sign on top of another square.* | `plus.square.on.square` |
 | Rename | *Image description: An icon showing a pencil.* | `pencil` |
 | Move to | *Image description: An icon showing a folder.* | `folder` |
-| Folder |  |  |
+| Folder | | |
 | Attach | *Image description: An icon showing a paperclip.* | `paperclip` |
 | Add | *Image description: An icon showing a plus sign.* | `plus` |
 | More | *Image description: An icon showing an ellipsis.* | `ellipsis` |
@@ -88,7 +88,7 @@ For icons to represent common actions in [menus](https://developer.apple.com/des
 | --- | --- | --- |
 | Select | *Image description: An icon showing a checkmark in a circle.* | `checkmark.circle` |
 | Deselect | *Image description: An icon showing an X.* | `xmark` |
-| Close |  |  |
+| Close | | |
 | Delete | *Image description: An icon showing a trash can.* | `trash` |
 
 ### Text formatting
@@ -111,10 +111,10 @@ For icons to represent common actions in [menus](https://developer.apple.com/des
 | --- | --- | --- |
 | Search | *Image description: An icon showing a magnifying glass.* | `magnifyingglass` |
 | Find | *Image description: An icon showing a magnifying glass above a document.* | `text.page.badge.magnifyingglass` |
-| Find and Replace |  |  |
-| Find Next |  |  |
-| Find Previous |  |  |
-| Use Selection for Find |  |  |
+| Find and Replace | | |
+| Find Next | | |
+| Find Previous | | |
+| Use Selection for Find | | |
 | Filter | *Image description: An icon showing a stack of three horizontal lines decreasing in width from top to bottom.* | `line.3.horizontal.decrease` |
 
 ### Sharing and exporting
@@ -122,7 +122,7 @@ For icons to represent common actions in [menus](https://developer.apple.com/des
 | Action | Icon | Symbol name |
 | --- | --- | --- |
 | Share | *Image description: An icon showing an arrow pointing up from the middle of square.* | `square.and.arrow.up` |
-| Export |  |  |
+| Export | | |
 | Print | *Image description: An icon showing a printer.* | `printer` |
 
 ### Users and accounts
@@ -130,8 +130,8 @@ For icons to represent common actions in [menus](https://developer.apple.com/des
 | Action | Icon | Symbol name |
 | --- | --- | --- |
 | Account | *Image description: An icon showing an abstract representation of a person’s head and shoulders in a circular outline.* | `person.crop.circle` |
-| User |  |  |
-| Profile |  |  |
+| User | | |
+| Profile | | |
 
 ### Ratings
 

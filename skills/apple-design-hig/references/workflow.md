@@ -65,7 +65,7 @@ Apple currently exposes HIG articles through
 and the human-facing site at
 `https://developer.apple.com/design/human-interface-guidelines/`. Historical
 What's New rows can point to unavailable pages (`messages-for-business`,
-`touch-bar`) or redirects (`navigation-bars` → `toolbars`); report these as
+`touch-bar`) or redirects (`navigation-bars` -> `toolbars`); report these as
 historical exceptions rather than creating duplicate or fabricated pages.
 
 If network access is unavailable, label conclusions as snapshot-based and

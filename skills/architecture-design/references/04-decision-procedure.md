@@ -203,19 +203,19 @@ Verification: kill process at every activity boundary and assert exactly-once lo
 
 ## 10. Lightweight ATAM-style review
 
-### Step A — Business and mission drivers
+### Step A - Business and mission drivers
 
 Record objective, stakeholders, deadlines, compatibility, and irreversible costs.
 
-### Step B — Architecture summary
+### Step B - Architecture summary
 
 Describe primary shape, components, connectors, data, runtime, and deployment.
 
-### Step C — Quality tree
+### Step C - Quality tree
 
 Group and prioritize scenarios under correctness, modifiability, performance, reliability, security, usability, and operability.
 
-### Step D — Analyze architectural approaches
+### Step D - Analyze architectural approaches
 
 For each approach identify:
 
@@ -225,7 +225,7 @@ For each approach identify:
 - Tradeoff point
 - Risk/non-risk
 
-### Step E — Risk themes
+### Step E - Risk themes
 
 Cluster risks that share a cause, such as:
 
@@ -325,8 +325,8 @@ Without a threshold, “future-proofing” is not sufficient.
 
 Use one verdict:
 
-- `PASS` — all mandatory gates pass; risks are accepted and verification exists.
-- `PASS WITH CONDITIONS` — implementation may start only on listed safe slices while conditions are resolved.
-- `REVISE` — architecture is directionally plausible but a failed gate invalidates implementation.
-- `BLOCKED` — missing evidence or conflicting constraints prevent a responsible decision.
-- `REJECT` — candidate violates a hard requirement or contains an unmitigated veto condition.
+- `PASS` - all mandatory gates pass; risks are accepted and verification exists.
+- `PASS WITH CONDITIONS` - implementation may start only on listed safe slices while conditions are resolved.
+- `REVISE` - architecture is directionally plausible but a failed gate invalidates implementation.
+- `BLOCKED` - missing evidence or conflicting constraints prevent a responsible decision.
+- `REJECT` - candidate violates a hard requirement or contains an unmitigated veto condition.

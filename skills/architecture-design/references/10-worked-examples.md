@@ -4,7 +4,7 @@ These examples demonstrate the decision procedure. They are not blueprints. Re-r
 
 ---
 
-## Example A — Extensible compiler toolchain
+## Example A - Extensible compiler toolchain
 
 ### Task contract
 
@@ -21,9 +21,9 @@ Build a compiler that accepts one source language, supports multiple target back
 
 ### Candidates
 
-1. **Monolithic compiler object** — parser, type checker, optimizer, and emitter mutate shared state.
-2. **Typed IR pipeline with pass manager** — each phase consumes/produces explicit representations; analyses are declared and invalidated.
-3. **Event-bus compiler** — stages react to compilation events.
+1. **Monolithic compiler object** - parser, type checker, optimizer, and emitter mutate shared state.
+2. **Typed IR pipeline with pass manager** - each phase consumes/produces explicit representations; analyses are declared and invalidated.
+3. **Event-bus compiler** - stages react to compilation events.
 
 ### Decision
 
@@ -85,7 +85,7 @@ Replace the in-process pass manager when untrusted plugins require process isola
 
 ---
 
-## Example B — Stateful package-manager TUI
+## Example B - Stateful package-manager TUI
 
 ### Task contract
 
@@ -155,7 +155,7 @@ A network failure yields `InstallFailed(operationId, classifiedError)`. The upda
 
 ---
 
-## Example C — Binary protocol inspector and editor
+## Example C - Binary protocol inspector and editor
 
 ### Task contract
 
@@ -174,7 +174,7 @@ Decode, validate, display, modify, and re-encode a versioned binary container wh
 
 1. Direct cursor reads into mutable domain objects.
 2. Declarative schema-generated parser only.
-3. Layered decode: byte source → structural parse tree → validation → semantic model → projection/edit commands → encoder.
+3. Layered decode: byte source -> structural parse tree -> validation -> semantic model -> projection/edit commands -> encoder.
 
 ### Decision
 
@@ -199,8 +199,8 @@ flowchart TD
   B[Bytes] --> R[Bounded reader]
   R --> S[Lossless structural tree]
   S --> V{Valid?}
-  V -- no --> E[Offset-aware error model]
-  V -- yes --> M[Semantic model]
+  V - no --> E[Offset-aware error model]
+  V - yes --> M[Semantic model]
   M --> P[UI/CLI projection]
   P --> C[Edit command]
   C --> M2[Validated semantic state]
@@ -225,7 +225,7 @@ flowchart TD
 
 ---
 
-## Example D — Tool-using AI agent harness
+## Example D - Tool-using AI agent harness
 
 ### Task contract
 
@@ -267,7 +267,7 @@ Select the governed orchestrator. Peer swarms may explore in parallel but MUST N
 
 ### Why this is only MVC-like
 
-The durable task state resembles a model and the status renderer resembles a view, but the central force is governed workflow execution. The correct primary names are orchestrator, state store, policy, workers, capability broker, and verifier—not generic MVC labels.
+The durable task state resembles a model and the status renderer resembles a view, but the central force is governed workflow execution. The correct primary names are orchestrator, state store, policy, workers, capability broker, and verifier--not generic MVC labels.
 
 ### Critical flow
 
@@ -276,19 +276,19 @@ flowchart TD
   U[User objective] --> C[Goal contract]
   C --> P[Planner]
   P --> G{Policy gate}
-  G -- reject/clarify --> U
-  G -- approve --> S[Scheduler]
+  G - reject/clarify --> U
+  G - approve --> S[Scheduler]
   S --> W1[Evidence worker]
   S --> W2[Design worker]
   W1 --> EV[Evidence store]
   W2 --> DR[Draft decision]
   EV --> V[Verifier]
   DR --> V
-  V -- contradiction --> P
-  V -- pass --> A{Side-effect gate}
-  A -- human required --> H[Human approval]
+  V - contradiction --> P
+  V - pass --> A{Side-effect gate}
+  A - human required --> H[Human approval]
   H --> X[Executor]
-  A -- reversible --> X
+  A - reversible --> X
   X --> CK[Checkpoint + event log]
   CK --> O[Observation renderer]
   O --> U
@@ -317,7 +317,7 @@ Take one repository question, gather two cited facts, produce two candidate edit
 
 ---
 
-## Example E — Enterprise order processing
+## Example E - Enterprise order processing
 
 ### Task contract
 

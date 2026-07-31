@@ -15,21 +15,22 @@ from datetime import datetime
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-
 DEFAULT_BASE_URL = (
     "https://developer.apple.com/tutorials/data/design/human-interface-guidelines"
 )
-CANONICAL_BASE_URL = (
-    "https://developer.apple.com/design/human-interface-guidelines"
-)
+CANONICAL_BASE_URL = "https://developer.apple.com/design/human-interface-guidelines"
 HIG_PREFIX = "doc://com.apple.HIG/design/Human-Interface-Guidelines/"
 HIG_PREFIX_LOWER = "doc://com.apple.HIG/design/human-interface-guidelines/"
 ROOT_IDENTIFIER = "doc://com.apple.HIG/design/human-interface-guidelines"
 
 
 def fetch_json(base_url: str, slug: str, timeout: float) -> dict:
-    normalized_base = base_url.rstrip('/')
-    url = f"{normalized_base}.json" if not slug else f"{normalized_base}/{slug.strip('/')}.json"
+    normalized_base = base_url.rstrip("/")
+    url = (
+        f"{normalized_base}.json"
+        if not slug
+        else f"{normalized_base}/{slug.strip('/')}.json"
+    )
     request = Request(
         url,
         headers={
@@ -43,7 +44,9 @@ def fetch_json(base_url: str, slug: str, timeout: float) -> dict:
     except HTTPError as error:
         raise RuntimeError(f"Apple HIG request failed ({error.code}): {url}") from error
     except URLError as error:
-        raise RuntimeError(f"Apple HIG request could not reach {url}: {error.reason}") from error
+        raise RuntimeError(
+            f"Apple HIG request could not reach {url}: {error.reason}"
+        ) from error
     except TimeoutError as error:
         raise RuntimeError(f"Apple HIG request timed out: {url}") from error
     if not isinstance(payload, dict):
@@ -122,7 +125,9 @@ def slug_title(payload: dict, fallback: str) -> str:
     return title if isinstance(title, str) else fallback.replace("-", " ").title()
 
 
-def fetch_catalog(base_url: str, timeout: float, deep: bool) -> tuple[dict[str, dict[str, str]], list[str]]:
+def fetch_catalog(
+    base_url: str, timeout: float, deep: bool
+) -> tuple[dict[str, dict[str, str]], list[str]]:
     records: dict[str, dict[str, str]] = {}
     queue = [""]
     visited: set[str] = set()
@@ -148,7 +153,9 @@ def canonical_url(slug: str) -> str:
     return f"{CANONICAL_BASE_URL}/{slug}" if slug else f"{CANONICAL_BASE_URL}/"
 
 
-def print_catalog(records: dict[str, dict[str, str]], sections: list[str], retrieved: str) -> None:
+def print_catalog(
+    records: dict[str, dict[str, str]], sections: list[str], retrieved: str
+) -> None:
     print(f"# Apple HIG catalog\n\nRetrieved: {retrieved}\n")
     print(f"Source: {CANONICAL_BASE_URL}/\n")
     section_set = set(sections)
@@ -158,15 +165,17 @@ def print_catalog(records: dict[str, dict[str, str]], sections: list[str], retri
         if slug not in section_set:
             continue
         title = record.get("title", slug.replace("-", " ").title())
-        print(f"- **{title}** — `{slug}` — {canonical_url(slug)}")
-    extras = [record for slug, record in records.items() if slug not in section_set and slug]
+        print(f"- **{title}** - `{slug}` - {canonical_url(slug)}")
+    extras = [
+        record for slug, record in records.items() if slug not in section_set and slug
+    ]
     if extras:
         print("\n## Discovered topics\n")
         for record in sorted(extras, key=lambda item: item.get("title", item["slug"])):
             slug = record["slug"]
             title = record.get("title", slug.replace("-", " ").title())
-            abstract = f" — {record['abstract']}" if record.get("abstract") else ""
-            print(f"- **{title}** — `{slug}`{abstract}\n  {canonical_url(slug)}")
+            abstract = f" - {record['abstract']}" if record.get("abstract") else ""
+            print(f"- **{title}** - `{slug}`{abstract}\n  {canonical_url(slug)}")
 
 
 def print_topic(payload: dict, slug: str, retrieved: str) -> None:
@@ -189,16 +198,29 @@ def print_topic(payload: dict, slug: str, retrieved: str) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     group = parser.add_mutually_exclusive_group()
-    group.add_argument("--all", action="store_true", help="Print the current HIG catalog (default).")
-    group.add_argument("--topic", metavar="SLUG", help="Print one live HIG topic, such as foundations or motion.")
+    group.add_argument(
+        "--all", action="store_true", help="Print the current HIG catalog (default)."
+    )
+    group.add_argument(
+        "--topic",
+        metavar="SLUG",
+        help="Print one live HIG topic, such as foundations or motion.",
+    )
     parser.add_argument(
         "--deep",
         action="store_true",
         help="Follow nested topic collections while building --all; may make many requests.",
     )
-    parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON for --all.")
+    parser.add_argument(
+        "--json", action="store_true", help="Emit machine-readable JSON for --all."
+    )
     parser.add_argument("--base-url", default=DEFAULT_BASE_URL, help=argparse.SUPPRESS)
-    parser.add_argument("--timeout", type=float, default=20.0, help="HTTP timeout in seconds (default: 20).")
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=20.0,
+        help="HTTP timeout in seconds (default: 20).",
+    )
     return parser.parse_args()
 
 
@@ -215,7 +237,13 @@ def main() -> int:
             return 0
         records, sections = fetch_catalog(args.base_url, args.timeout, args.deep)
         if args.json:
-            print(json.dumps({"retrieved": retrieved, "sections": sections, "topics": records}, indent=2, ensure_ascii=False))
+            print(
+                json.dumps(
+                    {"retrieved": retrieved, "sections": sections, "topics": records},
+                    indent=2,
+                    ensure_ascii=False,
+                )
+            )
         else:
             print_catalog(records, sections, retrieved)
         return 0

@@ -5,7 +5,7 @@ retrieved: 2026-07-25
 ---
 # In-app purchase
 
-People can use in-app purchase to pay for virtual goods — like premium content, digital goods, and subscriptions — securely within your app.
+People can use in-app purchase to pay for virtual goods - like premium content, digital goods, and subscriptions - securely within your app.
 
 *Image description: A sketch of an add button, suggesting the purchase of additional digital assets within an app. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
 
@@ -39,13 +39,13 @@ For marketing and business guidance, see [In-app purchase](https://developer.app
 
 **Display the total billing price for each in-app purchase you offer, regardless of type.** People need to know the total billing amount for every purchase they consider.
 
-**Display your store only when people can make payments.** If someone canʼt make payments — for example, because of parental restrictions — consider hiding your store or displaying UI that explains why the store isnʼt available. For developer guidance, see [canMakePayments](https://developer.apple.com/documentation/StoreKit/AppStore/canMakePayments).
+**Display your store only when people can make payments.** If someone canʼt make payments - for example, because of parental restrictions - consider hiding your store or displaying UI that explains why the store isnʼt available. For developer guidance, see [canMakePayments](https://developer.apple.com/documentation/StoreKit/AppStore/canMakePayments).
 
 **Use the default confirmation sheet.** When someone initiates an in-app purchase, the system displays a confirmation sheet to help prevent accidental purchases. Don’t modify or replicate this sheet.
 
 ### Supporting Family Sharing
 
-People can use Family Sharing to share access to their purchased content — such as auto-renewable subscriptions and non-consumable in-app purchases — with up to five additional family members, across all their Apple devices. To encourage people to take advantage of the Family Sharing support you offer, consider the following guidelines.
+People can use Family Sharing to share access to their purchased content - such as auto-renewable subscriptions and non-consumable in-app purchases - with up to five additional family members, across all their Apple devices. To encourage people to take advantage of the Family Sharing support you offer, consider the following guidelines.
 
 **Prominently mention Family Sharing in places where people learn about the content you offer.** For example, including “Family” or “Shareable” in a subscription or item name and referring to Family Sharing in your sign-up screen can highlight the feature and help people make an informed choice.
 
@@ -63,7 +63,7 @@ Sometimes, people need help with a purchase or want to request a refund. To help
 
 **Use a simple title for the refund action, like “Refund” or “Request a Refund”.** The system-provided refund flow makes it clear that people request a refund from Apple, so there’s no need to reiterate this information.
 
-**Help people find the problematic purchase.** For each recent purchase you display, include contextual information that helps people identify the one they want. For example, you might display an image of the product — along with its name and description — and list the original purchase date.
+**Help people find the problematic purchase.** For each recent purchase you display, include contextual information that helps people identify the one they want. For example, you might display an image of the product - along with its name and description - and list the original purchase date.
 
 *Image description: A partial screenshot of an app’s refund screen titled Request a Refund on iPhone. The Back button in the top-left of the screen is labeled 'Help' to indicate it takes people back to the help screen. In a list titled Purchases, the screen displays the following three recent purchases: Power Surge, Les Cheneaux Islands, and Cape Cod.*
 
@@ -177,7 +177,7 @@ Supporting subscription management means people can upgrade, downgrade, or cance
 
 *Image description: A screenshot of a resubscribe screen in the Math School app running on iPhone. The bottom half of the screen includes the label Resubscribe to Math School in large text, and the first of five pages which describe benefits of resubscribing. Below the page view area is a Resubscribe Now button with a six-month resubscription offer at 50 percent off, and a Sign In button.*
 
-**Always make it easy for customers to cancel an auto-renewable subscription.** If the manage subscription action is deep within an app — or hard to recognize — subscribers can feel they’re being discouraged or prevented from canceling.
+**Always make it easy for customers to cancel an auto-renewable subscription.** If the manage subscription action is deep within an app - or hard to recognize - subscribers can feel they’re being discouraged or prevented from canceling.
 
 **Consider creating a branded, contextual experience to complement the system-provided management UI.** Within your custom UI, you might offer a popular premium tier or provide personalized suggestions for alternative plans based on what you know about the customer’s preferences or how they use your app. For example, you can create a promotional offer that provides a discounted price for a specific period of time. You might also consider subscription [offer codes](https://developer.apple.com/design/human-interface-guidelines/in-app-purchase#Supporting-offer-codes) to help you win back lapsed subscribers and encourage existing subscribers to upgrade.
 
@@ -219,7 +219,7 @@ The sign-up screen in your watchOS app needs to display the same set of informat
 
 #### Developer documentation
 
-[In-App Purchase](https://developer.apple.com/documentation/StoreKit/in-app-purchase) — StoreKit
+[In-App Purchase](https://developer.apple.com/documentation/StoreKit/in-app-purchase) - StoreKit
 
 #### Videos
 

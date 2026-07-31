@@ -29,7 +29,7 @@ You may also want to use custom colors to enhance the visual experience of your 
 
 **Test your app’s color scheme under a variety of lighting conditions.** Colors can look different when you view your app outside on a sunny day or in dim light. In bright surroundings, colors look darker and more muted. In dark environments, colors appear bright and saturated. In visionOS, colors can look different depending on the colors of a wall or object in a person’s physical surroundings and how it reflects light. Adjust app colors to provide an optimal viewing experience in the majority of use cases.
 
-**Test your app on different devices.** For example, the True Tone display — available on certain iPhone, iPad, and Mac models — uses ambient light sensors to automatically adjust the white point of the display to adapt to the lighting conditions of the current environment. Apps that primarily support reading, photos, video, and gaming can strengthen or weaken this effect by specifying a white point adaptivity style (for developer guidance, see [UIWhitePointAdaptivityStyle](https://developer.apple.com/documentation/BundleResources/Information-Property-List/UIWhitePointAdaptivityStyle)). Test tvOS apps on multiple brands of HD and 4K TVs, and with different display settings. You can also test the appearance of your app using different color profiles on a Mac — such as P3 and Standard RGB (sRGB) — by choosing a profile in System Settings > Displays. For guidance, see [Color management](https://developer.apple.com/design/human-interface-guidelines/color#Color-management).
+**Test your app on different devices.** For example, the True Tone display - available on certain iPhone, iPad, and Mac models - uses ambient light sensors to automatically adjust the white point of the display to adapt to the lighting conditions of the current environment. Apps that primarily support reading, photos, video, and gaming can strengthen or weaken this effect by specifying a white point adaptivity style (for developer guidance, see [UIWhitePointAdaptivityStyle](https://developer.apple.com/documentation/BundleResources/Information-Property-List/UIWhitePointAdaptivityStyle)). Test tvOS apps on multiple brands of HD and 4K TVs, and with different display settings. You can also test the appearance of your app using different color profiles on a Mac - such as P3 and Standard RGB (sRGB) - by choosing a profile in System Settings > Displays. For guidance, see [Color management](https://developer.apple.com/design/human-interface-guidelines/color#Color-management).
 
 **Consider how artwork and translucency affect nearby colors.** Variations in artwork sometimes warrant changes to nearby colors to maintain visual continuity and prevent interface elements from becoming overpowering or underwhelming. Maps, for example, displays a light color scheme when in map mode but switches to a dark color scheme when in satellite mode. Colors can also appear different when placed behind or applied to a translucent element like a toolbar.
 
@@ -67,7 +67,7 @@ By default, [Liquid Glass](https://developer.apple.com/design/human-interface-gu
 
 For smaller elements like toolbars and tab bars, the system can adapt Liquid Glass between a light and dark appearance in response to the underlying content. By default, symbols and text on these elements follow a monochromatic color scheme, becoming darker when the underlying content is light, and lighter when it’s dark. Liquid Glass appears more opaque in larger elements like sidebars to preserve legibility over complex backgrounds and accommodate richer content on the material’s surface.
 
-**Apply color sparingly to the Liquid Glass material, and to symbols or text on the material.** If you apply color, reserve it for elements that truly benefit from emphasis, such as status indicators or primary actions. To emphasize primary actions, apply color to the background rather than to symbols or text. For example, the system applies the app accent color to the background in prominent buttons — such as the Done button — to draw attention and elevate their visual prominence. Refrain from adding color to the background of multiple controls.
+**Apply color sparingly to the Liquid Glass material, and to symbols or text on the material.** If you apply color, reserve it for elements that truly benefit from emphasis, such as status indicators or primary actions. To emphasize primary actions, apply color to the background rather than to symbols or text. For example, the system applies the app accent color to the background in prominent buttons - such as the Done button - to draw attention and elevate their visual prominence. Refrain from adding color to the background of multiple controls.
 
 *Image description: A screenshot of the top half of an iPhone app that shows a toolbar with several buttons. All of the buttons in the toolbar use a blue accent color for their Liquid Glass background.*
 
@@ -79,11 +79,11 @@ For smaller elements like toolbars and tab bars, the system can adapt Liquid Gla
 
 **Avoid using similar colors in control labels if your app has a colorful background.** While color can make apps more visually appealing, playful, or reflective of your brand, too much color can be overwhelming and make control labels more difficult to read. If your app features colorful backgrounds or visually rich content, prefer a monochromatic appearance for toolbars and tab bars, or choose an accent color with sufficient visual differentiation. By contrast, in apps with primarily monochromatic content or backgrounds, choosing your brand color as the app accent color can be an effective way to tailor your app experience and reflect your company’s identity.
 
-**Be aware of the placement of color in the content layer.** Make sure your interface maintains sufficient contrast by avoiding overlap of similar colors in the content layer and controls when possible. Although colorful content might intermittently scroll underneath controls, make sure its default or resting state — like the top of a screen of scrollable content — maintains clear legibility.
+**Be aware of the placement of color in the content layer.** Make sure your interface maintains sufficient contrast by avoiding overlap of similar colors in the content layer and controls when possible. Although colorful content might intermittently scroll underneath controls, make sure its default or resting state - like the top of a screen of scrollable content - maintains clear legibility.
 
 ## Color management
 
-A *color space* represents the colors in a *color model* like RGB or CMYK. Common color spaces — sometimes called *gamuts* — are sRGB and Display P3.
+A *color space* represents the colors in a *color model* like RGB or CMYK. Common color spaces - sometimes called *gamuts* - are sRGB and Display P3.
 
 *Image description: Diagram showing the colors included in the sRGB space, compared to the larger number of colors included in the P3 color space.*
 
@@ -99,7 +99,7 @@ A *color profile* describes the colors in a color space using, for example, math
 
 ### iOS, iPadOS
 
-iOS defines two sets of dynamic background colors — *system* and *grouped* — each of which contains primary, secondary, and tertiary variants that help you convey a hierarchy of information. In general, use the grouped background colors ([systemGroupedBackground](https://developer.apple.com/documentation/UIKit/UIColor/systemGroupedBackground), [secondarySystemGroupedBackground](https://developer.apple.com/documentation/UIKit/UIColor/secondarySystemGroupedBackground), and [tertiarySystemGroupedBackground](https://developer.apple.com/documentation/UIKit/UIColor/tertiarySystemGroupedBackground)) when you have a grouped table view; otherwise, use the system set of background colors ([systemBackground](https://developer.apple.com/documentation/UIKit/UIColor/systemBackground), [secondarySystemBackground](https://developer.apple.com/documentation/UIKit/UIColor/secondarySystemBackground), and [tertiarySystemBackground](https://developer.apple.com/documentation/UIKit/UIColor/tertiarySystemBackground)).
+iOS defines two sets of dynamic background colors - *system* and *grouped* - each of which contains primary, secondary, and tertiary variants that help you convey a hierarchy of information. In general, use the grouped background colors ([systemGroupedBackground](https://developer.apple.com/documentation/UIKit/UIColor/systemGroupedBackground), [secondarySystemGroupedBackground](https://developer.apple.com/documentation/UIKit/UIColor/secondarySystemGroupedBackground), and [tertiarySystemGroupedBackground](https://developer.apple.com/documentation/UIKit/UIColor/tertiarySystemGroupedBackground)) when you have a grouped table view; otherwise, use the system set of background colors ([systemBackground](https://developer.apple.com/documentation/UIKit/UIColor/systemBackground), [secondarySystemBackground](https://developer.apple.com/documentation/UIKit/UIColor/secondarySystemBackground), and [tertiarySystemBackground](https://developer.apple.com/documentation/UIKit/UIColor/tertiarySystemBackground)).
 
 With both sets of background colors, you generally use the variants to indicate hierarchy in the following ways:
 
@@ -240,11 +240,11 @@ In SwiftUI, the equivalent of `systemGray` is [gray](https://developer.apple.com
 
 #### Developer documentation
 
-[Color](https://developer.apple.com/documentation/SwiftUI/Color) — SwiftUI
+[Color](https://developer.apple.com/documentation/SwiftUI/Color) - SwiftUI
 
-[UIColor](https://developer.apple.com/documentation/UIKit/UIColor) — UIKit
+[UIColor](https://developer.apple.com/documentation/UIKit/UIColor) - UIKit
 
-[Color](https://developer.apple.com/documentation/AppKit/color) — AppKit
+[Color](https://developer.apple.com/documentation/AppKit/color) - AppKit
 
 #### Videos
 

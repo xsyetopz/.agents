@@ -1,0 +1,12 @@
+{
+  "required_headings": [
+    "# Git CI/CD",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Quick start",
+    "## Platform conventions",
+    "## Reference map",
+    "## Related skills"
+  ]
+}

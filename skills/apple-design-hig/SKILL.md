@@ -20,7 +20,7 @@ copy for offline discovery and analysis.
 
 ## When NOT to use
 
-- Implementing APIs or checking SDK availability — link to Apple Developer docs instead
+- Implementing APIs or checking SDK availability - link to Apple Developer docs instead
 - Choosing third-party libraries or frameworks
 - General UI design not targeting Apple platforms
 
@@ -29,7 +29,7 @@ copy for offline discovery and analysis.
 - Identify target platform(s), OS release, device context, and input model before selecting guidance.
 - Start discovery in `references/index.md`. Read **Platform considerations**, **Specifications**, and **Change log** when present.
 - Separate HIG guidance from implementation contracts. For APIs, entitlements, or accessibility behavior, follow the linked Apple Developer docs.
-- When citing: **Apple HIG — _Page title_** (retrieved YYYY-MM-DD): _paraphrased rule_. Link the canonical URL.
+- When citing: **Apple HIG - _Page title_** (retrieved YYYY-MM-DD): _paraphrased rule_. Link the canonical URL.
 - Call out conflicts, legacy terminology, redirects, and unavailable pages. Memory or an old snapshot is not current evidence.
 
 ## Quick start
@@ -54,7 +54,7 @@ Full workflow detail: [references/workflow.md](references/workflow.md).
 
 ## Related skills
 
-None — this skill is self-contained.
+None - this skill is self-contained.
 
 ## Maintenance
 

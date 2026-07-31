@@ -4,9 +4,9 @@ Retrieved and assembled: 2026-07-27.
 
 The skill distinguishes three source classes:
 
-1. **Format and host behavior** — current official product documentation and the Agent Skills specification.
-2. **Architecture foundations** — original papers, standards, method owners, and authoritative pattern descriptions.
-3. **Domain mechanics** — language/runtime/protocol specifications and official implementation documentation.
+1. **Format and host behavior** - current official product documentation and the Agent Skills specification.
+2. **Architecture foundations** - original papers, standards, method owners, and authoritative pattern descriptions.
+3. **Domain mechanics** - language/runtime/protocol specifications and official implementation documentation.
 
 ## Source-to-artifact map
 

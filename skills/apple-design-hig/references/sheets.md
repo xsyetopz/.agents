@@ -49,7 +49,7 @@ The placement of these buttons varies between platforms; see [Platform considera
 
 *Image description: A checkmark in a circle to indicate correct usage.*
 
-Avoid showing all three buttons — Cancel, Done, and Back — together.
+Avoid showing all three buttons - Cancel, Done, and Back - together.
 
 *Image description: An illustration of the top half of a sheet on iPhone. A Back button appears in the top-left corner of the view, and Cancel and Done buttons appear together in the top-right corner.*
 
@@ -95,9 +95,9 @@ In macOS, a sheet is a cardlike view with rounded corners that floats on top of 
 
 *Image description: A screenshot of the Notes app, with the What's New in Notes sheet centered on top of a dimmed Notes document in the background.*
 
-**Present a sheet in a reasonable default size.** People don’t generally expect to resize sheets, so it’s important to use a size that’s appropriate for the content you display. In some cases, however, people appreciate a resizable sheet — such as when they need to expand the contents for a clearer view — so it’s a good idea to support resizing.
+**Present a sheet in a reasonable default size.** People don’t generally expect to resize sheets, so it’s important to use a size that’s appropriate for the content you display. In some cases, however, people appreciate a resizable sheet - such as when they need to expand the contents for a clearer view - so it’s a good idea to support resizing.
 
-**Let people interact with other app windows without first dismissing a sheet.** When a sheet opens, you bring its parent window to the front — if the parent window is a document window, you also bring forward its modeless document-related panels. When people want to interact with other windows in your app, make sure they can bring those windows forward even if they haven’t dismissed the sheet yet.
+**Let people interact with other app windows without first dismissing a sheet.** When a sheet opens, you bring its parent window to the front - if the parent window is a document window, you also bring forward its modeless document-related panels. When people want to interact with other windows in your app, make sure they can bring those windows forward even if they haven’t dismissed the sheet yet.
 
 **Use a panel instead of a sheet if people need to repeatedly provide input and observe results.** A find and replace panel, for example, might let people initiate replacements individually, so they can observe the result of each search for correctness. For guidance, see [Panels](https://developer.apple.com/design/human-interface-guidelines/panels).
 
@@ -149,11 +149,11 @@ In watchOS, a sheet is a full-screen view that slides over your app’s current 
 
 #### Developer documentation
 
-[sheet(item:onDismiss:content:)](https://developer.apple.com/documentation/SwiftUI/View/sheet(item:onDismiss:content:)) — SwiftUI
+[sheet(item:onDismiss:content:)](https://developer.apple.com/documentation/SwiftUI/View/sheet(item:onDismiss:content:)) - SwiftUI
 
-[UISheetPresentationController](https://developer.apple.com/documentation/UIKit/UISheetPresentationController) — UIKit
+[UISheetPresentationController](https://developer.apple.com/documentation/UIKit/UISheetPresentationController) - UIKit
 
-[presentAsSheet(_:)](https://developer.apple.com/documentation/AppKit/NSViewController/presentAsSheet(_:)) — AppKit
+[presentAsSheet(_:)](https://developer.apple.com/documentation/AppKit/NSViewController/presentAsSheet(_:)) - AppKit
 
 ## Change log
 

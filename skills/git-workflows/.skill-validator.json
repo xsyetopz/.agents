@@ -1,0 +1,12 @@
+{
+  "required_headings": [
+    "# Git Workflows",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Models",
+    "## Merge strategies",
+    "## Reference map",
+    "## Related skills"
+  ]
+}

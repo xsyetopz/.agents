@@ -9,7 +9,6 @@ from codeowners import is_owner
 from file_operations import Operation, repo_path
 from locales import normalize_locale_tag
 
-
 LEGACY_PATHS = (
     ".github/ai-contribution-policy.yml",
     ".github/workflows/ai-contribution-policy.yml",
@@ -113,7 +112,7 @@ def _translation_block_matches(lines: list[str]) -> bool:
     if len(lines) != 3:
         return False
     heading = re.fullmatch(
-        r"# AI / Coding Agents(?: \(([^)]+)\)| — ([^\s]+))", lines[0]
+        r"# AI / Coding Agents(?: \(([^)]+)\)| - ([^\s]+))", lines[0]
     )
     if not heading or not re.fullmatch(r"Source policy: [^\r\n]+", lines[1]):
         return False

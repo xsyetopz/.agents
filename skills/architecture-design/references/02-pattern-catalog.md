@@ -12,7 +12,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Avoid when:** Every request must cross ceremonial layers; performance demands collapse boundaries; layer names hide feature cohesion.
 
-**Canonical shape:** interface → application → domain → infrastructure abstractions, with infrastructure adapters implementing ports.
+**Canonical shape:** interface -> application -> domain -> infrastructure abstractions, with infrastructure adapters implementing ports.
 
 **Invariants:** No forbidden upward dependency; domain semantics do not require presentation or storage frameworks.
 
@@ -248,7 +248,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Avoid when:** Agents duplicate work, share no authoritative state, or delegation overhead exceeds task complexity.
 
-**Canonical shape:** task contract → orchestrator/policy → bounded workers/tools → evidence store → verifier → result projection.
+**Canonical shape:** task contract -> orchestrator/policy -> bounded workers/tools -> evidence store -> verifier -> result projection.
 
 **Invariants:** User goal is immutable except by user change; tool capabilities are least privilege; budgets and stop conditions are enforced; claims require evidence.
 
@@ -370,7 +370,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Binary formats, protocols, compilers, configuration, or importers need staged trust and diagnostics.
 
-**Canonical shape:** framing/lexing → structural parse → validation → normalized IR/model → projections/effects.
+**Canonical shape:** framing/lexing -> structural parse -> validation -> normalized IR/model -> projections/effects.
 
 **Invariants:** Bounds checked before read; structural validity precedes semantic use; unknown/versioned fields have policy.
 

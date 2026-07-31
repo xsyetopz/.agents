@@ -19,7 +19,7 @@ responses to forces, never as fashionable answers.
 
 ## When NOT to use
 
-- Enforcing architecture rules in existing code — use `architecture-enforce` instead
+- Enforcing architecture rules in existing code - use `architecture-enforce` instead
 - A single-file, single-function edit with no structural choice
 - Picking frameworks/libraries before the architecture is decided
 
@@ -65,7 +65,7 @@ Full 11-phase workflow: [references/workflow.md](references/workflow.md).
 
 ## Related skills
 
-- `architecture-enforce` — After design decisions are made, use this to turn
+- `architecture-enforce` - After design decisions are made, use this to turn
   them into executable boundary checks, dependency rules, and audit gates.
 
 ## Maintenance

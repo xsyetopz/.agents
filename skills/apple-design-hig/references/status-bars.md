@@ -29,9 +29,9 @@ A status bar appears along the upper edge of the screen and displays information
 
 #### Developer documentation
 
-[UIStatusBarStyle](https://developer.apple.com/documentation/UIKit/UIStatusBarStyle) — UIKit
+[UIStatusBarStyle](https://developer.apple.com/documentation/UIKit/UIStatusBarStyle) - UIKit
 
-[preferredStatusBarStyle](https://developer.apple.com/documentation/UIKit/UIViewController/preferredStatusBarStyle) — UIKit
+[preferredStatusBarStyle](https://developer.apple.com/documentation/UIKit/UIViewController/preferredStatusBarStyle) - UIKit
 
 ## References
 

@@ -1,0 +1,12 @@
+{
+  "required_headings": [
+    "# Repo Docs",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Quick start",
+    "## Reference map",
+    "## Scripts",
+    "## Related skills"
+  ]
+}

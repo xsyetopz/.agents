@@ -5,7 +5,7 @@ retrieved: 2026-07-25
 ---
 # iCloud
 
-iCloud is a service that lets people seamlessly access the content they care about — photos, videos, documents, and more — from any device, without performing explicit synchronization.
+iCloud is a service that lets people seamlessly access the content they care about - photos, videos, documents, and more - from any device, without performing explicit synchronization.
 
 *Image description: A sketch of the iCloud icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
 

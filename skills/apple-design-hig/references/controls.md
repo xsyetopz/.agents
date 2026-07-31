@@ -50,7 +50,7 @@ performed from the Action button*
 
 *Image description: An active control toggle with a light bulb symbol that's tinted yellow. Tinted control toggle in the on state*
 
-**Help people provide additional information the system needs to perform an action.** A person may need to configure a control to perform a desired action — for example, select a specific light in a house to turn on and off. If a control requires configuration, prompt people to complete this step when they first add it. People can reconfigure the control at any time. For developer guidance, see [promptsForUserConfiguration()](https://developer.apple.com/documentation/SwiftUI/ControlWidgetConfiguration/promptsForUserConfiguration()).
+**Help people provide additional information the system needs to perform an action.** A person may need to configure a control to perform a desired action - for example, select a specific light in a house to turn on and off. If a control requires configuration, prompt people to complete this step when they first add it. People can reconfigure the control at any time. For developer guidance, see [promptsForUserConfiguration()](https://developer.apple.com/documentation/SwiftUI/ControlWidgetConfiguration/promptsForUserConfiguration()).
 
 *Image description: A representation of a control with the ability to set an option to a value a person chooses.*
 
