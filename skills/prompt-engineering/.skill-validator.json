@@ -1,0 +1,19 @@
+{
+  "required_headings": [
+    "# Prompt Engineering",
+    "## When to use",
+    "## When NOT to use",
+    "## Core principles",
+    "## Anti-patterns",
+    "## Prompt architecture template",
+    "## Model-type guidance"
+  ],
+  "required_files": [
+    "agents/openai.yaml",
+    "references/anti-patterns.md",
+    "references/model-reasoning-guide.md",
+    "references/issue-corpus-index.md",
+    "references/prompt-templates.md",
+    "references/issues/prompt-psychology/pink-elephant-negative-backfire.md"
+  ]
+}

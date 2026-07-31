@@ -1,6 +1,7 @@
 ---
 name: repo-docs
-description: Use when creating, auditing, or enforcing repository documentation files - README.md with SEO-adjacent structure and multilingual variants, CHANGELOG.md following Keep a Changelog conventions, and project-level documentation standards. Does not cover CONTRIBUTING.md (use repo-governance) or API reference docs.
+description: >
+  Use when creating, auditing, or enforcing repository documentation files - README.md with SEO-adjacent structure and multilingual variants, CHANGELOG.md following Keep a Changelog conventions, and project-level documentation standards. Does not cover CONTRIBUTING.md (use repo-governance) or API reference docs.
 ---
 
 # Repo Docs

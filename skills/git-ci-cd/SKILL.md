@@ -1,6 +1,7 @@
 ---
 name: git-ci-cd
-description: Use when designing, debugging, or modifying CI/CD pipelines on GitHub Actions, GitLab CI, Bitbucket Pipelines, or CircleCI. Covers workflow syntax, job orchestration, matrix builds, caching, artifact management, environment secrets, container jobs, reusable workflows, and cross-platform CI troubleshooting. Do not use for local git operations or platform API calls.
+description: >
+  Use when designing, debugging, or modifying CI/CD pipelines on GitHub Actions, GitLab CI, Bitbucket Pipelines, or CircleCI. Covers workflow syntax, job orchestration, matrix builds, caching, artifact management, environment secrets, container jobs, reusable workflows, and cross-platform CI troubleshooting. Do not use for local git operations or platform API calls.
 ---
 
 # Git CI/CD

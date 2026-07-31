@@ -1,6 +1,7 @@
 ---
 name: git-toolkit
-description: Use for advanced local git operations beyond basic commit/push - interactive rebase, bisect, worktree, reflog recovery, stash workflows, submodule management, git-lfs, hooks, commit signing, patch manipulation, and repository archaeology. Do not use for platform APIs or CI/CD pipelines.
+description: >
+  Use for advanced local git operations beyond basic commit/push - interactive rebase, bisect, worktree, reflog recovery, stash workflows, submodule management, git-lfs, hooks, commit signing, patch manipulation, and repository archaeology. Do not use for platform APIs or CI/CD pipelines.
 ---
 
 # Git Toolkit

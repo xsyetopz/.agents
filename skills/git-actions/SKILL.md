@@ -1,6 +1,7 @@
 ---
 name: git-actions
-description: Use when interacting with GitHub or GitLab through their HTTP APIs - fetching releases, tags, and latest versions, managing issues/PRs/merge requests, querying repository metadata, triggering workflows, or automating platform operations via REST and GraphQL. Do not use for local git commands or CI/CD pipeline authoring.
+description: >
+  Use when interacting with GitHub or GitLab through their HTTP APIs - fetching releases, tags, and latest versions, managing issues/PRs/merge requests, querying repository metadata, triggering workflows, or automating platform operations via REST and GraphQL. Do not use for local git commands or CI/CD pipeline authoring.
 ---
 
 # Git Actions

@@ -1,6 +1,7 @@
 ---
 name: git-workflows
-description: Use when selecting, designing, or auditing branching models and merge strategies - GitHub Flow, GitFlow, trunk-based development, GitLab Flow, forking workflow, monorepo branching, and release flow integration. Covers when to merge vs squash vs rebase, short-lived branch discipline, and workflow enforcement through branch protection rules. Do not use for local git commands (use git-toolkit) or CI/CD pipeline YAML (use git-ci-cd).
+description: >
+  Use when selecting, designing, or auditing branching models and merge strategies - GitHub Flow, GitFlow, trunk-based development, GitLab Flow, forking workflow, monorepo branching, and release flow integration. Covers when to merge vs squash vs rebase, short-lived branch discipline, and workflow enforcement through branch protection rules. Do not use for local git commands (use git-toolkit) or CI/CD pipeline YAML (use git-ci-cd).
 ---
 
 # Git Workflows

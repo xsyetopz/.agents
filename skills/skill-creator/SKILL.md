@@ -1,6 +1,7 @@
 ---
 name: skill-creator
-description: Use when creating, editing, or validating agent skills in this repository. Covers SKILL.md frontmatter, directory layout, reference files, validator configuration, naming conventions, and progressive disclosure patterns. Do not use for tasks unrelated to authoring skills.
+description: >
+  Use when creating, editing, or validating agent skills in this repository. Covers SKILL.md frontmatter, directory layout, reference files, validator configuration, naming conventions, and progressive disclosure patterns. Do not use for tasks unrelated to authoring skills.
 ---
 
 # Skill Creator
