@@ -1,4 +1,0 @@
-interface:
-  display_name: "Full-Output Enforcement"
-  short_description: "Produce complete unabridged deliverables"
-  default_prompt: "Use $full-output-enforcement when every requested file, section, or item must be delivered without placeholders or omissions."

@@ -1,9 +1,19 @@
 __pycache__/
 .ruff_cache/
 .DS_Store
+.skill-lock.json
 
-# from robertmsale's Skizzles
+plugins/
+
+# <https://github.com/vercel-labs/skills/tree/main/skills/find-skills>
+skills/find-skills/
+
+# <https://impeccable.style/>
+skills/impeccable/
+
+# <https://github.com/robertmsale/skizzles>
+skills/install-skizzles
 skills/fourth-wall/
 
-# from <skills.io>
-skills/find-skills/
+# <https://github.com/twostraws/SwiftUI-Agent-Skill>
+skills/swiftui-pro
