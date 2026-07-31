@@ -1,0 +1,20 @@
+{
+  "skill_name": "writing-cleanup",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Rewrite this release note so it is direct and specific, but preserve every command, version, URL, product name, and uncertainty marker.",
+      "expected_output": "A concise rewrite, an edit summary, and a semantic comparison showing that protected technical tokens, facts, scope, and uncertainty were preserved."
+    },
+    {
+      "id": 2,
+      "prompt": "Audit this pull request description for vague claims and process residue. Do not edit it; report locations, severity, rationale, and a possible repair.",
+      "expected_output": "A location-based audit that distinguishes clear findings from contextual, intentional, and protected wording without changing the source."
+    },
+    {
+      "id": 3,
+      "prompt": "Translate this Japanese developer instruction into German, leaving shell commands, identifiers, file paths, and citations unchanged.",
+      "expected_output": "A natural German translation with all protected technical tokens preserved and any unresolved locale or terminology issue called out."
+    }
+  ]
+}

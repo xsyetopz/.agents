@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scaffold Agent Governance"
+  short_description: "Split human and agent repository rules"
+  default_prompt: "Use $repo-governance to audit and create standard human and coding-agent governance files."

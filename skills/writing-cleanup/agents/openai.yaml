@@ -1,0 +1,4 @@
+interface:
+  display_name: "Avoid AI Slop Writing"
+  short_description: "Audit and rewrite plain technical prose"
+  default_prompt: "Use $writing-cleanup to audit or rewrite this text and its naming surfaces without changing its meaning."

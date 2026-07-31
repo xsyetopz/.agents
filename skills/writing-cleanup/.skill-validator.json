@@ -1,0 +1,18 @@
+{
+  "required_headings": [
+    "# Writing Cleanup",
+    "## When to use",
+    "## Modes",
+    "## Quick start",
+    "## Reference map"
+  ],
+  "required_files": [
+    "agents/openai.yaml",
+    "references/pattern-catalogue.md",
+    "references/phrases.tsv",
+    "references/seed-lexicon.tsv",
+    "scripts/scan_text.py",
+    "scripts/structure_scan.py",
+    "scripts/check_semantics.py"
+  ]
+}
