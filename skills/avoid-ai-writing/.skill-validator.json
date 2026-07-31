@@ -11,7 +11,11 @@
   ],
   "required_files": [
     "agents/openai.yaml",
-    "references/patterns.md",
+    "references/formatting.md",
+    "references/word-tables.md",
+    "references/sentence-structure.md",
+    "references/structural-patterns.md",
+    "references/rhetoric-patterns.md",
     "references/severity-tiers.md"
   ]
 }

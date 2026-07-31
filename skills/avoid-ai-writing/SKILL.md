@@ -81,7 +81,10 @@ audit→rewrite cycle until no patterns remain or N passes (cap N at 2).
 
 1. Determine the mode from user's request (rewrite/detect/edit)
 2. If the user names a specific context or voice, apply it; otherwise auto-detect
-3. Load `references/patterns.md` to audit against the full pattern catalog
+3. Load `references/formatting.md`, `references/word-tables.md`,
+   `references/sentence-structure.md`, `references/structural-patterns.md`,
+   and `references/rhetoric-patterns.md` to audit against the full pattern
+   catalog
 4. Load `references/severity-tiers.md` if you need priority guidance or context
    profiles
 5. Follow the output format for the chosen mode (below)
@@ -90,7 +93,11 @@ audit→rewrite cycle until no patterns remain or N passes (cap N at 2).
 
 | If you need to... | Load |
 |---|---|
-| Audit against the full pattern catalog | `references/patterns.md` |
+| Check formatting and typography tells | `references/formatting.md` |
+| Replace AI-vocabulary words (Tier 1A/1B/2/3) | `references/word-tables.md` |
+| Audit sentence-level phrasing and transitions | `references/sentence-structure.md` |
+| Audit paragraph flow and document structure | `references/structural-patterns.md` |
+| Check for specific named patterns | `references/rhetoric-patterns.md` |
 | Prioritize what to fix first (P0/P1/P2) | `references/severity-tiers.md` |
 | Apply audience-specific strictness | `references/severity-tiers.md` (Context profiles) |
 | Match a specific voice/persona | `references/severity-tiers.md` (Voice profiles) |
@@ -158,7 +165,7 @@ still recognizably machine output. For encyclopedic, technical, or legal text,
 neutral and plain is the correct human voice; don't inject personality there.
 
 If the original writing is already strong, make only the necessary cuts. The
-replacement table in `references/patterns.md` provides defaults, not mandates.
+replacement table in `references/word-tables.md` provides defaults, not mandates.
 
 ### Never inject these
 
