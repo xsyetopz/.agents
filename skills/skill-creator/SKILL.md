@@ -153,7 +153,7 @@ Common optional headings:
 ## Related skills
 
 - `find-skills` - discover and install skills from the ecosystem
-- `writing-cleanup` - audit and improve skill prose
+- `avoid-ai-writing` - audit and improve skill prose
 - `repo-governance` - governance files for humans and agents
 
 ## Validate
