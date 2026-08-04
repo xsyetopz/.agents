@@ -5,13 +5,6 @@ __pycache__/
 
 plugins/
 
-# <https://www.tasteskill.dev/>
-skills/design-taste-frontend/
-skills/full-output-enforcement/
-skills/gpt-taste
-skills/high-end-visual-design/
-skills/redesign-existing-projects/
-
 # <https://github.com/vercel-labs/skills/tree/main/skills/find-skills>
 skills/find-skills/
 
@@ -24,6 +17,13 @@ skills/fourth-wall/
 
 # <https://github.com/twostraws/SwiftUI-Agent-Skill>
 skills/swiftui-pro
+
+# <https://www.tasteskill.dev/>
+skills/design-taste-frontend/
+skills/full-output-enforcement/
+skills/gpt-taste
+skills/high-end-visual-design/
+skills/redesign-existing-projects/
 
 # <https://github.com/xsyetopz/easel.js>
 skills/threejs-to-easeljs
