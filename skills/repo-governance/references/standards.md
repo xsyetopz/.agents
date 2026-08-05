@@ -22,6 +22,9 @@ Verify current provider behavior before changing templates or hosted controls.
 - Git trailer syntax: <https://git-scm.com/docs/git-interpret-trailers.html>
 - Developer Certificate of Origin 1.1: <https://developercertificate.org/>
 - Linux coding-assistant policy: <https://kernel.org/doc/html/next/process/coding-assistants.html>
+- Linux maintainer guidance: AI is a useful tool judged by technical merit, while use remains optional: <https://lore.kernel.org/linux-media/CAHk-=wi4zC+Ze8e+p3tMv8TtG_80KzsZ1syL9anBtmEh5Z40vg@mail.gmail.com/>
+- Linux staging guidance: learning-oriented paths may reject LLM-generated patches and require hardware validation for AI-suggested security fixes: <https://lore.kernel.org/all/2026080354-skater-urgent-31b2@gregkh/>
+- Work-versus-learning decision rule for AI assistance: <https://www.schneier.com/blog/archives/2026/07/should-you-use-ai-for-a-task-heres-a-simple-way-to-decide.html>
 - LLVM AI tool policy: <https://llvm.org/docs/AIToolPolicy.html>
 - Apache generative-tooling guidance: <https://www.apache.org/legal/generative-tooling.html>
 - GitHub co-author attribution: <https://github.blog/news-insights/product-news/commit-together-with-co-authors/>

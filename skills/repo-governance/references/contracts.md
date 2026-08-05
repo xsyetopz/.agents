@@ -9,6 +9,14 @@ Load this reference when contracts is part of the governance task. Give each rul
 Use simple, neutral language. The human policy must cover change scope,
 review quality, tests, security and licensing, and meaningful tool assistance.
 
+The default should be tool-neutral rather than anti-AI: assistance is permitted
+when the contributor can understand, review, test, and defend the complete
+change. Do not treat unreviewed generated output as a contribution. Preserve
+learning-oriented work as a deliberate exception; the owner of a subtree may
+reject generated patches when direct practice is the purpose of that subtree.
+Treat AI-suggested security findings as hypotheses that need evidence on the
+affected system or hardware when applicable.
+
 Use Git trailer syntax for meaningful assistance:
 
 ```text

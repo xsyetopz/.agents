@@ -23,7 +23,17 @@ GitHub recognizes these files in specific locations. Prefer the repository root 
 
 ## Tool assistance
 
-Keep the policy neutral. Judge the change by relevance, quality, rights, security, tests, and human review. Do not use writing style or a detector as proof of tool use.
+Keep the policy tool-neutral rather than anti-AI. Judge the change by relevance,
+technical quality, rights, security, tests, and human review. AI assistance may
+be used when the contributor understands, reviews, tests, and can defend the
+complete change; do not accept unreviewed "vibe-coded" output. Do not use
+writing style or a detector as proof of tool use.
+
+Allow maintainers to define narrower path or task rules. A learning-oriented
+subtree may reject generated patches when contributor practice is the purpose;
+the narrowest applicable rule wins. Treat AI-suggested security findings as
+hypotheses and require reproduction on the affected system or hardware when
+applicable.
 
 Use a normal Git trailer for meaningful assistance:
 

@@ -31,6 +31,9 @@ execution rules in agent-facing files.
 - Put repository-wide defaults at the root and narrower overrides in the smallest owning subtree.
 - Keep instructions executable: name commands, paths, evidence, and acceptance conditions.
 - Do not convert preferences into universal prohibitions or claim tooling enforces prose that it does not read.
+- Treat AI assistance as a tool, not an ideology: allow it by default when the contributor can understand, review, test, and defend the result, while permitting maintainers to set narrower path-specific rules.
+- Distinguish productive work from learning-oriented practice. A learning subtree may reject generated patches so that contributors do the work needed to build the relevant skill.
+- Require stronger evidence for AI-suggested security fixes, including reproduction on the affected system or hardware when applicable.
 - Preserve unrelated existing policy and generated provider files unless their canonical source is changed.
 
 ## Quick start
