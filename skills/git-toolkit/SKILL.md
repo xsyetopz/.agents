@@ -1,219 +1,118 @@
 ---
 name: git-toolkit
 description: >
-  Use for advanced local git operations beyond basic commit/push - interactive rebase, bisect, worktree, reflog recovery, stash workflows, submodule management, git-lfs, hooks, commit signing, patch manipulation, and repository archaeology. Do not use for platform APIs or CI/CD pipelines.
+  Use for local Git repository operations and commit execution: status, diff, add, stage, unstage, commit, Conventional Commits, commit messages, amend, restore, reset, checkout, switch, branch, tag, merge, squash, fixup, interactive rebase, cherry-pick, revert, bisect, blame, log, reflog recovery, stash, worktree, submodule, Git LFS, hooks, signing, patches, release tags, and repository archaeology. Trigger when the user says stage changes, stage all, commit this, commit all, make a commit, conventional commit, amend the commit, squash commits, rebase, undo a commit, recover a branch, inspect Git history, or prepare a patch. Not for GitHub or GitLab APIs, CI/CD YAML, or choosing an organization-wide branching model.
 ---
 
 # Git Toolkit
 
-Advanced git operations for power users. Every command should be understood
-before it runs - git is destructive only when used without understanding.
-Prefer `git reflog` as your undo safety net.
+Execute local Git work without losing unrelated changes or rewriting shared
+history accidentally. Use repository evidence to choose the narrowest command.
 
 ## When to use
 
-- Interactive rebase: squashing, reordering, splitting, or dropping commits
-- Bisecting to find the commit that introduced a bug
-- Managing multiple worktrees for parallel feature branches
-- Recovering lost commits or branches via reflog
-- Stash workflows beyond `git stash pop` - partial stashes, named stashes,
-  branch-from-stash
-- Submodule updates, recursive operations, and migration to subtrees
-- Git LFS setup, migration, and troubleshooting
-- Git hooks: client-side (`pre-commit`, `commit-msg`) and server-side
-- Commit signing with GPG or SSH keys
-- Patch manipulation: `format-patch`, `am`, `apply`, `cherry-pick` ranges
-- Repository archaeology: `blame`, `log -S`, `log -G`, `bisect` with scripts
+- Status, diff, staging, unstaging, committing, restoring, branching, tagging, or local merging
+- Conventional Commit selection and commit-message construction
+- Amend, fixup, squash, rebase, cherry-pick, revert, bisect, reflog, or recovery
+- Stashes, worktrees, submodules, Git LFS, hooks, signing, patches, or archaeology
+- Release tags and local release-history inspection
 
 ## When NOT to use
 
-- Basic `git add`, `git commit`, `git push` - use `git` directly
-- GitHub/GitLab API operations - use `git-actions`
-- CI/CD pipeline authoring - use `git-ci-cd`
+- GitHub or GitLab API operations; use git-actions
+- CI/CD pipeline authoring; use git-ci-cd
+- Team branching, merge, or branch-protection policy; use git-workflows
+- Push, publish, release, or remote mutation without exact user authorization
 
 ## Quick start
 
-1. **Before any destructive operation**, confirm `git status` is clean or
-   intentionally dirty.
-2. **Before rewriting history**, note the current HEAD: `git rev-parse HEAD`.
-3. **If something goes wrong**, reach for `git reflog` first - it records every
-   HEAD change for 90 days.
-4. **When in doubt about a command's effect**, run it with `--dry-run` if
-   supported, or explain it to the user before executing.
+1. Read git status --short, current branch, and relevant staged/unstaged diffs.
+2. Preserve unrelated user or concurrent changes; stage explicit paths when scope is bounded.
+3. Choose the smallest command sequence that achieves the requested state.
+4. For a commit, verify the staged diff, run applicable checks, write a truthful message, and commit once.
+5. Re-read status and log after mutation.
+
+## Commit workflow
+
+For requests such as stage and commit, commit all, or use Conventional Commits:
+
+1. Determine whether all worktree changes are in scope. If the user says all, include all non-generated changes except artifacts that should never be versioned.
+2. Inspect status and diffs before staging.
+3. Remove only generated artifacts created by this task; never discard unrelated work.
+4. Stage the authorized paths.
+5. Run git diff --cached --check and relevant validation.
+6. Inspect git diff --cached --stat and enough staged content to choose the message.
+7. Use type(optional-scope): imperative summary. Common types are feat, fix, docs, refactor, test, build, ci, chore, perf, style, and revert.
+8. Commit, then verify status and the new log entry.
+
+Do not call ordinary repository commits advanced and route around this skill. Stage,
+commit, and Conventional Commit requests belong here.
 
 ## Guardrails
 
-This skill is strict and guarded. Commands are classified into three tiers.
-Never downgrade a tier without explicit user approval. Full details with real
-tool references in `references/tooling.md`.
+Classify by effect, not command name.
 
-Sources: [Git security best practices](https://dev.to/prankurpandeyy/git-
-security-best-practices-for-keeping-your-code-safe-1nep), [git-
-guardrails](https://git-guardrails.readthedocs.io/en/latest/), [pre-
-commit](https://github.com/pre-commit/pre-commit),
-[gitleaks](https://github.com/gitleaks/gitleaks), [git-filter-
-repo](https://github.com/newren/git-filter-repo).
+### Tier 1 - SAFE
 
-### Tier 1 - SAFE (run freely)
+Read-only and reversible local work: status, log, diff, show, blame, reflog,
+branch/tag listing, format-patch, worktree listing, and non-destructive inspection.
+Staging and a new local commit are authorized when the user asked to stage or
+commit.
 
-Read-only operations and reversible local changes:
+### Tier 2 - CAUTION
 
-- `git status`, `git log`, `git diff`, `git show`
-- `git stash push`, `git stash pop`, `git stash apply`
-- `git worktree add`, `git worktree list`, `git worktree remove`
-- `git bisect start/reset` (read-only until you mark good/bad)
-- `git reflog`, `git branch -l`, `git tag -l`
-- `git format-patch`, `git cherry-pick` (no conflicts)
-- `git submodule update --init`
+Local history or worktree mutation that may require recovery: amend of an unpushed
+commit, interactive rebase of unpublished work, mixed/soft reset, stash deletion,
+conflict-prone cherry-pick, submodule removal, and LFS migration. State the
+consequence and verify the recovery point before execution.
 
-### Tier 2 - CAUTION (explain consequence, then run)
+### Tier 3 - BLOCKED
 
-Operations that modify local history or working state. Explain what will happen
-in one sentence before executing:
-
-- `git rebase -i`, `git rebase --onto`
-- `git reset --soft`, `git reset --mixed`
-- `git commit --amend` (on unpushed commits only)
-- `git stash drop`, `git stash clear`
-- `git cherry-pick` (with possible conflicts)
-- `git submodule deinit`, `git rm` submodule
-- `git lfs migrate import`
-
-### Tier 3 - BLOCKED (require explicit user confirmation)
-
-Operations that mutate shared history, destroy local data, or affect remotes.
-Stop and ask for confirmation before running. Never proceed without the user's
-explicit approval:
-
-- `git push --force`, `git push --force-with-lease`, `git push --delete`
-- `git reset --hard` (any context - too easy to lose work)
-- `git clean -fd`, `git clean -fdx`, `git clean -xdf`
-- `git branch -D`, `git branch -d` (on non-merged branches)
-- `git commit --amend` on already-pushed commits
-- `git rebase` on a branch that has been pushed
-- `git filter-branch`, `git filter-repo`, BFG Repo Cleaner
-- `git lfs migrate import --everything`
-- `git stash clear` (all stashes)
+Require explicit confirmation for force push, remote branch deletion, hard reset,
+clean, destructive branch deletion, rewriting pushed history, filter-repo,
+repository-wide LFS migration, or deleting all stashes. Never infer authorization
+from a request to commit.
 
 ### Pre-operation checklist
 
-Before any Tier 2 or Tier 3 operation:
+For Tier 2 or Tier 3 operations:
 
-1. Print `git status --short` and `git branch --show-current`
-2. Save HEAD: `HEAD_BACKUP=$(git rev-parse HEAD)`
-3. If rewriting history, confirm the branch has no unpushed changes on remote:
-`git fetch && git log --oneline origin/$(git branch --show-current)..HEAD`
-4. After the operation, verify with `git status`
+1. Record current branch and HEAD.
+2. Inspect status and upstream relation.
+3. Identify affected paths and commits.
+4. State recovery method.
+5. Verify final status and history.
 
 ## Command catalog
 
-### Interactive rebase
-
-```bash
-# Squash last 3 commits
-git rebase -i HEAD~3
-
-# Rebase onto main, preserving merges
-git rebase -i --rebase-merges main
-
-# Autosquash fixup/squash commits
-git rebase -i --autosquash main
-```
-
-### Bisect
-
-```bash
-git bisect start
-git bisect bad HEAD
-git bisect good v1.0.0
-# Git checks out a midpoint commit - test it
-git bisect good  # or: git bisect bad
-# Repeat until the offending commit is found
-git bisect reset
-```
-
-### Worktree
-
-```bash
-# Create a new worktree for a feature branch
-git worktree add ../repo-feature feature-branch
-
-# List worktrees
-git worktree list
-
-# Remove a worktree
-git worktree remove ../repo-feature
-```
-
-### Stash workflows
-
-```bash
-# Stash with a name
-git stash push -m "wip: refactoring auth module"
-
-# Stash only untracked files
-git stash push -u -m "untracked config files"
-
-# Apply a stash without dropping it
-git stash apply stash@{1}
-
-# Create a branch from a stash
-git stash branch recovered-work stash@{0}
-```
-
-### Reflog recovery
-
-```bash
-# View reflog
-git reflog --date=iso
-
-# Recover a "lost" commit
-git checkout -b recovery-branch <commit-hash>
-
-# Recover after a bad reset
-git reset --hard HEAD@{1}
-```
-
-### Submodules
-
-```bash
-# Update all submodules recursively
-git submodule update --init --recursive
-
-# Pull latest for all submodules
-git submodule foreach git pull origin main
-
-# Deinit and remove a submodule
-git submodule deinit -f path/to/submodule
-git rm path/to/submodule
-```
+| Task | Typical commands | Load |
+|---|---|---|
+| Stage or commit | git status, git diff, git add, git diff --cached, git commit | references/tooling.md |
+| Rebase or fixup | git rebase -i, git commit --fixup | references/rebase-guide.md |
+| Find regression | git bisect | references/bisect-guide.md |
+| Parallel workspace | git worktree | references/worktree-guide.md |
+| Save partial work | git stash | references/stash-guide.md |
+| Recover commits | git reflog | references/reflog-guide.md |
+| Submodules or LFS | git submodule, git lfs | references/submodule-lfs.md |
+| Hooks or signing | hook and signing commands | references/hooks-guide.md, references/signing-guide.md |
+| Patches | format-patch, am, apply, cherry-pick | references/patch-guide.md |
+| History search | log -S, log -G, blame | references/archaeology.md |
+| Releases | tags and release history | references/release-management.md |
 
 ## Reference map
 
-| If you need to... | Load |
-|---|---|
-| Interactive rebase strategies and fixup workflows | `references/rebase-guide.md` |
-| Bisect with automated test scripts | `references/bisect-guide.md` |
-| Worktree patterns for parallel development | `references/worktree-guide.md` |
-| Stash tricks and recovery patterns | `references/stash-guide.md` |
-| Reflog recovery and lost commit archaeology | `references/reflog-guide.md` |
-| Submodule and git-lfs management | `references/submodule-lfs.md` |
-| Git hooks: client-side and server-side | `references/hooks-guide.md` |
-| Commit signing with GPG and SSH | `references/signing-guide.md` |
-| Patch workflows: format-patch, am, cherry-pick | `references/patch-guide.md` |
-| Security tooling: gitleaks, pre-commit, git-filter-repo | `references/tooling.md` |
-| Team git configuration (`.gitconfig`) | `references/gitconfig.md` |
-| File attributes (`.gitattributes`): EOL, diff, merge | `references/gitattributes.md` |
-| Deep history search: pickaxe, blame, line log | `references/archaeology.md` |
-| Release management: semver, tags, release branches | `references/release-management.md` |
+Use the command-catalog routing above. Also load references/gitconfig.md for team
+Git configuration and references/gitattributes.md for EOL, diff, merge, or binary
+attribute behavior.
+
+## Completion
+
+Complete when the requested repository state is achieved, unrelated changes remain
+intact, staged and committed content matches authorization, validation results are
+reported accurately, and status/history confirm the result.
 
 ## Related skills
 
-- `git-actions` - GitHub/GitLab API, release fetching, repository management
-- `git-ci-cd` - CI/CD pipeline design, workflow syntax, job debugging
-
-## Validate
-
-```sh
-python3 scripts/validate_skill.py skills/git-toolkit
-```
+- git-workflows for team branching and merge policy
+- git-actions for GitHub and GitLab APIs
+- git-ci-cd for pipeline configuration

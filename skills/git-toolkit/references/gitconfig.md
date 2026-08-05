@@ -47,8 +47,7 @@ git-setup:
 
 ## Security-critical settings
 
-From [dev.to Git security best practices](<https://dev.to/prankurpandeyy/git->
-security-best-practices-for-keeping-your-code-safe-1nep):
+From [dev.to Git security best practices](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-your-code-safe-1nep):
 
 ```bash
 # Force push only if local tracking branch matches remote

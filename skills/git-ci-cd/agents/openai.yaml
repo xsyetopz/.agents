@@ -1,4 +1,4 @@
 interface:
   display_name: "Git CI/CD"
-  short_description: "Author and debug CI/CD across GitHub, GitLab, and Bitbucket"
-  default_prompt: "Use $git-ci-cd to design, debug, or modify CI/CD pipelines on GitHub Actions, GitLab CI, or Bitbucket Pipelines."
+  short_description: "Build secure, blocking CI/CD pipelines"
+  default_prompt: "Use $git-ci-cd to design or repair this pipeline without suppressing failures; verify trust boundaries, permissions, immutable dependencies, and real pipeline behavior."

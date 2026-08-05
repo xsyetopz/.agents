@@ -64,16 +64,37 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], str]:
         raise ValueError("SKILL.md frontmatter has no closing '---'.") from exc
 
     data: dict[str, str] = {}
-    for raw in lines[1:end]:
+    index = 1
+    while index < end:
+        raw = lines[index]
         if not raw.strip() or raw.lstrip().startswith("#"):
+            index += 1
             continue
         if raw.startswith((" ", "\t")):
+            index += 1
             continue
         if ":" not in raw:
             raise ValueError(f"Malformed frontmatter line: {raw!r}")
         key, value = raw.split(":", 1)
         key = key.strip()
-        value = value.strip().strip('"').strip("'")
+        value = value.strip()
+        if value in {">", ">-", ">+", "|", "|-", "|+"}:
+            scalar_style = value[0]
+            scalar_lines: list[str] = []
+            index += 1
+            while index < end and (
+                not lines[index].strip()
+                or lines[index].startswith((" ", "\t"))
+            ):
+                scalar_lines.append(lines[index].strip())
+                index += 1
+            if scalar_style == ">":
+                value = " ".join(part for part in scalar_lines if part)
+            else:
+                value = "\n".join(scalar_lines).strip()
+        else:
+            value = value.strip('"').strip("'")
+            index += 1
         if key == "metadata":
             continue  # nested map — skip; full YAML parse out of scope
         data[key] = value
@@ -231,7 +252,8 @@ def check_duplicate_headers(root: Path, errors: list[str]) -> None:
     for md in sorted(root.rglob("*.md")):
         md_text = md.read_text(encoding="utf-8")
         md_unfenced = strip_fenced_blocks(md_text)
-        seen: dict[str, int] = {}
+        seen: dict[tuple[str, ...], int] = {}
+        parents: dict[int, str] = {}
         rel = md.relative_to(root)
 
         # Files that intentionally repeat headers per example/template
@@ -243,6 +265,8 @@ def check_duplicate_headers(root: Path, errors: list[str]) -> None:
             if not m:
                 continue
             heading = m.group(0).strip()
+            level = len(m.group(1))
+            title = m.group(2).strip()
 
             # Version headers in CHANGELOG.md are intentionally repeated
             if is_changelog and bool(CHANGELOG_VERSION_RE.match(heading)):
@@ -252,13 +276,23 @@ def check_duplicate_headers(root: Path, errors: list[str]) -> None:
             if is_worked_examples and heading.startswith("###"):
                 continue
 
-            if heading in seen:
+            for child_level in tuple(parents):
+                if child_level >= level:
+                    del parents[child_level]
+            identity = tuple(
+                parents[parent_level]
+                for parent_level in sorted(parents)
+                if parent_level < level
+            ) + (f"h{level}:{title}",)
+
+            if identity in seen:
                 errors.append(
                     f"Duplicate heading in {rel}:{line_no}: "
-                    f"{heading!r} (first at line {seen[heading]})"
+                    f"{heading!r} (first at line {seen[identity]})"
                 )
             else:
-                seen[heading] = line_no
+                seen[identity] = line_no
+            parents[level] = title
 
 
 def warn_missing_license(root: Path, warnings: list[str]) -> None:
@@ -276,10 +310,26 @@ def check_agents_yaml(root: Path, errors: list[str]) -> None:
         errors.append("agents/openai.yaml is missing required 'interface:' key.")
     if "display_name:" not in text:
         errors.append("agents/openai.yaml is missing required 'display_name'.")
-    if "default_prompt:" not in text:
+    short_match = re.search(r'^\s*short_description:\s*["\']?(.+?)["\']?\s*$', text, re.MULTILINE)
+    if not short_match:
+        errors.append("agents/openai.yaml is missing required 'short_description'.")
+    else:
+        short_description = short_match.group(1).rstrip('"\'')
+        if not 25 <= len(short_description) <= 64:
+            errors.append(
+                "agents/openai.yaml short_description must be 25-64 characters "
+                f"(got {len(short_description)})."
+            )
+    prompt_match = re.search(r'^\s*default_prompt:\s*["\']?(.+?)["\']?\s*$', text, re.MULTILINE)
+    if not prompt_match:
         errors.append("agents/openai.yaml is missing required 'default_prompt'.")
-    if "$" not in text:
-        warnings = []  # placeholder — add to validate() if needed
+    else:
+        default_prompt = prompt_match.group(1).rstrip('"\'')
+        expected = f"${root.name}"
+        if expected not in default_prompt:
+            errors.append(
+                f"agents/openai.yaml default_prompt must mention {expected}."
+            )
 
 
 # --- Main validation ---

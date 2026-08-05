@@ -1,4 +1,4 @@
 interface:
   display_name: "Architecture Enforce"
-  short_description: "Enforce production-grade architecture and boundaries"
-  default_prompt: "Use $architecture-enforce as a mandatory contract: trigger on topology changes or creating/splitting/moving three or more sibling source files; include tracked and untracked candidates; map each source path to owner, change reason, visibility, lifecycle, dependencies, and consolidation rationale; run the capability preflight and full architecture audit before and after; reject categorical one-file decomposition and authored inline tests or benchmarks; never accept baselines, exclusions, disabled/advisory gates, threshold overrides, or exceptions as proof; never suppress lint/check failures with ignores, disabled rules/providers/jobs, lowered severity, allow-failure, continue-on-error, excluded paths, baseline edits, or weakened/deleted tests—fix the owning cause, or report a minimal tool reproducer and obtain explicit policy authorization while keeping the gate blocked."
+  short_description: "Enforce boundaries, ownership, and topology"
+  default_prompt: "Use $architecture-enforce to audit and implement this repository topology or boundary change with source ownership, check integrity, and zero unresolved audit findings."

@@ -1,201 +1,132 @@
 ---
 name: avoid-ai-writing
-description: Audit and rewrite content to remove AI writing patterns ("AI-isms"). Use when asked to "remove AI-isms," "clean up AI writing," "edit writing for AI patterns," "audit writing for AI tells," or "make this sound less like AI." Supports detect-only, edit-in-place, and full rewrite modes with optional voice profiles.
-license: MIT
-metadata:
-  author: Conor Bronsdon
-  tags: writing editing voice quality
+description: >
+  Use when detecting, auditing, editing, or rewriting prose to remove AI-generated writing patterns while preserving meaning, facts, citations, formatting, terminology, and the author's voice. Trigger phrases include remove AI-isms, remove AI tells, humanize this, make this sound natural, ChatGPT style, robotic prose, generic prose, corporate tone, canned transition, excessive headings, fake quotation, repetitive conclusion, rewrite naturally, preserve my voice, detect only, line edit, full rewrite, AI writing audit, and AI-generated text. Supports detect, edit, and rewrite modes with optional voice profiles. Not for plagiarism detection, authorship attribution, factual verification, or evading academic or platform policies.
 ---
 
 # Avoid AI Writing
 
-Audit and rewrite text to remove AI writing patterns that make prose sound
-machine-generated. Operates in three modes: **rewrite** (flag + fix),
-**detect** (flag only), and **edit** (fix in place with minimal edits).
+Find concrete prose defects and repair only what the requested mode authorizes.
+Do not claim to determine whether a human or model authored text.
 
 ## What this skill is and isn't
 
-This is a **writing-quality tool**, not a verdict. The patterns here are
-statistically more common in LLM output, but humans under deadline pressure, in
-unfamiliar genres, or writing in a second language produce the same shapes.
-Independent audits of commercial AI detectors have found false-positive rates
-above 60% on non-native English writers (Liang et al., Stanford, *Patterns*
-2023). Adversarial paraphrase reduces detection accuracy by ~88% (arXiv:
-2506.07001, 2025).
-
-**Corpus limitation (#72).** The machine-written corpus used to measure
-detection rates (RAID 2024 + HC3 Dec 2022) contains no post-2024 models.
-Several rules may be measuring model habits that have shifted. Until a
-current-model corpus covering the registers this skill targets (LinkedIn
-posts, blog drafts, release notes) lands, treat all measured lift values as
-approximations of an older model era.
-
-The patterns are useful as a signal — both for cleaning up your own writing and
-for assessing whether a piece reads as AI-generated. Don't make them the sole
-basis for a consequential decision (academic integrity, hiring, publication).
-Pair the signal with context: who wrote it, what genre, what the writer's
-normal voice looks like.
-
-In short: signals, not proof.
+This is a style and rhetoric audit. It identifies observable patterns such as
+formulaic openings, empty intensifiers, repetitive sentence shapes, generic
+transitions, unnecessary headings, vague attribution, and canned conclusions.
+It is not an AI detector and must not assign authorship probabilities.
 
 ## When to use
 
-- User says "remove AI-isms," "clean up AI writing," "make this sound less like AI"
-- User says "audit writing for AI tells," "scan this for AI patterns"
-- User says "edit this file to remove AI writing"
-- User wants to check if text reads as AI-generated
-- Content was pasted from a chat UI and needs cleanup
+- The user asks to remove AI-isms, robotic tone, generic phrasing, or canned prose
+- Editing should preserve a named voice, audience, register, or publication style
+- The user wants findings only, surgical edits, or a complete rewrite
+- A generated draft needs a concrete rhetoric and sentence-level audit
 
 ## When NOT to use
 
-- For a single typo or grammar fix not related to AI patterns
-- On quoted material, code blocks, or text attributed to someone else
-- On text where the writer explicitly wants to preserve AI style
+- Authorship detection, plagiarism detection, or policy-evasion requests
+- Factual, legal, medical, citation, or originality verification as the primary task
+- Code cleanup or documentation architecture without a prose-style request
+- A request to imitate a living writer exactly; preserve user-provided traits instead
 
 ## Modes
 
-**`rewrite`** (default) — Flag AI-isms and rewrite the text to fix them.
+- **Detect:** report evidence and suggested corrections; do not modify text.
+- **Edit:** make the smallest local changes that remove identified patterns.
+- **Rewrite:** rebuild the passage while preserving facts, intent, constraints, and voice.
 
-**`detect`** — Flag AI-isms only. No rewriting. Use when the writer wants to
-see what's flagged and decide what to fix themselves, or when auditing text
-you don't want altered.
-
-**`edit`** — Edit a file in place with minimal, targeted edits. Preserve
-passages that are already human. Don't edit quoted material or code blocks.
-After editing, re-read the file and confirm the flagged patterns are resolved.
+If the user does not choose, infer the narrowest mode from the request. A request
+to audit or identify means Detect. A request to clean up or edit means Edit. A
+request to rewrite means Rewrite.
 
 ### Invocation
 
-Natural language is enough ("rewrite this in a blunt voice for LinkedIn,"
-"edit `post.md` in place," "scan this, don't rewrite"). Explicit options:
-`[--mode rewrite|detect|edit]`, `[--voice casual|professional|technical|warm|blunt]`,
-`[--context linkedin|blog|technical-blog|investor-email|docs|casual]`,
-`[--file PATH]`, `[--iterate N]` (max 2). See `references/severity-tiers.md`
-for context profiles and voice definitions.
+Natural language is sufficient. Optional controls include:
 
-**Iterate to convergence.** Rewrite mode already runs one corrective second
-pass. When the writer asks to "iterate" or passes `--iterate N`, repeat the
-audit→rewrite cycle until no patterns remain or N passes (cap N at 2).
+- mode: detect, edit, or rewrite
+- audience and medium
+- voice sample or explicit voice traits
+- preserve list: facts, citations, headings, terminology, length, formatting
+- tolerance: conservative, balanced, or aggressive
 
 ## Quick start
 
-1. Determine the mode from user's request (rewrite/detect/edit)
-2. If the user names a specific context or voice, apply it; otherwise auto-detect
-3. Load `references/formatting.md`, `references/word-tables.md`,
-   `references/sentence-structure.md`, `references/structural-patterns.md`,
-   and `references/rhetoric-patterns.md` to audit against the full pattern
-   catalog
-4. Load `references/severity-tiers.md` if you need priority guidance or context
-   profiles
-5. Follow the output format for the chosen mode (below)
+1. Establish mode, audience, voice, and preservation constraints.
+2. Read the whole artifact before editing isolated lines.
+3. Load only the relevant pattern references.
+4. Identify evidence by location and explain the concrete effect.
+5. Apply the narrowest correction that fixes the effect.
+6. Re-read for meaning, factual drift, voice drift, rhythm, formatting, and new repetition.
+
+## Editing rules
+
+- Preserve claims, numbers, citations, names, code, links, and domain terminology unless explicitly asked to change them.
+- Replace empty abstraction with specific meaning already supported by the source.
+- Vary sentence structure only when rhythm is actually repetitive.
+- Remove headings only when they fragment a short argument; keep headings that aid navigation.
+- Do not add personal anecdotes, emotions, slang, uncertainty, or opinions not present in the source.
+- Do not introduce deliberate errors to appear human.
+- Treat word lists as search aids, not automatic deletion rules.
 
 ## Reference map
 
-| If you need to... | Load |
+| Need | Load |
 |---|---|
-| Check formatting and typography tells | `references/formatting.md` |
-| Replace AI-vocabulary words (Tier 1A/1B/2/3) | `references/word-tables.md` |
-| Audit sentence-level phrasing and transitions | `references/sentence-structure.md` |
-| Audit paragraph flow and document structure | `references/structural-patterns.md` |
-| Check for specific named patterns | `references/rhetoric-patterns.md` |
-| Prioritize what to fix first (P0/P1/P2) | `references/severity-tiers.md` |
-| Apply audience-specific strictness | `references/severity-tiers.md` (Context profiles) |
-| Match a specific voice/persona | `references/severity-tiers.md` (Voice profiles) |
-| Understand the spec and structure | `agents/openai.yaml`, `.skill-validator.json` |
+| High-signal words and phrases | references/word-tables.md |
+| Sentence rhythm and syntax | references/sentence-structure.md |
+| Rhetorical patterns | references/rhetoric-patterns.md |
+| Structural and heading patterns | references/structural-patterns.md |
+| Markdown and formatting | references/formatting.md |
+| Finding severity | references/severity-tiers.md |
 
 ## Output format
 
 ### Rewrite mode
 
-Return four sections:
-
-1. **Issues found** — bulleted list of every AI-ism identified, with offending
-   text quoted
-2. **Rewritten version** — full rewritten content. Preserve original structure,
-   intent, and all specific technical details
-3. **What changed** — brief summary of major edits
-4. **Second-pass audit** — re-read the rewrite. Identify and fix any remaining
-   tells. If clean, say so
+Return the rewritten artifact first. Follow with a short change note only when it
+helps review or the user asks for one.
 
 ### Detect mode
 
-Return two sections:
+Report a compact table:
 
-1. **Issues found** — bulleted list grouped by severity (P0, P1, P2). Keep Tier
-   1B clarity edits visually separate from Tier 1A markers: a wordiness fix is
-   a writing suggestion, not evidence about who wrote the text. Per the measured
-   data (#71), structural signals (11.7x lift) are the stronger discriminator;
-   vocabulary (0.9x) is a convention, not verified authorship evidence.
-2. **Assessment** — for each flag, note whether it's a clear problem or a
-   judgment call. Call out which to definitely fix vs. worth a second look
+| Location | Evidence | Effect | Suggested correction | Severity |
+|---|---|---|---|---|
+
+Do not reproduce long source passages.
 
 ### Edit mode
 
-After editing the file in place, return a short report:
-
-1. **Edits made** — bulleted list of changes with before → after. Only the
-   spans you touched
-2. **Verification** — confirm re-read and resolution. Note anything deliberately
-   left alone
+Return the edited artifact or apply the edit in place. List only material changes
+and unresolved ambiguities.
 
 ### Score interpretation note (#70)
 
-The detector engine's 0-100 score clusters in a narrow band (0-11 on the
-current corpus) because the divisor `Math.log2(wordCount/50)` compresses
-paragraph-level scores. A score of 4 ("Minimal AI signals") can appear on
-fully machine-generated text at paragraph length. Treat the numeric score as a
-coarse relative signal; rely on the per-category breakdown and pattern list for
-decisions. When the corpus is recalibrated on current-model data (#72), the
-score range will be re-normalized to meaningful percentiles.
+If a tool emits a style score, describe it as heuristic coverage of configured
+patterns. It is not authorship probability and does not prove human or AI origin.
 
 ## Tone calibration
 
-Five principles for human-sounding rewrites:
-1. **Vary sentence length** — mix short with long. Fragments are fine
-2. **Be concrete** — replace vague claims with numbers, names, dates, or examples
-3. **Have a voice** — use first person, state preferences, show reactions where
-   appropriate
-4. **Cut the neutrality** — humans have opinions. If the piece takes a position,
-   take it
-5. **Earn your emphasis** — don't tell the reader something is interesting. Make
-   it interesting
-
-Removal is half the job. A rewrite that clears every flag but reads sterile is
-still recognizably machine output. For encyclopedic, technical, or legal text,
-neutral and plain is the correct human voice; don't inject personality there.
-
-If the original writing is already strong, make only the necessary cuts. The
-replacement table in `references/word-tables.md` provides defaults, not mandates.
+Infer tone from the source and audience. Prefer concrete writing choices such as
+shorter sentences, direct verbs, fewer headings, or retained technical terms over
+broad labels such as warm, professional, or human.
 
 ### Never inject these
 
-These must never be **added** to a text that did not already contain them:
+- fabricated experiences, quotations, sources, or personal feelings
+- fake uncertainty, typos, grammatical errors, or random slang
+- therapy language, social validation, or apology unless the source requires it
+- new claims added only to make prose seem less generated
 
-- **Fake first person.** "I've seen this a hundred times," "in my experience"
-  dropped into prose with no author presence. If the source has no `I`, the
-  rewrite has no `I`
-- **Manufactured stakes.** "In a world where," "now more than ever"
-- **Forced contrarianism.** "Everyone says X, but they're wrong." Only
-  legitimate when the source actually argued it
-- **Performed candor.** "Let's be honest," "real talk," "here's the thing"
-- **Em-dash theatrics.** Dashes staged for drama the content has not earned
-- **Staccato conversion.** Chopping ordinary sentences into fragments to
-  manufacture rhythm
-- **Invented specifics.** A number, name, date, tool, or mechanism the source
-  never contained. If the concrete detail is missing, flag the gap — never
-  fill it
+## Completion
 
-**The test.** For each edit, ask whether the information came from the source.
-Subtraction and sharpening are in scope; addition of stance, personality, or
-fact is not. Adapted from isatimur/de-slop's guardrails.
+Complete when the requested mode is honored, every material change is supported by
+an identified prose effect, preserved content remains intact, and a final read
+finds no new rhetorical or formatting regression.
 
 ## Related skills
 
-- `impeccable` — frontend interface design and polish
-- `skill-creator` — create and validate agent skills
-
-## Validate
-
-```sh
-python3 scripts/validate_skill.py skills/avoid-ai-writing
-```
+- repo-docs for README and CHANGELOG structure
+- prompt-engineering for agent-facing instructions
+- repo-governance for AGENTS.md and contributor policy

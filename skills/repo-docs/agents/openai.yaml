@@ -1,4 +1,4 @@
 interface:
   display_name: "Repo Docs"
-  short_description: "Audit README and CHANGELOG for structure and SEO"
-  default_prompt: "Use $repo-docs to create, audit, or enforce README.md and CHANGELOG.md following repository documentation standards."
+  short_description: "Create accurate README and CHANGELOG files"
+  default_prompt: "Use $repo-docs to create or audit repository documentation against manifests, commands, source behavior, links, and release history."

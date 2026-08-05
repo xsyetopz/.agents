@@ -4,8 +4,7 @@ Branch protection is the enforcement mechanism for branching models. Without it,
 a workflow is a suggestion. With it, a workflow is a contract.
 
 Source: [GitHub branch protection
-docs](<https://docs.github.com/en/repositories/configuring-branches-and-merges->
-in-your-repository/managing-protected-branches)
+docs](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches)
 
 ## Minimum protection for `main` (all models)
 

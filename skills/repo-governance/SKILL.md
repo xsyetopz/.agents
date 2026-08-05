@@ -1,61 +1,72 @@
 ---
 name: repo-governance
-description: Use when auditing, creating, or updating repository governance files for humans and coding agents - CONTRIBUTING.md, AGENTS.md, provider imports, pull-request templates, CODEOWNERS, multilingual policy, or Git assistance trailers.
+description: >
+  Use when creating, rewriting, auditing, splitting, or enforcing repository governance for humans and coding agents. Covers CONTRIBUTING.md, AGENTS.md, CLAUDE.md, instruction imports, nested agent rules, CODEOWNERS, pull-request templates, issue templates, contributor workflow, review ownership, repository policy, multilingual governance, Git assistance trailers, and provider-specific instruction files. Trigger phrases include contributor guide, agent instructions, repository rules, coding-agent policy, CODEOWNERS, PR template, issue template, governance audit, instruction precedence, nested AGENTS.md, and who owns this code. Not for README.md or CHANGELOG.md content.
 ---
 
 # Repo Governance
 
-Keep human contribution policy separate from agent execution rules.
-`CONTRIBUTING.md` is for people; `AGENTS.md` is for coding agents.
-Provider files (`CLAUDE.md`, `GEMINI.md`, `.cursor/rules/agents.mdc`) import `AGENTS.md`.
-Hosted enforcement lives in repository rulesets, branch protection, and `CODEOWNERS`.
+Create a small, enforceable governance surface with explicit owners, scope,
+precedence, and verification. Put human workflow in human-facing files and agent
+execution rules in agent-facing files.
 
 ## When to use
 
-- Creating or auditing `CONTRIBUTING.md`, `AGENTS.md`, pull-request templates
-- Adding `CODEOWNERS` entries for governed files
-- Setting up multilingual governance translations
-- Splitting an existing combined policy into human vs. agent files
-- Validating existing governance files for compliance
+- Creating or updating CONTRIBUTING.md, AGENTS.md, CLAUDE.md, CODEOWNERS, PR templates, or issue templates
+- Separating human contributor policy from coding-agent instructions
+- Designing nested instruction scope and provider imports
+- Auditing ownership, review requirements, change protocol, or conflicting rules
+- Adding validation for governance contracts
 
 ## When NOT to use
 
-- Writing a code of conduct, security policy, or support guide - requires real contact data
-- Inventing `CODEOWNERS`, teams, or hosted rules from guessed values
-- Generating non-standard files like `llms.txt` or deprecated `.cursorrules`
+- README.md, CHANGELOG.md, or release notes; use repo-docs
+- Team branching-model selection; use git-workflows
+- CI/CD implementation beyond documenting the required checks; use git-ci-cd
+
+## Governance contract
+
+- Identify the audience, owner, scope, precedence, enforcement mechanism, and update path for every rule.
+- Keep one canonical statement for each policy; import or link instead of duplicating divergent copies.
+- Put repository-wide defaults at the root and narrower overrides in the smallest owning subtree.
+- Keep instructions executable: name commands, paths, evidence, and acceptance conditions.
+- Do not convert preferences into universal prohibitions or claim tooling enforces prose that it does not read.
+- Preserve unrelated existing policy and generated provider files unless their canonical source is changed.
 
 ## Quick start
 
-1. **Inspect first**: confirm the repository root, host, README, languages, and existing governance files.
-2. **Read the references** before changing policy:
-   [human-governance.md](references/human-governance.md),
-   [agent-governance.md](references/agent-governance.md),
-   [contracts.md](references/contracts.md),
-   [standards.md](references/standards.md).
-3. **Preview**:
-   ```sh
-   python3 scripts/governance.py --repo /path/to/repo --project-name "Name" --description "One sentence."
-   ```
-4. **Apply with permission only**: add `--apply --confirm-authorized` after reviewing every proposed operation.
+1. Inventory existing governance files, imports, templates, CODEOWNERS rules, and branch checks.
+2. Map each rule to audience, scope, owner, and actual enforcement.
+3. Resolve contradictions using repository precedence and the narrowest applicable owner.
+4. Edit the canonical file; regenerate derived files through their owner.
+5. Validate links, imports, required sections, ownership patterns, and documented commands.
+6. Inspect the final diff for duplicated or unenforceable policy.
+
+## Output contract
+
+Report changed governance surfaces, scope and precedence, enforcement points,
+validation evidence, and any rule that remains advisory because no mechanism owns
+it.
 
 ## Reference map
 
-| If you need to... | Load |
+| Need | Load |
 |---|---|
-| Understand human contribution policy requirements | `references/human-governance.md` |
-| Understand agent execution rule requirements | `references/agent-governance.md` |
-| See the full human and agent contract templates | `references/contracts.md` |
-| Check standards and file format requirements | `references/standards.md` |
-| Issue templates: bug report, feature request, config | `references/issue-templates.md` |
+| Agent instruction structure | references/agent-governance.md |
+| Human contributor policy | references/human-governance.md |
+| Governance contracts | references/contracts.md |
+| Issue and PR templates | references/issue-templates.md |
+| Standards and validation | references/standards.md |
+
+## Completion
+
+Complete when every changed rule has one canonical owner, audience and scope are
+unambiguous, imports and templates resolve, documented commands are valid, and
+applicable governance checks pass.
 
 ## Related skills
 
-None - this skill is self-contained. For architecture governance, use `architecture-design` or `architecture-enforce`.
-
-## Validate
-
-```sh
-python3 scripts/governance.py --repo /path/to/repo --validate-only
-```
-
-Reports changed paths, conflicts, legacy artifacts, and unconfigured hosted settings.
+- repo-docs for README and CHANGELOG
+- git-workflows for branching and merge policy
+- git-ci-cd for pipeline enforcement
+- skill-creator for reusable agent skills

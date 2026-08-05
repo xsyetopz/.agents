@@ -1,189 +1,101 @@
 ---
 name: git-actions
 description: >
-  Use when interacting with GitHub or GitLab through their HTTP APIs - fetching releases, tags, and latest versions, managing issues/PRs/merge requests, querying repository metadata, triggering workflows, or automating platform operations via REST and GraphQL. Do not use for local git commands or CI/CD pipeline authoring.
+  Use when reading or mutating GitHub or GitLab through HTTP APIs, GraphQL, gh api, glab api, or platform SDKs. Covers repositories, releases, tags, commits, issues, pull requests, merge requests, comments, labels, milestones, checks, statuses, artifacts, workflow dispatch, branch protection, repository settings, pagination, rate limits, authentication, and platform automation. Trigger phrases include GitHub API, GitLab API, latest release, fetch tags, create issue, update PR, merge request, trigger workflow, download artifact, repository metadata, GraphQL query, REST endpoint, gh api, and glab api. Not for local Git commands, ordinary stage or commit requests, or CI/CD pipeline authoring.
 ---
 
 # Git Actions
 
-Interact with GitHub and GitLab platforms through their APIs. Prefer the `gh`
-CLI for GitHub and `glab` CLI for GitLab when they're available - they handle
-auth and pagination. Fall back to raw HTTP only when the CLI doesn't cover the
-endpoint.
+Use the platform API with the minimum required permissions, explicit mutation
+authority, and verifiable response handling.
 
 ## When to use
 
-- Fetching the latest release version, tag, or asset from a repository
-- Listing releases, comparing tags, or generating changelogs from release notes
-- Creating or updating issues, pull requests, or merge requests via API
-- Querying repository metadata: stars, forks, license, default branch
-- Triggering workflow runs or checking pipeline status
-- Managing repository settings, branch protection, or webhooks via API
-- Searching code, commits, or issues across repositories
-- Programmatic git hosting operations that `git` alone can't do
+- Querying GitHub or GitLab repository, release, tag, issue, PR/MR, check, or workflow data
+- Creating or updating platform resources after explicit authorization
+- Triggering workflows or downloading artifacts through platform APIs
+- Automating pagination, GraphQL queries, rate-limit handling, or repository settings
 
 ## When NOT to use
 
-- Local git operations (commit, push, rebase) - use `git` directly or `git-
-  toolkit`
-- Writing CI/CD pipeline YAML - use `git-ci-cd`
-- Simple `git clone` or `git remote` - those work without the platform API
+- Local status, diff, staging, commit, branch, tag, or rebase; use git-toolkit
+- CI/CD YAML authoring; use git-ci-cd
+- Branching-model selection; use git-workflows
+- Public facts available from a normal read-only page when API access adds no value
 
 ## Guardrails
 
-Platform APIs have the same blast radius as the token that authenticates them.
-This skill defaults to read-only and requires explicit confirmation for any
-operation that mutates repository state. See `references/auth-and-security.md`
-for the mutation catalog, token hygiene rules, and GraphQL injection prevention.
-
-Sources: [Git security best practices](https://dev.to/prankurpandeyy/git-
-security-best-practices-for-keeping-your-code-safe-1nep), [OWASP Secrets Managem
-ent](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_She
-et.html).
-
 ### Default posture: read-only
 
-Start every session by verifying the token has minimal scope. For GitHub, use
-`gh auth token` and check the token type. For GitLab, verify the token scopes.
-
-All commands default to GET requests. Never issue POST/PUT/PATCH/DELETE without
-confirming the operation with the user first.
+Run read-only API queries when they are necessary and credentials are already
+available. Do not reveal tokens, broaden scopes, or write credentials to files or
+logs.
 
 ### Mutating operations - require confirmation
 
-These operations must be confirmed explicitly before execution. State what will
-change and ask:
-
-- Creating or updating releases (`POST /releases`, `gh release create`)
-- Creating, editing, or closing issues/PRs/merge requests
-- Triggering workflow runs (`POST /actions/workflows/dispatches`)
-- Changing repository settings, branch protection, or webhooks
-- Deleting anything: branches, tags, releases, artifacts, webhooks
-- Merging pull requests or accepting merge requests
-- Adding or removing collaborators, teams, or deploy keys
+Creating, editing, merging, dispatching, deleting, publishing, changing settings,
+or otherwise mutating the remote platform requires exact user authorization for
+the target and effect. A request to inspect does not authorize mutation.
 
 ### Token safety
 
-- Tokens must come from environment variables, never hardcoded
-- Never log, echo, print, or commit tokens - not even in error messages
-- Prefer `gh`/`glab` CLI over raw `curl` - the CLI handles auth and token
-  refresh
-- When using raw HTTP, always use `-H "Authorization: Bearer $TOKEN"` - never
-  pass
-tokens in the URL query string (they appear in server logs)
-- Use fine-grained tokens with minimum permissions:
-  - Read-only for queries: `contents: read`, `metadata: read`
-  - Write only when needed: add specific write scopes per operation
-  - Never use classic PATs with broad `repo` scope when fine-grained tokens
-    suffice
+- Prefer existing gh, glab, credential-helper, or environment authentication.
+- Never print, persist, or transmit tokens outside the intended host.
+- Request the least privilege and shortest lifetime available.
+- Treat fork and pull-request content as untrusted input.
 
 ### Input validation
 
-Before any API call that accepts user-supplied input:
-
-1. Validate the input format (e.g., semver for tag names, URL-safe for repo
-   names)
-2. Shell-escape values used in `curl` or CLI arguments - prefer `--form` over
-   string interpolation
-3. For GraphQL, use parameterized queries with variables, never string
-   interpolation:
-   ```bash
-   # Safe - variables are passed separately
-   gh api graphql -F owner="$owner" -F name="$name" -f query='
-     query($owner: String!, $name: String!) { ... }'
-
-   # BLOCKED - string interpolation enables injection
-   gh api graphql -f query="query { repository(owner: \"$owner\") { ... } }"
-   ```
+Resolve host, owner, repository, resource identifier, pagination, API version, and
+intended mutation before calling. Validate user-provided URLs and prevent command,
+path, GraphQL, or JSON injection.
 
 ### GitHub-specific
 
-- `gh` commands with `--repo` are read-only by default unless the subcommand is
-explicitly mutating (e.g. `gh issue create`, `gh pr merge`)
-- `gh api` with `--method POST/PUT/PATCH/DELETE` requires confirmation
-- `gh release create`, `gh release delete`, `gh release upload` require
-  confirmation
+Use gh api or official REST/GraphQL endpoints. Pin API versions where applicable,
+follow Link pagination, and verify permissions before write operations.
 
 ### GitLab-specific
 
-- `glab` commands that create, update, or delete resources require confirmation
-- Raw API `POST/PUT/DELETE` with `PRIVATE-TOKEN` requires confirmation and scope
-  check
-- Project ID discovery (`projects/owner%2Frepo`) must be the first step --
-never guess a project ID
+Use glab api or versioned GitLab REST/GraphQL endpoints. URL-encode project paths,
+handle instance-specific base URLs, and distinguish merge-request IID from global
+IDs.
 
 ## Quick start
 
-1. Check if `gh` (GitHub) or `glab` (GitLab) is installed: `which gh glab`
-2. If available, use the CLI. If not, fall back to `curl` with an auth token.
-3. For version fetching: identify the repo and the API endpoint. Use the
-   reference table below.
-4. Parse JSON responses with `jq` - never hand-parse with `grep` or `awk`.
-
-### Auth
-
-- GitHub: `gh auth status` or `Authorization: Bearer $GITHUB_TOKEN`
-- GitLab: `glab auth status` or `PRIVATE-TOKEN: $GITLAB_TOKEN`
-- Never log, echo, or commit tokens. Read them from environment variables.
+1. Identify platform, host, repository, resource, and read/write intent.
+2. Load the relevant platform and auth reference.
+3. Confirm mutation authority when needed.
+4. Make the narrowest API call with explicit fields and pagination.
+5. Validate status, response schema, and target identity.
+6. Report the resulting resource ID/URL and any rate-limit or permission caveat.
 
 ## Common tasks
 
-### Fetch latest release version
+| Task | Preferred route | Load |
+|---|---|---|
+| Latest version or release | releases/tags endpoint | references/version-fetching.md |
+| GitHub REST | gh api or official endpoint | references/github-api.md |
+| GitHub GraphQL | gh api graphql | references/github-graphql.md |
+| GitLab REST/GraphQL | glab api or official endpoint | references/gitlab-api.md |
+| Authentication and scopes | existing credential surface | references/auth-and-security.md |
 
-```bash
-# GitHub - gh CLI (preferred)
-gh release view --repo owner/repo --json tagName -q '.tagName'
-
-# GitHub - raw API
-curl -sS -H "Accept: application/vnd.github+json" \
-  https://api.github.com/repos/owner/repo/releases/latest | jq -r '.tag_name'
-
-# GitLab - glab CLI
-glab release view --repo owner/repo latest
-
-# GitLab - raw API
-curl -sS "https://gitlab.com/api/v4/projects/${PROJECT_ID}/releases" \
-  -H "PRIVATE-TOKEN: $GITLAB_TOKEN" | jq -r '.[0].tag_name'
-```
-
-### List releases
-
-```bash
-# GitHub
-gh release list --repo owner/repo --limit 10
-
-# GitLab
-curl -sS "https://gitlab.com/api/v4/projects/${PROJECT_ID}/releases?per_page=10" \
-  -H "PRIVATE-TOKEN: $GITLAB_TOKEN" | jq '.[].tag_name'
-```
-
-### Create an issue
-
-```bash
-# GitHub
-gh issue create --repo owner/repo --title "Title" --body "Body"
-
-# GitLab
-glab issue create --repo owner/repo --title "Title" --description "Body"
-```
+Keep commands in the task response specific to the resolved host and repository;
+do not copy generic write examples before authority is established.
 
 ## Reference map
 
-| If you need to... | Load |
-|---|---|
-| GitHub REST API endpoints and pagination | `references/github-api.md` |
-| GitHub GraphQL API patterns | `references/github-graphql.md` |
-| GitLab REST API endpoints and pagination | `references/gitlab-api.md` |
-| Fetching and comparing versions across platforms | `references/version-fetching.md` |
-| Auth setup, token scopes, and security | `references/auth-and-security.md` |
+Use the Common tasks table. Load only the platform and operation references needed
+for the request.
+
+## Completion
+
+Complete when the response is schema-checked, pagination is handled, the remote
+target and effect are verified, secrets remain protected, and every mutation is
+within explicit authorization.
 
 ## Related skills
 
-- `git-ci-cd` - CI/CD pipeline design, workflow syntax, job debugging
-- `git-toolkit` - local git operations, hooks, bisect, worktree
-
-## Validate
-
-```sh
-python3 scripts/validate_skill.py skills/git-actions
-```
+- git-toolkit for local Git operations
+- git-ci-cd for pipeline definitions
+- git-workflows for branching and merge policy

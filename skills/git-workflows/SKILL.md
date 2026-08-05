@@ -1,174 +1,94 @@
 ---
 name: git-workflows
 description: >
-  Use when selecting, designing, or auditing branching models and merge strategies - GitHub Flow, GitFlow, trunk-based development, GitLab Flow, forking workflow, monorepo branching, and release flow integration. Covers when to merge vs squash vs rebase, short-lived branch discipline, and workflow enforcement through branch protection rules. Do not use for local git commands (use git-toolkit) or CI/CD pipeline YAML (use git-ci-cd).
+  Use when selecting, designing, migrating, enforcing, or auditing team Git branching and integration policy: GitHub Flow, trunk-based development, GitFlow, GitLab Flow, forking workflow, monorepo branching, release branches, feature branches, pull requests, merge queues, squash merge, rebase merge, merge commits, linear history, branch protection, required reviews, required status checks, branch lifetime, and branch deletion. Trigger when the user asks which branching model, merge strategy, PR policy, protected-branch rule, commit-history policy, or release flow a team should use. Not for local status, add, stage, commit, amend, reset, rebase execution, or other repository commands; use git-toolkit. Not for CI/CD YAML; use git-ci-cd.
 ---
 
 # Git Workflows
 
-A branching model is a team contract - it defines how work flows from idea to
-production. Pick the wrong one and you get merge hell, broken builds, and
-release paralysis. Pick the right one and you ship daily without ceremony.
-
-This skill is opinionated: it recommends specific models for specific team
-shapes and rejects patterns that sound reasonable but fail at scale.
+Select a team integration model from delivery constraints, then pair every policy
+with the repository setting or automation that enforces it.
 
 ## When to use
 
-- Choosing a branching model for a new project or team
-- Migrating from one model to another (e.g. GitFlow -> trunk-based)
-- Designing a monorepo branching strategy
-- Setting up merge strategy enforcement (merge vs squash vs rebase)
-- Auditing an existing workflow for bottlenecks, merge conflicts, or release lag
-- Configuring branch protection rules to enforce the chosen model
+- Choosing or migrating a branching model
+- Defining feature, release, hotfix, environment, or fork workflows
+- Selecting squash, rebase, merge-commit, merge-queue, or linear-history policy
+- Designing branch protection, review, status-check, and branch-lifetime rules
+- Auditing merge conflict rate, release lag, stale branches, or integration delay
 
 ## When NOT to use
 
-- Running git commands - use `git-toolkit`
-- Writing CI/CD pipeline YAML - use `git-ci-cd`
-- Designing how releases are versioned - see `git-toolkit` skill for release
-  management patterns
+- Running local Git commands, staging, committing, amending, or rebasing; use git-toolkit
+- Writing CI/CD YAML; use git-ci-cd
+- Calling GitHub or GitLab APIs; use git-actions
 
 ## Guardrails
 
-A workflow is only as good as its enforcement. Branch protection rules are the
-mechanism - the workflow is the policy. Never recommend a workflow without also
-recommending the branch protection rules that enforce it.
+- Start from team size, release cadence, deployability, compliance, repository shape, and current failure evidence.
+- Recommend the simplest model that meets those constraints.
+- Do not prescribe a workflow without its enforcement settings.
+- Avoid long-lived feature branches; integrate at least daily where product constraints permit.
+- Protect the mainline, require applicable checks, and automate stale-branch deletion.
+- Prefer linear history unless a release model has a demonstrated need to preserve branch topology.
 
-### Hard rules
+## Decision workflow
 
-1. **No long-lived feature branches.** Any branch that lives more than 2 days is
-   a
-long-lived branch. It will conflict, diverge, and cause integration pain.
-Source: [Trunk-Based Development](https://trunkbaseddevelopment.com/).
-
-2. **Protected main branch.** Direct push to `main`/`master` is blocked. All
-changes go through pull requests with required reviews and status checks.
-Source: [GitHub branch
-protection](https://docs.github.com/en/repositories/configuring-branches-and-
-merges-in-your-repository/managing-protected-branches).
-
-3. **Linear history on main.** Squash merge or rebase merge - never a merge
-commit that creates a non-linear graph. Linear history makes `git bisect` and
-`git revert` reliable.
-
-4. **Delete branches after merge.** Stale branches accumulate, confuse new
-contributors, and waste CI minutes. Automate this in repo settings.
+1. Measure current branch lifetime, merge delay, conflict rate, release cadence, and rollback needs.
+2. Identify regulatory, review, environment, and release constraints.
+3. Compare at least two viable models using the same constraints.
+4. Select branch origins, merge destinations, merge method, release source, and deletion policy.
+5. Define branch protection, required reviews/checks, merge queue, bypass ownership, and emergency path.
+6. Record migration steps, rollback, metrics, and review date.
 
 ## Models
 
-### GitHub Flow - the default for most teams
+| Model | Best fit | Default integration | Main risk |
+|---|---|---|---|
+| GitHub Flow | Most teams shipping continuously | short PR branch to main | weak release discipline if environments are unmanaged |
+| Trunk-based | High-throughput teams with strong CI and feature flags | hours-long branch or direct trunk | requires excellent tests and incremental design |
+| GitLab Flow | Explicit environment promotion | main to environment branches | environment branches can drift |
+| Forking | External contributors and open source | fork PR to upstream | slower feedback and permission complexity |
+| GitFlow | Scheduled, versioned products with long stabilization | feature/develop/release/main | ceremony, delayed integration, merge debt |
 
-Source: GitHub's recommended workflow. Simple, pull-request-based, one long-
-lived branch (`main`). Feature branches are short-lived, created from `main`,
-and merged back via pull request.
-
-- **Branch off:** `main`
-- **Merge back:** squash merge or rebase merge
-- **Release from:** `main` (continuous delivery) or release branches cut from
-  `main`
-- **Best for:** Teams of 1-50 developers, continuous deployment, web
-  applications
-- **Enforcement:** Branch protection on `main` - require PR, require reviews,
-  require status checks
-
-### Trunk-Based Development - high-throughput teams
-
-Source: [trunkbaseddevelopment.com](https://trunkbaseddevelopment.com/). All
-developers commit to a single branch (`main`/`trunk`) at least once every 24
-hours. Short-lived feature branches (hours, not days) for code review. Release
-branches are cut from trunk on a just-in-time basis, hardened, and deleted after
-release. Alternatively, release directly from trunk with feature flags.
-
-- **Branch off:** `main` (or commit directly for very small teams)
-- **Merge back:** squash merge to `main`, daily
-- **Release from:** `main` (with feature flags) or short-lived release branches
-- **Best for:** Teams of 5-500+ developers, CI/CD pipelines, monorepos
-- **Key techniques:** Feature flags, branch by abstraction, comprehensive test
-  suite
-- **Enforcement:** Branch protection on `main`, required status checks, linear
-  history
-
-> "Shared branches off mainline are bad at any release cadence." - trunkbaseddevelopment.com
-
-### GitFlow - legacy, for versioned products with long release cycles
-
-Source: [A successful Git branching model](https://nvie.com/posts/a-successful-
-git-branching-model/) (Vincent Driessen, 2010). Two permanent branches: `main`
-(production releases) and `develop` (integration). Feature branches from
-`develop`, release branches from `develop`, hotfix branches from `main`.
-Complex, heavy ceremony.
-
-- **Branch off:** `develop` for features, `main` for hotfixes
-- **Merge back:** `--no-ff` merge commits (preserve branch topology)
-- **Release from:** `main` (tagged releases)
-- **Best for:** Versioned products with scheduled releases (mobile apps, desktop
-  software, libraries with major version bumps)
-- **Warning:** Overkill for most web applications. Adds ceremony without
-  proportional benefit. Trunk-based development achieves the same release
-  discipline with less overhead.
-
-### GitLab Flow - environment-based branching
-
-Source: GitLab's recommended workflow. Extends GitHub Flow with environment
-branches (`staging`, `production`). Code flows `main -> staging -> production`
-through merge requests.
-
-- **Branch off:** `main`
-- **Merge back:** squash or rebase to `main`, then merge commits from `main` to
-  `staging` to `production`
-- **Release from:** `production` branch
-- **Best for:** Teams with staged deployment environments, manual QA gates
-- **Enforcement:** Branch protection on all environment branches
-
-### Forking workflow - open source, external contributors
-
-Contributors fork the repo, work in their fork, and submit pull requests.
-Maintainers merge from forks into the upstream.
-
-- **Branch off:** fork's `main`
-- **Merge back:** PR from fork to upstream
-- **Best for:** Open source projects with external contributors, large
-  organizations with cross-team contributions
-- **Enforcement:** Require PR from forks, limit `GITHUB_TOKEN` permissions,
-  never use `pull_request_target`
+Default to GitHub Flow or trunk-based development unless evidence requires a
+heavier model.
 
 ## Merge strategies
 
-| Strategy | History shape | When to use |
+| Strategy | Use when | Tradeoff |
 |---|---|---|
-| **Squash merge** | Linear, one commit per PR | Feature work, bug fixes. Default for GitHub Flow and trunk-based. |
-| **Rebase merge** | Linear, all commits preserved | When individual commits in a PR tell a meaningful story. |
-| **Merge commit** | Non-linear, preserves branch topology | GitFlow (required by `--no-ff` policy). Avoid otherwise. |
+| Squash merge | A PR is one reviewable change | discards internal commit sequence |
+| Rebase merge | Individual commits are intentional and buildable | preserves noisy commits if discipline is weak |
+| Merge commit | Branch topology is operationally meaningful | non-linear history complicates bisect and revert |
+| Merge queue | Main must remain green under concurrent merges | adds queue latency and platform dependence |
 
-### Enforcement
+Enforce the selected method at repository level. Define who can bypass it and how
+that bypass is audited.
 
-```bash
-# Repository settings -> require linear history
-# GitHub: Settings -> Branches -> main -> "Require linear history"
-# GitLab: Settings -> Repository -> Protected branches -> "Allowed to merge: Maintainers"
-#         with "Merge method: Fast-forward" or "Squash"
-```
+## Verification
 
-Set the merge method at the repo level so it can't be overridden per-PR.
+Inspect actual repository settings, protected branches, merge methods, status
+checks, branch ages, and recent merge history. Do not present a policy document as
+proof that enforcement exists.
 
 ## Reference map
 
-| If you need to... | Load |
+| Need | Load |
 |---|---|
-| Detailed comparison of all branching models | `references/branching-models.md` |
-| Merge strategy tradeoffs and enforcement | `references/merge-strategies.md` |
-| Branch protection rule templates | `references/branch-protection.md` |
+| Detailed model comparison | references/branching-models.md |
+| Merge strategy tradeoffs | references/merge-strategies.md |
+| Protection templates | references/branch-protection.md |
+
+## Completion
+
+Complete when the selected model follows measured constraints, every rule maps to
+an enforcement mechanism, migration and emergency paths are defined, and current
+settings are verified or clearly marked unimplemented.
 
 ## Related skills
 
-- `git-toolkit` - local git commands: rebase, merge, cherry-pick, bisect
-- `git-ci-cd` - CI/CD pipeline configuration that enforces these workflows
-- `repo-docs` - CHANGELOG.md and README.md
-- `repo-governance` - CONTRIBUTING.md, CODEOWNERS, PR templates
-
-## Validate
-
-```sh
-python3 scripts/validate_skill.py skills/git-workflows
-```
+- git-toolkit for local Git execution and commits
+- git-ci-cd for required pipeline checks
+- git-actions for platform settings through APIs
+- repo-governance for CONTRIBUTING.md and CODEOWNERS

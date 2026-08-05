@@ -1,175 +1,113 @@
 ---
 name: architecture-enforce
-description: Use when designing, reviewing, refactoring, migrating, or decomposing repository architecture - packages, modules, deployables, APIs, schemas, build graphs, or cross-language boundaries. This also triggers when a change creates, splits, merges, moves, or renames three or more sibling source files, or changes package/directory topology. Enforce ownership, dependency direction, public contracts, quality attributes, security and reliability, naming, toolchain topology, separation of tests and benchmarks, and executable verification without inventing layers or suppressing findings.
+description: >
+  Use when implementing, reviewing, refactoring, migrating, or enforcing repository architecture across packages, modules, deployables, APIs, schemas, build graphs, generated code, tests, benchmarks, and cross-language boundaries. Trigger on package or directory topology changes and whenever three or more sibling source files are created, split, merged, moved, or renamed. Keywords include architecture audit, boundary violation, file shattering, filename colony, flat cluster, microfile fragmentation, helper file, manager file, circular dependency, forbidden import, layering violation, public API drift, schema boundary, ownership, cohesion, coupling, dependency direction, source topology, inline tests, lint suppression, ignored findings, fitness function, and structural refactor. Enforce fail-closed verification without waivers or suppression.
 ---
 
 # Architecture Enforce
 
-Enforce architecture as an accountable system of boundaries, decisions, and
-proof. Be strict about ownership, dependency direction, public contracts,
-quality attributes, and operational behavior. Reject cargo-cult layering,
-pattern name-dropping, and arbitrary refactors presented as architecture.
-
-This skill owns architectural enforcement. For architecture *decisions*
-(ADRs, pattern selection, decomposition), use `architecture-design` first.
+Turn architecture policy into repository evidence and blocking checks. Preserve
+behavior unless the requested architecture change explicitly alters it.
 
 ## When to use
 
-- Auditing an existing codebase for architecture violations
-- Enforcing import/dependency rules, module boundaries, or naming conventions
-- Reviewing a PR for architectural compliance
-- Refactoring or migrating code while preserving architectural contracts
-- Setting up CI architecture checks
-- Creating, splitting, merging, moving, or renaming **three or more sibling
-  source files** in one change
-- Changing package, module, export, target, or directory topology, even when
-  the source edits look mechanical
+- Changing packages, directories, modules, schemas, APIs, tests, generated boundaries, or three or more sibling source files
+- Reviewing file shattering, flat folders, filename colonies, helper/manager proliferation, cycles, or ownership drift
+- Migrating build graphs, deployables, languages, storage, protocols, or public contracts
+- Auditing lint, test, architecture, or CI suppression used to hide failures
 
 ## When NOT to use
 
-- Making architecture *decisions* (patterns, ADRs, decomposition) - use `architecture-design`
-- A single-line fix or rename with no structural impact
-- Inventing layers or interfaces solely to match a diagram
+- A tiny edit with no boundary, topology, ownership, contract, or build-graph effect
+- Architecture ideation before a target structure is selected; use architecture-design
 
 ## Non-negotiable contract
 
-Every changed architectural unit must have:
+### Ownership and boundaries
 
-1. One accountable owner and one durable capability or reason to change
-2. An explicit public surface, or an intentional private status
-3. Allowed dependency directions enforced by the language, build graph, or policy
-4. Owned data, lifecycle, failure, observability, and compatibility behavior
-5. Tests at the boundary they claim to prove
-6. A reproducible build/package/deployment declaration
-7. A focused verification path through the real entrypoint
-
-Do not accept compilation, green unit tests, a diagram, or a familiar pattern
-name as architecture proof by itself.
+- Read repository instructions, owning code, callers, tests, build configuration, and public contracts before editing.
+- Assign each changed path one durable owner, responsibility, visibility, lifecycle, dependency direction, and reason it cannot be consolidated.
+- Prefer capability modules over one-type, one-operation, one-phase, helper, validation, or filename-prefix colonies.
+- Helpers, Validation, Types, Managers, Open, Reduce, and Commit are procedural roles, not owners.
+- Keep tests and benchmarks in owned test surfaces unless a language contract requires otherwise.
+- Change canonical generator inputs; do not hand-edit generated output.
 
 ### Topology and decomposition gate
 
-Files are implementation units, not architectural boundaries by default. A
-type, operation, phase, helper, validation rule, or procedural step does not
-earn a file merely because it has a name. Reject one-type-per-file,
-one-operation-per-file, one-phase-per-file, one-helper-per-file, and
-one-validation-per-file decomposition when the units share an owner, change
-reason, visibility, lifecycle, dependency set, or test contract. Consolidate
-such units into the nearest cohesive owner.
+Inventory tracked, modified, staged, untracked, and ignored authored source. For
+every created, moved, split, merged, or renamed path, record:
 
-`Validation`, `Helpers`, `Open`, `Reduce`, and `Commit` are procedural roles,
-not durable architectural owners. They may remain separate only when evidence
-proves an independent lifecycle, public contract, deployment/visibility
-boundary, dependency direction, or independently verifiable failure policy.
-Names and a desire for a tidy tree are not evidence.
+| Path | Owner | Reason | Visibility | Lifecycle | Dependencies | Why separate |
+|---|---|---|---|---|---|---|
 
-This skill is mandatory for any topology trigger listed above. Build a
-source-topology map for the candidate working tree (tracked **and untracked**
-files), with one row per changed or newly created source unit:
-
-| Path | Owner | Change reason | Visibility | Lifecycle | Dependencies | Consolidation rationale |
-| --- | --- | --- | --- | --- | --- | --- |
-
-Every row must name the nearest durable owner and explain why the unit cannot
-be consolidated. A missing row, shared owner with no independent contract, or
-unexplained categorical file is a structural finding.
+Missing rows block acceptance. A file justified only by declaration category,
+operation phase, test convenience, or anticipated reuse must be consolidated.
 
 ### Fail-closed acceptance
 
-Acceptance is a technical gate, not a conversational approval. Do not replace
-evidence with urgency, reassurance, praise, a user preference, or a verbal
-exception. A passing acceptance requires the unmodified full-repository gate,
-the source-topology map, and zero unresolved warning or error findings.
-Existing findings block acceptance; they are not a baseline that can be
-carried forward. The command exposes no exclusion, disabled/inventory-only,
-advisory, threshold-override, or exception-waiver mode. If the gate cannot
-establish the required result, stop and report the blocker.
+- Every warning and error blocks.
+- Existing findings are not a baseline or waiver.
+- Generated, vendored, ignored, artifact, snapshot, migration, or test-root labels do not silently remove authored source.
+- No accepted downgrade, exclusion, threshold, exception, or advisory mode exists.
 
-### Check integrity and failure ownership (non-negotiable)
+### Check integrity and failure ownership
 
-Lint, test, policy, provider, build, and architecture checks are part of the
-contract and must remain active. Never add or expand ignore directives (such
-as `.gitignore`, tool ignore files, or lint/check excludes), disable a rule,
-provider, or CI job, lower severity, add `allow-failure` or
-`continue-on-error`, exclude a failing path, alter a baseline, or weaken or
-delete a test/check to obtain a green result. A suppression is not a fix and
-cannot turn a failed gate into acceptance.
-
-Repair failures at the owning cause and rerun the affected check. If the tool
-itself is wrong, preserve the failing gate and record a minimal reproducer
-(tool/version, exact command and configuration, input, output, and exit code)
-before requesting explicit authorization for a policy change. The architecture
-gate remains blocked while a check is disabled, downgraded, excluded, made
-advisory, or otherwise weakened; no agent may grant that authorization by
-conversation alone.
+Never pass by adding ignores or suppression comments, disabling a rule/provider/job,
+lowering severity, changing thresholds or baselines, excluding paths, adding
+allow-failure or continue-on-error, swallowing command failures, or weakening or
+deleting tests and checks. Fix the underlying code or owning checker. If the
+checker is wrong, keep acceptance blocked and report a minimal reproducer.
 
 ## Quick start - mandatory audit protocol
 
-From this skill directory, first enumerate the complete candidate working tree;
-the audit must cover source files that are not yet tracked:
+1. Run capability discovery.
+2. Inventory Git state, source candidates, manifests, tests, generators, and public surfaces.
+3. Complete the topology and dependency maps.
+4. State the owning cause, target structure, preserved contracts, migration order, and rollback boundary.
+5. Implement through canonical sources in cohesive slices.
+6. Run focused tests and the production or integration entrypoint.
+7. Run the full audit and relevant provider queries.
+8. Inspect the final diff and resolve every diagnostic.
 
-```bash
-git status --short
-git ls-files --others --exclude-standard
-```
+Commands:
 
-Run both commands before and after every repository change:
-
-```bash
-python3 scripts/providers.py capabilities --root <repo> --format json
-python3 scripts/audit_architecture.py <repo> --format json
-```
-
-Record the exact scope, gate, provider status, findings, and exit codes. A
-source read or model-produced claim is not evidence that the commands ran.
-The acceptance command has one fixed policy: full filesystem scope, tracked and
-untracked candidates, fixed thresholds, and failure on every warning or error.
-There is no acceptance downgrade flag or waiver file. Confirm that the
-candidate map includes every changed and untracked source path before claiming
-completion.
+    python3 skills/architecture-enforce/scripts/providers.py capabilities --root . --format json
+    python3 skills/architecture-enforce/scripts/audit_architecture.py . --format json
 
 ## Enforcement profiles
 
-Choose the smallest profile that explains the real deployment boundaries:
+Profiles change questions, never the gate:
 
-| Profile | When |
-|---|---|
-| Modular monolith | One deployable with capability-owned modules |
-| Library / SDK | Narrow stable API/ABI, versioned compatibility |
-| Client / UI / edge runtime | Platform lifecycle, state ownership, rendering/input boundaries |
-| Pipeline / data-oriented | Explicit stages, data ownership, backpressure |
-| Plugin / extension host | Discovery, lifecycle, failure isolation |
-| Service / distributed | Independent deployability, network contracts, idempotency |
-| Embedded / real-time | Timing, resource, determinism, hazard budgets |
-| Polyglot workspace | Language-native modules + explicit FFI/schema/process contracts |
-
-Do not select microservices, CQRS, event sourcing, or a service layer without a
-stated force the simpler profile cannot satisfy.
+- Module/package: ownership, dependency direction, public API, tests
+- Distributed system: deployables, protocols, data ownership, failure domains
+- Compiler/runtime: phases, IR ownership, transitions, diagnostics
+- Data/storage: schema ownership, migration, compatibility, recovery
+- Cross-language: generated boundary, ABI/schema contract, canonical source
+- Agent system: authority, tools, state, orchestration, observable effects
 
 ## Reference map
 
-| If you need to... | Load |
+| Need | Load |
 |---|---|
-| Understand ownership, coupling, dependency, and migration rules | `references/principles.md` |
-| See pattern selection gates and ADR template | `references/patterns.md` |
-| Define quality-attribute scenarios and production gates | `references/quality-attributes.md` |
-| Run fitness functions and evidence reporting | `references/verification.md` |
-| Configure syntax rules, providers, and tool-backed checks | `references/tooling.md` |
-| Apply naming authorities across all semantic surfaces | `references/naming.md` |
-| Understand language-family and ecosystem boundaries | `references/languages.md` |
-| Navigate build systems (CMake, Make, Ninja, Xmake, Conan) | `references/toolchains.md` |
-| See accepted and rejected structural examples | `references/examples.md` |
-| Place tests in runner-recognized sources | `references/testing.md` |
-| Verify primary architecture and ecosystem authority links | `references/sources.md` |
+| Core rules | references/principles.md |
+| Naming and fragmentation | references/naming.md |
+| Language conventions | references/languages.md |
+| Tests and benchmarks | references/testing.md |
+| Toolchains | references/toolchains.md |
+| Audit tooling | references/tooling.md |
+| Verification | references/verification.md |
+| Patterns and quality attributes | references/patterns.md, references/quality-attributes.md |
+| Examples | references/examples.md |
+| Sources | references/sources.md |
+
+## Completion
+
+Complete only when contracts are preserved or explicitly migrated, every changed
+path has a durable owner, focused and integration checks pass, the full audit has
+zero warnings/errors, and the diff contains no suppression bypass.
 
 ## Related skills
 
-- `architecture-design` - Before enforcing boundaries, use this to make the
-  architecture decisions (ADRs, pattern selection, decomposition). Enforcement
-  without design has no target to enforce against.
-
-## Maintenance
-
-```sh
-# From the repository root:
-python3 skills/architecture-enforce/scripts/audit_architecture.py <repo> --format json
-```
+- architecture-design for selecting the structure
+- repo-governance for durable ownership policy
+- git-ci-cd for pipeline enforcement

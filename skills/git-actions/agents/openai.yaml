@@ -1,4 +1,4 @@
 interface:
   display_name: "Git Actions"
-  short_description: "Fetch releases, tags, and metadata via GitHub/GitLab APIs"
-  default_prompt: "Use $git-actions to interact with GitHub or GitLab through their APIs - fetching releases, querying metadata, or automating platform operations."
+  short_description: "Use GitHub and GitLab APIs safely"
+  default_prompt: "Use $git-actions for this GitHub or GitLab API task with minimum permissions, explicit mutation authority, schema validation, and verified remote effects."

@@ -131,8 +131,7 @@ gh api graphql -F owner="$owner" -F name="$name" -f query='
 gh api graphql -f query="query { repository(owner: \"$owner\", name: \"$name\") { stargazerCount } }"
 ```
 
-Source: [OWASP Secrets Management](<https://cheatsheetseries.owasp.org/cheatsheet>
-s/Secrets_Management_Cheat_Sheet.html).
+Source: [OWASP Secrets Management](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html).
 
 ## Testing tokens
 

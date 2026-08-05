@@ -18,8 +18,7 @@ metadata: `1.0.0+20130313144700` (ignored for precedence)
 
 ### SemVer regex
 
-From [semver.org](<https://semver.org/#is-there-a-suggested-regular-expression->
-regex-to-check-a-semver-string):
+From [semver.org](https://semver.org/#is-there-a-suggested-regular-expression-to-check-a-semver-string):
 
 ```regex
 ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)

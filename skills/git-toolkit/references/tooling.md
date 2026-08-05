@@ -2,9 +2,8 @@
 
 Production tools for git safety. Do not invent a pre-commit hook or security
 check when a production tool already exists. Sources: [dev.to Git
-security](<https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping->
-your-code-safe-1nep), [git-guardrails](<https://git->
-guardrails.readthedocs.io/en/latest/).
+security](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-your-code-safe-1nep),
+[git-guardrails](https://git-guardrails.readthedocs.io/en/latest/).
 
 ## Secret scanning (pre-commit)
 
@@ -88,8 +87,7 @@ guardrails.readthedocs.io/en/latest/).
 
 ## Built-in Git safety
 
-From [dev.to Git security best practices](<https://dev.to/prankurpandeyy/git->
-security-best-practices-for-keeping-your-code-safe-1nep):
+From [dev.to Git security best practices](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-your-code-safe-1nep):
 
 ```bash
 git config --global push.useForceIfIncludes true   # force only if tracking matches

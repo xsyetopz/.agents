@@ -1,4 +1,4 @@
 interface:
   display_name: "Repo Governance"
-  short_description: "Split human and agent repository rules"
-  default_prompt: "Use $repo-governance to audit and create standard human and coding-agent governance files."
+  short_description: "Define enforceable human and agent repository rules"
+  default_prompt: "Use $repo-governance to give each repository rule a canonical owner, audience, scope, precedence, enforcement mechanism, and validation check."

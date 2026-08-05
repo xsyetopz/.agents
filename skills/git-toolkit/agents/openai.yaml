@@ -1,4 +1,4 @@
 interface:
   display_name: "Git Toolkit"
-  short_description: "Rebase, bisect, worktree, reflog, hooks, and signing"
-  default_prompt: "Use $git-toolkit for advanced local git operations - interactive rebase, bisect, worktree, stash workflows, hooks, signing, and patch manipulation."
+  short_description: "Stage, commit, rebase, recover, and inspect Git"
+  default_prompt: "Use $git-toolkit for this local Git task, including staging and Conventional Commits; preserve unrelated changes and verify the resulting status and history."

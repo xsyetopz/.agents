@@ -1,4 +1,4 @@
 interface:
   display_name: "Apple Design HIG"
-  short_description: "Current Apple Human Interface Guidelines guidance"
-  default_prompt: "Use $apple-design-hig to apply current Apple Human Interface Guidelines to this design or UI task."
+  short_description: "Apply current Apple HIG with exact source tracing"
+  default_prompt: "Use $apple-design-hig to resolve this Apple-platform design decision from current HIG guidance, platform context, and accessibility evidence."

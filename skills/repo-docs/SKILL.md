@@ -1,119 +1,83 @@
 ---
 name: repo-docs
 description: >
-  Use when creating, auditing, or enforcing repository documentation files - README.md with SEO-adjacent structure and multilingual variants, CHANGELOG.md following Keep a Changelog conventions, and project-level documentation standards. Does not cover CONTRIBUTING.md (use repo-governance) or API reference docs.
+  Use when creating, rewriting, auditing, or enforcing repository documentation, especially README.md, README variants, CHANGELOG.md, release notes, project overviews, installation guides, usage guides, badges, navigation, tables of contents, multilingual documentation, Keep a Changelog structure, Semantic Versioning entries, and documentation validation. Trigger phrases include write the README, update README, fix documentation, audit docs, add installation instructions, document usage, update changelog, release notes, Keep a Changelog, docs drift, and repository documentation. Not for CONTRIBUTING.md, AGENTS.md, CODEOWNERS, pull-request templates, or API reference generation.
 ---
 
 # Repo Docs
 
-Repository documentation is the public face of a project. README.md is the
-landing page that search engines and humans both parse. CHANGELOG.md is the
-canonical release record. Both follow strict, verifiable conventions.
+Produce repository documentation that is accurate against the working tree,
+scannable for its audience, and mechanically verifiable where possible.
 
 ## When to use
 
-- Creating a README.md from scratch for a new project
-- Auditing an existing README.md for SEO, clarity, and completeness
-- Adding or auditing multilingual README translations (README.zh.md,
-  README.ja.md, etc.)
-- Creating or migrating a CHANGELOG.md to Keep a Changelog format
-- Auditing a CHANGELOG.md for format compliance and completeness
-- Reviewing a PR that touches README.md or CHANGELOG.md
+- Creating or restructuring README.md and translated README variants
+- Auditing installation, setup, usage, architecture overview, examples, or badges
+- Creating or correcting CHANGELOG.md and release-note entries
+- Adding repository-level documentation checks
 
 ## When NOT to use
 
-- CONTRIBUTING.md, CODE_OF_CONDUCT.md, SECURITY.md - use `repo-governance`
-- API reference docs, wiki pages, or multi-page documentation sites
-- Writing prose style audit - use `writing-cleanup`
-- Architecture decision records - use `architecture-design`
-- Machine-translating READMEs without a human maintainer to keep them current
+- CONTRIBUTING.md, AGENTS.md, CODEOWNERS, issue templates, or PR templates; use repo-governance
+- API reference generation from source symbols
+- Product manuals or general prose without a repository-documentation contract
 
 ## Guardrails
 
-These files are the project's public contract. They must be truthful, complete,
-and machine-readable where the conventions specify.
+- Inspect package manifests, executable entrypoints, configuration, examples, and existing scripts before documenting commands or features.
+- Run documented commands when practical; otherwise label them unverified.
+- Do not invent support claims, benchmarks, compatibility, roadmap items, environment variables, or installation methods.
+- Preserve established public names and release history unless the user requests a migration.
+- Update all language variants affected by a shared factual change, or report the exact variants left stale.
 
 ### README.md - hard requirements
 
-A valid README.md must answer, in order:
-
-1. **What is this?** - one-paragraph description that works as a search snippet
-2. **Why does it exist?** - the problem it solves, not just a feature list
-3. **How do I use it?** - minimum viable install + usage
-4. **How do I contribute?** - link to CONTRIBUTING.md
-5. **What license?** - link to LICENSE
-
-Missing any of these is a hard fail. A visiting developer should never have to
-scroll past the fold to understand whether this project is relevant.
+A README should make project identity, purpose, status, installation, minimum
+working usage, configuration, verification, support, license, and links easy to
+find when those sections apply. Remove empty boilerplate and duplicate prose.
 
 ### CHANGELOG.md - hard requirements
 
-Follow [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 1.1.0. Every
-entry must be:
-
-- Under a version header: `## [X.Y.Z] - YYYY-MM-DD`
-- Grouped into standard sections: `Added`, `Changed`, `Deprecated`, `Removed`,
-`Fixed`, `Security`
-- In reverse chronological order (newest first)
-- Describing the change from the *user's* perspective, not the implementation
-
-Entries that describe implementation details (`Refactored the FooParser class`)
-or omit the version header are rejected.
+Use Keep a Changelog categories and Semantic Versioning semantics where the
+repository follows them. Record user-visible changes, not commit-log noise. Do
+not rewrite released history without explicit authorization.
 
 ## Quick start
 
-1. Read the existing file: `cat README.md CHANGELOG.md 2>/dev/null`
-2. If README.md exists, audit against the checklist in
-   `references/readme-spec.md`
-3. If CHANGELOG.md exists, run the audit script:
-   ```sh
-   python3 scripts/audit_changelog.py CHANGELOG.md
-   ```
-4. Validate semver strings with:
-   ```sh
-   python3 scripts/audit_semver.py 1.2.3-alpha.1
-   python3 scripts/audit_semver.py --from-changelog CHANGELOG.md
-   python3 scripts/audit_semver.py --from-tags
-   ```
-5. For a new project: write README.md first, then CHANGELOG.md after the first
-   release
-6. Every change to either file must pass the validator before commit
+1. Determine audience, documentation owner, project status, and requested files.
+2. Inspect source truth: manifests, CLI help, configuration, examples, tests, and releases.
+3. Load the matching README or changelog specification.
+4. Draft or edit the smallest coherent documentation surface.
+5. Run link, command, changelog, and repository-specific checks.
+6. Re-read the final diff for unsupported claims and cross-file drift.
 
 ## Reference map
 
-| If you need to... | Load |
+| Need | Load |
 |---|---|
-| Full README.md specification and SEO rules | `references/readme-spec.md` |
-| Full CHANGELOG.md specification (Keep a Changelog 1.1.0) | `references/changelog-spec.md` |
-| README.md audit checklist and common failures | `references/readme-audit.md` |
-| CHANGELOG.md audit checklist and common failures | `references/changelog-audit.md` |
+| README requirements | references/readme-spec.md |
+| README audit procedure | references/readme-audit.md |
+| CHANGELOG requirements | references/changelog-spec.md |
+| CHANGELOG audit procedure | references/changelog-audit.md |
 
 ## Scripts
 
-| Script | Purpose |
-|---|---|
-| `scripts/audit_changelog.py` | Validate CHANGELOG.md against Keep a Changelog 1.1.0 |
-| `scripts/audit_semver.py` | Validate version strings against SemVer 2.0.0 |
+Use repository scripts when applicable:
 
-```sh
-# Audit a changelog
-python3 scripts/audit_changelog.py CHANGELOG.md
-python3 scripts/audit_changelog.py CHANGELOG.md --json
+    python3 skills/repo-docs/scripts/audit_changelog.py CHANGELOG.md
+    python3 skills/repo-docs/scripts/audit_semver.py
 
-# Audit semver
-python3 scripts/audit_semver.py 1.0.0 2.1.3-alpha.1
-python3 scripts/audit_semver.py --from-tags
-python3 scripts/audit_semver.py --from-changelog CHANGELOG.md --json
-```
+Do not suppress a failed documentation check. Correct the source, command, link,
+or checker.
+
+## Completion
+
+Complete when documentation matches current repository behavior, required commands
+and links are verified or explicitly qualified, related language variants agree,
+and all applicable documentation checks pass.
 
 ## Related skills
 
-- `repo-governance` - CONTRIBUTING.md, CODEOWNERS, AGENTS.md, PR templates
-- `writing-cleanup` - prose style audit for any Markdown file
-- `architecture-design` - ADRs and architecture documentation
-
-## Validate
-
-```sh
-python3 scripts/validate_skill.py skills/repo-docs
-```
+- repo-governance for contributor and agent policy
+- avoid-ai-writing for prose-level style cleanup
+- git-toolkit for release tags and local history inspection

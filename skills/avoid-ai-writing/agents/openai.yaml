@@ -1,4 +1,4 @@
 interface:
   display_name: "Avoid AI Writing"
-  short_description: "Audit and rewrite text to remove AI-generated writing patterns"
-  default_prompt: "Use $avoid-ai-writing to audit text for AI writing patterns and rewrite to sound human. Supports detect-only, edit-in-place, and full rewrite modes with optional voice profiles."
+  short_description: "Detect or repair concrete AI-style prose patterns"
+  default_prompt: "Use $avoid-ai-writing in the requested detect, edit, or rewrite mode; preserve facts and voice, report observable prose patterns, and do not claim authorship detection."

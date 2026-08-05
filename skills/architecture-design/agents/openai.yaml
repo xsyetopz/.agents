@@ -1,4 +1,4 @@
 interface:
   display_name: "Architecture Design"
-  short_description: "Evidence-based architecture design across domains"
-  default_prompt: "Use $architecture-design for evidence-backed architecture decisions and topology changes, including three-or-more sibling source files; include tracked and untracked candidates, reject categorical one-file decomposition, produce the source-topology map, and require fail-closed pre/post audit evidence without baseline, exclusion, advisory, threshold, or exception waivers; never suppress lint/check failures with ignores, disabled rules/providers/jobs, lowered severity, allow-failure, continue-on-error, excluded paths, baseline edits, or weakened/deleted tests—fix the owning cause, or report a minimal tool reproducer and obtain explicit policy authorization while keeping the gate blocked."
+  short_description: "Design evidence-backed architecture and topology"
+  default_prompt: "Use $architecture-design to compare architecture candidates, map durable ownership and source topology, record the decision, and define fail-closed verification."

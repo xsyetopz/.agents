@@ -1,166 +1,128 @@
 ---
 name: skill-creator
 description: >
-  Use when creating, editing, or validating agent skills in this repository. Covers SKILL.md frontmatter, directory layout, reference files, validator configuration, naming conventions, and progressive disclosure patterns. Do not use for tasks unrelated to authoring skills.
+  Use when creating, rewriting, auditing, debugging, packaging, or validating agent skills and SKILL.md files. Covers the Agent Skills specification, frontmatter, activation descriptions, trigger keywords, skill routing, metadata, agents/openai.yaml, .skill-validator.json, references, scripts, assets, evals, progressive disclosure, installation layout, naming, and behavioral validation. Trigger phrases include create a skill, update every skill, rewrite SKILL.md, fix skill activation, add keywords, improve discoverability, skill not triggering, route this request, validate a skill, package a capability, add a reference, add a script, and author agent instructions. Use current provider prompting guidance for model-specific behavior. Not for tasks unrelated to skill authorship.
 ---
 
 # Skill Creator
 
-Create skills that are self-contained, validatable, and easy to maintain. Every
-skill lives in its own directory under `skills/` with a `SKILL.md` entry point.
-Match the conventions of existing skills - follow the patterns, not the
-content.
+Create a discoverable, bounded, executable skill whose entry instructions are
+lean enough to load on every activation and whose behavior can be verified.
 
 ## When to use
 
-- Creating a new skill from scratch
-- Adding references, scripts, or assets to an existing skill
-- Auditing a skill for structural compliance
-- Updating `.skill-validator.json` or frontmatter
-- Debugging validation failures from the skill validator
+- Creating, rewriting, splitting, packaging, or validating a skill
+- Improving activation descriptions, trigger coverage, or routing boundaries
+- Adding references, scripts, assets, evals, validator rules, or OpenAI metadata
+- Debugging a skill that does not activate, over-activates, or fails validation
+- Adapting skill instructions to current provider guidance and measured failures
 
 ## When NOT to use
 
-- Editing skill *content* that doesn't change structure - use the domain skill
-  instead
-- Tasks unrelated to skill authorship
+- Editing domain behavior without changing the skill artifact
+- Putting repository-wide conventions in a skill when AGENTS.md is the correct owner
+- Encoding a runtime invariant that belongs in permissions, schemas, hooks, or application code
 
 ## Agent Skills spec
 
-Skills follow the [Agent Skills
-specification](https://agentskills.io/specification). The full spec defines
-progressive disclosure, optional directories, and a standard frontmatter schema.
-This repository extends it with a local validator.
+The current Agent Skills specification defines name and description as the
+discovery catalog. The description is therefore the supported routing surface:
+include concrete user phrases, commands, artifact names, formats, platforms, and
+bounded synonyms. There is no standardized standalone keywords field. Arbitrary
+metadata may be ignored during discovery.
+
+Use current official specification guidance when it changes. For a named model or
+provider, load current official prompting guidance before making model-specific
+claims.
+
+## Prompt design contract
+
+- Start from the skill outcome, authority, tools, evidence, completion condition, and failure cases.
+- State each instruction once; move details behind explicit reference-routing conditions.
+- Keep activation vocabulary broad within the owned domain and precise at neighboring boundaries.
+- Describe concrete actions and outputs instead of broad tone or personality labels.
+- Define tool routing, schemas, retries, stopping conditions, and consequential-action approval only when the skill owns them.
+- Use examples only for a product requirement or measured gap.
+- Treat static keyword checks as routing evidence, not proof of model behavior.
+- Test observable tool and filesystem effects separately from the final answer.
 
 ## Anatomy of a skill
 
-```
-skills/<skill-name>/
-├── SKILL.md                  # Required. Entry point with YAML frontmatter.
-├── .skill-validator.json     # Repository extension. Custom validation rules.
-├── LICENSE                   # Recommended.
-├── agents/                   # Product-specific config for agent runtimes.
-│   └── openai.yaml           # OpenAI-compatible runtime metadata.
-├── references/               # Optional. Progressive disclosure files.
-│   └── some-guide.md
-├── scripts/                  # Optional. Executable tooling.
-├── assets/                   # Optional. Static resources.
-└── evals/                    # Optional. Evaluation fixtures.
-```
+    skills/<skill-name>/
+    ├── SKILL.md
+    ├── .skill-validator.json
+    ├── LICENSE
+    ├── agents/openai.yaml
+    ├── references/
+    ├── scripts/
+    ├── assets/
+    └── evals/
 
 ### SKILL.md frontmatter
 
-Full schema per the Agent Skills spec:
+Required fields:
 
-```yaml
----
-name: skill-name           # Required. 1-64 chars, lowercase a-z/0-9/hyphens.
-                           # No leading/trailing hyphens, no consecutive --.
-description: ...           # Required. 1-1024 chars. What it does and when.
-license: MIT               # Optional. License name or bundled file reference.
-compatibility: ...         # Optional. Max 500 chars. Environment requirements.
-metadata:                  # Optional. Arbitrary key-value pairs.
-  author: "Name"
-  version: "1.0"
-allowed-tools: Bash Read   # Optional (experimental). Space-separated tools.
----
-```
+- name: lowercase letters, digits, and single hyphens; matches the directory
+- description: 1-1024 characters; says what the skill does, when it triggers,
+  key terms, and exclusions. See [frontmatter specification](references/frontmatter-spec.md).
 
-Rules enforced by the validator:
-- `name`: `^[a-z0-9]+(?:-[a-z0-9]+)*$`, must match directory name
-- `description`: non-empty, ≤ 1024 chars
-- `compatibility`: ≤ 500 chars if present
-- SKILL.md must start with `---` delimiter
+Optional fields are license, compatibility, metadata, and experimental
+allowed-tools. See the [frontmatter specification](references/frontmatter-spec.md).
 
 ### agents/openai.yaml
 
-Every skill includes an `agents/openai.yaml` for OpenAI-compatible runtimes.
-This file is read by the machine, not the agent. Minimum form:
-
-```yaml
-interface:
-  display_name: "Human-Facing Title"
-  short_description: "25-64 char blurb for UI lists"
-  default_prompt: "Use $skill-name to do X."
-```
-
-The `default_prompt` must mention the skill as `$skill-name`. Optional fields:
-`icon_small`, `icon_large`, `brand_color`, and `dependencies.tools` for MCP
-servers.
+Provide interface.display_name, interface.short_description, and a default_prompt
+that names the skill as $skill-name. Keep UI metadata concise; do not duplicate the
+entire SKILL.md.
 
 ### Progressive disclosure
 
-Skills are loaded in tiers to save context:
-
-1. **Metadata** (~100 tokens): `name` + `description` loaded at startup for all
-   skills
-2. **Instructions** (< 5000 tokens recommended): full `SKILL.md` body loaded on
-   activation
-3. **Resources** (as needed): files in `references/`, `scripts/`, `assets/`
-   loaded on demand
-
-Keep `SKILL.md` under 500 lines. Move detailed material to reference files.
+Tier 1 loads name and description. Tier 2 loads SKILL.md on activation. Tier 3
+loads references, scripts, and assets only when routed. Keep SKILL.md under 500
+lines and focused on decisions required for every invocation.
 
 ### .skill-validator.json
 
-```json
-{
-  "required_headings": [
-    "# Skill Name",
-    "## When to use",
-    "## When NOT to use"
-  ],
-  "required_files": []
-}
-```
-
-- `required_headings` - exact Markdown headings (with `#` prefix) that must
-  appear in SKILL.md
-- `required_files` - relative paths that must exist in the skill directory
+Use required_headings and required_files to encode structural contracts. Add
+executable validators or evals for behavior that prose cannot prove.
 
 ### Required headings convention
 
-Every SKILL.md should include at minimum:
-- `# Skill Name` - title matching the skill name
-- `## When to use` - concrete triggers, not vague categories
-- `## When NOT to use` - boundaries that prevent misapplication
-
-Common optional headings:
-- `## Quick start` - the shortest path to a working result
-- `## Reference map` - table mapping tasks to reference files
-- `## Related skills` - cross-references to sibling skills
-- `## Validate` - command to run the validator
+Include a clear title, When to use, When NOT to use, workflow or quick start,
+reference routing, completion criteria, and validation instructions. Add domain
+headings only when they change execution.
 
 ## Quick start
 
-1. Create the directory: `mkdir -p skills/<name>/{references,agents}`
-2. Write `SKILL.md` with frontmatter and required headings
-3. Write `.skill-validator.json` with `required_headings`
-4. Write `agents/openai.yaml` with `interface` block
-5. Validate: run the validator from the repo root against `skills/<name>`
-6. Add references, scripts, or assets as needed - validate after each change
+1. Identify the skill owner, outcome, neighboring skills, and natural user prompts.
+2. Read current official Agent Skills and model-specific prompting guidance.
+3. Write a description with high-recall domain terms and explicit exclusions.
+4. Write the lean execution contract and route details into references.
+5. Add scripts or evals for repeated, deterministic, or behaviorally risky work.
+6. Validate structure, routing cases, observable effects, and final answers.
+7. Inspect the packaged diff for stale references, duplicate policy, and generated artifacts.
 
 ## Reference map
 
-| If you need to... | Load |
+| Need | Load |
 |---|---|
-| Read the full Agent Skills specification | [agentskills.io/specification](https://agentskills.io/specification) |
-| Understand the openai.yaml format and fields | `references/openai-yaml-spec.md` |
-| See complete frontmatter field descriptions | `references/frontmatter-spec.md` |
-| Understand validation rules in detail | `references/validation-guide.md` |
-| See the naming and structure conventions | `references/conventions.md` |
-| Debug common validation failures | `references/troubleshooting.md` |
+| Frontmatter and activation descriptions | references/frontmatter-spec.md |
+| OpenAI metadata | references/openai-yaml-spec.md |
+| Layout and naming | references/conventions.md |
+| Validator behavior | references/validation-guide.md |
+| Validation failures | references/troubleshooting.md |
+| Model-specific prompt design | prompt-engineering skill and current official provider guidance |
+
+## Completion
+
+Complete when the skill activates for representative positive prompts, remains off
+for neighboring negative prompts, follows its workflow in an isolated fixture,
+produces the required observable effects and final answer, and passes structural
+validation with no unexplained warning.
 
 ## Related skills
 
-- `find-skills` - discover and install skills from the ecosystem
-- `avoid-ai-writing` - audit and improve skill prose
-- `repo-governance` - governance files for humans and agents
-
-## Validate
-
-From the repository root:
-
-```sh
-python3 scripts/validate_skill.py skills/<skill-name>
-```
+- prompt-engineering for model-specific instruction design and behavioral evals
+- find-skills for ecosystem discovery
+- repo-governance for durable repository agent rules
+- install-skizzles for installation and packaging workflows
