@@ -39,6 +39,10 @@ Do not invent model names, effort tiers, context limits, pricing, availability, 
 behavior. For GPT-5.6, load references/openai-gpt-5.6.md and refresh the live model
 guidance before material model-specific changes.
 
+Begin a named-model audit with the official sources used, retrieval date, and a
+plain statement that current official guidance overrides conflicting generic
+prompt advice.
+
 ## Core principles
 
 ### 1. Specify outcome and evidence
