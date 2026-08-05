@@ -5,5 +5,16 @@
     "## Quick start",
     "## Reference map",
     "## Related skills"
+  ],
+  "required_files": [
+    "LICENSE",
+    "references/workflow.md",
+    "references/06-artifact-contracts.md",
+    "references/07-verification-and-evals.md",
+    "references/08-failure-modes.md",
+    "assets/architecture-report.template.md",
+    "assets/adr.template.md",
+    "assets/eval-cases.jsonl",
+    "scripts/skill_checks.py"
   ]
 }

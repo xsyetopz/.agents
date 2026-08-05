@@ -1,1 +1,1 @@
-../../scripts/validate_skill.py
+../../../scripts/validate_skill.py

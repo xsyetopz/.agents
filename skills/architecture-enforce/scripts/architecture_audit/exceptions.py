@@ -151,8 +151,8 @@ def load_syntax_rules(root: Path, path: Path | None) -> tuple[list[SyntaxRule], 
         if raw["tool"] not in {"ast-grep"}:
             findings.append(Finding("error", "invalid-syntax-rule", path, f"syntax rule {index} uses unsupported provider '{raw['tool']}'"))
             continue
-        if raw["severity"] not in {"error", "warning", "notice"} or raw["mode"] not in {"required", "advisory"}:
-            findings.append(Finding("error", "invalid-syntax-rule", path, f"syntax rule {index} severity must be error/warning/notice and mode required/advisory"))
+        if raw["severity"] not in {"error", "warning"} or raw["mode"] != "required":
+            findings.append(Finding("error", "invalid-syntax-rule", path, f"syntax rule {index} must use severity error/warning and required mode; advisory and notice rules cannot be accepted"))
             continue
         paths = raw.get("paths", [])
         if not isinstance(paths, list) or any(not isinstance(item, str) or not item or item.startswith("/") or ".." in PurePosixPath(item).parts for item in paths):
@@ -160,16 +160,3 @@ def load_syntax_rules(root: Path, path: Path | None) -> tuple[list[SyntaxRule], 
             continue
         rules.append(SyntaxRule(raw["id"].strip(), raw["tool"].strip(), raw["language"].strip(), raw["pattern"], raw["severity"], raw["message"].strip(), raw["mode"], tuple(paths)))
     return rules, findings
-
-
-def apply_exceptions(root: Path, findings: Sequence[Finding], exceptions: Sequence[NamingException]) -> list[Finding]:
-    remaining = list(findings)
-    for exception in exceptions:
-        target = root / PurePosixPath(exception.path)
-        match = next((item for item in remaining if item.code == exception.rule and item.path == target), None)
-        if match is None:
-            remaining.append(Finding("error", "stale-naming-exception", target, f"exception for '{exception.rule}' does not match a current finding"))
-            continue
-        remaining.remove(match)
-        remaining.append(Finding("notice", "naming-exception", target, f"{exception.rule} excepted; reason={exception.reason}; owner={exception.owner}; control={exception.control}; review={exception.review}"))
-    return remaining

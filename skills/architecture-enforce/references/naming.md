@@ -241,11 +241,13 @@ Report:
   clean results after;
 - remaining uncertainty about ecosystem convention.
 
-## 7. Exceptions
+## 7. Naming provenance (not acceptance waivers)
 
-Record every user-authorized naming exception in
-`.architecture-enforcement.json`. Each entry uses one exact repository-root-relative
-path; globs and directory-wide wildcards are forbidden. Include all fields:
+If a user explicitly records a naming constraint for diagnosis, keep it in
+`.architecture-enforcement.json`. This metadata is provenance only: it never
+waives a finding, changes the acceptance gate, or proves a clean result. Each
+entry uses one exact repository-root-relative path; globs and directory-wide
+wildcards are forbidden. Include all fields:
 
 ```json
 {
@@ -274,12 +276,14 @@ path; globs and directory-wide wildcards are forbidden. Include all fields:
 
 The reason must name the compiler, framework, generator, or public contract that
 requires the path. "Legacy," "framework," "temporary," local consistency, and
-refactor cost are insufficient. Keep valid exceptions visible in audit output;
-an exception waives only its named rule and exact path.
+refactor cost are insufficient. Keep records visible in audit output. The
+acceptance command exposes no exception-waiver option, so any unresolved
+finding remains a blocker even when metadata is present.
 
 Valid naming rule codes are `category-chain`, `filename-colony`,
-`generic-file`, `semantic-token-limit`, `redundant-owner-prefix`, and
-`temporal-file`. Use the exact finding code emitted by the scanner.
+`generic-file`, `microfile-fragmentation`, `procedural-suffix`,
+`semantic-token-limit`, `redundant-owner-prefix`, and `temporal-file`. Use the
+exact finding code emitted by the scanner.
 
 For `filename-colony`, `path` is the proposed owner path reported by the audit,
 such as `src/destination`, even when that directory does not exist yet. This

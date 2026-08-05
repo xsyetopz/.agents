@@ -255,3 +255,75 @@
 **Why it fails:** Form compliance masks semantic defects.
 
 **Correction:** Combine static checks with executable tests, adversarial scenarios, and expert review. Treat bundled scripts as minimum lint only.
+
+## 33. One-file-per-role decomposition
+
+**Symptom:** A proposed tree creates `Validation`, `Helpers`, `Open`, `Reduce`,
+`Commit`, `Types`, or `Operations` files/directories solely because each name
+sounds like a responsibility.
+
+**Why it fails:** Procedural steps and syntax categories become durable owners
+without independent state, lifecycle, contract, visibility, dependency, or
+failure semantics. The result is microfile confetti and hidden coupling.
+
+**Correction:** Treat those names as procedural roles. Keep them with the
+nearest durable owner unless a source-topology map proves an independent
+lifecycle and contract. Reject one-type, one-operation, one-phase,
+one-helper, and one-validation-per-file plans when ownership answers match.
+
+## 34. Indexed-diff topology blindness
+
+**Symptom:** The design reviews only `git diff` or tracked files while newly
+created source files remain untracked and absent from the architecture map.
+
+**Why it fails:** The candidate tree is incomplete; a split can pass review by
+leaving its most consequential files outside the apparent change set.
+
+**Correction:** Enumerate `git status --short`, `git diff --name-status`, and
+`git ls-files --others --exclude-standard`. Map every changed and untracked
+source path to owner, change reason, visibility, lifecycle, dependencies, and
+consolidation rationale.
+
+## 35. Waiver or social-approval acceptance
+
+**Symptom:** A baseline, path exclusion, disabled/advisory mode, threshold
+override, exception record, urgency, reassurance, or praise is presented as a
+passing architecture result.
+
+**Why it fails:** The finding remains unresolved; only the evidence surface or
+the gate has been weakened. Conversation cannot establish ownership,
+dependency direction, or structural correctness.
+
+**Correction:** Use the unmodified full-repository fail-closed audit before and
+after repository edits. A pre-change result is comparison context, not a
+waiver baseline. Acceptance requires the topology map and zero unresolved warning or error
+findings; report a blocker when that evidence is unavailable.
+
+## 36. Check suppression as a fix
+
+**Symptom:** A lint/check failure is made green by adding an ignore or exclude,
+disabling a rule/provider/job, lowering severity, changing a baseline, adding
+`allow-failure` or `continue-on-error`, excluding the failing path, or weakening
+or deleting the test/check.
+
+**Why it fails:** The owning defect remains and the verification contract no
+longer measures the architecture claim. A green result obtained through a
+suppression is not evidence.
+
+**Correction:** Repair the owning cause and rerun the check. If the tool is
+wrong, preserve the failed gate, capture a minimal reproducer (tool/version,
+exact command/configuration, input, output, exit code), and obtain explicit
+policy-change authorization. Keep acceptance blocked while the check is
+disabled or weakened.
+
+## 37. Tool-defect authorization shortcut
+
+**Symptom:** An agent claims an analyzer is incorrect and silently disables its
+provider or marks the job advisory so architecture review can pass.
+
+**Why it fails:** The claim is untestable, the failure surface is hidden, and
+the gate can no longer detect the risk.
+
+**Correction:** Report the exact reproducer and environment, keep the original
+check enabled and failing, and request a separately recorded policy change.
+No conversational approval or local config edit authorizes a passing gate.

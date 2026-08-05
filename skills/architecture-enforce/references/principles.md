@@ -6,10 +6,11 @@ not replace language and toolchain requirements.
 
 ## Contents
 
-- Ownership and cohesion review; coupling limits; public-surface budget
+- Ownership and cohesion review; source-topology gate; coupling limits;
+  public-surface budget
 - Architecture selection; shared-code admission; monolith and fragmentation
 - Directory/package promotion; composition roots; generated/vendor boundaries
-- Migration gates; fitness functions; exception requirements
+- Migration gates; fail-closed fitness functions; non-waiver requirements
 
 ## 1. Ownership test
 
@@ -23,11 +24,47 @@ substantial file, answer:
 5. Which consumers may depend on it?
 6. Where are its unit, contract, integration, and architecture tests?
 7. Which manifest/build target enforces the boundary?
-8. Who reviews an exception or cross-boundary change?
+8. Who reviews a cross-boundary change or artifact-provenance record?
 
 If these answers cannot be stated without listing unrelated concepts, split the
 unit. If multiple units have the same answers and only forward calls,
 consolidate them.
+
+## 1a. Source-topology and decomposition gate
+
+This gate is mandatory when a change creates, splits, merges, moves, or renames
+three or more sibling source files, or changes package/module/directory/export
+topology. Enumerate the candidate working tree from both version-control views:
+
+```bash
+git diff --name-status
+git ls-files --others --exclude-standard
+```
+
+The second command is required; untracked source is part of the candidate and
+must not be omitted because it is absent from the index. For every changed or
+new source unit, record a row containing:
+
+| Path | Owner | Change reason | Visibility | Lifecycle | Dependencies | Consolidation rationale |
+| --- | --- | --- | --- | --- | --- | --- |
+
+The owner is the nearest durable capability, not a filename category. The
+consolidation rationale must explain why the unit cannot remain with that
+owner. A row with no independent contract, lifecycle, dependency boundary,
+visibility boundary, or failure policy is a finding, not an architecture
+decision.
+
+Do not decompose by syntax or procedure: one type, operation, phase, helper,
+or validation rule per file is forbidden when the units share an owner, change
+reason, visibility, lifecycle, dependency set, or test contract. `Validation`,
+`Helpers`, `Open`, `Reduce`, and `Commit` describe procedural roles in a flow;
+they are not durable owners. Keep them separate only with evidence of an
+independent lifecycle or contract and a source-topology row that proves it.
+
+The topology map is a gate, not a suggestion. A missing rationale, unexplained
+categorical file, or any warning or error finding blocks acceptance. A
+pre-change audit provides diagnostic context only; it cannot waive an existing
+finding.
 
 ## 2. Cohesion review heuristic
 
@@ -184,9 +221,10 @@ and reserved artifacts before evaluation. For authored separator-delimited
 leaves, remove only active-toolchain test, declaration, generated-companion, and
 platform markers. Flag three or more remaining semantic tokens, three or more
 sibling logical units sharing a semantic leading token, and a multi-token leaf
-that repeats an ancestor owner for review. Make a finding a hard gate only when
-the toolchain or repository policy explicitly requires it. Count
-source/header/test/declaration/platform representations of one unit once.
+that repeats an ancestor owner for review. Count source/header/test/declaration/
+platform representations of one unit once. These heuristics do not replace the
+source-topology gate; an inventory label cannot be used as an acceptance waiver,
+and no threshold override may lower the required review.
 
 Extract the repeated owner into a durable directory/module/package and keep a
 one- or two-token leaf. A resulting single-file owner directory is valid when it
@@ -228,7 +266,8 @@ generator, template, patch pipeline, or adapter.
 
 Before moving code:
 
-- baseline the build/tests and capture known failures;
+- capture pre-change build/test/audit results for diagnosis; do not treat a
+  baseline or known failure list as acceptance or a waiver;
 - inventory public paths, manifests, build targets, exports, reflection/config
 references, code generation, CI filters, and documentation;
 - define allowed dependency edges and the target tree;
@@ -250,7 +289,9 @@ After migration:
 - verify public API/ABI and package contents;
 - remove obsolete paths, targets, aliases, shims, and empty directories;
 - run architecture checks, full tests, packaging, and runtime smoke where
-composition changed.
+  composition changed;
+- rerun the unmodified full-repository audit with tracked and untracked
+  candidate files included; reject any new unresolved structural finding.
 
 ## 12. Fitness functions
 
@@ -258,7 +299,8 @@ Prefer automated checks that fail on drift:
 
 - dependency-cycle detection;
 - forbidden-import rules and module visibility;
-- public API/export baselines;
+- public API/export comparisons (diagnostic compatibility evidence, never a
+  baseline acceptance waiver);
 - workspace/project-reference constraints;
 - package-content inspection;
 - generated-output freshness;
@@ -269,25 +311,15 @@ Prefer automated checks that fail on drift:
 Run `scripts/audit_architecture.py` as one input. It cannot prove semantic
 cohesion or dependency direction.
 
-## 13. Exception requirements
+## 13. Non-waiver requirements
 
-Accept an exception only if it identifies the rule, exact scope, reason, owner,
-compensating control, and review/removal condition. Examples include generated
-bindings, framework-mandated paths, cohesive parsers/state machines, C/C++
-single-header distribution, migrations, fixtures, or compatibility surfaces
-with a real deprecation contract.
+The audit exposes no baseline, path exclusion, disabled/inventory-only gate,
+advisory severity, threshold override, or naming-exception waiver. The required
+acceptance run always uses fixed thresholds, full filesystem scope, and failure
+on every warning or error.
 
-Reject blanket exceptions and rationales consisting only of "legacy,"
-"temporary," "framework," "performance," or "enterprise standard."
-
-Record naming exceptions in `.architecture-enforcement.json` with one exact
-repository-root-relative `path` and the fields `rule`, `reason`, `owner`,
-`control`, and `review`. Globs are forbidden. Keep accepted exceptions visible
-in audit output; they waive only the named rule at the exact path and cannot
-serve as full-repository acceptance proof for excluded content.
-
-Classify generated, vendor, schema-derived, migration, snapshot, fixture, or
-framework-owned trees with an exact `artifact_exemptions` record containing
-`class`, `path`, `reason`, `owner`, `control`, and `review`. A suggestive
-directory name is not provenance. Reject overlapping, stale, wildcard, or
-control-free artifact records.
+If the repository has generated, vendor, schema-derived, migration, snapshot,
+fixture, or framework-owned paths, record their provenance and regeneration
+control separately. Exact metadata may help the audit classify the artifact,
+but an artifact record is not permission to ignore new topology findings. A
+stale, overlapping, wildcard, or control-free record is itself a finding.

@@ -533,6 +533,14 @@ def inline_test_findings(
             f"inline test/benchmark scan could not read authored source: {exc}",
             "tooling",
         )]
+    if len(source) > 2_000_000 or any(len(line) > 100_000 for line in source.splitlines()):
+        return [Finding(
+            "error",
+            "inline-test-scan-limit",
+            path,
+            "authored source exceeds the fail-closed inline scan size limit; split or regenerate it before acceptance",
+            "tooling",
+        )]
     comments_only = _strip_source(source, suffix, strings=False)
     clean = _strip_source(source, suffix)
     findings: list[Finding] = []

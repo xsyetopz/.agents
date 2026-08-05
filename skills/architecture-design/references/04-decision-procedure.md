@@ -326,7 +326,16 @@ Without a threshold, “future-proofing” is not sufficient.
 Use one verdict:
 
 - `PASS` - all mandatory gates pass; risks are accepted and verification exists.
-- `PASS WITH CONDITIONS` - implementation may start only on listed safe slices while conditions are resolved.
 - `REVISE` - architecture is directionally plausible but a failed gate invalidates implementation.
 - `BLOCKED` - missing evidence or conflicting constraints prevent a responsible decision.
 - `REJECT` - candidate violates a hard requirement or contains an unmitigated veto condition.
+
+There is no advisory or conditional pass. A design with unresolved conditions is
+`REVISE` or `BLOCKED`; implementation and acceptance wait for the mandatory
+gates. Baselines, exclusions, disabled/advisory modes, threshold overrides, and
+exception records cannot change that verdict. Neither can ignore directives,
+disabled rules/providers/jobs, lowered severity, `allow-failure`,
+`continue-on-error`, excluded paths, altered baselines, or weakened/deleted
+tests/checks. Fix failures at the owning cause; a suspected tool defect needs a
+minimal reproducer and explicit policy-change authorization while the affected
+gate remains blocked.

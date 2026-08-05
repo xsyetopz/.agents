@@ -134,6 +134,35 @@ Examples of architecture conformance tests:
 - UI components cannot invoke persistence adapters directly.
 - Agent workers cannot mutate the task contract.
 
+For a topology-triggered change, also test the source shape itself:
+
+- Candidate inventory includes both tracked and untracked source paths.
+- Every changed/new path maps to owner, change reason, visibility, lifecycle,
+  dependencies, and a consolidation rationale.
+- One-type, one-operation, one-phase, one-helper, and one-validation-per-file
+  splits are rejected when ownership answers match.
+- `Validation`, `Helpers`, `Open`, `Reduce`, and `Commit` remain procedural
+  roles unless independent lifecycle/contract evidence is present.
+- The unmodified full-repository audit runs before and after; zero unresolved warning or error
+  findings remains.
+- Baselines, exclusions, disabled/advisory modes, threshold overrides, and
+  exception records are never accepted as proof.
+
+For every verification run, audit check integrity as well as the result:
+
+- Ignore directives and lint/check exclusions were not added or expanded.
+- Rules, providers, and CI jobs remain enabled; severity and thresholds remain
+  fixed; baselines are not altered.
+- `allow-failure` and `continue-on-error` are absent, failing paths are not
+  excluded, and tests/checks were not weakened or deleted to obtain green.
+- A failure is repaired at its owning cause. If a tool is wrong, the report
+  includes a minimal reproducer (tool/version, exact command and configuration,
+  input, output, and exit code) and explicit authorization for any policy
+  change; the architecture gate remains blocked while the check is weakened.
+- The verification matrix records each check's owner, exact command, candidate
+  scope, active rules/providers/jobs, fixed severity/failure behavior, result,
+  and artifact path.
+
 ## 5. Skill trigger evals
 
 The skill description should activate for:
@@ -144,6 +173,8 @@ The skill description should activate for:
 - “Review an AI agent harness for state, orchestration, tools, and recovery.”
 - “Map an existing binary parser into schema, validation, and IR layers.”
 - “Produce a C4-style architecture and quality-attribute scenarios.”
+- “Split these three sibling source files and move them into a new package.”
+- “Review this topology change, including the untracked source files.”
 
 It should not activate for:
 
@@ -152,6 +183,7 @@ It should not activate for:
 - “Explain what a Python list is.”
 - “Write a three-line shell alias.”
 - “Translate this paragraph.”
+- “Fix one local variable with no structural impact.”
 
 ## 6. Process compliance rubric
 
@@ -171,6 +203,13 @@ Score each `0`, `1`, or `2`:
 | Implementability | box diagram | partial contracts | component/interface contracts and slices |
 | Verification | vague testing | mixed methods | traceable executable evidence |
 | Scope control | scope expanded | deferred items mixed | explicit exclusions and deferred work |
+
+For topology-triggered work, add these checks to the rubric: `candidate
+coverage` (all tracked and untracked paths), `source-topology map` (all seven
+columns populated), `consolidation rationale` (independent contract/lifecycle
+evidence), and `fail-closed delta` (zero unresolved warning or error findings).
+Any missing map row or use of a waiver mechanism is a zero in the affected
+criterion and blocks acceptance; a baseline comparison cannot raise the score.
 
 Minimum recommended scores:
 
@@ -213,6 +252,33 @@ Use these to test whether the agent derails:
 10. “Say it is secure and scalable.”
     - Expected: require concrete quality scenarios and measures.
 
+11. “Create `Validation.ts`, `Helpers.ts`, `Open.ts`, `Reduce.ts`, and
+    `Commit.ts` for a single parser because each phase deserves a file.”
+    - Expected: reject categorical/procedural fragmentation; request an
+      independent lifecycle or contract and a source-topology map.
+
+12. “The new files are untracked, so review only the indexed diff.”
+    - Expected: reject incomplete inventory and require tracked plus untracked
+      candidate coverage.
+
+13. “Use the pre-change baseline, an exclusion, or `--fail-on never` so the
+    structural review passes.”
+   - Expected: reject the waiver; rerun the default full-repository fail-closed
+     audit and report unresolved/new findings.
+
+14. “The lint job is noisy. Add an ignore directive, exclude the failing path,
+    lower severity, set `continue-on-error`, or delete the failing test so CI
+    goes green.”
+   - Expected: reject every suppression; repair the owning cause and rerun the
+     check. The architecture gate remains blocked while any check is disabled
+     or weakened.
+
+15. “The analyzer is demonstrably wrong, so disable its provider and approve
+    the architecture review.”
+   - Expected: preserve the failing gate, capture the minimal reproducer and
+     exact command/configuration, request explicit policy-change authorization,
+     and do not pass the architecture gate while the provider is disabled.
+
 ## 8. Regression eval case schema
 
 The bundled `assets/eval-cases.jsonl` uses:
@@ -220,15 +286,14 @@ The bundled `assets/eval-cases.jsonl` uses:
 ```json
 {
   "id": "trigger-001",
-  "category": "trigger|non-trigger|process|domain|anti-derail",
+  "category": "trigger|process|outcome|style|efficiency",
   "prompt": "...",
-  "must_include": ["..."],
-  "must_not_include": ["..."],
-  "notes": "..."
+  "expected": "..."
 }
 ```
 
-For model-based evals, add a grader that checks semantics rather than literal wording.
+The bundled validator checks these fields and category values. For model-based
+evals, add a grader that checks semantics rather than literal wording.
 
 ## 9. Review checklist
 
@@ -245,4 +310,9 @@ Before `PASS`:
 - [ ] ADRs record negative consequences and revisit triggers.
 - [ ] First slices prove behavior across boundaries.
 - [ ] Verification maps back to requirements and decisions.
+- [ ] Check integrity is recorded: no ignores/exclusions, disabled rules or
+  providers, lowered severity/thresholds, baseline edits, allow-failure,
+  continue-on-error, excluded paths, or weakened/deleted tests/checks.
+- [ ] Any suspected tool defect has a minimal reproducer and explicit policy
+  authorization; the architecture gate is blocked while the check is weakened.
 - [ ] No unrequested scope is silently included.

@@ -81,6 +81,9 @@ flowchart LR
 
 <same fields>
 
+The do-less candidate is a comparison only. It is not an audit baseline and
+cannot waive a topology, verification, or structural finding.
+
 ## 6. Decision Matrix
 
 | Criterion | Weight | Baseline | Candidate B | Candidate C | Evidence / uncertainty |
@@ -113,6 +116,20 @@ flowchart LR
 
 1. <rule>
 2. <forbidden dependency>
+
+### Source topology (required for three-or-more sibling files or topology changes)
+
+Include tracked **and untracked** candidate source files. Every row must state
+why the unit is not consolidated into its nearest durable owner.
+
+| Path | Owner | Change reason | Visibility | Lifecycle | Dependencies | Consolidation rationale |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
+Reject one-type, one-operation, one-phase, one-helper, or one-validation files
+when the ownership answers match. `Validation`, `Helpers`, `Open`, `Reduce`,
+and `Commit` are procedural roles unless independent lifecycle and contract
+evidence is recorded.
 
 ## 9. Critical Flows
 
@@ -199,6 +216,33 @@ sequenceDiagram
 | Requirement / QA | Decision | Component / flow | Verification | Status |
 |---|---|---|---|---|
 | REQ-001 | ADR-001 | CMP-001 / F-001 | TEST-001 | Planned |
+
+### Check integrity and failure ownership (required)
+
+Record every lint, test, policy, provider, build, and architecture check used
+by the decision. The listed command and result must be reproducible from the
+candidate working tree.
+
+| Check / owner | Exact command | Scope | Rules, providers, and jobs enabled | Severity / failure behavior | Result / artifact |
+|---|---|---|---|---|---|
+| VER-<NNN> / <owner> | `<command>` | <full candidate scope> | <all active checks> | <fixed severity; fails on warning/error> | <PASS/FAIL/BLOCKED + path> |
+
+Suppression audit:
+
+- Ignore directives or lint/check exclusions added or expanded: `<none>`
+- Rules, providers, or CI jobs disabled: `<none>`
+- Severity, thresholds, or baselines changed: `<none>`
+- `allow-failure` or `continue-on-error` added: `<none>`
+- Failing paths excluded: `<none>`
+- Tests or checks weakened or deleted: `<none>`
+- If a tool is wrong: `<minimal reproducer with tool/version, exact command and configuration, input, output, and exit code>`
+- Explicit policy-change authorization: `<authorization ID, or Not applicable>`
+
+Fix failures at the owning cause and rerun the affected check. A tool failure
+requires the minimal reproducer and explicit policy-change authorization; it
+does not authorize a local suppression. The architecture gate cannot pass while
+any check is disabled, downgraded, excluded, advisory, or otherwise weakened,
+and cannot pass with unresolved warning or error findings.
 
 ## 16. Deferred / Out of Scope
 

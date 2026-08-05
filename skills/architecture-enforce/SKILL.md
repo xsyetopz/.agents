@@ -1,6 +1,6 @@
 ---
 name: architecture-enforce
-description: Use when designing, reviewing, refactoring, migrating, or decomposing repository architecture - packages, modules, deployables, APIs, schemas, build graphs, or cross-language boundaries. Enforce ownership, dependency direction, public contracts, quality attributes, security and reliability, naming, toolchain topology, separation of tests and benchmarks, and executable verification without inventing layers or suppressing findings.
+description: Use when designing, reviewing, refactoring, migrating, or decomposing repository architecture - packages, modules, deployables, APIs, schemas, build graphs, or cross-language boundaries. This also triggers when a change creates, splits, merges, moves, or renames three or more sibling source files, or changes package/directory topology. Enforce ownership, dependency direction, public contracts, quality attributes, security and reliability, naming, toolchain topology, separation of tests and benchmarks, and executable verification without inventing layers or suppressing findings.
 ---
 
 # Architecture Enforce
@@ -20,6 +20,10 @@ This skill owns architectural enforcement. For architecture *decisions*
 - Reviewing a PR for architectural compliance
 - Refactoring or migrating code while preserving architectural contracts
 - Setting up CI architecture checks
+- Creating, splitting, merging, moving, or renaming **three or more sibling
+  source files** in one change
+- Changing package, module, export, target, or directory topology, even when
+  the source edits look mechanical
 
 ## When NOT to use
 
@@ -42,20 +46,86 @@ Every changed architectural unit must have:
 Do not accept compilation, green unit tests, a diagram, or a familiar pattern
 name as architecture proof by itself.
 
+### Topology and decomposition gate
+
+Files are implementation units, not architectural boundaries by default. A
+type, operation, phase, helper, validation rule, or procedural step does not
+earn a file merely because it has a name. Reject one-type-per-file,
+one-operation-per-file, one-phase-per-file, one-helper-per-file, and
+one-validation-per-file decomposition when the units share an owner, change
+reason, visibility, lifecycle, dependency set, or test contract. Consolidate
+such units into the nearest cohesive owner.
+
+`Validation`, `Helpers`, `Open`, `Reduce`, and `Commit` are procedural roles,
+not durable architectural owners. They may remain separate only when evidence
+proves an independent lifecycle, public contract, deployment/visibility
+boundary, dependency direction, or independently verifiable failure policy.
+Names and a desire for a tidy tree are not evidence.
+
+This skill is mandatory for any topology trigger listed above. Build a
+source-topology map for the candidate working tree (tracked **and untracked**
+files), with one row per changed or newly created source unit:
+
+| Path | Owner | Change reason | Visibility | Lifecycle | Dependencies | Consolidation rationale |
+| --- | --- | --- | --- | --- | --- | --- |
+
+Every row must name the nearest durable owner and explain why the unit cannot
+be consolidated. A missing row, shared owner with no independent contract, or
+unexplained categorical file is a structural finding.
+
+### Fail-closed acceptance
+
+Acceptance is a technical gate, not a conversational approval. Do not replace
+evidence with urgency, reassurance, praise, a user preference, or a verbal
+exception. A passing acceptance requires the unmodified full-repository gate,
+the source-topology map, and zero unresolved warning or error findings.
+Existing findings block acceptance; they are not a baseline that can be
+carried forward. The command exposes no exclusion, disabled/inventory-only,
+advisory, threshold-override, or exception-waiver mode. If the gate cannot
+establish the required result, stop and report the blocker.
+
+### Check integrity and failure ownership (non-negotiable)
+
+Lint, test, policy, provider, build, and architecture checks are part of the
+contract and must remain active. Never add or expand ignore directives (such
+as `.gitignore`, tool ignore files, or lint/check excludes), disable a rule,
+provider, or CI job, lower severity, add `allow-failure` or
+`continue-on-error`, exclude a failing path, alter a baseline, or weaken or
+delete a test/check to obtain a green result. A suppression is not a fix and
+cannot turn a failed gate into acceptance.
+
+Repair failures at the owning cause and rerun the affected check. If the tool
+itself is wrong, preserve the failing gate and record a minimal reproducer
+(tool/version, exact command and configuration, input, output, and exit code)
+before requesting explicit authorization for a policy change. The architecture
+gate remains blocked while a check is disabled, downgraded, excluded, made
+advisory, or otherwise weakened; no agent may grant that authorization by
+conversation alone.
+
 ## Quick start - mandatory audit protocol
 
-From this skill directory, run both commands before and after every repository change:
+From this skill directory, first enumerate the complete candidate working tree;
+the audit must cover source files that are not yet tracked:
 
 ```bash
-python3 scripts/architecture_tools.py capabilities --root <repo> --format json
+git status --short
+git ls-files --others --exclude-standard
+```
+
+Run both commands before and after every repository change:
+
+```bash
+python3 scripts/providers.py capabilities --root <repo> --format json
 python3 scripts/audit_architecture.py <repo> --format json
 ```
 
 Record the exact scope, gate, provider status, findings, and exit codes. A
 source read or model-produced claim is not evidence that the commands ran.
-
-Do not use `--exclude`, `--fail-on never`, or an edited exception entry to
-suppress findings without explicit user approval for that exact scope and reason.
+The acceptance command has one fixed policy: full filesystem scope, tracked and
+untracked candidates, fixed thresholds, and failure on every warning or error.
+There is no acceptance downgrade flag or waiver file. Confirm that the
+candidate map includes every changed and untracked source path before claiming
+completion.
 
 ## Enforcement profiles
 
@@ -100,5 +170,6 @@ stated force the simpler profile cannot satisfy.
 ## Maintenance
 
 ```sh
-python3 scripts/audit_architecture.py <repo> --format json
+# From the repository root:
+python3 skills/architecture-enforce/scripts/audit_architecture.py <repo> --format json
 ```

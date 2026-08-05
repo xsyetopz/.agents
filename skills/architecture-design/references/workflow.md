@@ -21,6 +21,34 @@ Assign stable identifiers: `OBJ-*`, `REQ-*`, `CON-*`, `EXC-*`, `QA-*`.
 **Gate G0 - Goal integrity:** The proposed work can be traced to the user's
 request. No invented objective is present.
 
+## Phase 0a - Candidate tree and topology trigger
+
+Treat these as architecture work even when the author calls them a mechanical
+refactor: creating, splitting, merging, moving, or renaming three or more
+sibling source files, or changing package/module/export/directory topology.
+Enumerate the candidate working tree before reading only the indexed diff:
+
+```bash
+git status --short
+git diff --name-status
+git ls-files --others --exclude-standard
+```
+
+The untracked-source listing is mandatory. New files are candidate architecture
+whether or not they are staged. For repository-affecting work, run the
+architecture-enforce capability preflight and full audit before editing and
+again after editing:
+
+```bash
+python3 skills/architecture-enforce/scripts/providers.py capabilities --root <repo> --format json
+python3 skills/architecture-enforce/scripts/audit_architecture.py <repo> --format json
+```
+
+The audit exposes one policy: full filesystem scope, fixed thresholds, and
+failure on every warning or error. It has no downgrade or waiver mode. Record
+commands, scope, provider status, findings, and exit codes. A failed or blocked
+preflight/audit stops the design until the owning issue is resolved.
+
 ## Phase 1 - Evidence and uncertainty
 
 Inspect available code, documentation, schemas, logs, tests, standards, and
@@ -39,6 +67,29 @@ For each assumption, record the consequence if false.
 
 **Gate G1 - Evidence sufficiency:** No high-impact decision depends on an
 unlabeled or untestable assumption.
+
+## Phase 1a - Source-topology gate
+
+For a topology trigger, create a source-topology table before proposing a tree
+and update it after the design is implemented. Include every changed or newly
+created source path, including untracked paths:
+
+| Path | Owner | Change reason | Visibility | Lifecycle | Dependencies | Consolidation rationale |
+| --- | --- | --- | --- | --- | --- | --- |
+
+The owner must be a durable capability or boundary, not a syntax category. A
+row is incomplete without a concrete reason the unit cannot be consolidated
+into its nearest owner. Reject one-type, one-operation, one-phase,
+one-helper, and one-validation-per-file plans when the units share owner,
+change reason, visibility, lifecycle, dependency set, or test contract.
+`Validation`, `Helpers`, `Open`, `Reduce`, and `Commit` are procedural roles;
+they are not durable owners unless an independent lifecycle, contract,
+visibility/dependency boundary, or failure policy is proven.
+
+**Gate G1a - Topology coherence:** Every candidate source path is mapped, every
+split has a consolidation rationale, and zero unresolved warning or error findings
+remains. Existing findings stay visible with a disposition; a pre-change
+result is comparison context, not a baseline waiver.
 
 ## Phase 2 - Domain and boundary model
 
@@ -80,7 +131,9 @@ dependency direction, I/O model, failure/cancellation behavior, extension
 mechanism, benefits, liabilities, validation evidence needed.
 
 **Gate G3 - Alternatives:** At least two credible candidates and one explicit
-"do less" baseline, or a justified impossibility statement.
+"do less" candidate, or a justified impossibility statement. The do-less
+candidate is a comparison, not a passing baseline and cannot waive a topology
+or audit finding.
 
 ## Phase 5 - Pattern decision
 
@@ -129,7 +182,10 @@ highest-ranked quality scenarios and exposes its tradeoffs.
 Write an ADR for every architecturally significant decision. Plan vertical
 slices that prove architecture: one real input, semantic validation, one state
 transition, one side effect through a port, one observable output, one failure
-path, one automated test.
+path, one automated test. Do not turn each step into a file by default: keep
+validation, helpers, open/reduce/commit phases, and one-off types with the
+nearest durable owner unless the source-topology map proves independent
+contracts and lifecycles.
 
 **Gate G6 - Implementability:** Interfaces, ownership, dependency rules, and
 first slices are specific enough to implement without inventing architecture
@@ -140,6 +196,16 @@ during coding.
 Define tests at the correct level: invariant/property tests, contract tests,
 golden/snapshot tests, differential tests, state-machine tests, fault-injection
 tests, performance budgets, security tests, architecture conformance checks.
+
+Audit the integrity of every check before accepting its result. Do not add or
+expand ignore directives or lint/check exclusions; disable rules, providers,
+or jobs; lower severity or thresholds; alter baselines; add `allow-failure` or
+`continue-on-error`; exclude failing paths; or weaken/delete tests/checks to
+make the result green. Fix failures at the owning cause. If a tool is wrong,
+preserve the failure and record a minimal reproducer (tool/version, exact
+command/configuration, input, output, exit code) while requesting explicit
+policy-change authorization; the architecture gate remains blocked while that
+check is disabled or weakened.
 
 **Gate G7 - Verifiability:** Each critical requirement maps to an executable
 test, inspection, analysis, or monitored measure.
@@ -152,4 +218,13 @@ test, inspection, analysis, or monitored measure.
 4. Search for pattern names unsupported by forces.
 5. Search for orphan components and duplicate state owners.
 6. Search for missing failure, cancellation, migration, and rollback paths.
-7. Run bundled validators when applicable.
+7. Verify the source-topology map covers tracked and untracked candidate files.
+8. Audit the check configuration and CI diff for ignore/exclusion directives,
+   disabled rules/providers/jobs, severity or threshold changes, baseline edits,
+   allow-failure/continue-on-error, excluded paths, and weakened/deleted tests.
+   Any such suppression is a blocking finding.
+9. Run the unmodified architecture-enforce preflight and full audit again when
+   repository files changed. Acceptance requires zero unresolved warning or
+   error findings.
+10. Run bundled validators when applicable and record exact commands, scopes,
+    active checks, exit codes, and artifact paths.

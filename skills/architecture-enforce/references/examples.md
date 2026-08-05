@@ -83,8 +83,9 @@ internal/security/security_token_runtime_test.go
 
 Update package/module declarations, imports/includes, exports, build lists,
 generator inputs, tests, CI path filters, and documentation atomically. Remove
-obsolete paths and empty directories. A public-path exception requires an exact
-entry in `.architecture-enforcement.json`; do not leave an undocumented alias.
+obsolete paths and empty directories. A public-path constraint requires an exact
+provenance entry in `.architecture-enforcement.json`; this records context and
+does not waive a finding or justify an undocumented alias.
 
 ## Prefix colony extraction
 
@@ -240,8 +241,11 @@ src/deploy/
   progress.ts
 ```
 
-Do not split into `types.ts`, `interfaces.ts`, `constants.ts`, and `helpers.ts`.
-Those names classify syntax, not responsibilities.
+Do not split into `types.ts`, `interfaces.ts`, `constants.ts`, `helpers.ts`,
+`validation.ts`, or one file for each operation/phase. Those names classify
+syntax or procedure, not durable responsibilities. Keep each role with its
+nearest owner unless the source-topology map proves an independent lifecycle,
+contract, visibility/dependency boundary, or failure policy.
 
 ## Microfile confetti
 
@@ -268,7 +272,10 @@ src/parser/
 ```
 
 Keep options, state, result, and internal context with the parser unless they
-have independent ownership or reuse.
+have independent ownership, lifecycle, visibility, dependency contract, or
+reuse. `Validation`, `Helpers`, `Open`, `Reduce`, and `Commit` remain
+procedural roles by default; names alone do not justify one-file-per-role
+decomposition.
 
 ## Test exile
 

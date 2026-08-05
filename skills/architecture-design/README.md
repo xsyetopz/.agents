@@ -61,10 +61,14 @@ For API or manual import, keep the zip shape as one top-level `architecture-desi
 ## Validation
 
 ```bash
-python3 scripts/validate_skill.py .
-python3 scripts/validate_architecture_report.py path/to/report.md --mode R3
-python3 scripts/validate_eval_cases.py
+python3 scripts/validate_skill.py skills/architecture-design
+python3 skills/architecture-design/scripts/skill_checks.py report path/to/report.md --mode R3
+python3 skills/architecture-design/scripts/skill_checks.py eval-cases
+python3 skills/architecture-design/scripts/skill_checks_test.py
 ```
+
+The report gate is fail-closed: any warning or error produces a non-zero exit
+and a JSON result with `"passed": false`.
 
 ## What is included
 

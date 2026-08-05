@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from architecture_tools.ast_grep import run_ast_grep
+from providers import run_ast_grep
 
 
 class ArchitectureToolsTests(unittest.TestCase):

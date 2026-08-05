@@ -5,11 +5,10 @@ from __future__ import annotations
 from collections.abc import Sequence
 from pathlib import Path, PurePosixPath
 
-from architecture_tools import run_ast_grep
+from providers import run_ast_grep
 
-from .discovery import artifact_class, count_lines, iter_audited_files
+from .discovery import artifact_class, count_lines, is_output_directory_source, is_source_bearing, iter_audited_files
 from .exceptions import (
-    apply_exceptions,
     load_exceptions,
     load_syntax_rules,
     load_test_source_roots,
@@ -17,12 +16,20 @@ from .exceptions import (
 from .findings import directory_findings, filename_findings, package_manager_findings
 from .inline_tests import inline_test_findings
 from .records import AnalyzerStatus, ArtifactException, AuditReport, Finding
-from .rules import SEVERITY_RANK, SOURCE_EXTENSIONS
+from .rules import (
+    FLAT_CLUSTER_LIMIT,
+    HARD_LINE_THRESHOLD,
+    SEVERITY_RANK,
+    SOFT_LINE_THRESHOLD,
+    SOURCE_EXTENSIONS,
+    STRONG_LINE_THRESHOLD,
+)
+from .suppressions import git_suppression_findings, suppression_findings
 
 
 def audit(
-    root: Path, *, soft: int = 450, strong: int = 650, hard: int = 800,
-    flat_limit: int = 12, include_generated: bool = False,
+    root: Path, *, soft: int = SOFT_LINE_THRESHOLD, strong: int = STRONG_LINE_THRESHOLD, hard: int = HARD_LINE_THRESHOLD,
+    flat_limit: int = FLAT_CLUSTER_LIMIT, include_generated: bool = False,
     excludes: Sequence[str] = (), exceptions_path: Path | None = None,
 ) -> tuple[list[Path], list[Finding]]:
     report = audit_report(
@@ -34,12 +41,23 @@ def audit(
 
 
 def audit_report(
-    root: Path, *, soft: int = 450, strong: int = 650, hard: int = 800,
-    flat_limit: int = 12, include_generated: bool = False,
+    root: Path, *, soft: int = SOFT_LINE_THRESHOLD, strong: int = STRONG_LINE_THRESHOLD, hard: int = HARD_LINE_THRESHOLD,
+    flat_limit: int = FLAT_CLUSTER_LIMIT, include_generated: bool = False,
     excludes: Sequence[str] = (), exceptions_path: Path | None = None,
     tool_timeout: float = 30,
 ) -> AuditReport:
-    files = sorted(iter_audited_files(root, excludes))
+    # Acceptance audits always cover the filesystem.  Keep the old keyword in
+    # the library API for callers that have not migrated yet, but turn any
+    # attempted scope reduction into a blocking finding and scan the omitted
+    # paths anyway.
+    requested_excludes = tuple(excludes)
+    policy_overridden = (
+        soft != SOFT_LINE_THRESHOLD
+        or strong != STRONG_LINE_THRESHOLD
+        or hard != HARD_LINE_THRESHOLD
+        or flat_limit != FLAT_CLUSTER_LIMIT
+    )
+    files = sorted(iter_audited_files(root))
     exceptions, artifact_exceptions, exception_findings = load_exceptions(root, exceptions_path)
     configured_test_roots, test_root_findings = load_test_source_roots(root, exceptions_path)
     external_exception_contract = False
@@ -53,10 +71,22 @@ def audit_report(
     syntax_rules, syntax_findings = ([], []) if external_exception_contract else load_syntax_rules(root, exceptions_path)
     authored: list[Path] = []
     findings: list[Finding] = [*exception_findings, *test_root_findings, *syntax_findings]
+    findings.extend(git_suppression_findings(root))
+    if requested_excludes:
+        findings.append(Finding("error", "unsupported-scope", root, "repository audits cannot exclude paths; all filesystem candidates are scanned"))
+    if policy_overridden:
+        findings.append(Finding("error", "unsupported-policy-override", root, "architecture thresholds are fixed policy and cannot be overridden for acceptance"))
+    if exceptions_path is not None:
+        findings.append(Finding("error", "unsupported-policy-file", exceptions_path, "acceptance audits cannot select an alternate exception or policy file"))
+    if exceptions:
+        findings.append(Finding("error", "unsupported-naming-exception", root, "naming and structural findings cannot be waived by exception entries"))
+    if artifact_exceptions:
+        findings.append(Finding("error", "unsupported-artifact-exemption", root, "acceptance audits use only deterministic generated/framework classification; configured artifact exemptions cannot waive findings"))
+    if configured_test_roots:
+        findings.append(Finding("error", "unsupported-test-source-root", root, "acceptance audits use built-in test-source conventions; configured test source roots cannot waive inline-test findings"))
     analyzers: list[AnalyzerStatus] = []
     artifact_targets: list[tuple[Path, ArtifactException]] = []
     matched_artifact_targets: set[Path] = set()
-    matched_test_roots: set[Path] = set()
     for exception in artifact_exceptions:
         target = root / PurePosixPath(exception.path)
         if not target.exists():
@@ -67,31 +97,42 @@ def audit_report(
         for right, _ in artifact_targets[index + 1:]:
             if left == right or left in right.parents or right in left.parents:
                 findings.append(Finding("error", "overlapping-artifact-exemption", root, f"artifact exemption paths overlap: {left.relative_to(root)} and {right.relative_to(root)}"))
-    for pattern in excludes:
-        findings.append(Finding("warning", "excluded-scope", root, f"excluded glob '{pattern}' makes this a scoped audit, not full-repository acceptance proof"))
     for configured in configured_test_roots:
         target = root / PurePosixPath(configured.path)
         if not target.exists():
             findings.append(Finding("error", "stale-test-source-root", target, f"configured test source root does not exist: {configured.path}"))
-        else:
-            findings.append(Finding("notice", "configured-test-source-root", target, f"custom test source root excepted; reason={configured.reason}; owner={configured.owner}; control={configured.control}; review={configured.review}"))
     for path in files:
-        for configured in configured_test_roots:
-            target = root / PurePosixPath(configured.path)
-            if path == target or target in path.parents:
-                matched_test_roots.add(target)
         recorded = next((item for item in artifact_targets if path == item[0] or item[0] in path.parents), None)
-        if recorded and not include_generated:
-            target, exception = recorded
-            matched_artifact_targets.add(target)
-            findings.append(Finding("notice", "exempt-artifact", path, f"{exception.artifact_class} artifact excepted; reason={exception.reason}; owner={exception.owner}; control={exception.control}; review={exception.review}"))
-            continue
+        if recorded:
+            matched_artifact_targets.add(recorded[0])
         kind = artifact_class(path, root)
-        if kind and not (include_generated and kind in {"generated", "vendor", "migration", "snapshot"}):
-            findings.append(Finding("notice", "exempt-artifact", path, f"{kind} artifact is visibly exempt from authored structural checks"))
+        if is_output_directory_source(path, root):
+            findings.append(Finding(
+                "error",
+                "output-directory-source",
+                path,
+                "authored source is hidden beneath an output directory; move it to a durable source owner",
+                "policy",
+            ))
+            authored.append(path)
+            findings.extend(filename_findings(path, root))
+            continue
+        if kind:
+            # Built-in artifact classifications remain visible exemptions, but
+            # generated/configured contents cannot hide lint suppressions.
+            findings.extend(suppression_findings(path, root))
+            if kind == "framework" or not (include_generated and kind in {"generated", "vendor", "migration", "snapshot"}):
+                findings.append(Finding("notice", "exempt-artifact", path, f"{kind} artifact is visibly exempt from authored structural checks"))
+                continue
+        findings.extend(suppression_findings(path, root))
+        if not is_source_bearing(path, root):
+            # Metadata and documentation remain in ``report.files`` for
+            # inventory visibility but do not form authored structural units.
             continue
         authored.append(path)
-        findings.extend(inline_test_findings(path, root, configured_test_roots))
+        # Configured test-source roots are intentionally not passed here: a
+        # policy file cannot suppress the built-in inline-test gate.
+        findings.extend(inline_test_findings(path, root))
         if path.suffix.lower() in SOURCE_EXTENSIONS:
             try:
                 lines = count_lines(path)
@@ -99,21 +140,17 @@ def audit_report(
                 findings.append(Finding("warning", "unreadable-file", path, f"could not read file: {exc}", "inventory"))
             else:
                 if lines > hard:
-                    findings.append(Finding("warning", "hard-lines", path, f"{lines} lines exceeds configured upper review threshold {hard}", "inventory"))
+                    findings.append(Finding("warning", "hard-lines", path, f"{lines} lines exceeds policy upper review threshold {hard}", "inventory"))
                 elif lines > strong:
-                    findings.append(Finding("warning", "strong-lines", path, f"{lines} lines requires an extraction plan above {strong}", "inventory"))
+                    findings.append(Finding("warning", "strong-lines", path, f"{lines} lines requires an extraction plan above policy threshold {strong}", "inventory"))
                 elif lines > soft:
-                    findings.append(Finding("notice", "soft-lines", path, f"{lines} lines requires architectural review above {soft}", "inventory"))
+                    findings.append(Finding("notice", "soft-lines", path, f"{lines} lines requires architectural review above policy threshold {soft}", "inventory"))
         findings.extend(filename_findings(path, root))
     for target, exception in artifact_targets:
         if target not in matched_artifact_targets and not include_generated:
             findings.append(Finding("error", "stale-artifact-exemption", target, f"{exception.artifact_class} artifact exemption contains no audited files"))
-    for configured in configured_test_roots:
-        target = root / PurePosixPath(configured.path)
-        if target.exists() and target not in matched_test_roots:
-            findings.append(Finding("error", "stale-test-source-root", target, f"configured test source root contains no audited files: {configured.path}"))
     findings.extend(directory_findings(root, authored, flat_limit))
-    findings.extend(package_manager_findings(root, excludes))
+    findings.extend(package_manager_findings(root))
     for rule in syntax_rules:
         if rule.tool != "ast-grep":
             analyzers.append(AnalyzerStatus(rule.rule_id, rule.tool, "blocked", rule.mode, "provider is not implemented by this skill"))
@@ -135,6 +172,5 @@ def audit_report(
             detail = "; ".join(result.diagnostics) or result.status
             evidence = "tooling" if rule.mode == "required" else "tooling-advisory"
             findings.append(Finding(severity, f"syntax-{result.status}", root, f"{rule.rule_id}: {detail}", evidence))
-    findings = apply_exceptions(root, findings, exceptions)
     findings.sort(key=lambda item: (SEVERITY_RANK[item.severity], str(item.path), item.code))
     return AuditReport(tuple(files), tuple(findings), tuple(analyzers))

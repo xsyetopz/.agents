@@ -5,6 +5,7 @@ from __future__ import annotations
 import fnmatch
 import os
 import re
+import subprocess
 from collections.abc import Iterable, Sequence
 from pathlib import Path
 
@@ -18,7 +19,16 @@ from .rules import (
     KOTLIN_PLATFORM_MARKERS,
     RESERVED_FILES,
     RESERVED_PATTERNS,
+    SOURCE_BEARING_CONFIG_EXTENSIONS,
+    SOURCE_BEARING_DIRECTORIES,
+    SOURCE_BEARING_IDL_EXTENSIONS,
+    SOURCE_EXTENSIONS,
 )
+
+OUTPUT_DIRECTORIES = {
+    "artifacts", "bazel-bin", "bazel-out", "bazel-testlogs", "build", "cmake-build-debug",
+    "cmake-build-release", "coverage", "deriveddata", "dist", "obj", "out", "reports", "target", "tmp", ".tmp",
+}
 
 
 def matches_any(path: Path, root: Path, patterns: Sequence[str]) -> bool:
@@ -26,21 +36,211 @@ def matches_any(path: Path, root: Path, patterns: Sequence[str]) -> bool:
     return any(fnmatch.fnmatch(relative, pattern) or fnmatch.fnmatch(path.name, pattern) for pattern in patterns)
 
 
-def iter_audited_files(root: Path, excludes: Sequence[str]) -> Iterable[Path]:
+def git_repository_root(root: Path) -> Path | None:
+    """Return the containing worktree root, or ``None`` outside Git."""
+
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "--show-toplevel"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if result.returncode != 0 or not result.stdout.strip():
+        return None
+    repository = Path(result.stdout.strip()).resolve()
+    try:
+        root.resolve().relative_to(repository)
+    except ValueError:
+        return None
+    return repository
+
+
+def _is_nested_repository(path: Path, root: Path) -> bool:
+    try:
+        relative = path.resolve().relative_to(root.resolve())
+    except ValueError:
+        return False
+    current = root.resolve()
+    for part in relative.parts:
+        current /= part
+        if current == root.resolve():
+            continue
+        if (current / ".git").exists():
+            return True
+    return False
+
+
+def _is_architecture_candidate(path: Path) -> bool:
+    name = path.name
+    extensionless_script = False
+    if not path.suffix:
+        try:
+            with path.open("rb") as handle:
+                extensionless_script = handle.read(2) == b"#!"
+        except OSError:
+            pass
+    return (
+        path.suffix.lower() in ARCHITECTURE_EXTENSIONS
+        or extensionless_script
+        or name.lower() in RESERVED_FILES
+        or any(fnmatch.fnmatch(name.lower(), pattern) for pattern in RESERVED_PATTERNS)
+    )
+
+
+def _candidate_paths(repository: Path, root: Path, payload: bytes) -> set[Path]:
+    """Convert Git's NUL-delimited paths into scoped architecture candidates."""
+
+    candidates: set[Path] = set()
+    for raw in payload.split(b"\0"):
+        if not raw:
+            continue
+        path = repository / os.fsdecode(raw)
+        try:
+            path.resolve().relative_to(root.resolve())
+        except ValueError:
+            continue
+        if _is_nested_repository(path, root) or not path.is_file():
+            continue
+        try:
+            relative = path.resolve().relative_to(root.resolve())
+        except ValueError:
+            continue
+        if any(part.lower() in DEFAULT_IGNORED_DIRS for part in relative.parts[:-1]):
+            continue
+        if _is_architecture_candidate(path):
+            # Keep the caller's lexical root spelling (macOS commonly exposes
+            # /var and /private/var aliases) so findings can safely use
+            # ``path.relative_to(root)`` without changing their reported path.
+            candidates.add(root / relative)
+    return candidates
+
+
+def _git_candidates(repository: Path, root: Path) -> set[Path]:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(repository), "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+            check=False,
+            capture_output=True,
+            timeout=20,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return set()
+    return _candidate_paths(repository, root, result.stdout) if result.returncode == 0 else set()
+
+
+def _git_ignored_output_candidates(repository: Path, root: Path) -> set[Path]:
+    """Reconcile ignored authored files under pruned output trees only.
+
+    ``git ls-files`` is intentionally constrained to known output-directory
+    pathspecs.  This recovers an ignored ``dist/Open.ts`` without asking Git to
+    enumerate broad dependency/cache trees such as ``node_modules``.
+    """
+
+    pathspecs = [f":(glob)**/{name}/**" for name in sorted(OUTPUT_DIRECTORIES)]
+    pathspecs.extend(f":(exclude,glob)**/{name}/**" for name in sorted(DEFAULT_IGNORED_DIRS))
+    try:
+        result = subprocess.run(
+            [
+                "git", "-C", str(repository), "ls-files", "--others", "--ignored",
+                "--exclude-standard", "-z", "--", *pathspecs,
+            ],
+            check=False,
+            capture_output=True,
+            timeout=20,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return set()
+    return _candidate_paths(repository, root, result.stdout) if result.returncode == 0 else set()
+
+
+def iter_audited_files(root: Path, excludes: Sequence[str] = ()) -> Iterable[Path]:
+    """Yield architecture candidates while preserving Git-visible output files.
+
+    Dependency/cache trees remain pruned.  In Git worktrees, expensive output
+    directories are pruned from ``os.walk`` and reconciled with the tracked and
+    non-ignored untracked candidate map, so authored files under ``dist`` or
+    ``build`` remain visible without traversing generated bulk output.  Outside
+    Git, the complete filesystem is walked because no index can provide that
+    reconciliation.  ``excludes`` is retained only for API compatibility.
+    """
+
+    del excludes
+    # Do not resolve symlinks here.  Temporary roots on macOS are commonly
+    # addressed through /var while ``Path.resolve`` yields /private/var;
+    # preserving the caller's absolute spelling keeps every yielded finding
+    # relative to the root supplied to the public API.
+    root = root.absolute()
+    repository = git_repository_root(root)
+    candidates: set[Path] = set()
     for current, dirs, files in os.walk(root):
         base = Path(current)
-        dirs[:] = [name for name in dirs if name not in DEFAULT_IGNORED_DIRS and not matches_any(base / name, root, excludes)]
+        if base != root and _is_nested_repository(base, root):
+            dirs[:] = []
+            continue
+        filtered: list[str] = []
+        for name in dirs:
+            child = base / name
+            lower = name.lower()
+            if name in DEFAULT_IGNORED_DIRS or _is_nested_repository(child, root):
+                continue
+            if repository is not None and lower in OUTPUT_DIRECTORIES:
+                continue
+            filtered.append(name)
+        dirs[:] = filtered
         for name in files:
             path = base / name
-            extensionless_script = False
-            if not path.suffix:
-                try:
-                    with path.open("rb") as handle:
-                        extensionless_script = handle.read(2) == b"#!"
-                except OSError:
-                    pass
-            if (path.suffix.lower() in ARCHITECTURE_EXTENSIONS or extensionless_script or name.lower() in RESERVED_FILES or any(fnmatch.fnmatch(name.lower(), pattern) for pattern in RESERVED_PATTERNS)) and not matches_any(path, root, excludes):
-                yield path
+            if _is_architecture_candidate(path):
+                candidates.add(path)
+    if repository is not None:
+        candidates.update(_git_candidates(repository, root))
+        candidates.update(_git_ignored_output_candidates(repository, root))
+    yield from sorted(candidates, key=str)
+
+
+def is_source_bearing(path: Path, root: Path) -> bool:
+    """Return whether a candidate is an authored source unit for structure checks.
+
+    The walker inventories documentation, manifests, and other architecture
+    metadata so the audit remains transparent.  Structural heuristics apply
+    only to source-bearing paths: code, IDL/schema, or configuration located
+    under a source-owned directory.  This removes obvious metadata/ephemeral
+    noise without introducing a user-controlled exclusion mechanism.
+    """
+
+    extension = path.suffix.lower()
+    if extension in SOURCE_EXTENSIONS or extension in SOURCE_BEARING_IDL_EXTENSIONS:
+        return True
+    if not extension:
+        try:
+            with path.open("rb") as handle:
+                return handle.read(2) == b"#!"
+        except OSError:
+            return False
+    if extension not in SOURCE_BEARING_CONFIG_EXTENSIONS:
+        return False
+    # Exact tool/framework manifests are metadata even when nested in a
+    # package directory.  ``artifact_class`` still reports them visibly.
+    if path.name.lower() in RESERVED_FILES or any(fnmatch.fnmatch(path.name.lower(), pattern) for pattern in RESERVED_PATTERNS):
+        return False
+    try:
+        ancestors = {part.lower() for part in path.relative_to(root).parts[:-1]}
+    except ValueError:
+        return False
+    return bool(ancestors & SOURCE_BEARING_DIRECTORIES)
+
+
+def is_output_directory_source(path: Path, root: Path) -> bool:
+    """Return whether authored source is placed beneath an output directory."""
+
+    try:
+        parents = path.relative_to(root).parts[:-1]
+    except ValueError:
+        return False
+    return is_source_bearing(path, root) and any(part.lower() in OUTPUT_DIRECTORIES for part in parents)
 
 
 def count_lines(path: Path) -> int:

@@ -7,7 +7,7 @@ or treats a missing provider as a clean result.
 ## Capability preflight
 
 ```bash
-python3 scripts/architecture_tools.py capabilities --root <repo> --format json
+python3 scripts/providers.py capabilities --root <repo> --format json
 ```
 
 The report distinguishes `ready` from `unavailable` and records the resolved
@@ -19,7 +19,7 @@ manifest it needs.
 ## Read-only AST query
 
 ```bash
-python3 scripts/architecture_tools.py ast-query \
+python3 scripts/providers.py ast-query \
   --root <repo> --tool ast-grep --language rust \
   --pattern 'unsafe { $$$BODY }' --rule-id unsafe-block \
   --severity warning --message 'review unsafe boundary' src
@@ -57,8 +57,8 @@ configuration:
 ```
 
 If a runner owns a custom test source set that cannot use the exact bundled
-path conventions, declare only its exact root in a reviewed contract. This is
-an exemption, not a way to turn off the detector:
+path conventions, document its exact root for provenance. This metadata is not
+an acceptance exemption and never turns off the detector:
 
 ```json
 {
@@ -74,22 +74,28 @@ an exemption, not a way to turn off the detector:
 }
 ```
 
-The path is root-relative, exact, and must exist. The audit emits a visible
-notice for every configured root, rejects globs and stale roots, and requires
-explicit user approval before agents add or edit the contract.
+Configured test-source roots are rejected by the acceptance audit; repository
+metadata cannot reclassify production source or waive the inline-test gate.
+Use only the scanner's built-in test-source conventions.
 
-`required` rules fail closed on `blocked`, `timeout`, `tool-failed`, or
-`invalid-output`. `advisory` rules report the same condition as a warning but
-never claim proof. The filename and regex checks remain `inventory` evidence;
-they cannot satisfy a syntax, symbol, package-graph, or build-graph gate. A
-supplemental rule cannot replace or waive a bundled inline-test finding.
+Syntax rules must use `mode: "required"` and severity `error` or `warning`.
+`advisory` mode and `notice` severity are invalid policy. Required rules fail
+closed on `blocked`, `timeout`, `tool-failed`, or `invalid-output`. Filename
+and structural inventory findings are also enforced; an inventory evidence
+label is not a severity downgrade. A supplemental rule cannot replace or waive
+a bundled finding. Do not lower severity, disable a
+rule/provider/job, override thresholds or baselines, exclude paths, add an
+ignore or exception, set `allow-failure` or `continue-on-error`, or
+weaken/delete tests to obtain a passing acceptance result. Fix the owning
+cause; a suspected tool defect needs a minimal reproducer and explicit
+policy-change authorization while the gate remains blocked.
 
 ## Package graph
 
 Use the native resolver without configuring or generating a build:
 
 ```bash
-python3 scripts/architecture_tools.py graph --root <repo> --tool auto --format json
+python3 scripts/providers.py graph --root <repo> --tool auto --format json
 ```
 
 `cargo-metadata` consumes `cargo metadata --format-version=1 --no-deps`; `go-list`

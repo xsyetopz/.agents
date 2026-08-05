@@ -2,39 +2,13 @@
 from __future__ import annotations
 
 import json
-import subprocess
-import sys
-import tempfile
 import unittest
-from pathlib import Path
 
 import audit_architecture
+from test_support import AuditFixture
 
 
-class AuditArchitectureTests(unittest.TestCase):
-    def setUp(self) -> None:
-        self.temp = tempfile.TemporaryDirectory()
-        self.root = Path(self.temp.name)
-
-    def tearDown(self) -> None:
-        self.temp.cleanup()
-
-    def write(self, relative: str, lines: int = 1, content: str | None = None) -> Path:
-        path = self.root / relative
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content if content is not None else "x\n" * lines, encoding="utf-8")
-        return path
-
-    def findings(self, **kwargs: object) -> list[audit_architecture.Finding]:
-        return audit_architecture.audit(self.root, **kwargs)[1]
-
-    @staticmethod
-    def codes(findings: list[audit_architecture.Finding]) -> set[str]:
-        return {finding.code for finding in findings}
-
-    def inline_findings(self, relative: str, content: str) -> list[audit_architecture.Finding]:
-        path = self.write(relative, content=content)
-        return audit_architecture.inline_test_findings(path, self.root)
+class AuditArchitectureTests(AuditFixture, unittest.TestCase):
 
     def test_inline_rust_tests_and_benchmarks_report_syntax_and_lines(self) -> None:
         findings = self.inline_findings(
@@ -200,7 +174,7 @@ class AuditArchitectureTests(unittest.TestCase):
         )
 
     def test_reviewed_custom_test_source_root_is_exempt_and_visible(self) -> None:
-        self.write("qa/Codec.java", content="@Test\nvoid roundTrip() {}\n")
+        self.write("qa/Codec.java", content="import org.junit.Test;\n@Test\nvoid roundTrip() {}\n")
         self.write_contract(test_source_roots=[{
             "path": "qa",
             "reason": "JUnit source set declared by the build runner",
@@ -209,8 +183,9 @@ class AuditArchitectureTests(unittest.TestCase):
             "review": "remove on build runner upgrade",
         }])
         findings = self.findings()
-        self.assertNotIn("inline-test", self.codes(findings))
-        self.assertIn("configured-test-source-root", self.codes(findings))
+        self.assertIn("inline-test", self.codes(findings))
+        self.assertIn("unsupported-test-source-root", self.codes(findings))
+        self.assertNotIn("configured-test-source-root", self.codes(findings))
 
     def test_custom_test_source_root_contract_is_strict_and_stale(self) -> None:
         self.write_contract(test_source_roots=[{
@@ -310,25 +285,17 @@ class AuditArchitectureTests(unittest.TestCase):
         included = self.findings(include_generated=True)
         self.assertTrue(any(item.path.parent.name == "generated" and item.code == "inline-test" for item in included))
 
-    def test_inline_test_cli_fails_default_acceptance_gate(self) -> None:
-        self.write("src/codec.rs", content="#[test]\nfn round_trip() {}\n")
-        script = Path(audit_architecture.__file__)
-        for extra in ([], ["--fail-on", "never", "--allow-advisory-audit"]):
-            result = subprocess.run(
-                [sys.executable, str(script), str(self.root), "--format", "json", *extra],
-                check=False, capture_output=True, text=True,
-            )
-            self.assertEqual(result.returncode, 1)
-            payload = json.loads(result.stdout)
-            finding = next(item for item in payload["findings"] if item["code"] == "inline-test")
-            self.assertEqual(finding["evidence"], "syntax")
-
     def test_inline_scan_fails_closed_on_invalid_source_encoding(self) -> None:
         path = self.root / "src" / "codec.rs"
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(b"#[test]\nfn invalid() {}\n\xff")
         findings = audit_architecture.inline_test_findings(path, self.root)
         self.assertEqual([item.code for item in findings], ["inline-test-scan-failed"])
+        self.assertEqual(findings[0].evidence, "tooling")
+    def test_inline_scan_fails_closed_on_pathological_single_line_source(self) -> None:
+        path = self.write("src/bundle.ts", content="x" * 100_001)
+        findings = audit_architecture.inline_test_findings(path, self.root)
+        self.assertEqual([item.code for item in findings], ["inline-test-scan-limit"])
         self.assertEqual(findings[0].evidence, "tooling")
 
     def test_line_thresholds_and_visible_generated_exemption(self) -> None:
@@ -468,7 +435,7 @@ class AuditArchitectureTests(unittest.TestCase):
         paths = {item.path.name for item in self.findings() if item.code == "redundant-owner-prefix"}
         self.assertEqual(paths, {"SecurityRuntime.java", "SecurityContract.cs"})
 
-    def test_manifest_migration_snapshot_and_vendor_exemptions_are_visible(self) -> None:
+    def test_manifest_migration_snapshot_and_vendor_exemption_bypasses_are_blocked(self) -> None:
         self.write("package.json", content="{}\n")
         self.write("migrations/20260101010101_create_security_tool.sql")
         self.write("snapshots/security-tool-contract.json")
@@ -490,10 +457,11 @@ class AuditArchitectureTests(unittest.TestCase):
                 "control": "checksum and license gate", "review": "review on upstream version upgrade",
             },
         ])
-        messages = [item.message for item in self.findings() if item.code == "exempt-artifact"]
-        self.assertEqual(len(messages), 5)
-        for kind in ("framework", "migration", "snapshot", "vendor"):
-            self.assertTrue(any(message.startswith(kind) for message in messages))
+        findings = self.findings()
+        messages = [item.message for item in findings if item.code == "exempt-artifact"]
+        self.assertEqual(len(messages), 2)
+        self.assertTrue(all(message.startswith("framework") for message in messages))
+        self.assertIn("unsupported-artifact-exemption", self.codes(findings))
 
     def test_timestamp_shape_does_not_self_exempt_an_authored_file(self) -> None:
         self.write("src/20260101_security-tool-contract.py")
@@ -507,9 +475,8 @@ class AuditArchitectureTests(unittest.TestCase):
         self.write("src/security-tool-contract.py", content="# The policy says do not edit generated files.\n")
         findings = self.findings()
         flagged = {item.path.name for item in findings if item.code == "semantic-token-limit"}
-        self.assertEqual(flagged, {
-            "security-tool-contract.proto", "security-tool-contract.json", "security-tool-contract.py",
-        })
+        self.assertEqual(flagged, {"security-tool-contract.proto", "security-tool-contract.py"})
+        self.assertNotIn("security-tool-contract.json", flagged)
         self.assertNotIn("exempt-artifact", {
             item.code for item in findings if item.path.name in flagged
         })
@@ -542,7 +509,7 @@ class AuditArchitectureTests(unittest.TestCase):
         self.write("DESCRIPTION")
         findings = self.findings()
         flagged = {item.path.name for item in findings if item.code == "semantic-token-limit"}
-        self.assertEqual(flagged, set(names))
+        self.assertEqual(flagged, set(names) - {"security-tool-boundary.adoc"})
         reserved = {item.path.name for item in findings if item.code == "exempt-artifact"}
         self.assertTrue({"NAMESPACE", "DESCRIPTION"} <= reserved)
 
@@ -573,92 +540,6 @@ class AuditArchitectureTests(unittest.TestCase):
             <= self.codes(self.findings())
         )
 
-    def test_excludes_are_visible_in_text_and_json(self) -> None:
-        self.write("src/run-status-codec.py")
-        script = Path(audit_architecture.__file__)
-        for output_format in ("text", "json"):
-            result = subprocess.run(
-                [
-                    sys.executable, str(script), str(self.root), "--exclude", "src/**",
-                    "--allow-scoped-audit", "--format", output_format, "--fail-on", "error",
-                ],
-                check=True, capture_output=True, text=True,
-            )
-            if output_format == "json":
-                payload = json.loads(result.stdout)
-                self.assertEqual(payload["excludes"], ["src/**"])
-                self.assertTrue(any(item["code"] == "excluded-scope" for item in payload["findings"]))
-            else:
-                self.assertIn("excludes: src/**", result.stdout)
-                self.assertIn("warning: excluded-scope", result.stdout)
-
-    def test_cli_requires_scope_and_advisory_acknowledgements(self) -> None:
-        self.write("src/codec.py")
-        script = Path(audit_architecture.__file__)
-        scoped_rejected = subprocess.run(
-            [sys.executable, str(script), str(self.root), "--exclude", "src/**", "--format", "json"],
-            check=False, capture_output=True, text=True,
-        )
-        self.assertEqual(scoped_rejected.returncode, 2)
-        self.assertIn("--exclude requires --allow-scoped-audit", scoped_rejected.stderr)
-        scoped_accepted = subprocess.run(
-            [
-                sys.executable, str(script), str(self.root), "--exclude", "src/**",
-                "--allow-scoped-audit", "--format", "json",
-            ],
-            check=False, capture_output=True, text=True,
-        )
-        self.assertEqual(scoped_accepted.returncode, 0)
-        scoped_payload = json.loads(scoped_accepted.stdout)
-        self.assertEqual(scoped_payload["scope"], "scoped")
-        self.assertEqual(scoped_payload["gate"], "fail-on error")
-
-        advisory_rejected = subprocess.run(
-            [sys.executable, str(script), str(self.root), "--fail-on", "never", "--format", "json"],
-            check=False, capture_output=True, text=True,
-        )
-        self.assertEqual(advisory_rejected.returncode, 2)
-        self.assertIn("--fail-on never requires --allow-advisory-audit", advisory_rejected.stderr)
-        advisory_accepted = subprocess.run(
-            [
-                sys.executable, str(script), str(self.root), "--fail-on", "never",
-                "--allow-advisory-audit", "--format", "json",
-            ],
-            check=False, capture_output=True, text=True,
-        )
-        self.assertEqual(advisory_accepted.returncode, 0)
-        advisory_payload = json.loads(advisory_accepted.stdout)
-        self.assertEqual(advisory_payload["scope"], "full")
-        self.assertEqual(advisory_payload["gate"], "inventory-only")
-
-    def test_cli_rejects_external_exception_contract(self) -> None:
-        script = Path(audit_architecture.__file__)
-        with tempfile.TemporaryDirectory() as outside:
-            exception_path = Path(outside) / "exceptions.json"
-            exception_path.write_text("{}\n", encoding="utf-8")
-            result = subprocess.run(
-                [
-                    sys.executable, str(script), str(self.root),
-                    "--exceptions", str(exception_path), "--format", "json",
-                ],
-                check=False, capture_output=True, text=True,
-            )
-        self.assertEqual(result.returncode, 2)
-        self.assertIn("--exceptions must be inside the audited repository", result.stderr)
-
-    def test_errors_always_fail_even_with_never_escape(self) -> None:
-        error = audit_architecture.Finding("error", "x", self.root, "x")
-        warning = audit_architecture.Finding("warning", "x", self.root, "x")
-        self.assertTrue(audit_architecture.should_fail([error], "never"))
-        self.assertFalse(audit_architecture.should_fail([warning], "never"))
-        self.assertTrue(audit_architecture.should_fail([warning], "warning"))
-        self.assertEqual(audit_architecture.parse_args([]).fail_on, "error")
-
-    def test_inventory_and_advisory_tool_findings_do_not_gate(self) -> None:
-        inventory = audit_architecture.Finding("error", "inventory", self.root, "inventory", "inventory")
-        advisory = audit_architecture.Finding("error", "advisory", self.root, "advisory", "syntax-advisory")
-        self.assertFalse(audit_architecture.should_fail([inventory, advisory], "warning"))
-
     def exception(self, **changes: str) -> dict[str, str]:
         record = {
             "rule": "semantic-token-limit", "path": "src/run-status-codec.py",
@@ -681,18 +562,17 @@ class AuditArchitectureTests(unittest.TestCase):
         self.write("src/run-status-codec.py")
         self.write_exceptions([self.exception()])
         findings = self.findings()
-        self.assertNotIn("semantic-token-limit", self.codes(findings))
-        notices = [item for item in findings if item.code == "naming-exception"]
-        self.assertEqual(len(notices), 1)
-        self.assertIn("owner=platform team", notices[0].message)
+        self.assertIn("semantic-token-limit", self.codes(findings))
+        self.assertIn("unsupported-naming-exception", self.codes(findings))
+        self.assertNotIn("naming-exception", self.codes(findings))
 
     def test_colony_exception_targets_exact_directory(self) -> None:
         for name in ("catalog-reader.py", "catalog-writer.py", "catalog-index.py"):
             self.write(f"src/{name}")
         self.write_exceptions([self.exception(rule="filename-colony", path="src/catalog")])
         findings = self.findings(flat_limit=99)
-        self.assertNotIn("filename-colony", self.codes(findings))
-        self.assertIn("naming-exception", self.codes(findings))
+        self.assertIn("filename-colony", self.codes(findings))
+        self.assertIn("unsupported-naming-exception", self.codes(findings))
 
     def test_malformed_unknown_overbroad_and_stale_exceptions_are_errors(self) -> None:
         bad_records = [
@@ -703,10 +583,10 @@ class AuditArchitectureTests(unittest.TestCase):
         self.write_exceptions(bad_records)
         findings = self.findings()
         invalid = [item for item in findings if item.code == "invalid-naming-exception"]
-        stale = [item for item in findings if item.code == "stale-naming-exception"]
         self.assertEqual(len(invalid), 4)
-        self.assertEqual(len(stale), 1)
-        self.assertTrue(audit_architecture.should_fail(findings, "never"))
+        self.assertEqual(len([item for item in findings if item.code == "stale-naming-exception"]), 0)
+        self.assertIn("unsupported-naming-exception", self.codes(findings))
+        self.assertTrue(audit_architecture.should_fail(findings))
 
     def test_low_quality_exception_rationale_is_rejected(self) -> None:
         self.write("src/run-status-codec.py")
@@ -757,29 +637,13 @@ class AuditArchitectureTests(unittest.TestCase):
         )])
         findings = self.findings(flat_limit=99)
         colony_paths = {item.path.relative_to(self.root).as_posix() for item in findings if item.code == "filename-colony"}
-        self.assertEqual(colony_paths, {"src/catalog"})
-        notices = [item for item in findings if item.code == "naming-exception"]
-        self.assertEqual([item.path.relative_to(self.root).as_posix() for item in notices], ["src/rollout"])
+        self.assertEqual(colony_paths, {"src/catalog", "src/rollout"})
+        self.assertNotIn("naming-exception", self.codes(findings))
+        self.assertIn("unsupported-naming-exception", self.codes(findings))
 
     def test_invalid_exception_json_is_an_error(self) -> None:
         self.write(".architecture-enforcement.json", content="{")
         self.assertIn("invalid-exception-file", self.codes(self.findings()))
-
-    def test_json_cli_is_machine_readable_and_error_exit_is_nonzero(self) -> None:
-        self.write("src/run-status-codec.py")
-        self.write(".architecture-enforcement.json", content="{")
-        script = Path(audit_architecture.__file__)
-        result = subprocess.run(
-            [
-                sys.executable, str(script), str(self.root), "--format", "json",
-                "--fail-on", "never", "--allow-advisory-audit",
-            ],
-            check=False, capture_output=True, text=True,
-        )
-        self.assertEqual(result.returncode, 1)
-        payload = json.loads(result.stdout)
-        self.assertEqual(payload["audited_files"], 2)
-        self.assertIn("findings", payload)
 
 
 if __name__ == "__main__":

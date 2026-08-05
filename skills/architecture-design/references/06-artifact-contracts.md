@@ -278,6 +278,28 @@ A slice that only creates directories, interfaces, mocks, or framework setup doe
 
 Each critical requirement must have at least one verification row.
 
+### 14.1 Check-integrity and failure-ownership record
+
+The verification section MUST also record every lint, test, policy, provider,
+build, and architecture check used by the decision:
+
+```markdown
+| Check/owner | Exact command | Scope | Active rules/providers/jobs | Severity/failure behavior | Result/artifact |
+|---|---|---|---|---|---|
+| VER-001 / owner | `...` | full candidate tree | all enabled | fixed; fails on warning/error | PASS/FAIL/BLOCKED + path |
+```
+
+The report MUST explicitly state that no ignore directive or lint/check
+exclusion was added or expanded; no rule, provider, or CI job was disabled; no
+severity, threshold, or baseline was lowered or altered; no `allow-failure` or
+`continue-on-error` was added; no failing path was excluded; and no test/check
+was weakened or deleted to obtain a green result. Failures are fixed at the
+owning cause. When a tool appears wrong, preserve the failure and attach a
+minimal reproducer (tool/version, exact command and configuration, input,
+output, and exit code) plus explicit policy-change authorization. The
+architecture gate remains blocked while a check is disabled, downgraded,
+excluded, advisory, or otherwise weakened.
+
 ## 15. Risk register
 
 ```markdown

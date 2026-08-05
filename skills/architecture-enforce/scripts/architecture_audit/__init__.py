@@ -5,6 +5,9 @@ from .cli import main, parse_args, render_json, render_text, should_fail
 from .discovery import (
     artifact_class,
     count_lines,
+    git_repository_root,
+    is_source_bearing,
+    is_output_directory_source,
     iter_audited_files,
     matches_any,
     normalized_leaf,
@@ -13,7 +16,6 @@ from .discovery import (
     split_semantic_words,
 )
 from .exceptions import (
-    apply_exceptions,
     exception_path_is_overbroad,
     exception_quality_error,
     load_exceptions,
@@ -31,6 +33,7 @@ from .records import (
     SyntaxRule,
     TestSourceRoot,
 )
+from .suppressions import git_suppression_findings, suppression_findings
 from .rules import *
 
 __all__ = [
@@ -38,7 +41,6 @@ __all__ = [
     "ARTIFACT_EXCEPTION_CLASSES",
     "CATEGORY_CHAIN",
     "DEFAULT_IGNORED_DIRS",
-    "FAIL_RANK",
     "GENERATED_HEADER",
     "GENERATED_NAME_PATTERNS",
     "GENERIC_BUCKETS",
@@ -48,11 +50,21 @@ __all__ = [
     "JS_LOCKFILES",
     "KOTLIN_PLATFORM_MARKERS",
     "LOW_QUALITY_EXCEPTION_VALUES",
+    "FLAT_CLUSTER_LIMIT",
+    "HARD_LINE_THRESHOLD",
+    "MICROFILE_MAX_LINES",
+    "MICROFILE_MIN_SIBLINGS",
     "NAMING_EXCEPTION_RULES",
+    "SOFT_LINE_THRESHOLD",
+    "STRONG_LINE_THRESHOLD",
     "RESERVED_FILES",
     "RESERVED_PATTERNS",
     "SEVERITY_RANK",
+    "SOURCE_BEARING_CONFIG_EXTENSIONS",
+    "SOURCE_BEARING_DIRECTORIES",
+    "SOURCE_BEARING_IDL_EXTENSIONS",
     "SOURCE_EXTENSIONS",
+    "PROCEDURAL_PHASES",
     "STRUCTURAL_DIRECTORIES",
     "TEMPORAL_OR_NUMBERED",
     "AnalyzerStatus",
@@ -62,11 +74,13 @@ __all__ = [
     "NamingException",
     "SyntaxRule",
     "TestSourceRoot",
-    "apply_exceptions",
     "artifact_class",
     "audit",
     "audit_report",
     "count_lines",
+    "git_repository_root",
+    "is_source_bearing",
+    "is_output_directory_source",
     "directory_findings",
     "exception_path_is_overbroad",
     "exception_quality_error",
@@ -88,4 +102,6 @@ __all__ = [
     "semantic_words",
     "should_fail",
     "split_semantic_words",
+    "suppression_findings",
+    "git_suppression_findings",
 ]

@@ -5,5 +5,17 @@
     "## Quick start",
     "## Reference map",
     "## Related skills"
+  ],
+  "required_files": [
+    "LICENSE",
+    "references/principles.md",
+    "references/verification.md",
+    "references/tooling.md",
+    "references/examples.md",
+    "evals/evals.json",
+    "scripts/audit_architecture.py",
+    "scripts/providers.py",
+    "scripts/test_audit_cli.py",
+    "scripts/test_suppressions.py"
   ]
 }

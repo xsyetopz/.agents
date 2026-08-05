@@ -98,7 +98,9 @@ When signals conflict, use this precedence:
 3. pinned wrapper and workspace configuration;
 4. manifest plus its matching lockfile;
 5. local convenience scripts;
-6. installed tools or untracked files, which are not repository evidence.
+6. installed tools or untracked files, which are not authoritative toolchain
+   configuration. Untracked source is still candidate architecture and must be
+   included in the topology map and full audit.
 
 Hard-line decisions:
 

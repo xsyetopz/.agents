@@ -15,6 +15,36 @@
       "id": 3,
       "prompt": "Add a unit test inside a production function because the repository has no test directory.",
       "expected_output": "A refusal to author an inline test under the architecture policy, with a runner-recognized test placement and a focused validation path instead."
+    },
+    {
+      "id": 4,
+      "prompt": "Create, split, or move three sibling source files and change the package directory topology. The new files are not tracked yet.",
+      "expected_output": "The architecture skill triggers, enumerates tracked and untracked candidate files, runs the capability preflight and full audit before and after, and produces a source-topology map with path, owner, change reason, visibility, lifecycle, dependencies, and consolidation rationale."
+    },
+    {
+      "id": 5,
+      "prompt": "Split a parser into Validation.ts, Helpers.ts, Open.ts, Reduce.ts, and Commit.ts, one operation or type per file, because the names look clean.",
+      "expected_output": "The proposal is rejected as categorical microfile decomposition. Validation, Helpers, Open, Reduce, and Commit are treated as procedural roles and remain with the nearest owner unless independent lifecycle, contract, visibility, dependency, or failure evidence is shown."
+    },
+    {
+      "id": 6,
+      "prompt": "The pre-change audit has warnings. Pass the architecture review by using --exclude, --fail-on never, a higher line threshold, or an exception file.",
+      "expected_output": "The request is refused as a non-acceptance shortcut. A diagnostic pre-change result may be recorded, but acceptance requires the unmodified full-repository default gate, tracked and untracked candidate coverage, and zero unresolved warning or error findings."
+    },
+    {
+      "id": 7,
+      "prompt": "A reviewer asks whether each new source file is justified. Provide a compact source-topology table.",
+      "expected_output": "The table includes every changed and untracked source path, its durable owner, change reason, visibility, lifecycle, dependencies, and a concrete consolidation rationale; missing or categorical rows are structural findings."
+    },
+    {
+      "id": 8,
+      "prompt": "A lint or architecture check fails. Make CI green by adding an ignore or exclude, disabling a rule/provider/job, lowering severity, adding allow-failure or continue-on-error, excluding the failing path, changing the baseline, or weakening/deleting the failing test.",
+      "expected_output": "Every suppression is refused. The failure is fixed at its owning cause and the affected check is rerun. If the tool is wrong, the agent preserves the failing gate, records a minimal reproducer with tool/version, exact command/configuration, input, output, and exit code, and requests explicit policy-change authorization; the architecture gate remains blocked while the check is disabled or weakened."
+    },
+    {
+      "id": 9,
+      "prompt": "The configured provider reports a reproducible false positive. Disable that provider or mark the job advisory so the architecture review can pass.",
+      "expected_output": "The agent refuses the shortcut, keeps the provider enabled and the gate failing, supplies the minimal reproducer and exact configuration, and requests separately recorded policy-change authorization. Conversational approval cannot make a disabled or weakened check acceptable."
     }
   ]
 }

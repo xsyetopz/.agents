@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""Static gate checks for an architecture report produced with this skill."""
+"""Run the architecture-design skill's report and evaluation checks.
+
+The entry point keeps the two checks under one capability-owned interface:
+
+    skill_checks.py report REPORT [--mode R3] [--json]
+    skill_checks.py eval-cases [PATH]
+
+Both checks remain intentionally small static gates.  They do not replace
+architectural review or the repository architecture audit.
+"""
 
 from __future__ import annotations
 
@@ -8,6 +17,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from typing import Callable
 
 MODE_SECTIONS = {
     "R0": ["Task Contract", "Evidence"],
@@ -40,12 +50,18 @@ ID_PATTERNS = {
     "risk": re.compile(r"\bRISK-\d+\b"),
 }
 
+REQUIRED_EVAL_KEYS = {"id", "category", "prompt", "expected"}
+ALLOWED_EVAL_CATEGORIES = {"trigger", "process", "outcome", "style", "efficiency"}
+DEFAULT_EVAL_CASES = Path(__file__).resolve().parents[1] / "assets" / "eval-cases.jsonl"
+
 
 def contains_heading(text: str, fragment: str) -> bool:
     return bool(re.search(rf"^#{{1,6}}\s+.*{re.escape(fragment)}.*$", text, re.I | re.M))
 
 
 def evaluate(text: str, mode: str) -> tuple[list[str], list[str]]:
+    """Return report errors and warnings for the requested rigor mode."""
+
     errors: list[str] = []
     warnings: list[str] = []
 
@@ -102,13 +118,38 @@ def evaluate(text: str, mode: str) -> tuple[list[str], list[str]]:
     return errors, warnings
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("report", type=Path)
-    parser.add_argument("--mode", choices=sorted(MODE_SECTIONS), default="R3")
-    parser.add_argument("--json", action="store_true")
-    args = parser.parse_args()
+def validate_eval_cases(path: Path) -> tuple[list[str], int]:
+    """Return JSONL validation errors and the number of non-empty cases."""
 
+    errors: list[str] = []
+    seen: set[str] = set()
+    count = 0
+    for line_no, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        if not raw.strip():
+            continue
+        count += 1
+        try:
+            obj = json.loads(raw)
+        except json.JSONDecodeError as exc:
+            errors.append(f"line {line_no}: invalid JSON: {exc}")
+            continue
+        missing = REQUIRED_EVAL_KEYS - obj.keys()
+        if missing:
+            errors.append(f"line {line_no}: missing keys {sorted(missing)}")
+        case_id = obj.get("id")
+        if case_id in seen:
+            errors.append(f"line {line_no}: duplicate id {case_id!r}")
+        if case_id:
+            seen.add(case_id)
+        if obj.get("category") not in ALLOWED_EVAL_CATEGORIES:
+            errors.append(f"line {line_no}: invalid category {obj.get('category')!r}")
+        for key in ("prompt", "expected"):
+            if not isinstance(obj.get(key), str) or not obj.get(key, "").strip():
+                errors.append(f"line {line_no}: {key} must be a non-empty string")
+    return errors, count
+
+
+def _report_command(args: argparse.Namespace) -> int:
     try:
         text = args.report.read_text(encoding="utf-8")
     except OSError as exc:
@@ -116,10 +157,11 @@ def main() -> int:
         return 2
 
     errors, warnings = evaluate(text, args.mode)
+    passed = not errors and not warnings
     result = {
         "report": str(args.report),
         "mode": args.mode,
-        "passed": not errors,
+        "passed": passed,
         "errors": errors,
         "warnings": warnings,
     }
@@ -131,9 +173,54 @@ def main() -> int:
             print(f"WARNING: {warning}")
         for error in errors:
             print(f"ERROR: {error}")
-        print("PASS" if not errors else "FAILED")
+        print("PASS" if passed else "FAILED")
 
-    return 0 if not errors else 1
+    return 0 if passed else 1
+
+
+def _eval_cases_command(args: argparse.Namespace) -> int:
+    try:
+        errors, count = validate_eval_cases(args.path)
+    except OSError as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
+
+    for error in errors:
+        print(f"ERROR: {error}")
+    if errors:
+        print(f"FAILED: {len(errors)} error(s) across {count} case(s).")
+        return 1
+    print(f"PASS: {count} unique evaluation cases.")
+    return 0
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Validate architecture reports and architecture-design evaluation cases."
+    )
+    commands = parser.add_subparsers(dest="command", required=True)
+
+    report = commands.add_parser(
+        "report", aliases=["architecture-report"], help="validate an architecture report"
+    )
+    report.add_argument("report", type=Path)
+    report.add_argument("--mode", choices=sorted(MODE_SECTIONS), default="R3")
+    report.add_argument("--json", action="store_true")
+    report.set_defaults(handler=_report_command)
+
+    eval_cases = commands.add_parser(
+        "eval-cases", aliases=["eval"], help="validate bundled JSONL evaluation cases"
+    )
+    eval_cases.add_argument("path", nargs="?", type=Path, default=DEFAULT_EVAL_CASES)
+    eval_cases.set_defaults(handler=_eval_cases_command)
+
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = _parser().parse_args(argv)
+    handler: Callable[[argparse.Namespace], int] = args.handler
+    return handler(args)
 
 
 if __name__ == "__main__":
