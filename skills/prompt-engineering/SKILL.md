@@ -1,7 +1,7 @@
 ---
 name: prompt-engineering
 description: >
-  Use when designing, rewriting, auditing, debugging, adapting, or evaluating prompts and agent instructions. Covers system prompts, developer prompts, AGENTS.md, SKILL.md, tool descriptions, tool routing, authority boundaries, autonomy, approval policy, output contracts, examples, structured context, prompt injection resistance, model-specific prompting, GPT prompting, context bloat, instruction conflicts, prompt ablation, behavioral evals, regression tests, and prompt migration. Trigger phrases include write a prompt, fix this prompt, prompt audit, model not following instructions, skill not activating, agent keeps asking, tool misuse, too verbose, instruction conflict, few-shot example, system message, developer instruction, GPT-5.6 prompt, prompt optimizer, and evaluate agent behavior. Use current official provider guidance and measured behavior, not generic prompt folklore.
+  Use to design or audit system prompts, tool routing, behavioral evals, or GPT-5.6 instructions; not runtime code or model selection alone.
 ---
 
 # Prompt Engineering

@@ -1,7 +1,7 @@
 ---
 name: architecture-design
 description: >
-  Use for architecture selection, system design, decomposition, ADRs, bounded contexts, domain models, module boundaries, package topology, component diagrams, dependency graphs, data flow, control flow, API and schema design, quality-attribute tradeoffs, migration plans, implementation plans, or architecture reviews across compilers, runtimes, CLI and TUI systems, AI agents, web applications, binary formats, storage, data platforms, and distributed systems. Also trigger when creating, splitting, merging, moving, or renaming three or more sibling source files or changing package or directory topology. Keywords include modular monolith, services, event-driven, pipeline, protocol, scalability, reliability, performance, security, ownership, cohesion, coupling, and architectural decision record. Not for a tiny isolated edit with no architectural decision.
+  Use for architecture decisions, ADRs, bounded contexts, or quality-attribute tradeoffs; not a tiny isolated edit without architectural impact.
 ---
 
 # Architecture Design

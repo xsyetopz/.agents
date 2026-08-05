@@ -1,7 +1,7 @@
 ---
 name: repo-governance
 description: >
-  Use when creating, rewriting, auditing, splitting, or enforcing repository governance for humans and coding agents. Covers CONTRIBUTING.md, AGENTS.md, CLAUDE.md, instruction imports, nested agent rules, CODEOWNERS, pull-request templates, issue templates, contributor workflow, review ownership, repository policy, multilingual governance, Git assistance trailers, and provider-specific instruction files. Trigger phrases include contributor guide, agent instructions, repository rules, coding-agent policy, CODEOWNERS, PR template, issue template, governance audit, instruction precedence, nested AGENTS.md, and who owns this code. Not for README.md or CHANGELOG.md content.
+  Use for CONTRIBUTING.md, AGENTS.md, CODEOWNERS, or pull-request templates and governance policy; not README.md or CHANGELOG.md content.
 ---
 
 # Repo Governance

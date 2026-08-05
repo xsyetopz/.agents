@@ -1,7 +1,7 @@
 ---
 name: git-actions
 description: >
-  Use when reading or mutating GitHub or GitLab through HTTP APIs, GraphQL, gh api, glab api, or platform SDKs. Covers repositories, releases, tags, commits, issues, pull requests, merge requests, comments, labels, milestones, checks, statuses, artifacts, workflow dispatch, branch protection, repository settings, pagination, rate limits, authentication, and platform automation. Trigger phrases include GitHub API, GitLab API, latest release, fetch tags, create issue, update PR, merge request, trigger workflow, download artifact, repository metadata, GraphQL query, REST endpoint, gh api, and glab api. Not for local Git commands, ordinary stage or commit requests, or CI/CD pipeline authoring.
+  Use GitHub API or GitLab API for remote repository resources, pull requests, and workflow dispatch; not local Git commands or CI/CD authoring.
 ---
 
 # Git Actions

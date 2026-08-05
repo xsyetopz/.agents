@@ -1,7 +1,7 @@
 ---
 name: skill-creator
 description: >
-  Use when creating, rewriting, auditing, debugging, packaging, or validating agent skills and SKILL.md files. Covers the Agent Skills specification, frontmatter, activation descriptions, trigger keywords, skill routing, metadata, agents/openai.yaml, .skill-validator.json, references, scripts, assets, evals, progressive disclosure, installation layout, naming, and behavioral validation. Trigger phrases include create a skill, update every skill, rewrite SKILL.md, fix skill activation, add keywords, improve discoverability, skill not triggering, route this request, validate a skill, package a capability, add a reference, add a script, and author agent instructions. Use current provider prompting guidance for model-specific behavior. Not for tasks unrelated to skill authorship.
+  Use to create or validate a SKILL.md, trigger keywords, skill routing, or progressive disclosure; not unrelated runtime behavior.
 ---
 
 # Skill Creator

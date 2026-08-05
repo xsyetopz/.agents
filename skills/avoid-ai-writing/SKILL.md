@@ -1,7 +1,7 @@
 ---
 name: avoid-ai-writing
 description: >
-  Use when detecting, auditing, editing, or rewriting prose to remove AI-generated writing patterns while preserving meaning, facts, citations, formatting, terminology, and the author's voice. Trigger phrases include remove AI-isms, remove AI tells, humanize this, make this sound natural, ChatGPT style, robotic prose, generic prose, corporate tone, canned transition, excessive headings, fake quotation, repetitive conclusion, rewrite naturally, preserve my voice, detect only, line edit, full rewrite, AI writing audit, and AI-generated text. Supports detect, edit, and rewrite modes with optional voice profiles. Not for plagiarism detection, authorship attribution, factual verification, or evading academic or platform policies.
+  Use to detect AI-isms or humanize this/rewrite prose while preserving voice; not plagiarism, authorship, or factuality analysis.
 ---
 
 # Avoid AI Writing

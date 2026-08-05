@@ -1,7 +1,7 @@
 ---
 name: apple-design-hig
 description: >
-  Use when designing, implementing, or auditing Apple-platform UI and UX against the current Human Interface Guidelines. Covers iOS, iPadOS, macOS, tvOS, visionOS, watchOS, games, accessibility, VoiceOver, Dynamic Type, layout, navigation, windows, menus, controls, forms, sheets, popovers, typography, color, materials, motion, haptics, SF Symbols, widgets, notifications, onboarding, privacy, and platform conventions. Trigger phrases include Apple HIG, Human Interface Guidelines, iPhone design, iPad layout, Mac app, spatial UI, watch interaction, tvOS focus, Apple accessibility, system component, and native Apple experience. Distinguish design guidance from SDK, API, entitlement, and implementation contracts.
+  Use for Apple HIG design or UX reviews across iOS, macOS, watchOS, and visionOS, including VoiceOver and SF Symbols; not SDK/API implementation guidance.
 ---
 
 # Apple Design HIG

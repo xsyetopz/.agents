@@ -1,7 +1,7 @@
 ---
 name: git-workflows
 description: >
-  Use when selecting, designing, migrating, enforcing, or auditing team Git branching and integration policy: GitHub Flow, trunk-based development, GitFlow, GitLab Flow, forking workflow, monorepo branching, release branches, feature branches, pull requests, merge queues, squash merge, rebase merge, merge commits, linear history, branch protection, required reviews, required status checks, branch lifetime, and branch deletion. Trigger when the user asks which branching model, merge strategy, PR policy, protected-branch rule, commit-history policy, or release flow a team should use. Not for local status, add, stage, commit, amend, reset, rebase execution, or other repository commands; use git-toolkit. Not for CI/CD YAML; use git-ci-cd.
+  Use for team branching, merge strategy, branch protection, and GitHub Flow policy; not local Git execution or CI/CD YAML.
 ---
 
 # Git Workflows

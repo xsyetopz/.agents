@@ -1,7 +1,7 @@
 ---
 name: architecture-enforce
 description: >
-  Use when implementing, reviewing, refactoring, migrating, or enforcing repository architecture across packages, modules, deployables, APIs, schemas, build graphs, generated code, tests, benchmarks, and cross-language boundaries. Trigger on package or directory topology changes and whenever three or more sibling source files are created, split, merged, moved, or renamed. Keywords include architecture audit, boundary violation, file shattering, filename colony, flat cluster, microfile fragmentation, helper file, manager file, circular dependency, forbidden import, layering violation, public API drift, schema boundary, ownership, cohesion, coupling, dependency direction, source topology, inline tests, lint suppression, ignored findings, fitness function, and structural refactor. Enforce fail-closed verification without waivers or suppression.
+  Use to enforce architecture during topology refactors or three or more sibling-file changes; detect file shattering, source topology drift, and lint suppression.
 ---
 
 # Architecture Enforce

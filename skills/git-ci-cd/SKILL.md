@@ -1,7 +1,7 @@
 ---
 name: git-ci-cd
 description: >
-  Use when designing, debugging, securing, optimizing, or modifying CI/CD pipelines on GitHub Actions, GitLab CI, Bitbucket Pipelines, or CircleCI. Covers workflow YAML, .github/workflows, .gitlab-ci.yml, jobs, stages, matrices, runners, caches, artifacts, reusable workflows, container jobs, services, environments, secrets, OIDC, permissions, concurrency, deployments, flaky pipelines, failing workflows, release automation, and cross-platform migration. Trigger phrases include CI failure, CD pipeline, GitHub Actions, GitLab CI, workflow file, build matrix, cache miss, artifact upload, runner, deployment job, reusable workflow, pipeline security, and status check. Not for local Git operations or platform API calls.
+  Use for CI/CD pipeline design or failures in GitHub Actions, GitLab CI, workflow YAML, or runner configuration; not local Git or API calls.
 ---
 
 # Git CI/CD

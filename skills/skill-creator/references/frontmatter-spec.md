@@ -27,6 +27,8 @@ name: Invalid-Name     # uppercase
 ## description (required)
 
 - 1-1024 characters
+- Keep discovery descriptions to 80-240 characters in this repository; they are
+  loaded every turn and should reserve context for activated skill instructions.
 - Describe what the skill does and when to use it
 - Include keywords that help agents identify relevant tasks
 - Start with "Use when" or "Use for"

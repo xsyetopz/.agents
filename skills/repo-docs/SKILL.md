@@ -1,7 +1,7 @@
 ---
 name: repo-docs
 description: >
-  Use when creating, rewriting, auditing, or enforcing repository documentation, especially README.md, README variants, CHANGELOG.md, release notes, project overviews, installation guides, usage guides, badges, navigation, tables of contents, multilingual documentation, Keep a Changelog structure, Semantic Versioning entries, and documentation validation. Trigger phrases include write the README, update README, fix documentation, audit docs, add installation instructions, document usage, update changelog, release notes, Keep a Changelog, docs drift, and repository documentation. Not for CONTRIBUTING.md, AGENTS.md, CODEOWNERS, pull-request templates, or API reference generation.
+  Use for README.md, CHANGELOG.md, release notes, or Keep a Changelog documentation; not CONTRIBUTING.md, AGENTS.md, CODEOWNERS, or PR templates.
 ---
 
 # Repo Docs

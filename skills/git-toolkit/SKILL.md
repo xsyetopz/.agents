@@ -1,7 +1,7 @@
 ---
 name: git-toolkit
 description: >
-  Use for local Git repository operations and commit execution: status, diff, add, stage, unstage, commit, Conventional Commits, commit messages, amend, restore, reset, checkout, switch, branch, tag, merge, squash, fixup, interactive rebase, cherry-pick, revert, bisect, blame, log, reflog recovery, stash, worktree, submodule, Git LFS, hooks, signing, patches, release tags, and repository archaeology. Trigger when the user says stage changes, stage all, commit this, commit all, make a commit, conventional commit, amend the commit, squash commits, rebase, undo a commit, recover a branch, inspect Git history, or prepare a patch. Not for GitHub or GitLab APIs, CI/CD YAML, or choosing an organization-wide branching model.
+  Use for local Git: stage, commit, Conventional Commits, rebase, reflog, and recovery; not GitHub/GitLab APIs, CI/CD YAML, or team policy.
 ---
 
 # Git Toolkit

@@ -26,6 +26,11 @@ REQUIRED_TERMS = {
     "skill-creator": ("skill.md", "trigger keywords", "skill routing", "progressive disclosure"),
 }
 
+# Discovery descriptions are loaded for every turn, so keep this catalog surface
+# compact while leaving enough room for routing terms and one boundary.
+MIN_DESCRIPTION_LENGTH = 80
+MAX_DESCRIPTION_LENGTH = 240
+
 
 def tracked_skill_files() -> list[Path]:
     result = subprocess.run(
@@ -53,8 +58,11 @@ def main() -> int:
         name = metadata.get("name", path.parent.name)
         description = metadata.get("description", "")
         folded = description.casefold()
-        if not 250 <= len(description) <= 1024:
-            errors.append(f"{name}: description length {len(description)} is outside 250-1024")
+        if not MIN_DESCRIPTION_LENGTH <= len(description) <= MAX_DESCRIPTION_LENGTH:
+            errors.append(
+                f"{name}: description length {len(description)} is outside "
+                f"{MIN_DESCRIPTION_LENGTH}-{MAX_DESCRIPTION_LENGTH} compact range"
+            )
         for term in REQUIRED_TERMS.get(name, ()):
             if term.casefold() not in folded:
                 errors.append(f"{name}: missing routing term {term!r}")
