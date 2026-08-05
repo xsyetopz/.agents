@@ -11,9 +11,12 @@
   "required_files": [
     "agents/openai.yaml",
     "references/anti-patterns.md",
+    "references/openai-gpt-5.6.md",
     "references/model-reasoning-guide.md",
     "references/issue-corpus-index.md",
     "references/prompt-templates.md",
-    "references/issues/prompt-psychology/pink-elephant-negative-backfire.md"
+    "references/issues/prompt-psychology/pink-elephant-negative-backfire.md",
+    "scripts/audit_openai_alignment.py",
+    "scripts/live_codex_audit.py"
   ]
 }

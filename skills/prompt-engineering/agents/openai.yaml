@@ -1,4 +1,4 @@
 interface:
   display_name: "Prompt Engineering"
-  short_description: "Design, audit, and debug prompts for LLMs and agents using anti-patterns from a 118-issue corpus."
-  default_prompt: "Use prompt-engineering to design, audit, or debug prompts and system instructions. Apply model-type-specific guidance and check against known anti-patterns."
+  short_description: "Design and behaviorally test prompts using current official model guidance."
+  default_prompt: "Use $prompt-engineering to audit or revise this prompt. Fetch current official guidance for the named model, state each rule once, and prove the result with paired real-model behavior tests plus static source audits."

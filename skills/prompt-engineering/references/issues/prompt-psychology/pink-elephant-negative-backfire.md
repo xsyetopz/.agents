@@ -1,52 +1,31 @@
-# Pink Elephant / Negative Instruction Backfire
+# Constraint Framing Overgeneralization
 
 **ID**: `pink-elephant-negative-backfire` | **Category**: `prompt-psychology`
 
 ## Trigger
 
-Telling an LLM "don't do X" makes it more likely to do X. The model must
-process the prohibited concept to know what to avoid, priming it. Based on
-Ironic Process Theory. Anthropic: "Tell Claude what to do instead of what not to do."
+A prompt audit applies a blanket rule that negative wording is unreliable,
+counts prohibitions, or rewrites precise hard boundaries merely because they use
+“do not,” “never,” or “avoid.”
 
-## Bad forms — what this looks like
+## Failure
 
-- ❌ `"NEVER create duplicate files."` → model creates `file-fixed.py`, `file-correct.py`
-- ❌ `"Do not use markdown in your response."` → model uses markdown
-- ❌ `"Don't use mock data."` → model uses mock data
-- ❌ Long lists of "DO NOT" rules → worse output quality overall
+The rewrite weakens the actual constraint, duplicates it as a positive rule, or
+contradicts current model-specific guidance. A psychology analogy is presented
+as a universal empirical law for LLM instruction following.
 
-## Contrast
+## Required behavior
 
-```diff
-## ❌ WRONG — negative instructions that backfire
-- "Do not use markdown in your response."
-- "Never create duplicate files."
-
-## ✅ RIGHT — positive reframing
-+ "Your response should be composed of smoothly flowing prose paragraphs."
-+ "Apply all fixes to the existing files in place."
-```
-
-## Concrete example
-
-**User's CLAUDE.md says**: "NEVER create duplicate files. Always modify existing files."
-
-**❌ Agent (WRONG)**: Creates `file-fixed.py` and `file-corrected.py` alongside `file.py`.
-
-**✅ CORRECT** (shortest path):
-
-```text
-# CLAUDE.md should say:
-"Apply all fixes to the existing files in place. Use the Edit tool for all changes."
-```
+- Use current official guidance for the target model.
+- Keep a precise negative instruction when it is the clearest forbidden effect.
+- Use a positive instruction when it more clearly names the desired action or
+  output.
+- Remove semantic duplication regardless of grammatical polarity.
+- Test the boundary with natural adversarial prompts and a required-action
+  control.
 
 ## Acceptance check
 
-Count negative instructions (do NOT / never / avoid) in the prompt. If > 3,
-reframe as positives. Every negative should have a positive alternative.
-
-## Efficiency note
-
-- **Shortest path**: Reframe all negatives to positives in one pass. Don't add more DO NOTs.
-- **No overthinking**: If you see > 3 negatives, the fix is always: positive reframe.
-- **Cut to the chase**: Every "don't do X" → "only do Y." Done.
+The revised prompt preserves every required boundary, states each rule once,
+does not use a fixed prohibition-count threshold, and passes both abstention and
+authorized-action rollouts on the target model.

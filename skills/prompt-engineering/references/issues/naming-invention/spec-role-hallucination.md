@@ -34,6 +34,6 @@ Do not create a format spec until its source path, external URL, or explicit use
 
 ## Efficiency note
 
-- **Shortest path**: Verify once, act once.
+- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
 - **No overthinking**: Pattern obvious? State it and move on.
 - **Cut to the chase**: Skip narration, self-analysis, process logging.

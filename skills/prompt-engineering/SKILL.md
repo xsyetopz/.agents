@@ -1,294 +1,232 @@
 ---
 name: prompt-engineering
 description: >
-  Design, audit, debug, or adapt prompts and system instructions for LLMs and agents. Covers model-agnostic principles, model-type-specific guidance, anti-patterns from the LLM issue corpus, and structured prompt architecture. Use when writing AGENTS.md, SKILL.md, system prompts, or any agent-facing instructions.
+  Design, audit, debug, or adapt prompts and agent instructions. Use current
+  provider documentation for named models, measured behavioral failures, and
+  executable evaluations rather than generic prompt folklore.
 ---
 
 # Prompt Engineering
 
-Design, audit, and adapt prompts for LLMs and agents. Language-agnostic,
-model-agnostic, format-agnostic. Grounded in observed failure patterns from a
-corpus of 118 real-world LLM behavioral issues.
+Design and verify prompts as versioned software behavior. Provider guidance for
+the named model outranks generic heuristics and this skill's issue corpus.
 
 ## When to use
 
-- Writing or revising system prompts, AGENTS.md, SKILL.md, or agent instructions
-- Debugging prompts that produce unreliable or systematically wrong behavior
-- Adapting prompts for different model architectures (reasoning vs
-  non-reasoning, large vs small)
-- Auditing existing prompts for known failure patterns
-- Designing multi-model pipelines where each model needs different prompting
-- Creating or updating reusable prompt templates for a project
+- Writing or revising system prompts, developer instructions, `AGENTS.md`, or
+  `SKILL.md`
+- Debugging recurring agent behavior or tool-routing failures
+- Adapting prompts to a named model, execution mode, or tool surface
+- Building behavioral evaluations for prompt changes
 
 ## When NOT to use
 
-- For one-shot queries where prompt structure doesn't matter
-- For runtime behavior that should be handled by tools or code, not prompt text
-- For model selection or benchmarking — this skill covers how to prompt, not
-  which model to pick
-- When the failure is in the tool layer (API errors, parsing bugs), not the
-  prompt
+- Runtime invariants that belong in permissions, schemas, policy engines, or
+  application code
+- Tool/API failures unrelated to model instructions
+- Model selection without an evaluation workload
+- A simple answer that needs no reusable prompt artifact
+
+## Source authority
+
+For a named provider or model, read its current official documentation before
+giving model-specific advice. Record the URL and retrieval date. Apply sources
+in this order:
+
+1. current official documentation for the exact model and product surface;
+2. repository contracts and measured local behavior;
+3. peer-reviewed or primary research relevant to the failure;
+4. this skill's generic guidance and observed issue corpus.
+
+When sources conflict, follow the higher source and state the conflict. Do not
+turn unverified model names, benchmark tables, effort tiers, context limits, or
+provider behavior into facts. For GPT-5.6, load
+`references/openai-gpt-5.6.md` before drafting or auditing.
 
 ## Core principles
 
-### 1. Chain of command
+### 1. Start from a measured outcome
 
-Define explicit authority levels. System/developer instructions override user
-messages; user messages override assistant history. Never let lower-authority
-content silently override higher-authority constraints.
+Define the task, target model and surface, available tools, required evidence,
+success criteria, and final output. Tie every non-obvious instruction to a
+product requirement, observed failure, or evaluated gap.
 
-For OpenAI: `developer` > `user` > `assistant`. For Anthropic: `system` >
-messages. For agent frameworks: AGENTS.md or equivalent system-level
-instructions take priority.
+### 2. Keep the prompt lean
 
-### 2. Prefer positive framing — the Pink Elephant Problem
+State each instruction once. Keep authority and approval policy in one place.
+Expose only relevant tools with concise, precise schemas and error behavior.
+Retrieve large reference material on demand instead of duplicating it in the
+system prompt.
 
-Telling an LLM "don't do X" forces it to process X to know what to avoid, often
-making X more likely to appear in the output. This is the **Pink Elephant
-Problem** (Ironic Process Theory applied to LLMs). Negative instructions like
-"never create duplicate files" or "don't use library X" are unreliable.
+Remove one instruction group, example group, or tool at a time and rerun the
+same representative evaluations. Lower token use or cost counts as an
+improvement only when required behavior still passes.
 
-**Anthropic's official guidance**: "Tell Claude what to do instead of what not
-to do." Reframe prohibitions as positive, explicit commands.
+### 3. Define autonomy and approval once
 
-| Negative (less effective) | Positive (more effective) |
-|---|---|
-| "Don't use mock data." | "Only use real-world data." |
-| "Don't use library X for state management." | "Only use library Y for state management." |
-| "Avoid creating new files for fixes." | "Apply all fixes to the existing files." |
-| "Never output code with overly descriptive comments." | "Write professional, concise code comments." |
-| "Do not use markdown in your response." | "Your response should be composed of smoothly flowing prose paragraphs." |
+For GPT-5.6 coding agents, use a compact three-part policy:
 
-**When negative constraints are appropriate**: use them sparingly for hard
-boundaries — unethical behavior, safety rules, or cases where a positive
-alternative would be ambiguous. Anthropic's system prompts use third-person
-descriptive statements ("Claude does not provide information that could be
-used...") rather than imperative negative commands.
+```text
+For requests to answer, explain, review, diagnose, or plan, inspect relevant
+materials and report. Implement only when the request also asks for a change.
 
-**The "Show, Don't Tell" principle**: background context and character traits
-given to a model tend to leak into the output as explicit statements. If you
-tell the model "this character has a strict moral code," expect dialogue about
-morals. Instead, show the trait through actions and let the model infer it from
-context. Give the background as implicit context, not stated rules.
+For requests to change, build, or fix, make the requested in-scope local
+changes and run relevant non-destructive validation without asking first.
 
-### 3. Examples over prohibitions
-
-One good example does more work than ten negative constraints. When output
-format or behavior is nuanced, include 1–3 concrete examples showing the
-desired output. This is especially important for creative writing, tone
-control, and format adherence.
-
-When providing examples:
-- Label each example explicitly with IDs
-- Show diverse inputs, not just the happy path
-- Match example format exactly to the expected output format
-- Reasoning models (Kimi K3, DeepSeek V4 Pro, GPT-5.6 Sol) often perform better
-  zero-shot — try without examples first
-
-### 4. Efficiency — shortest path, no overthinking
-
-Every tool call has a cost in time and context. Take the minimal path:
-
-- **Verify once, act once**. Don't re-read the same file. Don't re-grep the same
-  pattern. One read + one grep should cover 90% of verification.
-- **Parallel reads**. When you need multiple files, read them in one batch — not
-  one per turn.
-- **If the answer is obvious, give it**. Don't search for 10 related issues,
-  load 5 reference files, and check 3 anti-patterns before answering a simple
-  question. Trust the trigger → recognize the pattern → act.
-- **Cut to the chase**. Skip narration ("I'll now check..."), skip
-  self-analysis ("I made X when..."), skip process logging. The user wants
-  the correction, not the story of how you got there.
-- **One tool call that reads the right file beats three that read wrong ones**.
-  If you're not sure which file to read, ask rather than guessing and then
-  correcting.
-
-Counter-example of overthinking:
-```
-# WRONG — 8 tool calls for a simple correction
-1. Read SKILL.md
-2. Grep for "complaint" in all files
-3. Read anti-patterns.md
-4. Read issue-corpus-index.md
-5. Read complaint-is-not-authorization.md
-6. Re-read SKILL.md (same file again!)
-7. Narrate the analysis for 3 paragraphs
-8. Finally propose the fix
+Require confirmation for external writes, destructive actions, purchases, or
+material scope expansion.
 ```
 
-```
-# RIGHT — 2 tool calls
-1. Read the file the user pointed at
-2. Grep for callers
-→ State the fix. Done.
-```
+Name safe local actions when the environment needs them. Repeated variants of
+“ask first,” “do not mutate,” and “wait for approval” can over-block expected
+local work.
 
-### 5. Prompt as kernel, not operating system
+### 4. Use clear constraints, not framing dogma
 
-The prompt should define behavior, priorities, and routing — not carry all
-knowledge. Long prompts that encode the entire system become fragile. Instead:
+Positive instructions are useful when they name the desired action or output.
+Negative instructions are appropriate for precise boundaries and forbidden
+effects. Choose the form that makes the rule least ambiguous; do not apply a
+fixed negative-count threshold or claim that mentioning a forbidden action
+makes models perform it.
 
-- Keep the prompt lean: identity, instructions, decision rules, output format
-- Retrieve knowledge on demand (files, docs, context packets)
-- Use reference files and progressive disclosure rather than inlining everything
-- A shorter prompt that retrieves context is more reliable than a mega-prompt
-  that encodes it all
+Examples are optional. Keep them when they encode a product requirement or fix
+a measured gap. Remove examples that merely repeat instructions. Do not claim
+that one example universally outweighs multiple constraints.
 
-### 6. Structure with delimiters
+### 5. Separate context from authority
 
-Use Markdown headings and XML tags to separate sections. Delimiters help models
-distinguish instructions from examples from context. Position cacheable content
-at the beginning of the prompt.
+Use headings, XML, or fences to identify context, examples, and data. These
+delimiters improve interpretation but do not create a security or privilege
+boundary. Enforce durable authority with permissions, capabilities, schemas,
+reference monitors, or other runtime controls.
 
-Preferred delimiters:
-- XML tags for structured data blocks: `<example>`, `<context>`, `<input>`,
-  `<output>`
-- Markdown headings for instruction sections: `# Identity`, `## Instructions`
-- Triple backticks for code or verbatim content
+### 6. Specify tool routing by task shape
 
-### 7. Version prompts in code
+Describe when each tool is used, its input/output shape, evidence requirements,
+retry and stopping limits, and which actions require approval. Use direct calls
+when one call is sufficient or semantic judgment is needed. Use programmatic
+tool calling only for bounded, predictable reductions such as filtering,
+joining, ranking, aggregation, or validation.
 
-Store prompts in version-controlled files alongside the code they govern. Use
-typed arguments or template variables for dynamic values. Test with
-representative fixtures and evaluation checks before changing production
-prompts.
+### 7. Validate behavior, not vocabulary
 
-## Model-type guidance
+Run the real model or installed agent in an isolated local fixture. Use natural
+user prompts that do not disclose the expected decision. Verify filesystem and
+tool effects independently, then evaluate the final answer for required facts,
+evidence, caveats, and next actions. Include both no-tool and required-tool
+controls, multi-turn pressure, ambiguous wording, and direct authorized work.
 
-Different model architectures need different prompting strategies. The table
-below summarizes key families and their prompting implications.
+Compare the candidate with its baseline on the same cases. Static checks for
+required files, source citations, duplicate policy, and unsupported claims are
+additional gates; keyword presence is not behavioral proof.
 
-| Model type | Families | Prompting approach |
-|---|---|---|
-| Reasoning (always-on) | Kimi K3 | High-level goals, no step-by-step. Thinking always active; control output constraints only. |
-| Reasoning (toggleable) | DeepSeek V4 Pro/Flash, GLM-5.2, GPT-5.6, Qwen3.6 27B | Goal-oriented in reasoning mode; explicit steps in non-reasoning mode. |
-| Adaptive thinking | MiniMax-M3 | Effort labels enable/disable thinking mode; don't try to tune depth. Structure but don't over-specify. |
-| Non-reasoning | GLM-4.7-Flash (non-reasoning mode) | Explicit, detailed step-by-step instructions. Few-shot examples are high-impact. |
-| Small models (<30B active) | Qwen3.6 27B, GLM-4.7-Flash, gpt-oss-120b | Single objective per prompt. Short, concrete instructions with acceptance criteria. Avoid open-ended tasks. |
+### 8. Scale discovery and validation to risk
 
-**Reasoning effort controls**:
+Use safe local inspection without asking when it can resolve ownership or
+context. Read callers, contracts, and tests that affect the result. Re-read or
+expand checks when evidence conflicts, the change is risky, or the first check
+cannot prove the behavior. Do not use fixed tool-call counts as an engineering
+rule.
 
-- Models that support `reasoning_effort`: Kimi K3 (low/high/max), DeepSeek V4
-  (high/max), GLM-5.2 (low/high/max), GPT-5.6 (low/medium/high/xhigh/max),
-  Qwen3.6 27B (low/high/max), gpt-oss-120b (low/medium/high)
-- Models where effort labels don't tune depth: MiniMax-M3 (only toggles adaptive
-  thinking on/off), Kimi K2.7 Code (fixed reasoning), GLM-4.7-Flash (reasoning
-  mode toggle)
-- Higher effort = deeper internal reasoning, not different output structure.
-  Don't change prompt format when changing effort level.
+### 9. Make delegation earn its coordination cost
 
-See `references/model-reasoning-guide.md` for detailed per-model guidance.
-
-## Prompt architecture template
-
-A well-structured prompt follows this template. Adapt section order and detail
-to the target model type (see model-type guidance above).
-
-```markdown
-# Identity
-You are a [role]. Your primary goal is [goal].
-
-# Instructions
-- [Positive instruction 1: what to do]
-- [Positive instruction 2: what to do]
-- [Positive instruction 3: what to do]
-
-# Hard boundaries (use sparingly)
-- Do not [hard ethical/safety boundary only]
-
-# Output format
-[Describe expected output structure, format, and constraints. Use positive
- framing: "Output as plain JSON" not "Don't use markdown."]
-
-# Examples
-<input_example id="example-1">
-[Concrete example input]
-</input_example>
-
-<output_example id="example-1">
-[Expected output for that input — one good example outweighs ten constraints]
-</output_example>
-
-# Context
-[Relevant data, documents, or reference material. Position near end
- for prompt caching benefits. Keep this section lean — retrieve on demand.]
-```
+Default to direct single-agent execution. Delegate only concrete, independent
+outcomes that can run concurrently and whose expected gain exceeds coordination
+overhead. Do not delegate ownership discovery, command errands, or work the
+root can finish directly. If delegation is challenged, stop further spawning
+and report active workers, status, whether each met the delegation threshold,
+and the direct next action without agreement theatre or self-narration.
 
 ## Anti-patterns
 
-The skill embeds a deduplicated catalog of LLM behavioral failure modes,
-consolidated from 118 observed patterns into 54 focused entries across 18
-categories. Each entry includes concrete bad forms, required behavior, and
-falsifiable acceptance checks extracted from real-world agent interactions.
+The issue corpus records observed failures, not universal model laws. Use it to
+generate adversarial cases after identifying a matching trigger. Deduplicate
+overlapping entries and preserve the concrete failure, required behavior, and
+falsifiable acceptance check. Do not copy complaint language, self-analysis, or
+assistant promises into operational prompts.
 
-| # | Category | Entries | Core failure |
-|---|---|---|---|
-| 1 | Pink Elephant / Negative Backfire | 1 | "Don't do X" primes model to do X |
-| 2 | Show, Don't Tell Leakage | 1 | Background rules leak into explicit output |
-| 3 | Social Mirror / Verbatim Echo | 1 | Prompt labels echoed verbatim in output |
-| 4 | Artifact-Role Confusion | 4 | Answers "why?" with removal promise, not role |
-| 5 | Complaint Mirroring & Feedback Misuse | 3 | Treats frustration as authorization/evidence |
-| 6 | Scope, Consent & Agency | 4 | Turns proposal/question into decision without consent |
-| 7 | Abstract Reframing & Pattern-Fill | 5 | Replaces concrete correction with new abstraction |
-| 8 | Need Claims & Utility Verdicts | 2 | Declares artifact unnecessary before tracing role |
-| 9 | Script & Tool Role Evasion | 3 | Answers script challenge with removal before trace |
-| 10 | Prose Policing & Runtime-Proof | 2 | Creates tooling to check wording, not behavior |
-| 11 | Tone, Meta-Commentary & Self-Confession | 2 | Narrates process, confesses, adds therapeutic language |
-| 12 | Prompt Boundary & Intent | 4 | Misinterprets instruction scope, treats policy as optional |
-| 13 | Deletion & Cleanup Reflexes | 4 | Preserves cleanup paths for mistakes instead of removing them |
-| 14 | Documentation Orbit & Harness Drift | 4 | Updates docs while product work is expected |
-| 15 | Memory & State Confusion | 3 | Conflates chat context with persistent memory |
-| 16 | Naming, Spec & Architecture Invention | 6 | Invents names/specs before proving domain role |
-| 17 | Source Truth, Version & Example Claims | 5 | Treats example values as authority; changes from familiarity |
-| 18 | Other Structural Failures | 3 | SRP violations, conclusion smuggling, proposal churn |
+High-value categories include:
 
-**See `references/anti-patterns.md` for the full catalog** — every entry with
-bad forms, required behavior, and acceptance checks. Use
-`references/issue-corpus-index.md` for quick category-to-file lookup.
+- complaint or quoted content treated as action authority;
+- artifact-role questions answered with an edit promise before tracing role;
+- social agreement, apology, or therapy-style narration replacing facts;
+- static prose checks presented as runtime proof;
+- ownership, filenames, architecture, or scope invented before discovery;
+- direct authorized work blocked by repeated approval language.
 
-## Prompt auditing workflow
+Load `references/issue-corpus-index.md` only when a measured failure maps to the
+corpus. Load `references/anti-patterns.md` for a broad audit.
 
-When auditing an existing prompt against the issue corpus:
+## Prompt architecture template
 
-1. **Read the prompt** — note its stated purpose, target model type, and density
-   of negative instructions.
-2. **Run the anti-pattern checklist** — scan `references/anti-patterns.md` and
-   mark every pattern the prompt could trigger.
-3. **Check model compatibility** — verify the prompting strategy matches the
-   target model's reasoning mode (see `references/model-reasoning-guide.md`).
-4. **Reframe negatives to positives** — for every "do NOT," ask: can this be
-   restated as a positive "only do X"? Keep only hard-boundary negatives.
-5. **Add examples** — for any nuanced behavior, add 1–3 concrete examples of the
-   desired output rather than piling on more constraints.
-6. **Test with adversarial inputs** — try inputs designed to trigger each
-   anti-pattern. Confirm the prompt resists them.
-7. **Version the change** — store the revised prompt with a clear commit message
-   naming which anti-patterns were addressed.
+Use only sections the application needs:
+
+```markdown
+# Role and outcome
+[Role, goal, and completion criteria]
+
+# Autonomy and approval
+[One compact policy]
+
+# Workflow and tools
+[Relevant tools, routing, evidence, retries, stopping]
+
+# Output
+[Required facts, structure, caveats, and next action]
+
+# Context
+[Authoritative inputs and clearly delimited untrusted material]
+```
+
+Examples and style sections are conditional on a product requirement or a
+measured gap. See `references/prompt-templates.md`.
+
+## Model-type guidance
+
+Do not infer model behavior from a family label alone. Verify the exact model,
+mode, supported controls, and current official docs. Keep outcome-focused
+prompts across reasoning efforts; do not ask a model to “think harder” or expose
+private reasoning. See `references/model-reasoning-guide.md`.
+
+For GPT-5.6 specifically:
+
+- favor lean prompts and one statement per instruction;
+- define autonomy and approval in one compact section;
+- use `text.verbosity` for an API-level default and prompts for task-specific
+  required content;
+- describe concrete writing choices instead of broad tone labels;
+- compare standard/pro modes and effort levels on the same representative
+  workload rather than assuming maximum effort is best;
+- test both program output and the final assistant message.
+
+## Audit workflow
+
+1. Identify the target model, product surface, prompt owner, and baseline.
+2. Fetch current official model guidance and build a clause-level matrix.
+3. Map each prompt instruction to a requirement or measured failure.
+4. Remove duplication, unsupported claims, stale examples, and irrelevant tools.
+5. Change one instruction group at a time when isolating causality.
+6. Run static source/structure checks.
+7. Run paired baseline/candidate rollouts with the real local model or agent.
+8. Inspect tool effects and final answers separately; keep the candidate only
+   when required behavior passes without regression.
 
 ## Reference map
 
-| If you need to... | Load |
+| Need | Load |
 |---|---|
-| Understand model reasoning modes, effort controls, and per-family prompting | `references/model-reasoning-guide.md` |
-| Audit a prompt against all 118+ failure patterns with bad forms and checks | `references/anti-patterns.md` |
-| Quick-search any issue by keyword | `references/issue-lookup.md` |
-| Browse issues by category with trigger conditions | `references/issue-corpus-index.md` |
-| See prompt templates for specific tasks | `references/prompt-templates.md` |
-| Dive into a specific issue with diff-style (❌→✅) contrast | `references/issues/<category>/<id>.md` |
-
-## Related skills
-
-- `skill-creator` — authoring agent skills with SKILL.md
-- `avoid-ai-writing` — removing AI-isms from generated prose
-- `architecture-design` — system prompts as architectural decisions
-- `repo-governance` — AGENTS.md and governance documents
-- `kf-adversarial-review` — adversarial review of generated output
-- `kf-process-fix` — fixing root causes of recurring failures
+| Official GPT-5.6 clauses and audit matrix | `references/openai-gpt-5.6.md` |
+| Model/mode evidence rules | `references/model-reasoning-guide.md` |
+| Reusable structures | `references/prompt-templates.md` |
+| Broad observed failure catalog | `references/anti-patterns.md` |
+| Category-to-file lookup | `references/issue-corpus-index.md` |
 
 ## Validate
 
-From the repository root:
+From `/Users/krystian/.agents`:
 
 ```sh
 python3 scripts/validate_skill.py skills/prompt-engineering
+python3 skills/prompt-engineering/scripts/audit_openai_alignment.py
+python3 skills/prompt-engineering/scripts/live_codex_audit.py
 ```
