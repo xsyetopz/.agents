@@ -1,5 +1,9 @@
 # Version Fetching
 
+## Use this reference
+
+Load this reference when version fetching is part of the GitHub or GitLab API task. Resolve platform, host, repository, target, read/write intent, permissions, and response evidence before applying commands.
+
 Patterns for fetching release versions across platforms.
 
 ## GitHub - latest release

@@ -1,63 +1,36 @@
-# Issue Lookup — Quick Search Table
+# Issue Lookup
 
-Deduplicated: 57 entries across 16 categories.
+## Use this reference
 
-| ID | Category | File |
-|---|---|---|
-| `abstract-category-reframing` | `abstract-reframing` | `issues/abstract-reframing/abstract-category-reframing.md` |
-| `clarified-term-architecture-promotion` | `abstract-reframing` | `issues/abstract-reframing/clarified-term-architecture-promotion.md` |
-| `generic-implementation-bucket-tree` | `abstract-reframing` | `issues/abstract-reframing/generic-implementation-bucket-tree.md` |
-| `pattern-fill-architecture` | `abstract-reframing` | `issues/abstract-reframing/pattern-fill-architecture.md` |
-| `user-intent-reframing` | `abstract-reframing` | `issues/abstract-reframing/user-intent-reframing.md` |
-| `appeasement-loop` | `artifact-role-confusion` | `issues/artifact-role-confusion/appeasement-loop.md` |
-| `artifact-dismissal-before-audit` | `artifact-role-confusion` | `issues/artifact-role-confusion/artifact-dismissal-before-audit.md` |
-| `role-question-to-file-edit` | `artifact-role-confusion` | `issues/artifact-role-confusion/role-question-to-file-edit.md` |
-| `role-question-to-removal` | `artifact-role-confusion` | `issues/artifact-role-confusion/role-question-to-removal.md` |
-| `complaint-as-authorization` | `complaint-mirroring` | `issues/complaint-mirroring/complaint-as-authorization.md` |
-| `complaint-label-as-fact` | `complaint-mirroring` | `issues/complaint-mirroring/complaint-label-as-fact.md` |
-| `complaint-to-utility-verdict` | `complaint-mirroring` | `issues/complaint-mirroring/complaint-to-utility-verdict.md` |
-| `deletion-promise-after-borrowed-label` | `deletion-cleanup` | `issues/deletion-cleanup/deletion-promise-after-borrowed-label.md` |
-| `invariant-fixation-over-product-behavior` | `deletion-cleanup` | `issues/deletion-cleanup/invariant-fixation-over-product-behavior.md` |
-| `rejected-surface-normalization` | `deletion-cleanup` | `issues/deletion-cleanup/rejected-surface-normalization.md` |
-| `transient-cleanup-persistence` | `deletion-cleanup` | `issues/deletion-cleanup/transient-cleanup-persistence.md` |
-| `bare-renderer-snapshot-as-product-goal` | `docs-orbit` | `issues/docs-orbit/bare-renderer-snapshot-as-product-goal.md` |
-| `documentation-orbit-over-product-work` | `docs-orbit` | `issues/docs-orbit/documentation-orbit-over-product-work.md` |
-| `harness-drift-over-product-structure` | `docs-orbit` | `issues/docs-orbit/harness-drift-over-product-structure.md` |
-| `inline-command-prose-instead-of-scripts` | `docs-orbit` | `issues/docs-orbit/inline-command-prose-instead-of-scripts.md` |
-| `account-state-change-claim-without-evidence` | `memory-state` | `issues/memory-state/account-state-change-claim-without-evidence.md` |
-| `memory-scope-pollution` | `memory-state` | `issues/memory-state/memory-scope-pollution.md` |
-| `memory-state-context-conflation` | `memory-state` | `issues/memory-state/memory-state-context-conflation.md` |
-| `agents-universal-surface-overstatement` | `naming-invention` | `issues/naming-invention/agents-universal-surface-overstatement.md` |
-| `artifact-naming-without-domain-contract` | `naming-invention` | `issues/naming-invention/artifact-naming-without-domain-contract.md` |
-| `compatibility-surface-injection` | `naming-invention` | `issues/naming-invention/compatibility-surface-injection.md` |
-| `entrypoint-and-wrapper-invention` | `naming-invention` | `issues/naming-invention/entrypoint-and-wrapper-invention.md` |
-| `scratch-space-overdesign` | `naming-invention` | `issues/naming-invention/scratch-space-overdesign.md` |
-| `spec-role-hallucination` | `naming-invention` | `issues/naming-invention/spec-role-hallucination.md` |
-| `universal-need-claim` | `need-claims` | `issues/need-claims/universal-need-claim.md` |
-| `utility-verdict-skip` | `need-claims` | `issues/need-claims/utility-verdict-skip.md` |
-| `full-source-application-downgrade` | `prompt-boundary` | `issues/prompt-boundary/full-source-application-downgrade.md` |
-| `named-readme-workflow-bypass` | `prompt-boundary` | `issues/prompt-boundary/named-readme-workflow-bypass.md` |
-| `native-workflow-bypass` | `prompt-boundary` | `issues/prompt-boundary/native-workflow-bypass.md` |
-| `prompt-boundary-and-intent-interpretation` | `prompt-boundary` | `issues/prompt-boundary/prompt-boundary-and-intent-interpretation.md` |
-| `pink-elephant-negative-backfire` | `prompt-psychology` | `issues/prompt-psychology/pink-elephant-negative-backfire.md` |
-| `show-dont-tell-leakage` | `prompt-psychology` | `issues/prompt-psychology/show-dont-tell-leakage.md` |
-| `social-mirror-verbatim-echo` | `prompt-psychology` | `issues/prompt-psychology/social-mirror-verbatim-echo.md` |
-| `prose-as-purpose` | `prose-policing` | `issues/prose-policing/prose-as-purpose.md` |
-| `prose-policing` | `prose-policing` | `issues/prose-policing/prose-policing.md` |
-| `artifact-substitution` | `scope-consent` | `issues/scope-consent/artifact-substitution.md` |
-| `cleanup-reflex` | `scope-consent` | `issues/scope-consent/cleanup-reflex.md` |
-| `consent-override` | `scope-consent` | `issues/scope-consent/consent-override.md` |
-| `premature-or-overbroad-action` | `scope-consent` | `issues/scope-consent/premature-or-overbroad-action.md` |
-| `script-challenge-to-removal` | `script-tool-evasion` | `issues/script-tool-evasion/script-challenge-to-removal.md` |
-| `script-complaint-to-policy` | `script-tool-evasion` | `issues/script-tool-evasion/script-complaint-to-policy.md` |
-| `script-purpose-without-trace` | `script-tool-evasion` | `issues/script-tool-evasion/script-purpose-without-trace.md` |
-| `example-source-version-overwrite` | `source-truth` | `issues/source-truth/example-source-version-overwrite.md` |
-| `fake-authority-artifact-persistence` | `source-truth` | `issues/source-truth/fake-authority-artifact-persistence.md` |
-| `source-truth-misplacement` | `source-truth` | `issues/source-truth/source-truth-misplacement.md` |
-| `stale-product-boundary-as-scope-brake` | `source-truth` | `issues/source-truth/stale-product-boundary-as-scope-brake.md` |
-| `unverified-example-claims` | `source-truth` | `issues/source-truth/unverified-example-claims.md` |
-| `coverage-map-before-deletion-readiness` | `structural` | `issues/structural/coverage-map-before-deletion-readiness.md` |
-| `meta-placeholders` | `structural` | `issues/structural/meta-placeholders.md` |
-| `responsibility-split-before-scale` | `structural` | `issues/structural/responsibility-split-before-scale.md` |
-| `self-narration` | `tone-meta` | `issues/tone-meta/self-narration.md` |
-| `style-laundering` | `tone-meta` | `issues/tone-meta/style-laundering.md` |
+Use this table to select one failure category from observed behavior. Then open
+the exact case through references/issue-corpus-index.md. Do not load all issue
+files or route solely from complaint wording.
+
+| Observed behavior | Category |
+|---|---|
+| invents layers, categories, models, or namespaces after correction | abstract-reframing |
+| edits or dismisses an artifact before tracing callers and effects | artifact-role-confusion |
+| echoes a complaint or treats its label as established fact | complaint-mirroring |
+| promises deletion or cleanup before ownership/behavior accounting | deletion-cleanup |
+| works on docs, snapshots, or harnesses instead of the product outcome | docs-orbit |
+| confuses memory, current context, account state, or source state | memory-state |
+| invents files, roles, entrypoints, or compatibility surfaces | naming-invention |
+| says something is universally needed or useless without evaluation | need-claims |
+| bypasses the named prompt, source, or native workflow | prompt-boundary |
+| leaks prompt scaffolding or stated traits into output | prompt-psychology |
+| turns style or tone commentary into the purpose of technical work | prose-policing |
+| converts diagnosis, criticism, or context into mutation authority | scope-consent |
+| deletes, bypasses, or reframes tooling before tracing its contract | script-tool-evasion |
+| lets stale examples or invented artifacts override canonical evidence | source-truth |
+| decomposes by category or fills placeholders before ownership is proved | structural |
+| replaces the answer with apology, agreement, or self-narration | tone-meta |
+
+## Selection rules
+
+1. Select from observable effects and final-answer content, not assumed internal
+   reasoning.
+2. Prefer one narrow case; add a second only when it tests a distinct effect.
+3. Preserve the original task and authority boundary in the evaluation.
+4. Use natural prompts that do not name the category or expected correction.
+5. Inspect tool/filesystem effects separately from the final answer.
+6. Retire redundant or non-reproducing cases instead of accumulating aliases.

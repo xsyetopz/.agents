@@ -1,5 +1,9 @@
 # Quality-attribute scenarios and gates
 
+## Use this reference
+
+Load this reference when quality attributes affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Architecture is a response to measurable forces, not a collection of nouns.
 Write scenarios before selecting a pattern or boundary. Use this form:
 

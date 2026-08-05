@@ -1,5 +1,9 @@
 # Word Replacement Tables
 
+## Use this reference
+
+Load this reference when the prose audit finds a word tables problem. Treat its patterns as evidence prompts rather than automatic matches, and preserve facts, voice, citations, and requested formatting.
+
 The vocabulary replacement catalog organized by detection tier. Load when
 auditing or rewriting to check individual words and phrases against the known
 AI-vocabulary lists.

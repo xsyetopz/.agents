@@ -1,5 +1,9 @@
 # Issue Templates
 
+## Use this reference
+
+Load this reference when issue templates is part of the governance task. Give each rule one audience, scope, owner, precedence, enforcement mechanism, and validation path.
+
 Configuring `.github/ISSUE_TEMPLATE/` with YAML forms. Source:
 [GitHub issue template docs](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository).
 

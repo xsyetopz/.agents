@@ -1,5 +1,9 @@
 # Conventions
 
+## Use this reference
+
+Load this reference when conventions is part of the skill-authoring task. Keep the discovery description precise, the entry instructions lean, details progressively disclosed, and behavior independently verifiable.
+
 Naming and structure conventions observed across skills in this repository.
 
 ## Naming

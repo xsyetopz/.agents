@@ -1,5 +1,9 @@
 # Branching Models
 
+## Use this reference
+
+Load this reference when branching models is part of the team integration decision. Compare policy against measured delivery constraints and map every selected rule to repository enforcement.
+
 Comparative analysis of branching models. Source data from
 [trunkbaseddevelopment.com](https://trunkbaseddevelopment.com/), [GitHub
 Flow](https://docs.github.com/en/get-started/using-git/github-flow), [nvie.com

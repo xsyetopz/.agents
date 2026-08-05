@@ -1,5 +1,9 @@
 # Architecture fitness rules
 
+## Use this reference
+
+Load this reference when principles affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Use this reference when selecting boundaries, evaluating a structural proposal,
 or planning a migration. These rules operationalize the core contract; they do
 not replace language and toolchain requirements.

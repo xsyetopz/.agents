@@ -1,5 +1,9 @@
 # Reflog Guide
 
+## Use this reference
+
+Load this reference when reflog guide is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 The reflog records every change to HEAD and branch tips. It's your undo safety
 net - commits are not truly lost until the reflog expires (default 90 days).
 

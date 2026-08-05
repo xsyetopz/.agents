@@ -1,5 +1,9 @@
 # CHANGELOG.md Specification
 
+## Use this reference
+
+Load this reference when changelog spec is part of the repository documentation task. Verify every command, link, version, and product claim against current repository source truth.
+
 Based on [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
 
 ## Format

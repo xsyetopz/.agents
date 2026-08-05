@@ -2,9 +2,17 @@
 
 **ID**: `spec-role-hallucination` | **Category**: `naming-invention`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Spec Role Hallucination
+
+## Observed failure
+
+The response exhibits the trigger pattern instead of the requested concrete behavior.
 
 ## Required behavior
 
@@ -16,7 +24,7 @@ Keep product decisions in `PRODUCT.md` and ADRs.
 Keep completion state in `goals/`.
 ```
 
-## Concrete example
+## Example
 
 The user meant specs integrated from real existing format specifications or source-backed artifact contracts, not assistant-authored product ledgers or plausible local schema names.
 
@@ -32,8 +40,8 @@ Do not create a format spec until its source path, external URL, or explicit use
 
 - `specs/` contains real source-backed specs, not product-governance ledgers or plausible local schema names. - Runtime renderer does not require invented governance specs. - Verifier checks that specs exist and are valid JSON, but does not treat them as product authority unless a current ADR says so.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

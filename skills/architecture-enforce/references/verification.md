@@ -1,5 +1,9 @@
 # Architecture verification and evidence
 
+## Use this reference
+
+Load this reference when verification affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Use fitness functions to keep an architectural decision true as the repository
 changes. Prefer deterministic checks at the owning boundary and report what
 each check can and cannot prove.

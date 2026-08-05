@@ -1,5 +1,9 @@
 # Executable architecture tooling
 
+## Use this reference
+
+Load this reference when tooling affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Use the bundled adapter for tool discovery and syntax evidence. It never
 installs software, executes repository-provided shell commands, rewrites files,
 or treats a missing provider as a clean result.

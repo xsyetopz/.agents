@@ -1,5 +1,9 @@
 # CI/CD Security Checklist
 
+## Use this reference
+
+Load this reference when security checklist is part of the pipeline task. Apply it to the actual event trust boundary, job permissions, dependencies, runner, artifacts, and observed pipeline result without suppressing failures.
+
 Audit checklist for pipeline security across platforms.
 
 ## Secrets

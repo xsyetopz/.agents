@@ -1,5 +1,9 @@
 # Git Attributes
 
+## Use this reference
+
+Load this reference when gitattributes is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 `.gitattributes` controls how Git handles files: line endings, diff display,
 merge behavior, and archive exports. Source: `gitattributes(5)` man page.
 

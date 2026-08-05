@@ -1,5 +1,9 @@
 # README.md Specification
 
+## Use this reference
+
+Load this reference when readme spec is part of the repository documentation task. Verify every command, link, version, and product claim against current repository source truth.
+
 A README.md is the project's landing page. It serves two audiences: search
 engines (discovery) and developers (evaluation). Good structure serves both.
 

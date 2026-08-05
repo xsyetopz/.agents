@@ -1,5 +1,9 @@
 # GitLab CI
 
+## Use this reference
+
+Load this reference when gitlab ci is part of the pipeline task. Apply it to the actual event trust boundary, job permissions, dependencies, runner, artifacts, and observed pipeline result without suppressing failures.
+
 ## Pipeline syntax
 
 Minimum viable `.gitlab-ci.yml`:

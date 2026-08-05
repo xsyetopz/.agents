@@ -1,5 +1,9 @@
 # Canonical Vocabulary and Universal Decomposition Model
 
+## Use this reference
+
+Load this reference only when 01 core model is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 ## 1. Distinguish the levels of design language
 
 | Term | Meaning | Evidence required |

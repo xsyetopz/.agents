@@ -1,5 +1,9 @@
 # Bitbucket Pipelines
 
+## Use this reference
+
+Load this reference when bitbucket pipelines is part of the pipeline task. Apply it to the actual event trust boundary, job permissions, dependencies, runner, artifacts, and observed pipeline result without suppressing failures.
+
 ## Pipeline syntax
 
 Minimum viable `bitbucket-pipelines.yml`:

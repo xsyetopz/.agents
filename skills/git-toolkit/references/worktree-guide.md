@@ -1,5 +1,9 @@
 # Worktree Guide
 
+## Use this reference
+
+Load this reference when worktree guide is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 Git worktrees let you check out multiple branches simultaneously in separate
 directories, linked to the same repository.
 

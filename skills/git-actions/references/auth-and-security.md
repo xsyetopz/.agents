@@ -1,5 +1,9 @@
 # Auth and Security
 
+## Use this reference
+
+Load this reference when auth and security is part of the GitHub or GitLab API task. Resolve platform, host, repository, target, read/write intent, permissions, and response evidence before applying commands.
+
 ## GitHub
 
 ### GitHub token types

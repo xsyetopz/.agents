@@ -1,5 +1,9 @@
 # Bibliography and Primary References
 
+## Use this reference
+
+Load this reference only when 09 bibliography is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 This bibliography is a source map, not a reading list to copy mechanically. Prefer the primary source that defines a concept, standard, protocol, or tool. Verify publication versions and current product behavior before relying on them.
 
 ## Agent Skills and coding agents

@@ -2,11 +2,15 @@
 
 **ID**: `pattern-fill-architecture` | **Category**: `abstract-reframing`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent fills a product or repository architecture with familiar scaffolding terms instead of staying inside the user's stated constraints.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `"v1"`
 - ❌ `"first implementation slice"`
@@ -21,7 +25,7 @@ Use when: the agent fills a product or repository architecture with familiar sca
 When the user is defining architecture, the agent must: 1. Treat each correction as a hard constraint for the rest of the turn. 2.
 ```
 
-## Concrete example
+## Example
 
 The agent completes an architecture from common repo patterns after the user has already corrected the frame
 
@@ -35,8 +39,8 @@ When the user is defining architecture, the agent must: 1. Treat each correction
 
 After a correction, the next architecture answer lists only user-stated directories, observed repository facts, and explicitly labelled open questions or proposals. No familiar scaffold term appears unless the response ties it directly to a user statement or current file evidence.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

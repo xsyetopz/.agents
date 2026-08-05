@@ -1,6 +1,15 @@
 # Architecture Design
 
-A strict Agent Skills–compatible architecture-analysis skill for cross-domain software design. It treats MVC, MVU, DDD, pipelines, runtimes, ports-and-adapters, event-driven systems, and agent harnesses as responses to explicit forces rather than universal templates.
+An Agent Skills-compatible workflow for evidence-backed architecture decisions.
+It treats MVC, MVU, DDD, pipelines, runtimes, ports and adapters, event-driven
+systems, and agent harnesses as candidates against explicit forces rather than
+universal templates.
+
+## Outcome
+
+The skill produces an implementable decision, source-topology ownership map,
+tradeoff record, migration boundary, and executable verification. Every warning
+or error from the required architecture audit blocks acceptance.
 
 ## Correct filename and directory shape
 
@@ -58,6 +67,10 @@ For API or manual import, keep the zip shape as one top-level `architecture-desi
 - Codex CLI / IDE: use `/skills` or mention the skill with `$` where supported.
 - Claude Code: invoke `/architecture-design` or allow description-based activation.
 
+Activation uses the SKILL.md name and description. The description includes
+architecture artifacts, quality attributes, topology changes, and common user
+phrases; no separate standardized keyword field is required.
+
 ## Validation
 
 ```bash
@@ -86,4 +99,6 @@ and a JSON result with `"passed": false`.
 
 ## Limits
 
-A skill can strongly constrain behavior but cannot guarantee perfect compliance or override higher-priority host instructions. Use the validators, eval cases, repository policies, tests, and review gates for enforcement beyond prompting.
+A skill cannot replace permissions, build rules, tests, or review controls. Static
+keyword checks prove discovery coverage only; use the validators, paired eval
+cases, repository policies, and architecture audit for behavioral enforcement.

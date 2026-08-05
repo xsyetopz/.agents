@@ -2,30 +2,35 @@
 
 **ID**: `social-mirror-verbatim-echo` | **Category**: `prompt-psychology`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 The model echoes prompt language verbatim in output. "Make it recruiter-friendly"
 produces the heading "Recruiter-friendly." The model mirrors labels instead of
 embodying them.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ Prompt: "Make it recruiter-friendly." → Output heading: "Recruiter-friendly"
 - ❌ Prompt: "Write in a friendly tone." → Output: "In a friendly tone, here is..."
 - ❌ Prompt: "Be concise and professional." → Output: "Here is a concise and professional..."
 
-## Contrast
-
 ```diff
-## ❌ WRONG — labeling qualities in the prompt
+
 - "Make the About page recruiter-friendly and colorful."
 
-## ✅ RIGHT — demonstrating the quality
 + "Write an About page. Example: '## Hi, I'm Alex. I turn complex backends
 + into APIs frontend teams enjoy. Currently at Stripe, previously Shopify.'"
 ```
 
-## Concrete example
+## Required behavior
+
+Produce the concrete correction demonstrated by the example without repeating the issue label, narrating internal diagnosis, or expanding the requested scope.
+
+## Example
 
 **User prompt**: "Write a product description. Make it catchy and exciting. Under 50 words."
 
@@ -47,8 +52,8 @@ canceling that works, fit so light you forget you're wearing them.
 
 No prompt label phrases appear verbatim in the output.
 
-## Efficiency note
+## Evaluation use
 
-- **Shortest path**: Replace label with one example showing the quality.
-- **No overthinking**: Don't add "don't include labels in output" — that's another label that can leak.
-- **Cut to the chase**: Quality label → example. Done.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

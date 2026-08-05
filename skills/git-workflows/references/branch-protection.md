@@ -1,5 +1,9 @@
 # Branch Protection Rules
 
+## Use this reference
+
+Load this reference when branch protection is part of the team integration decision. Compare policy against measured delivery constraints and map every selected rule to repository enforcement.
+
 Branch protection is the enforcement mechanism for branching models. Without it,
 a workflow is a suggestion. With it, a workflow is a contract.
 

@@ -1,5 +1,9 @@
 # Patch Workflows
 
+## Use this reference
+
+Load this reference when patch guide is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 ## Creating patches
 
 ### format-patch

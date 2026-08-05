@@ -1,5 +1,9 @@
 # Interactive Rebase Guide
 
+## Use this reference
+
+Load this reference when rebase guide is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 ## Core operations
 
 ### Squash commits

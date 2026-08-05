@@ -2,11 +2,15 @@
 
 **ID**: `example-source-version-overwrite` | **Category**: `source-truth`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent treats a version, dependency ref, standard, config value, or generated setting from an example repository as authority to overwrite current local state.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `Changing 1.26.4 to 1.26.3 because an example repo has 1.26.3.`
 - ❌ `Treating a sample go.mod, package lock, action ref, model name, or compiler standard as the current desired value.`
@@ -19,7 +23,7 @@ Use when: the agent treats a version, dependency ref, standard, config value, or
 Before changing a version-like value, identify whether the source is authoritative, illustrative, stale, generated, user-authored,
 ```
 
-## Concrete example
+## Example
 
 - A template repo uses an older language version and the agent copies it over a newer generated value.
 
@@ -33,8 +37,8 @@ Before changing a version-like value, identify whether the source is authoritati
 
 Every version/config change is backed by a stated authority trace: source value, current local value, owner, consumer, reach, and reason the change is authorized. Conflicts are reported rather than edited.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

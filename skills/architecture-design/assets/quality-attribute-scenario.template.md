@@ -1,5 +1,11 @@
 # Quality-Attribute Scenario <QA-NNN>
 
+## Use this template
+
+Use for one measurable architectural force. Replace broad labels such as fast,
+secure, scalable, or reliable with a stimulus, environment, response, and
+falsifiable measure.
+
 - Attribute: Correctness | Modifiability | Performance | Reliability | Security | Testability | Operability | Portability | Other
 - Priority: Must | Should | Could
 

@@ -2,11 +2,15 @@
 
 **ID**: `bare-renderer-snapshot-as-product-goal` | **Category**: `docs-orbit`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent treats the current minimal renderer output as the intended product instead of a temporary lifecycle exercise.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ "The product is just `.codex/config.toml`."
 - ❌ `"No hooks, skills, MCP, or templates because the current renderer does not emit them."`
@@ -22,7 +26,7 @@ Keep hooks, skills, MCP, instructions, templates, and related files in the admit
 Require source routing, renderer support, manifest ownership, removal behavior, and dogfood evidence before each surface is genera
 ```
 
-## Concrete example
+## Example
 
 - Goal wording implied the current `.codex/config.toml` renderer snapshot was the product boundary.
 
@@ -38,8 +42,8 @@ Keep hooks, skills, MCP, instructions, templates, and related files in the admit
 
 Goal and product docs name the intended generated-surface framework and distinguish unimplemented admitted-surface backlog from rejected scope.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

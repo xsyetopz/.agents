@@ -1,5 +1,9 @@
 # Commit Signing
 
+## Use this reference
+
+Load this reference when signing guide is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 ## Why sign
 
 Signing verifies that a commit was made by the claimed author. Required for some

@@ -1,5 +1,9 @@
 # Architecture Pattern Selection Catalog
 
+## Use this reference
+
+Load this reference when patterns affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Select an architecture from product constraints, operating model, and enforceable dependency rules--not fashion, framework defaults, or a desire to look "enterprise." A pattern is accepted only when its boundary can be named, its invariants can be tested or reviewed, and its operational cost has an accountable owner. Prefer the smallest coherent model; add a boundary only when it protects a real change, failure, scaling, security, data, or ownership concern.
 
 ## Contents

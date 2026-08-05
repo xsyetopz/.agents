@@ -21,7 +21,7 @@ def require(label: str, condition: bool) -> None:
 
 # Source authority and full clause inventory.
 for url in (
-    "https://developers.openai.com/api/docs/guides/model-guidance#prompting-best-practices",
+    "https://developers.openai.com/api/docs/guides/model-guidance?model=gpt-5.6",
     "https://developers.openai.com/api/docs/guides/prompt-engineering#coding",
 ):
     require(f"missing official source: {url}", url in OPENAI)

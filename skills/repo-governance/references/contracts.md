@@ -1,5 +1,9 @@
 # Governance Contracts
 
+## Use this reference
+
+Load this reference when contracts is part of the governance task. Give each rule one audience, scope, owner, precedence, enforcement mechanism, and validation path.
+
 ## Human contribution contract
 
 Use simple, neutral language. The human policy must cover change scope,

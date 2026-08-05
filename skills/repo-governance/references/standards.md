@@ -1,5 +1,9 @@
 # Standards and primary sources
 
+## Use this reference
+
+Load this reference when standards is part of the governance task. Give each rule one audience, scope, owner, precedence, enforcement mechanism, and validation path.
+
 Verify current provider behavior before changing templates or hosted controls.
 
 ## Repository guidance

@@ -1,5 +1,9 @@
 # Pattern Catalogue
 
+## Use this reference
+
+Load this reference only when 02 pattern catalog is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 Use this catalogue to generate and test candidates. It is not a menu from which the most fashionable item is selected.
 
 For every selected pattern, prove its **problem**, **forces**, **preconditions**, **mechanism**, and **consequences** in the current system.

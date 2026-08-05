@@ -1,8 +1,12 @@
 # Official OpenAI GPT-5.6 Prompting Guidance
 
+## Use this reference
+
+Load this reference when openai gpt 5.6 is material to a measured prompt or agent-behavior failure. Apply current provider guidance first, state each instruction once, and verify observable effects separately from the final answer.
+
 Retrieved 2026-08-05 from current official OpenAI documentation:
 
-- https://developers.openai.com/api/docs/guides/model-guidance#prompting-best-practices
+- https://developers.openai.com/api/docs/guides/model-guidance?model=gpt-5.6
 - https://developers.openai.com/api/docs/guides/prompt-engineering#coding
 
 The live OpenAI pages are canonical. Re-fetch them before a new model-specific

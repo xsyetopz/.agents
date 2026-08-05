@@ -1,5 +1,9 @@
 # Issue Corpus Index — Categorized
 
+## Use this reference
+
+Load this reference when issue corpus index is material to a measured prompt or agent-behavior failure. Apply current provider guidance first, state each instruction once, and verify observable effects separately from the final answer.
+
 Deduplicated: 57 entries across 16 categories.
 
 ## abstract-reframing (5)

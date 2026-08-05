@@ -1,5 +1,9 @@
 # Structural examples
 
+## Use this reference
+
+Load this reference when examples affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Apply the language and toolchain references before adopting a tree. These
 examples show how boundary decisions affect a repository tree.
 

@@ -1,5 +1,9 @@
 # Frontmatter Specification
 
+## Use this reference
+
+Load this reference when frontmatter spec is part of the skill-authoring task. Keep the discovery description precise, the entry instructions lean, details progressively disclosed, and behavior independently verifiable.
+
 Full frontmatter schema per the [Agent Skills
 specification](https://agentskills.io/specification).
 

@@ -1,5 +1,9 @@
 # Cross-Platform CI Patterns
 
+## Use this reference
+
+Load this reference when cross platform patterns is part of the pipeline task. Apply it to the actual event trust boundary, job permissions, dependencies, runner, artifacts, and observed pipeline result without suppressing failures.
+
 Patterns that work across GitHub Actions, GitLab CI, and Bitbucket Pipelines.
 
 ## Caching dependencies

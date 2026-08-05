@@ -1,5 +1,9 @@
 # Rigor Modes
 
+## Use this reference
+
+Load this reference only when 11 rigor modes is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 Choose the least expensive mode that can still make the architectural decision safely. Raise rigor when uncertainty, irreversibility, blast radius, novelty, or coordination cost rises.
 
 ## R0 - Orientation

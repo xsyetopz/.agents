@@ -1,5 +1,9 @@
 # Artifact Contracts
 
+## Use this reference
+
+Load this reference only when 06 artifact contracts is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 The templates in `assets/` are normative starting points. Remove unused sections only with an explicit `Not applicable - reason` entry when the omission could otherwise hide risk.
 
 ## 1. Architecture report contract

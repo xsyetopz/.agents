@@ -1,5 +1,9 @@
 # Failure Modes and Anti-Patterns
 
+## Use this reference
+
+Load this reference only when 08 failure modes is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 ## 1. Pattern-first architecture
 
 **Symptom:** “Use MVC/microservices/event sourcing/DDD” appears before requirements and forces.

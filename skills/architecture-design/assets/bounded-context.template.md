@@ -1,5 +1,10 @@
 # Bounded Context: <Name>
 
+## Use this template
+
+Use only when domain language, authority, state, and evolution form a real
+semantic boundary. Do not create a context to satisfy a pattern checklist.
+
 ## Purpose
 
 <Business/domain capability and why it exists.>
@@ -47,3 +52,9 @@ Do not create an aggregate merely because tables are related.
 - Retry/compensation:
 - Migration:
 - Deprecation:
+
+## Verification
+
+- Contract/evaluation:
+- Cross-context translation test:
+- Failure and migration evidence:

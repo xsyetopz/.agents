@@ -1,5 +1,9 @@
 # Validation Guide
 
+## Use this reference
+
+Load this reference when validation guide is part of the skill-authoring task. Keep the discovery description precise, the entry instructions lean, details progressively disclosed, and behavior independently verifiable.
+
 Full rules enforced by the skill validator (`validate_skill.py` in the repo
 root).
 

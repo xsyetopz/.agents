@@ -1,5 +1,9 @@
 # Git Hooks Guide
 
+## Use this reference
+
+Load this reference when hooks guide is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 Hooks are scripts that run at specific points in the git workflow.
 
 ## Client-side hooks

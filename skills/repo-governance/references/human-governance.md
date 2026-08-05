@@ -1,5 +1,9 @@
 # Human governance
 
+## Use this reference
+
+Load this reference when human governance is part of the governance task. Give each rule one audience, scope, owner, precedence, enforcement mechanism, and validation path.
+
 ## Purpose
 
 Use recognized community-health files for people. Do not put human conduct, review authority, or contribution ownership in `AGENTS.md`.

@@ -1,5 +1,9 @@
 # Filename contract
 
+## Use this reference
+
+Load this reference when naming affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Use this reference after detecting languages, toolchains, frameworks, generators,
 and test runners. It applies to authored source, tests, configuration, IDL,
 schemas, extensionless shebang scripts, and architecture-bearing documentation.

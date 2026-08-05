@@ -1,5 +1,9 @@
 # GitLab REST API
 
+## Use this reference
+
+Load this reference when gitlab api is part of the GitHub or GitLab API task. Resolve platform, host, repository, target, read/write intent, permissions, and response evidence before applying commands.
+
 Base URL: `https://gitlab.com/api/v4` (or self-hosted instance URL)
 
 ## Auth

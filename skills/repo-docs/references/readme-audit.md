@@ -1,5 +1,9 @@
 # README.md Audit Checklist
 
+## Use this reference
+
+Load this reference when readme audit is part of the repository documentation task. Verify every command, link, version, and product claim against current repository source truth.
+
 ## Quick pass (2 minutes)
 
 - [ ] H1 is the project name, not a tagline

@@ -1,5 +1,9 @@
 # Release Management
 
+## Use this reference
+
+Load this reference when release management is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 Versioning, tagging, and release automation patterns. Based on [Semantic
 Versioning 2.0.0](https://semver.org/).
 

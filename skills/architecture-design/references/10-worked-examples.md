@@ -1,5 +1,9 @@
 # Worked Examples
 
+## Use this reference
+
+Load this reference only when 10 worked examples is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 These examples demonstrate the decision procedure. They are not blueprints. Re-run the gates for the actual system and record where the analogy fails.
 
 ---

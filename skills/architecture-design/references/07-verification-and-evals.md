@@ -1,5 +1,9 @@
 # Verification and Evaluation
 
+## Use this reference
+
+Load this reference only when 07 verification and evals is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 ## 1. Verification hierarchy
 
 Prefer the lowest-cost evidence that can falsify the architectural claim, then add higher-level tests for integration risk.

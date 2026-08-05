@@ -1,5 +1,11 @@
 # Architecture Report: <System / Decision>
 
+## Use this template
+
+Use for a nontrivial architecture decision or migration. Keep only material
+sections, tie each instruction and artifact to a requirement or measured risk,
+and replace every placeholder with evidence or an explicit unknown.
+
 - Date: <YYYY-MM-DD>
 - Status: Draft | Review | Accepted | Superseded
 - Rigor: R0 | R1 | R2 | R3 | R4

@@ -8,6 +8,10 @@ The skill distinguishes three source classes:
 2. **Architecture foundations** - original papers, standards, method owners, and authoritative pattern descriptions.
 3. **Domain mechanics** - language/runtime/protocol specifications and official implementation documentation.
 
+Prompt-facing instructions additionally use current official OpenAI model
+guidance. Model-specific claims must be refreshed before a new prompt migration;
+the repository snapshot is traceability evidence, not permanent authority.
+
 ## Source-to-artifact map
 
 | Skill area | Principal source families | Files informed |
@@ -24,9 +28,14 @@ The skill distinguishes three source classes:
 | CLI/TUI interaction | POSIX utility syntax; Elm Architecture | domain mappings, flowgraphs, TUI example |
 | Binary/protocol correctness | Protocol Buffers encoding; Kaitai Struct; relevant protocol specs | domain mappings, binary example, verification rules |
 | Agent orchestration and persistence | OpenAI Agents SDK; Anthropic agent/harness guidance; MCP architecture | agent mappings, flowgraphs, agent-harness example, eval cases |
+| GPT-5.6 prompt behavior | Current OpenAI model guidance and prompt-engineering guide | SKILL.md activation/workflow, prompt-facing templates, routing and behavioral eval rules |
 
 ## Evidence policy
 
-The bibliography stores links, not copied publications. An agent MUST open and inspect the applicable source before making a source-dependent claim. It MUST record the exact claim, version/date, and evidence location in the evidence ledger.
+The bibliography stores links, not copied publications. Open and inspect the
+applicable current source before making a source-dependent claim. Record the
+claim, version or retrieval date, and evidence location in the evidence ledger.
+Evaluate tool/filesystem effects separately from the final answer when the claim
+concerns agent behavior.
 
 See `references/09-bibliography.md` for the full curated list.

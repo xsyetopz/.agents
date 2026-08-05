@@ -1,5 +1,9 @@
 # Troubleshooting
 
+## Use this reference
+
+Load this reference when troubleshooting is part of the skill-authoring task. Keep the discovery description precise, the entry instructions lean, details progressively disclosed, and behavior independently verifiable.
+
 Common validation failures and how to fix them.
 
 ## "SKILL.md must start with YAML frontmatter delimiter '---'."

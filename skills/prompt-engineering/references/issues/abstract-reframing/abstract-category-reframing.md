@@ -2,11 +2,15 @@
 
 **ID**: `abstract-category-reframing` | **Category**: `abstract-reframing`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent answers a correction by inventing abstract categories, spaces, layers, trees, namespaces, surfaces, families, or models the user did not state.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `"I over-framed that as..."`
 - ❌ `"Better read: ..."`
@@ -17,26 +21,25 @@ Use when: the agent answers a correction by inventing abstract categories, space
 
 ## Required behavior
 
-```text
-When corrected, the agent must: 1. State the concrete corrected claim in the user's terms. 2. Remove the rejected abstraction befo
-```
+State the corrected claim in the user's terms. Remove the rejected abstraction before introducing any alternative. If shorthand is necessary, label it as provisional and tie it to user text or current source evidence.
 
-## Concrete example
+## Example
 
 The agent responds to a correction by replacing the user's concrete point with an assistant-authored abstract structure
 
-**✅ CORRECT** (shortest path):
+**Corrected response:**
 
 ```text
-When corrected, the agent must: 1. State the concrete corrected claim in the user's terms. 2. Remove the rejected abstraction befo
+The current requirement is <concrete corrected claim>. The earlier category is
+not part of the user's model, so it is removed rather than renamed.
 ```
 
 ## Acceptance check
 
 The next response after a correction repeats the user's concrete point without first-person diagnosis or new abstract categories. If an abstraction is necessary, the response labels it as provisional assistant shorthand and ties it to user text or current source evidence.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

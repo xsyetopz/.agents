@@ -1,5 +1,9 @@
 # Sentence Structure and Phrasing
 
+## Use this reference
+
+Load this reference when the prose audit finds a sentence structure problem. Treat its patterns as evidence prompts rather than automatic matches, and preserve facts, voice, citations, and requested formatting.
+
 Sentence-level AI writing patterns: how sentences are built, connected, and
 paced. Load when auditing prose at the sentence level. For paragraph and
 document structure, see `structural-patterns.md`. For individual word

@@ -1,5 +1,9 @@
 # Rhetoric and Artifact Patterns
 
+## Use this reference
+
+Load this reference when the prose audit finds a rhetoric patterns problem. Treat its patterns as evidence prompts rather than automatic matches, and preserve facts, voice, citations, and requested formatting.
+
 Named AI writing patterns covering argument construction, conversational tics,
 publication artifacts, and stylistic tells. Load when auditing prose for
 specific recurring patterns. For sentence-level rules, see

@@ -1,5 +1,9 @@
 # Language architecture catalog
 
+## Use this reference
+
+Load this reference when languages affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Use this catalog after identifying the repository's language, framework, and
 toolchain. Years approximate first public appearance or standard lineage. They
 order the catalog only; they do not rank quality. For build and package

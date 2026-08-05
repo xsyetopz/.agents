@@ -1,5 +1,9 @@
 # Git Archaeology
 
+## Use this reference
+
+Load this reference when archaeology is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 Finding when and why code changed. Not `git log` - the deep tools.
 
 ## Finding when a string was added or removed

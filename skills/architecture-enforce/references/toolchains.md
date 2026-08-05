@@ -1,5 +1,9 @@
 # Toolchain, build, and package ownership
 
+## Use this reference
+
+Load this reference when toolchains affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Use this reference to identify the files that own architecture before adding,
 moving, or generating source. A tool name alone is insufficient. Determine its
 role, authority, and resolution domain from repository evidence.

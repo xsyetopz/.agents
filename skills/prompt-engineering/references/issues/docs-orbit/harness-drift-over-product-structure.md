@@ -2,11 +2,15 @@
 
 **ID**: `harness-drift-over-product-structure` | **Category**: `docs-orbit`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent keeps adding smoke cases, wrappers, or verification machinery while the product source and test structure remain thin or missing.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `"I will add one more smoke phase."`
 - ❌ `"The smoke script proves this" when the product implementation is still just a thin script.`
@@ -22,7 +26,7 @@ If the product lacks source or test structure, address that structure directly i
 When challenged about drift, answer the artifact-state question first and stop unless explicitly told to continue.
 ```
 
-## Concrete example
+## Example
 
 - The agent keeps adding lifecycle smoke cases instead of creating a real source and test structure.
 
@@ -38,8 +42,8 @@ If the product lacks source or test structure, address that structure directly i
 
 - Product-progress turns touch product implementation or intentional test structure before adding broad harness coverage. - Smoke scripts remain small end-to-end checks, not the main place product behavior accumulates. - Reports distinguish product source, tests, smoke, and evidence instead of collapsing them into one proof bucket.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

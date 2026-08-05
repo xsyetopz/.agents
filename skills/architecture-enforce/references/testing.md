@@ -1,5 +1,9 @@
 # Test ownership and placement
 
+## Use this reference
+
+Load this reference when testing affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Test placement is part of production architecture. Put a test at the smallest
 boundary whose contract it proves. Its location and build target should make
 that ownership visible.

@@ -1,5 +1,9 @@
 # GitHub GraphQL API
 
+## Use this reference
+
+Load this reference when github graphql is part of the GitHub or GitLab API task. Resolve platform, host, repository, target, read/write intent, permissions, and response evidence before applying commands.
+
 Endpoint: `POST https://api.github.com/graphql`
 
 ## When to use

@@ -1,5 +1,11 @@
 # Component Contract: <CMP-NNN / name>
 
+## Use this template
+
+Use when a component owns an independently testable capability or boundary.
+Remove unused fields; do not invent interfaces, layers, or failure modes merely
+to complete the template.
+
 - Boundary / context:
 - Classification: semantic core | application coordinator | adapter | projection | infrastructure | policy | scheduler | parser | validator | other
 
@@ -60,3 +66,6 @@
 ## Test seam
 
 <unit, contract, property, model, fault, or integration test>
+
+Record the observable effect and final diagnostic/report checks separately when
+an agent or tool executes the component workflow.

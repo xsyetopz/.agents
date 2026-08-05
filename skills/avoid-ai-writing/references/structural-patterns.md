@@ -1,5 +1,9 @@
 # Structural Patterns
 
+## Use this reference
+
+Load this reference when the prose audit finds a structural patterns problem. Treat its patterns as evidence prompts rather than automatic matches, and preserve facts, voice, citations, and requested formatting.
+
 Paragraph-level and document-level structural AI writing patterns. Load when
 auditing text flow, paragraph rhythm, and overall document organization. For
 sentence-level rules, see `sentence-structure.md`. For specific named

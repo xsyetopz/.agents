@@ -1,5 +1,9 @@
 # Cross-Domain Mappings
 
+## Use this reference
+
+Load this reference only when 03 domain mappings is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 These mappings help classify a system. They are not prescriptions. The “MVC-like” columns show analogies only; the **preferred primary shape** usually names the stronger architecture.
 
 | # | Domain | Semantic core / “Model” | Projection / “View” | Control / “Controller” | Preferred primary shape | Critical invariants |

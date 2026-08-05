@@ -1,5 +1,9 @@
 # Severity Tiers, Context Profiles, and Voice Profiles
 
+## Use this reference
+
+Load this reference when the prose audit finds a severity tiers problem. Treat its patterns as evidence prompts rather than automatic matches, and preserve facts, voice, citations, and requested formatting.
+
 Load this to prioritize what to fix and calibrate strictness for the audience.
 
 ---

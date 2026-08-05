@@ -1,5 +1,9 @@
 # Prompt Templates
 
+## Use this reference
+
+Load this reference when prompt templates is material to a measured prompt or agent-behavior failure. Apply current provider guidance first, state each instruction once, and verify observable effects separately from the final answer.
+
 Use only sections justified by the application. For GPT-5.6, read
 `openai-gpt-5.6.md` first and remove repeated instructions, irrelevant tools,
 and examples without a product requirement or measured gap.

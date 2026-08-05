@@ -1,5 +1,9 @@
 # Formatting Rules
 
+## Use this reference
+
+Load this reference when the prose audit finds a formatting problem. Treat its patterns as evidence prompts rather than automatic matches, and preserve facts, voice, citations, and requested formatting.
+
 Typography and visual formatting patterns that signal AI-generated text. Load
 when auditing document-level formatting, layout, and typographic tells.
 

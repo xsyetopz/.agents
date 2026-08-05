@@ -3,14 +3,18 @@
 **Merged from**: `prose-content-role-collapse`, `prose-presence-as-removal-proof`, `runtime-proof-substitution`, `test-prose-anchoring`
 **Category**: `prose-policing`
 
-## Trigger patterns
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
+## Trigger
 
 - Use when: the agent treats prose content inside a script, command, generator, CI job, or task runner as proof that the artifact has no valid executable role.
 - Use when: the agent treats the presence of prose in an artifact as proof that the artifact only exists to police prose, then promises removal before tracing behavior.
 - Use when: the agent creates, keeps, removes, or reports a script as if the script itself proves product quality, even though the script only checks assistant-maintained prose, labels, markers, or document shape.
 - Use when: tests assert exact explanatory wording instead of behavior, structure, or artifact invariants.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `"It contains prose checks, so remove it."`
 - ❌ `"Nobody needs a prose script."`
@@ -34,7 +38,7 @@ If only prose policing remains after the trace, remove the artifact and every st
 If behavioral checks remain, keep or move the smallest proven behavior and remove only the unrequested prose-policing part.
 ```
 
-## Concrete example
+## Example
 
 **User says**: "why is verifiy.mjs even here? nobody needs a prose SCRIPT!"
 
@@ -48,14 +52,14 @@ Trace callers, package commands, CI jobs, docs references, installers, tests, ge
 Record inputs, outputs, writes, exit behavior, ownership assumptions, and user-visible reach.
 ```
 
-## Acceptance checks
+## Acceptance check
 
 - For any challenged executable artifact with prose content, the agent separates prose policy from behavior. The edit removes, narrows, keeps, or replaces each part based on observed role and reach.
 - - Prose presence is not treated as artifact-purpose evidence by itself. - Removal promises appear only after behavior, caller, write, exit, ownership, and reach accounting. - Mixed-purpose artifacts are split by observed behavior, not by complaint wording. - Final reports identify observed behavior, changed artifacts, command evidence, and remaining unverified claim.
 - Every reported command maps to a product claim it actually exercises. If it only checks prose arrangement, report it as review support or remove it from proof paths.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

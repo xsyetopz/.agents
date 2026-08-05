@@ -1,5 +1,9 @@
 # Canonical Flowgraphs
 
+## Use this reference
+
+Load this reference only when 05 flowgraphs is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 All diagrams use Mermaid. Adapt names to the actual system. Do not copy a graph without checking state ownership, control authority, and failure paths.
 
 ## 1. Master architecture workflow

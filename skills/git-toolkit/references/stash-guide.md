@@ -1,5 +1,9 @@
 # Stash Guide
 
+## Use this reference
+
+Load this reference when stash guide is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 ## Why stash
 
 Stash captures uncommitted changes - both staged and unstaged - and reverts

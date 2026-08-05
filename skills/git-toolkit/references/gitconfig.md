@@ -1,5 +1,9 @@
 # Git Configuration
 
+## Use this reference
+
+Load this reference when gitconfig is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 Team-wide git configuration patterns. Git reads config from four places in order
 of increasing precedence. Source: `git-config(1)` man page.
 

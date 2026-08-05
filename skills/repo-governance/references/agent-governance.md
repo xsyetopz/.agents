@@ -1,5 +1,9 @@
 # Agent governance
 
+## Use this reference
+
+Load this reference when agent governance is part of the governance task. Give each rule one audience, scope, owner, precedence, enforcement mechanism, and validation path.
+
 ## Boundary
 
 `AGENTS.md` is for agent execution. It may contain project facts, commands, architecture rules, validation, safety limits, and external-action permission. Link to `CONTRIBUTING.md` instead of copying human contribution policy.

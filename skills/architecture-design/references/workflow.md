@@ -1,5 +1,9 @@
 # Architecture Design Workflow
 
+## Use this reference
+
+Load this reference only when workflow is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 The complete 11-phase architecture design procedure. Load when the agent
 needs the full step-by-step methodology.
 

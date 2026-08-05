@@ -2,11 +2,15 @@
 
 **ID**: `inline-command-prose-instead-of-scripts` | **Category**: `docs-orbit`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent repeats inline smoke commands, transcript fragments, or prose command recipes instead of consolidating recurring product checks into runnable scripts.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `"Run this inline block again" for recurring lifecycle proof.`
 - ❌ `A smoke evidence page made mostly of shell prose when the same behavior should be scripted.`
@@ -19,7 +23,7 @@ Use when: the agent repeats inline smoke commands, transcript fragments, or pros
 When a command sequence becomes recurring evidence for lifecycle, generated output, ownership, or removal safety, the agent must:
 ```
 
-## Concrete example
+## Example
 
 - The agent described repeated smoke commands in documentation instead of first creating a durable lifecycle smoke script.
 
@@ -33,8 +37,8 @@ When a command sequence becomes recurring evidence for lifecycle, generated outp
 
 Recurring product checks are represented by runnable scripts under `scripts/`, and evidence docs point to the script command plus current observed output.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

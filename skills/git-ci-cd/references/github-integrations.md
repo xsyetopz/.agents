@@ -1,5 +1,9 @@
 # GitHub Integrations
 
+## Use this reference
+
+Load this reference when github integrations is part of the pipeline task. Apply it to the actual event trust boundary, job permissions, dependencies, runner, artifacts, and observed pipeline result without suppressing failures.
+
 Automated dependency updates, security scanning, and repository maintenance
 bots. These live in the `.github/` directory and complement CI/CD pipelines.
 

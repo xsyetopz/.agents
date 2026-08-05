@@ -2,11 +2,15 @@
 
 **ID**: `documentation-orbit-over-product-work` | **Category**: `docs-orbit`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent keeps updating docs, evidence maps, stale wording, or issue records while the user expects product/runtime work.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `"I found more stale docs, so I am fixing those first."`
 - ❌ `"The runtime still needs work, but the evidence trail is cleaner."`
@@ -23,7 +27,7 @@ Report product artifacts changed and command evidence before documentation polis
 Stop documentation sweeps when the user challenges progress direction.
 ```
 
-## Concrete example
+## Example
 
 - The user asks whether the agent is working on the product, and the recent work has been mostly stale wording fixes across docs.
 
@@ -39,8 +43,8 @@ If stale docs are found during product work, note them briefly and continue unle
 
 - Product turns change or verify product/runtime artifacts before optional docs. - Documentation-only turns happen only when explicitly requested or when no product edit is needed. - Final reports separate product behavior evidence from documentation consistency.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

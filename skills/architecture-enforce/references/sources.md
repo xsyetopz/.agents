@@ -1,5 +1,9 @@
 # Authority sources
 
+## Use this reference
+
+Load this reference when sources affects the repository boundary under review. Verify its rules against source, build, test, and runtime evidence; every unresolved warning or error remains blocking.
+
 Use current, version-appropriate primary sources when a repository contract or
 language rule is unclear. Record retrieval date and pinned tool versions in an
 ADR or review note; these links are starting points, not a substitute for local

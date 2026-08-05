@@ -1,5 +1,11 @@
 # ADR-<NNN>: <Decision title>
 
+## Use this template
+
+Use for one architecturally significant decision. Replace every placeholder with
+repository evidence; remove sections that do not apply instead of filling them
+with generic prose.
+
 - Status: Proposed | Accepted | Rejected | Superseded
 - Date: <YYYY-MM-DD>
 - Deciders: <roles>
@@ -64,6 +70,9 @@ waiver for unresolved audit findings.
   and configuration, input, output, and exit code) and explicit policy-change
   authorization; keep the architecture gate blocked while the check is
   weakened.
+
+Record observed commands, outputs, and exit codes. Evaluate implementation
+effects separately from the review summary.
 
 ## Exit criteria
 

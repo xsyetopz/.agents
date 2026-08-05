@@ -1,5 +1,9 @@
 # Model Reasoning Guide
 
+## Use this reference
+
+Load this reference when model reasoning guide is material to a measured prompt or agent-behavior failure. Apply current provider guidance first, state each instruction once, and verify observable effects separately from the final answer.
+
 Use model-specific claims only when current first-party documentation supports
 them. Model names, modes, effort values, defaults, context limits, and benchmark
 results change independently and must not be copied from an undated comparison

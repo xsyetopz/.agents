@@ -3,14 +3,18 @@
 **Merged from**: `need-claim-as-premise`, `universal-need-claim-before-role-trace`, `universal-script-need-claim`, `script-necessity-claim-before-trace`
 **Category**: `need-claims`
 
-## Trigger patterns
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
+## Trigger
 
 - Use when: the agent answers a challenge by declaring what "nobody needs" before tracing the artifact, command, or workflow.
 - Use when: the agent repeats or adopts a "nobody needs this" claim about an artifact before tracing its observed role, reach, and replacement cost.
 - Use when: the agent answers a script role challenge with a blanket claim that nobody needs the script.
 - Use when: the agent says a script or command is unnecessary before tracing what it does and who depends on it.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ `"Nobody needs this."`
 - ❌ `"This is not needed here."`
@@ -30,7 +34,7 @@ Separate these questions: what it does, who uses it, whether the role belongs, a
 Recommend deletion only after the trace proves the behavior is unwanted or already covered by a smaller existing route.
 ```
 
-## Concrete example
+## Example
 
 **User says**: "why is verifiy.mjs even here? nobody needs a prose SCRIPT!"
 
@@ -44,14 +48,14 @@ Trace references from package commands, docs, CI files, installers, tests, gener
 Record inputs, outputs, writes, exit behavior, ownership, and reach.
 ```
 
-## Acceptance checks
+## Acceptance check
 
 - - Need claims do not appear before artifact tracing. - Deletion promises do not appear before caller, output, write, ownership, and reach accounting. - Final reports distinguish user complaint, observed behavior, changed artifacts, command evidence, and remaining unverified claim. - Rejected behavior is not recreated under another filename, command, CI job, install action, or generated artifact.
 - Before echoing or making a need claim, the agent can name the artifact, callers, inputs, outputs, exits, user reach, covered claim, duplicate coverage, and uncovered behavior after removal.
 - - No script is called unnecessary before role tracing. - Role answers distinguish observed behavior from the edit that follows. - Prose-only automation is not recreated under a different command name. - Final reports state whether the script had install reach, runtime reach, or only local maintenance reach.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

@@ -2,11 +2,15 @@
 
 **ID**: `agents-universal-surface-overstatement` | **Category**: `naming-invention`
 
+## Use this case
+
+Use this entry only when current evidence matches the trigger. Treat it as an adversarial evaluation case, not as universal prompt wording or a label to repeat in the answer.
+
 ## Trigger
 
 Use when: the agent turns `.agents/` compatibility into a claim that `.agents/` is the canonical source or root for every generated tool surface.
 
-## Bad forms — what this looks like
+## Observed failure
 
 - ❌ "`.agents/` is the canonical source of everything."
 - ❌ "`.codex/` and `.claude/` are just projections."
@@ -19,7 +23,7 @@ Use when: the agent turns `.agents/` compatibility into a claim that `.agents/` 
 When discussing `.agents/`, `.codex/`, and `.claude/`, the agent must: 1. State that `.agents/` is for universal-compatible hooks,
 ```
 
-## Concrete example
+## Example
 
 - The agent said `.agents/` is the universal source/runtime surface and `.codex/` and `.claude/` are generated projections.
 
@@ -33,8 +37,8 @@ When discussing `.agents/`, `.codex/`, and `.claude/`, the agent must: 1. State 
 
 The agent describes placement per artifact class: universal-compatible hooks, skills, and scripts may live in `.agents/` or be symlinked with tool paths as required; tool-specific artifacts stay under their native tool surface.
 
-## Efficiency note
+## Evaluation use
 
-- **Evidence path**: Inspect enough current evidence to prove the role, reach, and requested outcome; expand when findings conflict or risk requires it.
-- **No overthinking**: Pattern obvious? State it and move on.
-- **Cut to the chase**: Skip narration, self-analysis, process logging.
+- Use a natural prompt that does not name the failure or reveal the expected correction.
+- Check tool and filesystem effects separately from the final answer.
+- Keep the case only while it reproduces the measured failure; static phrase matching is not behavioral proof.

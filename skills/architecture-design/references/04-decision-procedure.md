@@ -1,5 +1,9 @@
 # Architecture Decision Procedure
 
+## Use this reference
+
+Load this reference only when 04 decision procedure is material to the active architecture decision. Apply it to repository evidence, candidate tradeoffs, contracts, and verification; do not copy it as a default architecture.
+
 ## 1. Rigor-first workflow
 
 Use the smallest method that still resolves the architectural risk. The default is `R3` unless the task is plainly smaller or the user specifies otherwise. See `references/11-rigor-modes.md`.

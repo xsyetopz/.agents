@@ -1,5 +1,9 @@
 # Merge Strategies
 
+## Use this reference
+
+Load this reference when merge strategies is part of the team integration decision. Compare policy against measured delivery constraints and map every selected rule to repository enforcement.
+
 When to squash, rebase, or merge-commit. Based on git's actual merge behavior
 and the linear history requirements of trunk-based development.
 

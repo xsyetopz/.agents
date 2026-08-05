@@ -1,5 +1,9 @@
 # openai.yaml Specification
 
+## Use this reference
+
+Load this reference when openai yaml spec is part of the skill-authoring task. Keep the discovery description precise, the entry instructions lean, details progressively disclosed, and behavior independently verifiable.
+
 `agents/openai.yaml` is a product-specific config read by OpenAI-compatible
 runtimes. It is read by the machine/harness, not the agent.
 

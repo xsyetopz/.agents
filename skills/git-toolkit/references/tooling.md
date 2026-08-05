@@ -1,5 +1,9 @@
 # Git Security Tooling
 
+## Use this reference
+
+Load this reference when tooling is part of the requested local Git state transition. Inspect current status and history first, preserve unrelated work, identify recovery, and verify the resulting state.
+
 Production tools for git safety. Do not invent a pre-commit hook or security
 check when a production tool already exists. Sources: [dev.to Git
 security](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-your-code-safe-1nep),
