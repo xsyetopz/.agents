@@ -5,6 +5,10 @@ __pycache__/
 
 plugins/
 
+# <https://github.com/kucherenko/jscpd>
+skills/dry-refactoring/
+skills/jscpd/
+
 # <https://github.com/vercel-labs/skills/tree/main/skills/find-skills>
 skills/find-skills/
 
