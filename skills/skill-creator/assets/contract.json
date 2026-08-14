@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "skill_name": "skill-creator",
+  "required_headings": [
+    "When to use",
+    "When NOT to use",
+    "Guardrails",
+    "Workflow",
+    "Quick start",
+    "Reference map",
+    "Completion",
+    "Validation",
+    "Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/conventions.md",
+    "references/frontmatter-spec.md",
+    "references/openai-yaml-spec.md",
+    "references/validation-guide.md",
+    "references/troubleshooting.md",
+    "references/evaluation-and-security.md",
+    "references/package-distribution.md",
+    "references/graph-and-examples.md"
+  ],
+  "eval_case_ids": [
+    "positive-package-contract",
+    "positive-semantic-reference-routing",
+    "near-miss-runtime-governance",
+    "safety-untrusted-content",
+    "failure-missing-reference"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "required_headings": [
+    "# Skill Creator",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Workflow",
+    "## Quick start",
+    "## Reference map",
+    "## Completion",
+    "## Validation",
+    "## Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    "agents/openai.yaml",
+    ".skill-validator.json",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py",
+    "scripts/validate_skill.py",
+    "scripts/test_validate_skill.py",
+    "references/conventions.md",
+    "references/frontmatter-spec.md",
+    "references/openai-yaml-spec.md",
+    "references/validation-guide.md",
+    "references/troubleshooting.md",
+    "references/evaluation-and-security.md",
+    "references/package-distribution.md",
+    "references/graph-and-examples.md",
+    "references/index.md",
+    "scripts/check_skill_structure.py"
+  ]
+}
