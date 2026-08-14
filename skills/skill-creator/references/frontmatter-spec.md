@@ -13,6 +13,11 @@ description: artifact nouns, domain terms, bounded exclusion
 ---
 ```
 
+Catalog entrypoints use exactly these two fields. The validator still accepts
+the optional fields below for generic open-format fixtures and clients that
+consume them; do not add them to a catalog skill unless a target client needs
+them.
+
 ### `name`
 
 - Use 1–64 lowercase letters or digits joined by single hyphens.

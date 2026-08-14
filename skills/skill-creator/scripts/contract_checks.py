@@ -7,18 +7,19 @@ import re
 from pathlib import Path
 from typing import Any
 
+from check_skill_structure import (
+    EXPECTED_HEADINGS as COMMON_CONTRACT_HEADINGS,
+)
+from check_skill_structure import (
+    PACKAGE_CHECK_COMMAND,
+    UNAVAILABLE_MARKER_RE,
+    check_common_section_semantics,
+)
 from reference_checks import HEADING_RE, strip_fenced_blocks
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SKILL_MD_LINE_WARN = 500
 SKILL_MD_LINE_ERROR = 800
-COMMON_CONTRACT_HEADINGS = [
-    "Use this skill",
-    "Rules",
-    "Steps",
-    "Resources",
-    "Verify",
-]
 COMMON_CONTRACT_FILES = [
     "SKILL.md",
     "LICENSE",
@@ -208,6 +209,8 @@ def check_required_headings(text: str, config: dict, errors: list[str]) -> None:
                 "SKILL.md H2 headings must use the exact common order: "
                 + ", ".join(COMMON_CONTRACT_HEADINGS)
             )
+        else:
+            errors.extend(check_common_section_semantics(text))
 
 
 def check_required_files(root: Path, config: dict, errors: list[str]) -> None:
@@ -265,10 +268,15 @@ def _reference_is_routed(reference: str, route_text: str, index_text: str) -> bo
     """Accept a direct path or a basename route from references/index.md."""
     if reference in route_text:
         return True
+    index_relative = reference.removeprefix("references/")
+    if re.search(
+        rf"\]\(\s*(?:\./)?{re.escape(index_relative)}(?:[#?)]|$)",
+        index_text,
+    ):
+        return True
     name = Path(reference).name
-    # Index links are relative to references/, so the contract prefix is absent.
+    # Preserve basename routes for older flat indexes.
     return bool(re.search(rf"\]\(\s*(?:\./)?{re.escape(name)}(?:[#?)]|$)", index_text))
-
 
 def check_assets_contract(
     root: Path, config: dict, skill_text: str, errors: list[str]
@@ -310,12 +318,10 @@ def check_assets_contract(
         errors.append(
             ".skill-validator.json required_headings must contain the common heading order."
         )
-
     if payload.get("required_files") != COMMON_CONTRACT_FILES:
         errors.append(
             "assets/contract.json required_files must use the common package contract."
         )
-
     references = payload.get("reference_paths")
     if not isinstance(references, list) or not references:
         errors.append("assets/contract.json reference_paths must be a non-empty array.")
@@ -371,7 +377,6 @@ def check_assets_contract(
     ):
         errors.append("assets/contract.json eval_case_ids must be unique.")
     return payload
-
 
 def _non_empty_string(value: object) -> bool:
     return isinstance(value, str) and bool(value.strip())
@@ -480,7 +485,10 @@ __all__ = [
     "COMMON_CONTRACT_FILES",
     "COMMON_CONTRACT_HEADINGS",
     "NAME_RE",
+    "PACKAGE_CHECK_COMMAND",
+    "UNAVAILABLE_MARKER_RE",
     "check_assets_contract",
+    "check_common_section_semantics",
     "check_file_size",
     "check_frontmatter_spec",
     "check_progressive_disclosure",

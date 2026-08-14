@@ -15,6 +15,11 @@ EXPECTED_HEADINGS = [
     "Resources",
     "Verify",
 ]
+PACKAGE_CHECK_COMMAND = "python3 scripts/check.py"
+UNAVAILABLE_MARKER_RE = re.compile(
+    r"\b(?:unverified|unavailable|not\s+(?:run|available|executed|verified)|skipped)\b",
+    re.IGNORECASE,
+)
 EXPECTED_FILES = [
     "SKILL.md",
     "LICENSE",
@@ -121,6 +126,54 @@ def markdown_headings(text: str) -> list[tuple[int, str]]:
     return result
 
 
+def common_section_bodies(text: str) -> dict[str, str]:
+    """Return body text for the common H2 sections outside fenced blocks."""
+    lines = text.splitlines()
+    positions: list[tuple[str, int]] = []
+    fence: str | None = None
+    for index, line in enumerate(lines):
+        fence_match = re.match(r"^\s{0,3}(`{3,}|~{3,})", line)
+        if fence is not None:
+            if fence_match and fence_match.group(1)[0] == fence:
+                fence = None
+            continue
+        if fence_match:
+            fence = fence_match.group(1)[0]
+            continue
+        match = HEADING_RE.match(line)
+        if match and len(match.group(1)) == 2:
+            positions.append((match.group(2).strip(), index))
+
+    bodies: dict[str, str] = {}
+    for position, (title, start) in enumerate(positions):
+        if title not in EXPECTED_HEADINGS:
+            continue
+        end = positions[position + 1][1] if position + 1 < len(positions) else len(lines)
+        bodies[title] = "\n".join(lines[start + 1 : end]).strip()
+    return bodies
+
+
+def check_common_section_semantics(text: str, errors: list[str]) -> None:
+    """Require useful common sections and explicit verification limits."""
+    bodies = common_section_bodies(text)
+    for title in EXPECTED_HEADINGS:
+        if not bodies.get(title):
+            fail(errors, f"SKILL.md section '## {title}' must not be empty.")
+    verify = bodies.get("Verify", "")
+    if PACKAGE_CHECK_COMMAND not in verify:
+        fail(
+            errors,
+            "SKILL.md section '## Verify' must include "
+            f"{PACKAGE_CHECK_COMMAND}.",
+        )
+    if not UNAVAILABLE_MARKER_RE.search(verify):
+        fail(
+            errors,
+            "SKILL.md section '## Verify' must classify unavailable evidence "
+            "with UNVERIFIED, unavailable, not run, or skipped.",
+        )
+
+
 def safe_relative(root: Path, raw: str, errors: list[str], label: str) -> Path | None:
     target = Path(unquote(raw.split("#", 1)[0].split("?", 1)[0]))
     if target.is_absolute() or ".." in target.parts:
@@ -222,6 +275,8 @@ def check_skill(
             "SKILL.md H2 headings must use the exact common order: "
             + ", ".join(EXPECTED_HEADINGS),
         )
+    else:
+        check_common_section_semantics(text, errors)
 
 
 def check_links(

@@ -1,8 +1,8 @@
-"""Check catalog selectors and the shared reference contract.
+"""Check catalog selectors and the shared skill section contract.
 
-The checker is intentionally structural. It does not judge source snapshots or
-behavioral activation; the only tone exceptions are imported source material
-and explicit evaluation-case evidence.
+The checker validates headings, section content, and verification markers. It
+does not judge source snapshots or behavioral activation; the only tone
+exceptions are imported source material and explicit evaluation-case evidence.
 """
 
 from __future__ import annotations
@@ -18,6 +18,11 @@ EXPECTED_HEADINGS = [
     "Resources",
     "Verify",
 ]
+PACKAGE_CHECK_COMMAND = "python3 scripts/check.py"
+UNAVAILABLE_MARKER_RE = re.compile(
+    r"\b(?:unverified|unavailable|not\s+(?:run|available|executed|verified)|skipped)\b",
+    re.IGNORECASE,
+)
 DESCRIPTION_WORDS = (8, 16)
 DESCRIPTION_LIMIT = 140
 GENERIC_ROOT_NAMES = {"workflow.md", "patterns.md", "tooling.md"}
@@ -36,8 +41,57 @@ FORBIDDEN_LABELS = (
 
 FRONTMATTER_END = re.compile(r"^\s*---\s*$")
 DESCRIPTION_LINE = re.compile(r"^description:\s*(.*)$")
-HEADING_LINE = re.compile(r"^##\s+(.+?)\s*$")
+HEADING_LINE = re.compile(r"^##\s+(.+?)(?:\s*\{#[^}]+\})?\s*$")
 WORD = re.compile(r"[A-Za-z0-9]+(?:[+./:-][A-Za-z0-9]+)*")
+
+
+def _common_section_bodies(text: str) -> dict[str, str]:
+    """Return body text for common H2 sections outside fenced headings."""
+    lines = text.splitlines()
+    positions: list[tuple[str, int]] = []
+    fence: str | None = None
+    for index, line in enumerate(lines):
+        fence_match = re.match(r"^\s{0,3}(`{3,}|~{3,})", line)
+        if fence is not None:
+            if fence_match and fence_match.group(1)[0] == fence:
+                fence = None
+            continue
+        if fence_match:
+            fence = fence_match.group(1)[0]
+            continue
+        match = HEADING_LINE.match(line)
+        if match:
+            positions.append((match.group(1).strip(), index))
+
+    bodies: dict[str, str] = {}
+    for position, (title, start) in enumerate(positions):
+        if title not in EXPECTED_HEADINGS:
+            continue
+        end = positions[position + 1][1] if position + 1 < len(positions) else len(lines)
+        bodies[title] = "\n".join(lines[start + 1 : end]).strip()
+    return bodies
+
+
+def check_common_section_semantics(text: str) -> list[str]:
+    """Check section content and explicit verification limits."""
+    bodies = _common_section_bodies(text)
+    errors = [
+        f"SKILL.md section '## {title}' must not be empty."
+        for title in EXPECTED_HEADINGS
+        if not bodies.get(title)
+    ]
+    verify = bodies.get("Verify", "")
+    if PACKAGE_CHECK_COMMAND not in verify:
+        errors.append(
+            "SKILL.md section '## Verify' must include "
+            f"{PACKAGE_CHECK_COMMAND}."
+        )
+    if not UNAVAILABLE_MARKER_RE.search(verify):
+        errors.append(
+            "SKILL.md section '## Verify' must classify unavailable evidence "
+            "with UNVERIFIED, unavailable, not run, or skipped."
+        )
+    return errors
 
 def parse_frontmatter(path: Path) -> tuple[str, bool, list[str]]:
     """Return description, multiline flag, and parse errors."""
@@ -133,6 +187,11 @@ def check(root: Path) -> tuple[list[str], list[str]]:
         found = headings(package / "SKILL.md")
         if found != EXPECTED_HEADINGS:
             errors.append(f"{relative}: H2 order differs from the common contract")
+        else:
+            for message in check_common_section_semantics(
+                (package / "SKILL.md").read_text(encoding="utf-8")
+            ):
+                errors.append(f"{relative}: {message}")
 
         index = package / "references" / "index.md"
         if not index.is_file():

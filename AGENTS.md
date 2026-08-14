@@ -102,15 +102,17 @@ Resources
 Verify
 ```
 
-Keep the entrypoint concise and progressively disclosed. `Use this skill` holds
-positive triggers, exclusions, and sibling redirects. `Rules` contains only
-non-negotiable constraints. `Steps` is one complete executable path. `Resources`
-routes package-local references, indexes, assets, and scripts. `Verify` combines
-done state, validation commands, evidence, and `UNVERIFIED` conditions. Do not
-load every reference by default or duplicate policy between sections. The
-five-part sequence is this repository's contract, not an upstream Agent Skills
-requirement. The authored Python limit is **500 physical lines per file** under
-`skills/`, including tests; no generated/vendor exemption exists.
+Keep the entrypoint concise and progressively disclosed. One placement rule
+applies: `Use this skill` contains triggers, exclusions, and sibling redirects;
+`Rules` contains constraints; `Steps` contains one executable path; `Resources`
+contains only package-local resource routing, starting with `references/index.md`;
+`Verify` contains done state, commands, evidence, and an explicit unavailable or
+`UNVERIFIED` classification. Each shared-contract section must contain content,
+and `Verify` must name `python3 scripts/check.py`. Do not load every reference by
+default or duplicate policy between sections. The five-part sequence is this
+repository's contract, not an upstream Agent Skills requirement. The authored
+Python limit is **500 physical lines per file** under `skills/`, including tests;
+no generated/vendor exemption exists.
 
 `evals/evals.json` uses only this schema-by-convention (no results or fabricated
 traces):

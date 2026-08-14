@@ -54,6 +54,10 @@ forms fail closed.
 - Configured headings are exact, ordered, and outside fenced blocks; old
   heading aliases are not accepted. Duplicate headings are rejected where the
   validator supports them.
+- When `.skill-validator.json` configures the common five H2 headings, each
+  section must contain content. `Verify` must include the package checker
+  command `python3 scripts/check.py` and an explicit unavailable-evidence
+  marker such as `UNVERIFIED`, `unavailable`, `not run`, or `skipped`.
 - Configured `required_files` resolve under the skill root. These package files
   are not open-format universal requirements.
 - Relative links and `references/`, `assets/`, and `scripts/` paths resolve under
@@ -71,6 +75,11 @@ model activation, reference selection, command identity, filesystem effects,
 safe tool use, or answer quality. Run behavioral evals from `evals/evals.json`
 in clean comparable contexts and record commands, changed paths, exit status,
 network/secret events, and final response quality separately.
+
+The section-content and `Verify` checks apply only when the local configuration
+opts into the common package contract. A minimal open-format skill can use its
+own headings and remains subject to the Agent Skills frontmatter and portability
+checks.
 
 For CLI distribution, use disposable project fixtures and the exact pinned
 commands in [package distribution](package-distribution.md). Validate the

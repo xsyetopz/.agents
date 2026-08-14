@@ -22,13 +22,15 @@ compatibility paths. Preserve this exact H2 order:
 4. `Resources`
 5. `Verify`
 
-`Use this skill` contains positive triggers, exclusions, and sibling redirects.
-`Rules` contains only non-negotiable constraints. `Steps` is one complete
-executable path. `Resources` routes package-local references, indexes, assets,
-and scripts. `Verify` combines done state, validation commands, evidence, and
-`UNVERIFIED` conditions. This five-part sequence is this repository's contract,
-not an upstream Agent Skills requirement. Detail belongs one hop away in
-`references/`.
+Use one placement rule: `Use this skill` contains triggers, exclusions, and
+sibling redirects; `Rules` contains constraints; `Steps` contains one executable
+path; `Resources` contains only package-local resource routing, starting with
+`references/index.md`; `Verify` contains done state, commands, evidence, and an
+explicit unavailable or `UNVERIFIED` classification. All five sections contain
+content. The shared validator also requires `Verify` to name
+`python3 scripts/check.py`. This five-part sequence is this repository's
+contract, not an upstream Agent Skills requirement. Detail belongs one hop away
+in `references/`.
 
 ## Reference names and routes
 

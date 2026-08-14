@@ -68,8 +68,13 @@ class PackageContractTests(unittest.TestCase):
             root = self._skill(
                 Path(directory) / "example",
                 body=(
-                    "# Example\n## Use this skill\n## Rules\n## Verify\n"
-                    "## Steps\n## Resources\n## Workflow\n"
+                    "# Example\n"
+                    "## Use this skill\ntriggers\n"
+                    "## Rules\nconstraints\n"
+                    "## Verify\npython3 scripts/check.py\nUNVERIFIED\n"
+                    "## Steps\none path\n"
+                    "## Resources\nreferences/index.md\n"
+                    "## Workflow\nlegacy\n"
                 ),
             )
             errors: list[str] = []
@@ -98,6 +103,49 @@ class PackageContractTests(unittest.TestCase):
             ],
         )
 
+    def test_common_heading_contract_requires_nonempty_sections_and_verify_limits(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = self._skill(
+                Path(directory) / "example",
+                body=(
+                    "# Example\n"
+                    "## Use this skill\n\n"
+                    "## Rules\nconstraints\n"
+                    "## Steps\none path\n"
+                    "## Resources\nroutes\n"
+                    "## Verify\nlocal checks only\n"
+                ),
+            )
+            errors: list[str] = []
+            check_required_headings(
+                (root / "SKILL.md").read_text(encoding="utf-8"),
+                {
+                    "required_headings": [
+                        "# Example",
+                        "## Use this skill",
+                        "## Rules",
+                        "## Steps",
+                        "## Resources",
+                        "## Verify",
+                    ]
+                },
+                errors,
+            )
+
+        self.assertIn("SKILL.md section '## Use this skill' must not be empty.", errors)
+        self.assertIn(
+            "SKILL.md section '## Verify' must include python3 scripts/check.py.",
+            errors,
+        )
+        self.assertTrue(
+            any(
+                "must classify unavailable evidence" in error
+                for error in errors
+            )
+        )
+
     def test_required_file_cannot_escape_skill_root(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = self._skill(Path(directory) / "example")
@@ -115,10 +163,15 @@ class PackageContractTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = self._skill(
                 Path(directory) / "example",
-                body="[Guide](references/guide.md)\n",
+                body="[Reference index](references/index.md)\n",
             )
-            (root / "references").mkdir()
-            (root / "references" / "guide.md").write_text("# Guide\n", encoding="utf-8")
+            (root / "references" / "nested").mkdir(parents=True)
+            (root / "references" / "nested" / "guide.md").write_text(
+                "# Guide\n", encoding="utf-8"
+            )
+            (root / "references" / "index.md").write_text(
+                "[Guide](nested/guide.md)\n", encoding="utf-8"
+            )
             (root / ".skill-validator.json").write_text(
                 json.dumps({"required_files": ["assets/contract.json"]}),
                 encoding="utf-8",
@@ -146,7 +199,7 @@ class PackageContractTests(unittest.TestCase):
                             "evals/evals.json",
                             "scripts/check.py",
                         ],
-                        "reference_paths": ["references/guide.md"],
+                        "reference_paths": ["references/nested/guide.md"],
                         "eval_case_ids": [
                             "positive-example",
                             "near-miss-example",
