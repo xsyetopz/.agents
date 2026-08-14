@@ -43,6 +43,7 @@ Treat prompts as versioned behavior. Optimize for observable outcomes and indepe
 - Reasoning and model comparison: [model reasoning guide](references/model-reasoning-guide.md).
 - Reusable structures: [prompt templates](references/prompt-templates.md).
 - Failure patterns: [anti-patterns](references/anti-patterns.md), [issue corpus index](references/issue-corpus-index.md), and [issue taxonomy](references/issues/index.md).
+- Sibling routes: `$openai-docs` for current official OpenAI product/model guidance and `$architecture-design` for agent-system structure and tool boundaries.
 
 ## Verify
 
@@ -50,4 +51,3 @@ Treat prompts as versioned behavior. Optimize for observable outcomes and indepe
 - Run `python3 scripts/live_codex_audit.py` only with an available installed-Codex isolated fixture; classify missing binary, auth, or model availability as unverified.
 - Confirm current sources support model claims, the candidate retains requirements, representative cases pass, forbidden effects remain absent, and final-answer quality is assessed separately from tool effects.
 - Do not claim a live run without evidence.
-- Use `$openai-docs` for current official OpenAI product/model guidance and `$architecture-design` for agent-system structure and tool boundaries.

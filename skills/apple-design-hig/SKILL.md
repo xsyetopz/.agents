@@ -38,6 +38,7 @@ Use current Apple Human Interface Guidelines to make an Apple-platform interface
 - Patterns and components: [pattern catalog](references/pattern-catalog.md), [layout](references/layout.md), [motion](references/motion.md), [components](references/components.md), [controls](references/controls.md), and [inputs](references/inputs.md).
 - Presentation and inclusion: [navigation and search](references/navigation-and-search.md), [presentation](references/presentation.md), [inclusion](references/inclusion.md), and [VoiceOver](references/voiceover.md).
 - Repeatable audit sequence: [audit workflow](references/audit-workflow.md).
+- Sibling routes: `$swiftui-pro` for SwiftUI implementation review, `$impeccable` for broad interface refinement, and `$design-proof-gate` for screenshot acceptance.
 
 ## Verify
 
@@ -45,4 +46,3 @@ Use current Apple Human Interface Guidelines to make an Apple-platform interface
 - Separate design advice from implementation contracts and state accessibility effects.
 - Run `python3 scripts/check.py` and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
 - Confirm mapped references resolve. Static checks do not prove live-source freshness or behavioral quality.
-- For SwiftUI implementation review, use `$swiftui-pro`; for broad interface refinement, use `$impeccable`; for screenshot acceptance, use `$design-proof-gate`.
