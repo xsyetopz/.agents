@@ -1,23 +1,32 @@
 # Canonical Flowgraphs
 
+> Locally authored diagram guidance, not a primary source or generated snapshot; source gap: live verification of renderer behavior through the [bibliography](09-bibliography.md) is required before relying on syntax or architecture claims.
+
+GitHub renders Mermaid from a fenced `mermaid` block using a
+version-dependent renderer. Use `flowchart` with stable IDs, quote labels that
+contain punctuation, and use `A -->|label| B` for labeled edges. Probe the
+target renderer with an `info` diagram as described in the
+[GitHub Mermaid compatibility note](09-bibliography.md#github-mermaid-compatibility);
+no local render result is claimed here.
+
 All diagrams use Mermaid. Adapt names to the actual system. Do not copy a graph without checking state ownership, control authority, and failure paths.
 
 ## 1. Master architecture workflow
 
 ```mermaid
 flowchart TD
-    U[User objective and constraints] --> C[Task contract with stable IDs]
-    C --> E[Evidence and uncertainty ledger]
-    E --> B[Domain, state, and boundary model]
-    B --> Q[Quality-attribute scenarios]
-    Q --> A[Generate baseline and alternatives]
-    A --> D[Decision matrix and hard vetoes]
-    D -->|failed gate| X[Return to earliest invalid phase]
-    D -->|candidate selected| S[Static and dynamic specification]
-    S --> R[Risk and tradeoff review]
-    R --> I[ADRs and vertical slices]
-    I --> V[Executable verification plan]
-    V --> F[Final traceability and consistency pass]
+    U["User objective and constraints"] --> C["Task contract with stable IDs"]
+    C --> E["Evidence and uncertainty ledger"]
+    E --> B["Domain, state, and boundary model"]
+    B --> Q["Quality-attribute scenarios"]
+    Q --> A["Generate baseline and alternatives"]
+    A --> D["Decision matrix and hard vetoes"]
+    D -->|failed gate| X["Return to earliest invalid phase"]
+    D -->|candidate selected| S["Static and dynamic specification"]
+    S --> R["Risk and tradeoff review"]
+    R --> I["ADRs and vertical slices"]
+    I --> V["Executable verification plan"]
+    V --> F["Final traceability and consistency pass"]
 ```
 
 ## 2. Gate state machine
@@ -82,12 +91,12 @@ sequenceDiagram
 
 ```mermaid
 flowchart LR
-    EVT[Input or effect result message] --> UPD[update message model]
-    UPD --> NEW[New model]
-    UPD --> CMD[Effect commands]
-    NEW --> VIEW[Pure projection/render]
-    VIEW --> OUT[UI or TUI]
-    CMD --> FX[Effect interpreter/ports]
+    EVT["Input or effect result message"] --> UPD["update message model"]
+    UPD --> NEW["New model"]
+    UPD --> CMD["Effect commands"]
+    NEW --> VIEW["Pure projection/render"]
+    VIEW --> OUT["UI or TUI"]
+    CMD --> FX["Effect interpreter/ports"]
     FX --> EVT
 ```
 
@@ -95,22 +104,22 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    subgraph A[Bounded Context A]
-        AM[Domain model A]
-        AS[Application service A]
-        AO[Published port]
+    subgraph A["Bounded Context A"]
+        AM["Domain model A"]
+        AS["Application service A"]
+        AO["Published port"]
         AS --> AM
         AS --> AO
     end
 
-    subgraph ACL[Anti-corruption layer]
-        T[Translator and policy]
+    subgraph ACL["Anti-corruption layer"]
+        T["Translator and policy"]
     end
 
-    subgraph B[Bounded Context B]
-        BI[Inbound adapter]
-        BS[Application service B]
-        BM[Domain model B]
+    subgraph B["Bounded Context B"]
+        BI["Inbound adapter"]
+        BS["Application service B"]
+        BM["Domain model B"]
         BI --> BS --> BM
     end
 
@@ -121,22 +130,22 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    SRC[Source snapshot] --> LEX[Lex/parse]
-    LEX --> AST[Syntax tree]
-    AST --> SEM[Name/type/semantic analysis]
-    SEM --> HIR[High-level IR]
-    HIR --> PM[Pass manager]
-    PM --> MIR[Lower IR]
-    MIR --> BE[Target backend]
-    BE --> ART[Object/module artifact]
+    SRC["Source snapshot"] --> LEX["Lex/parse"]
+    LEX --> AST["Syntax tree"]
+    AST --> SEM["Name/type/semantic analysis"]
+    SEM --> HIR["High-level IR"]
+    HIR --> PM["Pass manager"]
+    PM --> MIR["Lower IR"]
+    MIR --> BE["Target backend"]
+    BE --> ART["Object/module artifact"]
 
-    LEX -. diagnostics .-> DIAG[Diagnostic projection]
+    LEX -. diagnostics .-> DIAG["Diagnostic projection"]
     SEM -. diagnostics .-> DIAG
     PM -. remarks and verification .-> DIAG
     BE -. diagnostics .-> DIAG
 
-    PM --> VER{IR valid?}
-    VER -->|no| STOP[Stop with verifier failure]
+    PM --> VER{"IR valid?"}
+    VER -->|no| STOP["Stop with verifier failure"]
     VER -->|yes| MIR
 ```
 
@@ -144,50 +153,50 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    EDIT[Document change with version] --> SNAP[Workspace snapshot]
-    SNAP --> INV[Dependency invalidation]
-    INV --> SCHED[Demand-driven scheduler]
-    SCHED --> PARSE[Incremental parse]
-    SCHED --> SEM[Incremental semantics]
-    SCHED --> IDX[Index update]
-    PARSE --> CACHE[Versioned analysis cache]
+    EDIT["Document change with version"] --> SNAP["Workspace snapshot"]
+    SNAP --> INV["Dependency invalidation"]
+    INV --> SCHED["Demand-driven scheduler"]
+    SCHED --> PARSE["Incremental parse"]
+    SCHED --> SEM["Incremental semantics"]
+    SCHED --> IDX["Index update"]
+    PARSE --> CACHE["Versioned analysis cache"]
     SEM --> CACHE
     IDX --> CACHE
-    CACHE --> PROJ[Diagnostics/completion/symbol projection]
-    CANCEL[Cancellation or newer version] --> SCHED
-    SCHED -->|discard stale result| DROP[No publication]
+    CACHE --> PROJ["Diagnostics/completion/symbol projection"]
+    CANCEL["Cancellation or newer version"] --> SCHED
+    SCHED -->|discard stale result| DROP["No publication"]
 ```
 
 ## 8. Interpreter / abstract machine
 
 ```mermaid
 flowchart LR
-    CODE[AST or bytecode] --> DISPATCH[Evaluator/dispatcher]
-    STATE[Environment, stack, heap] --> DISPATCH
-    DISPATCH --> STEP[Instruction/expression transition]
-    STEP --> STATE2[New machine state]
-    STEP --> FX[Declared effect]
-    FX --> HOST[Host port]
-    HOST --> RES[Result/trap/event]
+    CODE["AST or bytecode"] --> DISPATCH["Evaluator/dispatcher"]
+    STATE["Environment, stack, heap"] --> DISPATCH
+    DISPATCH --> STEP["Instruction/expression transition"]
+    STEP --> STATE2["New machine state"]
+    STEP --> FX["Declared effect"]
+    FX --> HOST["Host port"]
+    HOST --> RES["Result/trap/event"]
     RES --> DISPATCH
     STATE2 --> DISPATCH
-    DISPATCH --> OUT[Value, trap, trace]
+    DISPATCH --> OUT["Value, trap, trace"]
 ```
 
 ## 9. Runtime with JIT feedback
 
 ```mermaid
 flowchart TD
-    MOD[Validated module] --> EXEC[Interpreter/baseline executor]
-    EXEC --> PROF[Profiling counters]
-    PROF --> POLICY{Tiering policy}
+    MOD["Validated module"] --> EXEC["Interpreter/baseline executor"]
+    EXEC --> PROF["Profiling counters"]
+    PROF --> POLICY{"Tiering policy"}
     POLICY -->|cold| EXEC
-    POLICY -->|hot| JIT[JIT compiler]
-    JIT --> CODE[Code cache + deopt metadata]
-    CODE --> FAST[Optimized execution]
-    FAST --> GUARD{Assumption holds?}
+    POLICY -->|hot| JIT["JIT compiler"]
+    JIT --> CODE["Code cache + deopt metadata"]
+    CODE --> FAST["Optimized execution"]
+    FAST --> GUARD{"Assumption holds?"}
     GUARD -->|yes| FAST
-    GUARD -->|no| DEOPT[Deoptimize to safe state]
+    GUARD -->|no| DEOPT["Deoptimize to safe state"]
     DEOPT --> EXEC
 ```
 
@@ -195,18 +204,18 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    ARGV[argv/env/stdin] --> TP[Transport parsing]
-    TP -->|syntax error| USAGE[Usage diagnostic + stable exit code]
-    TP --> CMD[Typed application command]
-    CMD --> AUTH[Validation/authorization]
-    AUTH -->|reject| ERR[Typed application error]
-    AUTH --> USE[Use-case coordinator]
-    USE --> DOM[Domain operation]
-    DOM --> PORT[Filesystem/network/process ports]
-    PORT --> RES[Result]
-    RES --> FMT{Output mode}
-    FMT --> HUMAN[Human formatter -> stdout/stderr]
-    FMT --> MACHINE[JSON/structured formatter -> stdout]
+    ARGV["argv/env/stdin"] --> TP["Transport parsing"]
+    TP -->|syntax error| USAGE["Usage diagnostic + stable exit code"]
+    TP --> CMD["Typed application command"]
+    CMD --> AUTH["Validation/authorization"]
+    AUTH -->|reject| ERR["Typed application error"]
+    AUTH --> USE["Use-case coordinator"]
+    USE --> DOM["Domain operation"]
+    DOM --> PORT["Filesystem/network/process ports"]
+    PORT --> RES["Result"]
+    RES --> FMT{"Output mode"}
+    FMT --> HUMAN["Human formatter -> stdout/stderr"]
+    FMT --> MACHINE["JSON/structured formatter -> stdout"]
 ```
 
 ## 11. TUI
@@ -233,24 +242,24 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    USER[User request] --> CONTRACT[Immutable task contract]
-    CONTRACT --> ORCH[Orchestrator/policy state machine]
-    EVID[Evidence and decision store] --> ORCH
-    ORCH --> PLAN[Bounded task graph]
-    PLAN --> SCHED[Budgeted scheduler]
-    SCHED --> W1[Worker/model]
-    SCHED --> W2[Worker/model]
-    W1 --> BROKER[Tool capability broker]
+    USER["User request"] --> CONTRACT["Immutable task contract"]
+    CONTRACT --> ORCH["Orchestrator/policy state machine"]
+    EVID["Evidence and decision store"] --> ORCH
+    ORCH --> PLAN["Bounded task graph"]
+    PLAN --> SCHED["Budgeted scheduler"]
+    SCHED --> W1["Worker/model"]
+    SCHED --> W2["Worker/model"]
+    W1 --> BROKER["Tool capability broker"]
     W2 --> BROKER
-    BROKER --> TOOLS[Files/shell/web/MCP/APIs]
-    TOOLS --> OBS[Typed observations with provenance]
+    BROKER --> TOOLS["Files/shell/web/MCP/APIs"]
+    TOOLS --> OBS["Typed observations with provenance"]
     OBS --> EVID
-    W1 --> CAND[Candidate result]
+    W1 --> CAND["Candidate result"]
     W2 --> CAND
-    CAND --> VERIFY[Independent verifier/evals]
+    CAND --> VERIFY["Independent verifier/evals"]
     VERIFY -->|fail| ORCH
-    VERIFY -->|pass| PROJ[User-facing result and audit trace]
-    STOP[Budget, cancellation, approval, stop conditions] --> ORCH
+    VERIFY -->|pass| PROJ["User-facing result and audit trace"]
+    STOP["Budget, cancellation, approval, stop conditions"] --> ORCH
 ```
 
 ## 13. Long-running agent recovery
@@ -276,31 +285,31 @@ stateDiagram-v2
 
 ```mermaid
 flowchart LR
-    HTTP[HTTP adapter] --> VALID[Transport validation/auth]
-    VALID --> APP[Application command/query]
-    APP --> DOMAIN[Domain model]
-    APP --> PORTS[Declared ports]
-    PORTS --> DB[Persistence adapter]
-    PORTS --> EXT[External-service adapter]
-    DOMAIN --> RESULT[Domain result/error]
-    RESULT --> MAP[Representation mapping]
-    MAP --> RESP[Versioned HTTP response]
+    HTTP["HTTP adapter"] --> VALID["Transport validation/auth"]
+    VALID --> APP["Application command/query"]
+    APP --> DOMAIN["Domain model"]
+    APP --> PORTS["Declared ports"]
+    PORTS --> DB["Persistence adapter"]
+    PORTS --> EXT["External-service adapter"]
+    DOMAIN --> RESULT["Domain result/error"]
+    RESULT --> MAP["Representation mapping"]
+    MAP --> RESP["Versioned HTTP response"]
 ```
 
 ## 15. Binary parser with staged trust
 
 ```mermaid
 flowchart LR
-    BYTES[Untrusted bytes/stream] --> FRAME[Framing and size limits]
-    FRAME --> STRUCT[Structural decoder]
-    STRUCT -->|bounds/encoding failure| PERR[Parse error with offset]
-    STRUCT --> VAL[Semantic validation]
-    VAL -->|invariant/version failure| VERR[Validation error]
-    VAL --> IR[Normalized typed IR]
-    IR --> API[Object/query API]
-    IR --> HEX[Annotated hex/disassembly projection]
-    IR --> ENC[Encoder]
-    ENC --> ROUND[Round-trip/canonicalization checks]
+    BYTES["Untrusted bytes/stream"] --> FRAME["Framing and size limits"]
+    FRAME --> STRUCT["Structural decoder"]
+    STRUCT -->|bounds/encoding failure| PERR["Parse error with offset"]
+    STRUCT --> VAL["Semantic validation"]
+    VAL -->|invariant/version failure| VERR["Validation error"]
+    VAL --> IR["Normalized typed IR"]
+    IR --> API["Object/query API"]
+    IR --> HEX["Annotated hex/disassembly projection"]
+    IR --> ENC["Encoder"]
+    ENC --> ROUND["Round-trip/canonicalization checks"]
 ```
 
 ## 16. Event-driven service
@@ -329,30 +338,30 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    START[Start command] --> HIST[Append workflow event]
-    HIST --> DECIDE[Deterministic workflow decision]
-    DECIDE --> ACT[Schedule activity]
-    ACT --> WORK[Idempotent worker]
+    START["Start command"] --> HIST["Append workflow event"]
+    HIST --> DECIDE["Deterministic workflow decision"]
+    DECIDE --> ACT["Schedule activity"]
+    ACT --> WORK["Idempotent worker"]
     WORK -->|success| HIST
-    WORK -->|retryable failure| RETRY[Backoff + bounded retry]
+    WORK -->|retryable failure| RETRY["Backoff + bounded retry"]
     RETRY --> ACT
-    WORK -->|permanent failure| COMP[Compensate or manual repair]
+    WORK -->|permanent failure| COMP["Compensate or manual repair"]
     COMP --> HIST
-    DECIDE -->|complete| DONE[Terminal state]
+    DECIDE -->|complete| DONE["Terminal state"]
 ```
 
 ## 18. Vertical architecture slice
 
 ```mermaid
 flowchart LR
-    INPUT[One real input] --> ADAPTER[Real inbound adapter]
-    ADAPTER --> USE[One application operation]
-    USE --> CORE[Semantic rule/invariant]
-    CORE --> PORT[One declared effect port]
-    PORT --> IMPLEMENT[Minimal real adapter or controlled fake]
-    IMPLEMENT --> OUTPUT[One observable output]
-    CORE --> FAIL[One failure path]
-    OUTPUT --> TEST[Automated acceptance test]
+    INPUT["One real input"] --> ADAPTER["Real inbound adapter"]
+    ADAPTER --> USE["One application operation"]
+    USE --> CORE["Semantic rule/invariant"]
+    CORE --> PORT["One declared effect port"]
+    PORT --> IMPLEMENT["Minimal real adapter or controlled fake"]
+    IMPLEMENT --> OUTPUT["One observable output"]
+    CORE --> FAIL["One failure path"]
+    OUTPUT --> TEST["Automated acceptance test"]
     FAIL --> TEST
 ```
 
@@ -360,12 +369,16 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    CLAIMS[Conflicting claims or designs] --> SRC{Independent sources/evidence?}
-    SRC -->|no| UNKNOWN[Mark unknown; do not vote]
-    SRC -->|yes| REPRO{Executable reproduction possible?}
-    REPRO -->|yes| TEST[Run controlled experiment]
-    REPRO -->|no| AUTH[Rank primary authority and scope]
-    TEST --> RESULT[Record result and conditions]
+    CLAIMS["Conflicting claims or designs"] --> SRC{"Independent sources/evidence?"}
+    SRC -->|no| UNKNOWN["Mark unknown; do not vote"]
+    SRC -->|yes| REPRO{"Executable reproduction possible?"}
+    REPRO -->|yes| TEST["Run controlled experiment"]
+    REPRO -->|no| AUTH["Rank primary authority and scope"]
+    TEST --> RESULT["Record result and conditions"]
     AUTH --> RESULT
-    RESULT --> LEDGER[Update evidence and decision ledgers]
+    RESULT --> LEDGER["Update evidence and decision ledgers"]
 ```
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

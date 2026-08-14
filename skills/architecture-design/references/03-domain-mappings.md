@@ -1,5 +1,7 @@
 # Cross-Domain Mappings
 
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
 These mappings help classify a system. They are not prescriptions. The “MVC-like” columns show analogies only; the **preferred primary shape** usually names the stronger architecture.
 
 | # | Domain | Semantic core / “Model” | Projection / “View” | Control / “Controller” | Preferred primary shape | Critical invariants |
@@ -190,3 +192,7 @@ Do not begin with microservices. Begin with ownership and consistency:
 5. Which integrations require published language or anti-corruption translation?
 
 A service boundary is justified only by semantic, ownership, trust, deployment, failure, or scaling forces.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

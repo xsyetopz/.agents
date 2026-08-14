@@ -227,3 +227,8 @@ read the artifact before labeling it
 - Before the trigger occurs, the response contains no execution or finished artifact for the deferred step unless an advance draft was explicitly requested. After the trigger occurs, the action matches the stored condition and does not broaden beyond it.
 - The response preserves the user's actual requested task while removing only the rejected behavior.
 - Before committing to removal, the agent can state: exact artifact, aliases, callers, references, effects, user-file reach, covered claim, uncovered claim after removal, and whether the user asked for deletion.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

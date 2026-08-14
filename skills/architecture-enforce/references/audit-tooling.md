@@ -1,5 +1,7 @@
 # Executable architecture tooling
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Use the bundled adapter for tool discovery and syntax evidence. It never
 installs software, executes repository-provided shell commands, rewrites files,
 or treats a missing provider as a clean result.
@@ -102,3 +104,7 @@ python3 scripts/providers.py graph --root <repo> --tool auto --format json
 consumes `go list -json ./...`. The adapter accepts only structured JSON, keeps
 provider diagnostics and digests, and reports resolver failures as
 `tool-failed` rather than inventing a dependency graph.
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

@@ -16,6 +16,7 @@
     "scripts/check.py",
     "references/index.md",
     "references/changelog.md",
-    "references/readme.md"
+    "references/readme.md",
+    "references/sources.md"
   ]
 }

@@ -1,8 +1,28 @@
-# Apple HIG reference router
+# Apple Human Interface Guidelines reference router
 
-Start here: [this router](index.md). For current external pages, use the [Apple HIG source index](hig-source-index.md).
+Use this router to select one focused local reference. The [Apple HIG source
+index](hig-source-index.md) is the bundled snapshot; verify version-sensitive
+claims against the live Apple page before relying on them.
 
-Select the smallest local reference matching the platform, foundation, pattern, component, or technology question.
+## When you need | Read
+
+| When you need | Read |
+| --- | --- |
+| Frame a design decision or audit | [Design principles](design-principles.md), [Audit workflow](audit-workflow.md) |
+| Resolve accessibility or inclusive-design constraints | [Accessibility](accessibility.md), [VoiceOver](voiceover.md) |
+| Choose layout, components, or interaction patterns | [Layout](layout.md), [Components](components.md), [Pattern catalog](pattern-catalog.md) |
+| Find platform-specific guidance | [Designing for iOS](designing-for-ios.md), [Designing for iPadOS](designing-for-ipados.md), [Designing for macOS](designing-for-macos.md), [Designing for visionOS](designing-for-visionos.md), [Designing for watchOS](designing-for-watchos.md), [Designing for tvOS](designing-for-tvos.md) |
+| Verify current Apple sources or recent changes | [HIG source index](hig-source-index.md), [What’s new](whats-new.md) |
+
+## Sources
+
+- [Bundled HIG source index](hig-source-index.md) and its canonical [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) page.
+
+## Alphabetical topic index
+
+Select the smallest topic reference that answers the question. The index is
+alphabetical for predictable lookup; it is not a statement that every topic is
+appropriate for every platform.
 
 ## A
 

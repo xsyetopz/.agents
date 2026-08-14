@@ -84,6 +84,9 @@ checks.
 For CLI distribution, use disposable project fixtures and the exact pinned
 commands in [package distribution](package-distribution.md). Validate the
 copied package itself; a source pass does not prove copy independence.
+For source claims or Mermaid diagrams, route to the package
+[reference provenance guide](reference-provenance.md) before calling external
+or rendering evidence verified.
 
 ## Exit classification
 
@@ -92,3 +95,7 @@ copied package itself; a source pass does not prove copy independence.
   any safety invariant violated.
 - **UNVERIFIED:** a behavioral, network, or external-source check was not run;
   report it rather than converting absence of evidence into a pass.
+
+## Sources
+
+- [Reference provenance guide](reference-provenance.md) for source records, scope boundaries, and freshness labels.

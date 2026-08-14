@@ -146,3 +146,8 @@ canceling that works, fit so light you forget you're wearing them.
 ### Acceptance check
 
 No prompt label phrases appear verbatim in the output.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

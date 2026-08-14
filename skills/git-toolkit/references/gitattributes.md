@@ -1,5 +1,7 @@
 # Git Attributes
 
+Scope: local `.gitattributes` patterns for line endings (end-of-line, or EOL, normalization), diffs, merges, archives, and generated-file classification. In examples, LF means line feed and CRLF means carriage-return line feed. A pattern affects Git behavior in the checkout and may not change how a hosting provider renders or stores the file.
+
 `.gitattributes` controls how Git handles files: line endings, diff display,
 merge behavior, and archive exports. Source: `gitattributes(5)` man page.
 
@@ -169,3 +171,8 @@ yarn.lock -diff merge=ours
 .gitattributes export-ignore
 .gitignore export-ignore
 ```
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git reference and standards links.
+- [Git attributes documentation](https://git-scm.com/docs/gitattributes) — current pattern and filter semantics.

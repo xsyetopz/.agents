@@ -123,3 +123,11 @@ fixture with synthetic credentials and no production egress.
 | Codex-only removal can leave a shared-target copy; enumerating agents removed it in the probe | Pinned CLI contract probe, accessed 2026-08-13 | Agent names and behavior may change; always verify path, list JSON, and lock. |
 | Historical credential/hash portability reports merit extra review | [Vercel issue #523](https://github.com/vercel-labs/skills/issues/523) and [#781](https://github.com/vercel-labs/skills/issues/781), accessed 2026-08-13 | User reports are version-/platform-scoped, not current-version guarantees. |
 | Skills are a supply-chain surface | [Skill-Inject](https://arxiv.org/abs/2602.20156), preprint accessed 2026-08-13 | Threat categories motivate review; paper rates are not this package's test result. |
+
+## Sources
+
+The evidence table is the source record for this procedure. Preserve its
+retrieval dates and scoped boundaries; when a command or source was not
+re-probed, state the gap rather than inventing a revision or result. See the
+[reference provenance guide](reference-provenance.md) for the shared field
+definitions.

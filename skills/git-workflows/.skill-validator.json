@@ -15,6 +15,7 @@
     "references/branch-protection.md",
     "references/branching-models.md",
     "references/merge-strategies.md",
+    "references/sources.md",
     "assets/contract.json",
     "evals/evals.json",
     "scripts/check.py"

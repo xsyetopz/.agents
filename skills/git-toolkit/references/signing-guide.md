@@ -1,5 +1,7 @@
 # Commit Signing
 
+Scope: local commit and tag signing with GNU Privacy Guard (GPG) or Secure Shell (SSH) keys. A locally valid signature is not hosted verification until the provider has the matching public key and displays the verification result.
+
 ## Why sign
 
 Signing verifies that a commit was made by the claimed author. Required for some
@@ -7,6 +9,8 @@ orgs and open-source projects. GitHub shows a "Verified" badge on signed
 commits.
 
 ## GPG signing
+
+The configuration examples below change user-level signing defaults and export public-key material. Confirm the key identity and destination before running them; do not disclose private keys, and treat hosted verification as `UNVERIFIED` until the provider confirms it.
 
 ### GPG setup
 
@@ -104,3 +108,8 @@ machine. Check: `gpg --list-secret-keys --keyid-format LONG`
 ```bash
 echo "$(git config --get user.email) $(cat path/to/id_ed25519.pub)" > path/to/allowed_signers
 ```
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git signing and hosted-boundary references.
+- [Git commit documentation](https://git-scm.com/docs/git-commit) and [GitHub authentication documentation](https://docs.github.com/en/authentication) — local signing and provider verification boundaries.

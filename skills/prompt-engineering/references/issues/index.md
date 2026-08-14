@@ -108,3 +108,7 @@ Use this router after `issue-lookup.md` identifies a category. Open one category
 
 - [self-narration](./tone-meta.md#self-narration)
 - [style-laundering](./tone-meta.md#style-laundering)
+
+## Sources
+
+- [Official source snapshots](../official-sources.md) for provider guidance; issue and corpus rows are local evaluation records, not external evidence.

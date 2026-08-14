@@ -1,6 +1,8 @@
-# Pattern Catalogue
+# Pattern Catalog
 
-Use this catalogue to generate and test candidates. It is not a menu from which the most fashionable item is selected.
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
+Use this catalog to generate and test candidates. It is not a menu from which the most fashionable item is selected.
 
 For every selected pattern, prove its **problem**, **forces**, **preconditions**, **mechanism**, and **consequences** in the current system.
 
@@ -402,3 +404,7 @@ Patterns commonly compose at different levels:
 - Binary parser + validator + normalized IR + visitor/pipeline transformations.
 
 Do not combine patterns merely to appear comprehensive. Every added pattern must remove a named risk or satisfy a named quality scenario.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

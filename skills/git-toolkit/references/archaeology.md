@@ -1,5 +1,7 @@
 # Git Archaeology
 
+Scope: local Git history search and attribution using commits, refs, and path-limited inspection. A ref is a name pointing to an object; commands read the current checkout unless an explicit repository and revision are supplied. Do not infer authorship or intent from a matching line alone.
+
 Finding when and why code changed. Not `git log` - the deep tools.
 
 ## Finding when a string was added or removed
@@ -163,3 +165,8 @@ else so the rename detection has maximum signal.
 3. **Squashing unrelated changes.** A squash merge that combines a refactor
 with a new feature in one commit makes it impossible to bisect to the precise
 change that caused a regression.
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git reference and hosted-boundary sources.
+- [Git reference](https://git-scm.com/docs) — current command semantics.

@@ -1,5 +1,7 @@
 # Interactive Rebase Guide
 
+Scope: local history rewriting with rebase, interactive editing, conflict resolution, and abort/recovery. Rebase changes commit identities; record the original `HEAD`, preserve a recovery ref, and do not force-push without explicit authorization.
+
 ## Core operations
 
 ### Squash commits
@@ -97,3 +99,8 @@ git rebase --abort
 - `git rebase --abort` restores pre-rebase state
 - Rebase only unpushed commits on shared branches
 - `git push --force-with-lease` after rebase, not `--force`
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git history and hosted-boundary sources.
+- [Git rebase documentation](https://git-scm.com/docs/git-rebase) — current rebase semantics.

@@ -8,12 +8,66 @@ from test_support import (
     check_broken_references,
     check_duplicate_headers,
     check_markdown_links,
+    check_skill_creator_references,
     validate,
 )
 from validate_skill_contract_tests import PackageContractTests
 
 
 class ReferenceAndYamlTests(unittest.TestCase):
+    @staticmethod
+    def _router_fixture(directory: str, *, text: str) -> Path:
+        root = Path(directory) / "skill-creator"
+        references = root / "references"
+        references.mkdir(parents=True)
+        (references / "index.md").write_text(text, encoding="utf-8")
+        return root
+
+    def test_skill_creator_mermaid_requires_github_safe_edges_and_fence(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = self._router_fixture(
+                directory,
+                text=(
+                    "# Skill creator reference router\n\n"
+                    "## Authoring\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                    "## Metadata and routing\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                    "## Validation and safety\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                    "## Distribution\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                ),
+            )
+            graph = root / "references" / "graph.md"
+            graph.write_text(
+                "flowchart LR\nA -- no --> B\n\n"
+                "```mermaid\nflowchart LR\nA -- no --> B\n```\n",
+                encoding="utf-8",
+            )
+            errors: list[str] = []
+            check_skill_creator_references(root, errors)
+
+        self.assertTrue(any("must be in a ```mermaid fence" in error for error in errors))
+        self.assertTrue(any("must use -->|label| syntax" in error for error in errors))
+
+    def test_skill_creator_mermaid_accepts_fenced_label_syntax(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = self._router_fixture(
+                directory,
+                text=(
+                    "# Skill creator reference router\n\n"
+                    "## Authoring\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                    "## Metadata and routing\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                    "## Validation and safety\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                    "## Distribution\n| When you need | Read |\n| --- | --- |\n| x | [x](x.md) |\n"
+                ),
+            )
+            (root / "references" / "graph.md").write_text(
+                "```mermaid\nflowchart LR\nA -->|next| B\n```\n",
+                encoding="utf-8",
+            )
+            errors: list[str] = []
+            check_skill_creator_references(root, errors)
+
+        self.assertEqual(errors, [])
+
     def test_markdown_links_allow_external_urls_but_reject_missing_local_target(
         self,
     ) -> None:

@@ -12,8 +12,8 @@ Use current Apple Human Interface Guidelines to make an Apple-platform interface
 - Design or review an iOS, iPadOS, macOS, watchOS, tvOS, or visionOS interface.
 - Choose native navigation, presentation, input, feedback, typography, color, motion, or system experiences.
 - Check adaptation across devices, input modes, appearances, Dynamic Type, VoiceOver, and other accessibility needs.
-- Do not use for Swift, SwiftUI, UIKit, SDK/API correctness without a design question; App Store policy, entitlements, provisioning, privacy manifests, legal advice; or generic web and cross-platform UX.
-- Redirect SwiftUI implementation review to `$swiftui-pro`, broad interface refinement to `$impeccable`, screenshot acceptance to `$design-proof-gate`, and Canvas2D 3D implementation to `$using-easeljs`.
+- Do not activate for Swift, SwiftUI, UIKit, or other SDK/API correctness work; use the implementation-specific documentation or skill for the target project.
+- Do not activate for generic web or cross-platform UX, App Store policy, entitlements, provisioning, privacy manifests, or legal advice.
 
 ## Rules
 
@@ -34,7 +34,7 @@ Use current Apple Human Interface Guidelines to make an Apple-platform interface
 ## Resources
 
 - Start with the package [reference router](references/index.md).
-- Run the package [checker](scripts/check.py) for structural evidence.
+- The router links the local HIG snapshot and the authored audit workflow; use those routes before searching individual topics.
 
 ## Verify
 

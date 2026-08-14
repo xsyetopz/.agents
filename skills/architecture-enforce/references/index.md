@@ -1,19 +1,21 @@
-# Architecture enforcement reference map
+# Architecture Enforce reference router
 
+Use one focused route at a time. Start with the target boundary and fail-closed
+constraints, choose the smallest enforcement task, verify the audit evidence,
+and consult the source record for provider or language-specific behavior.
 
-Start here: [this router](index.md).
-Use this router to select the smallest reference that answers the current
-boundary, audit, or migration question.
+## When you need | Read
 
-| Trigger keywords | Reference |
+| When you need | Read |
 | --- | --- |
-| ownership, cohesion, quality scenarios, fail-closed gates | [fitness principles](principles.md) |
-| filenames, fragmentation, colonies, reserved names | [naming](naming.md) |
-| language and ecosystem conventions | [language catalogue](languages.md) |
-| test placement, source sets, test ownership | [testing](testing.md) |
-| build, package, lockfile, generator ownership | [toolchains](toolchains.md) |
-| providers, AST queries, capability preflight | [audit tooling](audit-tooling.md) |
-| architecture evidence, proof ladder, acceptance reports | [verification](verification.md) |
-| pattern selection, migration structures | [pattern catalogue](pattern-catalog.md) |
-| concrete topology examples, generated boundaries | [examples](examples.md) |
-| first-party architecture and tool references | [sources](sources.md) |
+| **Scope:** ownership, cohesion, quality scenarios, and fail-closed gates | [fitness principles](principles.md) |
+| **Scope:** language and ecosystem boundaries | [language catalog](languages.md) |
+| **Safety:** filename, fragmentation, colony, and reserved-name risks | [naming](naming.md) |
+| **Safety:** suppression policy, generated boundaries, and warning/error handling | [verification](verification.md) |
+| **Task:** place tests and preserve source-set ownership | [testing](testing.md) |
+| **Task:** identify build, package, lockfile, and generator owners | [toolchains](toolchains.md) |
+| **Task:** select migration structures and cohesive patterns | [pattern catalog](pattern-catalog.md) |
+| **Task:** compare concrete topology and generated-boundary examples | [examples](examples.md) |
+| **Verification:** run capability preflight, syntax-tree (AST) queries, and architecture audits | [audit tooling](audit-tooling.md) |
+| **Verification:** produce architecture evidence, proof ladders, and acceptance reports | [verification](verification.md) |
+| **Sources:** first-party architecture, language, tool, and provider references | [sources](sources.md) |

@@ -57,6 +57,11 @@
   authorization plus isolated review. Do not “fix” it by adding permissions.
 - **A result is claimed without a run:** label it `UNVERIFIED`, run the smallest
   safe check, or state the blocker.
-- **Model-specific claim may be stale:** use `$openai-docs`/OpenAI Docs MCP,
-  fetch the exact official page, record the retrieval date, and preserve older
-  text as historical evidence until refreshed.
+- **Model-specific claim may be stale:** route named-model source work to the
+  prompt-engineering skill, fetch the exact official page when authorized,
+  record the retrieval date or an explicit source gap, and preserve older text
+  as historical evidence until refreshed. See [reference provenance](reference-provenance.md).
+
+## Sources
+
+- [Reference provenance guide](reference-provenance.md) for source records, scope boundaries, and freshness labels.

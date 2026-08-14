@@ -1,5 +1,7 @@
 # Git Hooks Guide
 
+Scope: local Git hooks and pre-commit validation. A hook is executable code invoked by Git; review every hook before enabling it, keep failures visible, and never install a hook from an untrusted source.
+
 Hooks are scripts that run at specific points in the git workflow.
 
 ## Client-side hooks
@@ -115,3 +117,8 @@ repos:
 ```
 
 Install: `pre-commit install` Run manually: `pre-commit run --all-files`
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git command and security references.
+- [Git hooks documentation](https://git-scm.com/docs/githooks) — lifecycle and execution semantics.

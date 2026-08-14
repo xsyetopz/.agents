@@ -1,20 +1,27 @@
 # Architecture Decision Procedure
 
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
+For diagrams intended for GitHub, keep the fenced `mermaid` language marker,
+quote punctuation-heavy labels, and write edge labels as `A -->|label| B`.
+Use the [GitHub Mermaid compatibility note](09-bibliography.md#github-mermaid-compatibility)
+to probe the target renderer; local rendering is not claimed here.
+
 ## 1. Rigor-first workflow
 
 Use the smallest method that still resolves the architectural risk. The default is `R3` unless the task is plainly smaller or the user specifies otherwise. See `references/11-rigor-modes.md`.
 
 ```mermaid
 flowchart TD
-   contract[contract] --> evidence[evidence]
-   evidence --> boundaries[boundaries]
-   boundaries --> forces[forces]
-   forces --> candidates[candidates]
-   candidates --> decision[decision]
-   decision --> views[views/contracts]
-   views --> risk[risk review]
-   risk --> slices[slices]
-   slices --> verification[verification]
+   contract["contract"] --> evidence["evidence"]
+   evidence --> boundaries["boundaries"]
+   boundaries --> forces["forces"]
+   forces --> candidates["candidates"]
+   candidates --> decision["decision"]
+   decision --> views["views/contracts"]
+   views --> risk["risk review"]
+   risk --> slices["slices"]
+   slices --> verification["verification"]
 ```
 
 A later step may expose an earlier error. Return to the earliest invalid step rather than patching downstream artifacts.
@@ -38,28 +45,28 @@ Answer in order:
 
 ```mermaid
 flowchart TD
-    A[Is the dominant work an interactive feedback loop?]
-    A -->|yes| B[Is state transition message-driven and replayable?]
-    B -->|yes| C[consider MVU / reducer / state machine]
-    B -->|no| D[Is UI technology / binding the dominant constraint?]
-    D -->|binding| E[consider MVVM]
-    D -->|passive view / testability| F[consider MVP]
-    D -->|multiple views over independent model| G[consider MVC]
+    A["Is the dominant work an interactive feedback loop?"]
+    A -->|yes| B["Is state transition message-driven and replayable?"]
+    B -->|yes| C["consider MVU / reducer / state machine"]
+    B -->|no| D["Is UI technology / binding the dominant constraint?"]
+    D -->|binding| E["consider MVVM"]
+    D -->|passive view / testability| F["consider MVP"]
+    D -->|multiple views over independent model| G["consider MVC"]
 
-    A -->|no| H[Is the dominant work ordered transformation?]
-    H -->|yes| I[Are stages reusable and IR / contracts explicit?]
-    I -->|yes| J[consider pipeline / pass manager]
-    I -->|no| K[consider functional core + explicit sequence]
+    A -->|no| H["Is the dominant work ordered transformation?"]
+    H -->|yes| I["Are stages reusable and IR / contracts explicit?"]
+    I -->|yes| J["consider pipeline / pass manager"]
+    I -->|no| K["consider functional core + explicit sequence"]
 
-    H -->|no| L[Is the system executing a language or machine model?]
-    L -->|yes| M[consider interpreter / abstract machine / runtime]
-    L -->|no| N[Is work governed by explicit lifecycle states?]
-    N -->|yes| O[consider state machine / workflow / saga]
-    N -->|no| P[Is dependency structure a graph?]
-    P -->|yes| Q[consider dataflow / DAG / scheduler-executor]
-    P -->|no| R[Is asynchronous decoupling required?]
-    R -->|yes| S[consider event-driven / actor / broker, with delivery semantics]
-    R -->|no| T[consider layered / hexagonal application architecture or simpler modules]
+    H -->|no| L["Is the system executing a language or machine model?"]
+    L -->|yes| M["consider interpreter / abstract machine / runtime"]
+    L -->|no| N["Is work governed by explicit lifecycle states?"]
+    N -->|yes| O["consider state machine / workflow / saga"]
+    N -->|no| P["Is dependency structure a graph?"]
+    P -->|yes| Q["consider dataflow / DAG / scheduler-executor"]
+    P -->|no| R["Is asynchronous decoupling required?"]
+    R -->|yes| S["consider event-driven / actor / broker, with delivery semantics"]
+    R -->|no| T["consider layered / hexagonal application architecture or simpler modules"]
 ```
 
 This tree chooses a primary explanatory shape. Secondary patterns may handle other forces.
@@ -522,3 +529,7 @@ test, inspection, analysis, or monitored measure.
 4. Audit check/CI configuration for suppression directives, disabled rules/providers/jobs, severity/threshold/baseline edits, allow-failure, excluded paths, or weakened/deleted tests.
 5. Rerun the unmodified `architecture-enforce` preflight and full audit when repository files changed; acceptance requires zero unresolved warnings/errors.
 6. Run bundled validators and record exact commands, scopes, active checks, exit codes, and artifact paths.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

@@ -1,5 +1,7 @@
 # Artifact Contracts
 
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
 The templates in `assets/` are normative starting points. Remove unused sections only with an explicit `Not applicable - reason` entry when the omission could otherwise hide risk.
 
 ## 1. Architecture report contract
@@ -334,3 +336,7 @@ Represent mechanically checkable rules where possible:
 - No compiler pass leaves unverified IR at a named boundary
 
 Use language-native architecture tests, static analysis, lint rules, build graph checks, or custom scripts.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

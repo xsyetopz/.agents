@@ -1,5 +1,7 @@
 # Toolchain, build, and package ownership
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Use this reference to identify the files that own architecture before adding,
 moving, or generating source. A tool name alone is insufficient. Determine its
 role, authority, and resolution domain from repository evidence.
@@ -331,3 +333,7 @@ Reject the change when any of these remain unexplained:
 Tool syntax and lockfile behavior can change across major versions. When a
 repository pins a version, its local help, wrapper, schema, and generated
 headers override generic command examples here.
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

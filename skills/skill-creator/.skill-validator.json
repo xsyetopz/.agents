@@ -18,6 +18,7 @@
     "scripts/validate_skill.py",
     "scripts/test_validate_skill.py",
     "references/conventions.md",
+    "references/reference-provenance.md",
     "references/frontmatter-spec.md",
     "references/openai-yaml-spec.md",
     "references/validation-guide.md",

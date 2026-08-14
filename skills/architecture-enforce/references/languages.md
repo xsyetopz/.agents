@@ -1,5 +1,7 @@
 # Language architecture catalog
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Use this catalog after identifying the repository's language, framework, and
 toolchain. Years approximate first public appearance or standard lineage. They
 order the catalog only; they do not rank quality. For build and package
@@ -223,3 +225,7 @@ Enforce all of the following:
 Before moving a cross-language boundary, inspect FFI memory ownership, ABI and
 calling convention, serialization compatibility, error mapping, concurrency or
 runtime affinity, generated-file provenance, and release/version coupling.
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

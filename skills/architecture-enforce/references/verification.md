@@ -1,5 +1,7 @@
 # Architecture verification and evidence
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Use fitness functions to keep an architectural decision true as the repository
 changes. Prefer deterministic checks at the owning boundary and report what
 each check can and cannot prove.
@@ -149,3 +151,7 @@ blocked, flaky, and environment-failed checks. Include pre-change diagnostic
 results and known limitations without treating them as a baseline waiver. A
 claim that a pattern or quality attribute is enforced without a named check is
 an unresolved design risk.
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

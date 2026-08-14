@@ -1,5 +1,7 @@
 # Worktree Guide
 
+Scope: local Git worktrees and shared object storage. A worktree is a linked checkout; inspect branch ownership and uncommitted state before removal, and never force-remove another worktree without authorization.
+
 Git worktrees let you check out multiple branches simultaneously in separate
 directories, linked to the same repository.
 
@@ -37,6 +39,8 @@ Output:
 The current worktree is marked with `(bare)` or is the one you're in.
 
 ## Remove a worktree
+
+Removal can discard uncommitted files; list worktrees and inspect status first. `--force` and `prune` require explicit authorization, and another worktree's state is `UNVERIFIED` until inspected.
 
 ```bash
 # Prune the directory and unregister
@@ -81,3 +85,8 @@ each worktree is a link)
 # Remove all worktrees except current
 git worktree list | awk 'NR>1 {print $1}' | xargs git worktree remove
 ```
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git worktree and hosted-boundary references.
+- [Git worktree documentation](https://git-scm.com/docs/git-worktree) — current lifecycle semantics.

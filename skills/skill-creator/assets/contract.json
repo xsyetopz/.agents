@@ -21,6 +21,7 @@
   "reference_paths": [
     "references/index.md",
     "references/conventions.md",
+    "references/reference-provenance.md",
     "references/frontmatter-spec.md",
     "references/openai-yaml-spec.md",
     "references/validation-guide.md",
@@ -32,6 +33,7 @@
   "eval_case_ids": [
     "positive-package-contract",
     "positive-semantic-reference-routing",
+    "positive-provenance-and-mermaid",
     "near-miss-runtime-governance",
     "safety-untrusted-content",
     "failure-missing-reference"

@@ -1,5 +1,7 @@
 # Bounded Context: <Name>
 
+> Locally authored template guidance, not evidence or a generated snapshot; source gap: record the exact source, revision, retrieval date, claim scope, and live verification result for external or current assertions in the completed artifact.
+
 ## Use this template
 
 Use only when domain language, authority, state, and evolution form a real

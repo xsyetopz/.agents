@@ -3,6 +3,9 @@
 Configuring `.github/ISSUE_TEMPLATE/` with YAML forms. Source:
 [GitHub issue template docs](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository).
 
+Scope: local-policy issue-form examples. Replace placeholder owners, URLs, and
+labels, then verify the current provider syntax before publishing.
+
 ## File structure
 
 ```text
@@ -186,3 +189,8 @@ The companion to issue templates. Lives at `.github/pull_request_template.md`:
 - [ ] Documentation updated
 - [ ] CHANGELOG.md entry added
 ```
+
+## Sources
+
+- [GitHub issue template documentation](https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/configuring-issue-templates-for-your-repository)
+  supports the form structure and placement guidance.

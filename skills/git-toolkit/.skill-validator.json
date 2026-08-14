@@ -26,6 +26,7 @@
     "references/submodule-lfs.md",
     "references/git-security-tooling.md",
     "references/worktree-guide.md",
+    "references/sources.md",
     "assets/contract.json",
     "evals/evals.json",
     "scripts/check.py"

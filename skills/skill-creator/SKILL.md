@@ -8,11 +8,15 @@ description: Agent Skill authoring, metadata, references, evals, package checks,
 Author one bounded, portable Agent Skill. Keep the root entrypoint concise, route detail through the reference router, and leave observable evidence for structural, behavioral, and distribution claims.
 Each section has one role: Use this skill holds triggers, exclusions, and sibling redirects; Rules holds constraints; Steps is one path; Resources routes package-local references; Verify states done conditions, commands, evidence, and UNVERIFIED limits.
 
+`$name` is a selector token: it names one catalog skill package, not a shell
+variable. Use only selectors listed in the catalog, and define the token before
+its first use in any diagram or example.
+
 ## Use this skill
 
 - Create, revise, validate, package, or evaluate a skill artifact; design selector metadata, references, assets, evals, and client routing; or consolidate duplicate reference content.
 - Do not use for runtime application changes, prompt or model design, repository governance, current OpenAI product documentation, or release documentation.
-- Redirect prompt and model work to `$prompt-engineering`, governance to `$repo-governance`, current OpenAI documentation to `$openai-docs`, and release documentation to `$repo-docs`.
+- Redirect prompt and model work to `$prompt-engineering`, governance to `$repo-governance`, and release documentation to `$repo-docs`.
 
 ## Rules
 
@@ -35,13 +39,20 @@ Each section has one role: Use this skill holds triggers, exclusions, and siblin
 
 ## Resources
 
-- Start with the package [reference router](references/index.md).
-- Use `assets/contract.json` and `evals/evals.json` for package contracts and cases.
-- Run `scripts/check.py`, `scripts/validate_skill.py`, and `scripts/check_skill_structure.py` for structural evidence.
+- Start with the package [reference router](references/index.md); read the
+  [reference provenance guide](references/reference-provenance.md) when a
+  source record, citation boundary, or GitHub-compatible Mermaid diagram is
+  needed.
+- Route package contracts and cases to `assets/contract.json` and
+  `evals/evals.json`.
 
 ## Verify
 
 - Done means the entrypoint, metadata, references, contract paths, eval cases, and package-local resources are self-contained and checks pass.
 - Run `python3 scripts/check.py` and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
-- For this repository, run `python3 scripts/validate_skill.py skills/skill-creator` and `python3 scripts/check_skill_structure.py "$PWD"`.
-- Report command output, changed paths, and evidence separately. Mark behavioral, CLI, network, or external-source checks `UNVERIFIED` when they were not run or when Codex, authentication, or network access was unavailable.
+- For this repository, run `python3 scripts/validate_skill.py skills/skill-creator`
+  and `python3 scripts/check_skill_structure.py "$PWD"`.
+- Report command output, changed paths, and evidence separately. Mark
+  behavioral, CLI, network, external-source, or Mermaid-rendering checks
+  `UNVERIFIED` when they were not run or when Codex, authentication, network,
+  or a GitHub-compatible renderer was unavailable.

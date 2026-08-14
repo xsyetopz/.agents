@@ -246,3 +246,8 @@ Record observed inputs, outputs, writes, exit behavior where applicable, ownersh
 - - Responses to role questions start with observed facts. - Edit promises follow a role audit, not the emotional force of the question. - Cleanup commits identify whether each touched file was live behavior or residue. - Issue reports generalize the failure without preserving hook output or transcript noise.
 - - Role answers name observed inputs, outputs, callers, and install reach before promising edits. - Removal changes do not leave stale references. - Cleanup does not recreate the same behavior elsewhere. - Final reports separate "what existed" from "what changed."
 - The first answer to an artifact-role question contains observed role, reach, and evidence gaps. Any edit commitment comes after that accounting.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

@@ -1,5 +1,8 @@
 # Governance Contracts
 
+Scope: local-policy contract patterns. Adapt owners, enforcement, and required
+disclosures to evidence from the target repository.
+
 ## Human contribution contract
 
 Use simple, neutral language. The human policy must cover change scope,
@@ -49,3 +52,15 @@ The agent policy must state all of the following in simple English:
 
 These rules limit agent execution. Human conduct belongs in the code of conduct
 and contribution policy.
+
+## Sources
+
+- [Git trailer documentation](https://git-scm.com/docs/git-interpret-trailers.html)
+  supports the trailer syntax example.
+- [Developer Certificate of Origin 1.1](https://developercertificate.org/) supports
+  the DCO boundary described above.
+- [Linux coding-assistant guidance](https://kernel.org/doc/html/next/process/coding-assistants.html)
+  and [LLVM's AI tool policy](https://llvm.org/docs/AIToolPolicy.html) are
+  precedents, not copied repository policy.
+- [GitHub co-author attribution](https://github.blog/news-insights/product-news/commit-together-with-co-authors/)
+  supports the attribution warning.

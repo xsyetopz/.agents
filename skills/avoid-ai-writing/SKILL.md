@@ -34,7 +34,8 @@ Find observable prose patterns and make only the requested edits. Do not infer w
 ## Resources
 
 - Start with the package [reference router](references/index.md).
-- Run the package [checker](scripts/check.py) for structural evidence.
+- Load only the routed package-local reference that matches the observable issue.
+- Use the package-local checker, contract, and eval manifest when validation is requested.
 
 ## Verify
 

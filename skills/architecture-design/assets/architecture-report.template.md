@@ -1,5 +1,13 @@
 # Architecture Report: <System / Decision>
 
+> Locally authored template guidance, not evidence or a generated snapshot; source gap: record the exact source, revision, retrieval date, claim scope, and live verification result for external or current assertions in the completed artifact.
+
+For a report that will render on GitHub, follow the package's
+[Mermaid compatibility note](../references/09-bibliography.md#github-mermaid-compatibility):
+use a fenced `mermaid` block, quote punctuation-heavy labels, and use
+`A -->|label| B` for labeled edges. Probe the target renderer with `info`; do
+not treat local rendering as proof.
+
 ## Use this template
 
 Use for a nontrivial architecture decision or migration. Keep only material
@@ -57,7 +65,7 @@ and replace every placeholder with evidence or an explicit unknown.
 
 ```mermaid
 flowchart LR
-  A[Actor] --> S[System]
+  A["Actor"] --> S["System"]
 ```
 
 ## 4. Quality-Attribute Scenarios
@@ -115,7 +123,7 @@ cannot waive a topology, verification, or structural finding.
 
 ```mermaid
 flowchart LR
-  A[Component A] -->|contract| B[Component B]
+  A["Component A"] -->|contract| B["Component B"]
 ```
 
 ### Dependency rules

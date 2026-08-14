@@ -1,5 +1,7 @@
 # Auth and Security
 
+Scope: authentication and mutation safety for hosted GitHub and GitLab APIs. The GitHub CLI (`gh`) and GitLab CLI (`glab`) are command-line interfaces (CLIs); a personal access token (PAT), OAuth (delegated authorization) token, CLI credential, or continuous-integration (CI) token has provider-defined permissions. Resolve the exact scope before use.
+
 ## GitHub
 
 ### GitHub token types
@@ -150,3 +152,9 @@ curl -sS -o /dev/null -w '%{http_code}' \
 ```
 
 Both should return `200`. A `401` means the token is invalid or expired.
+
+## Sources
+
+- [Git Actions source map](sources.md) — provider authentication and secret-handling URLs.
+- [GitHub authentication documentation](https://docs.github.com/en/authentication) and [GitLab REST authentication](https://docs.gitlab.com/api/rest/authentication/) — current provider boundaries.
+- [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) — independent security baseline (verify freshness before relying on it).

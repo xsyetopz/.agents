@@ -109,3 +109,8 @@ After rejection, the agent must: 1. remove evaluative labels from the next propo
 ### Acceptance check
 
 - The next proposal after rejection is presented as a proposal with evidence labels, not as an improved or corrected answer by assertion.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

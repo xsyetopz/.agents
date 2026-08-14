@@ -140,3 +140,7 @@ Route: [tone-meta category file](issues/tone-meta.md).
 
 - **`self-narration`** → `issues/tone-meta.md#self-narration`
 - **`style-laundering`** → `issues/tone-meta.md#style-laundering`
+
+## Sources
+
+- [Official source snapshots](official-sources.md) for provider guidance; issue and corpus rows are local evaluation records, not external evidence.

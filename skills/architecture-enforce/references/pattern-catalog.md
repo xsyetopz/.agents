@@ -1,5 +1,7 @@
 # Architecture Pattern Selection Catalog
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Select an architecture from product constraints, operating model, and enforceable dependency rules--not fashion, framework defaults, or a desire to look "enterprise." A pattern is accepted only when its boundary can be named, its invariants can be tested or reviewed, and its operational cost has an accountable owner. Prefer the smallest coherent model; add a boundary only when it protects a real change, failure, scaling, security, data, or ownership concern.
 
 ## Contents
@@ -268,3 +270,7 @@ Name the package/module rules, architecture checks, contract tests, runtime sign
 ## Exit or Review Trigger
 State the measurable condition that requires revisiting, replacing, or removing this decision.
 ```
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

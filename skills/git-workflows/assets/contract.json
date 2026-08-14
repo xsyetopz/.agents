@@ -22,7 +22,8 @@
     "references/index.md",
     "references/branch-protection.md",
     "references/branching-models.md",
-    "references/merge-strategies.md"
+    "references/merge-strategies.md",
+    "references/sources.md"
   ],
   "eval_case_ids": [
     "positive-model-selection",

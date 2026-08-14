@@ -35,3 +35,7 @@ solely from complaint wording.
 4. Use natural prompts that do not name the category or expected correction.
 5. Inspect tool/filesystem effects separately from the final answer.
 6. Retire redundant or non-reproducing cases instead of accumulating aliases.
+
+## Sources
+
+- [Official source snapshots](official-sources.md) for provider guidance; issue and corpus rows are local evaluation records, not external evidence.

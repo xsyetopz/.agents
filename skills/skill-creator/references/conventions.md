@@ -52,6 +52,9 @@ Consolidate by meaning, not by filename or line count. Before merging:
 Use a consistent authored reference schema when useful: scope, rules, procedure,
 checks, and sources. Split a reference above roughly 200 lines when one topic
 has independent routes; retain a reason for any larger source snapshot.
+For source records and Mermaid syntax, use the package
+[reference provenance guide](reference-provenance.md); keep the record in a
+normal `## Sources` or `## References` section rather than inventing frontmatter.
 
 ## Tone and portability
 
@@ -66,3 +69,7 @@ separate claims.
 Select one skill explicitly, use the pinned CLI, project scope, and `--copy`,
 then inspect the copied tree and lock entries. See
 [package distribution](package-distribution.md) for command and removal evidence.
+
+## Sources
+
+- [Reference provenance guide](reference-provenance.md) for source records, scope boundaries, and freshness labels.

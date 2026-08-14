@@ -25,7 +25,8 @@
     "references/rhetoric-patterns.md",
     "references/structural-patterns.md",
     "references/formatting.md",
-    "references/severity-tiers.md"
+    "references/severity-tiers.md",
+    "references/sources.md"
   ],
   "eval_case_ids": [
     "positive-detect-patterns",

@@ -2,6 +2,9 @@
 
 Load this to prioritize what to fix and calibrate strictness for the audience.
 
+Scope: local-policy triage guidance. Severity depends on the requested medium,
+audience, voice, and evidence; it is not an authorship score.
+
 ---
 
 ## Severity tiers
@@ -188,3 +191,7 @@ both axes govern the same rule and agree, they reinforce. Where they disagree,
 resolve toward the **stricter** of the two. Sensible default pairings:
 casual↔casual, professional↔linkedin/investor-email,
 technical↔docs/technical-blog.
+
+## Sources
+
+- [Package source map](sources.md); verify the linked source record before relying on current or external claims.

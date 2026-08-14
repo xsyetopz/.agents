@@ -1,9 +1,13 @@
 # GPT-5.6 family
 
-- Canonical identifier: `gpt-5.6`
-- Guide language: English
-- Evidence status: prompt guide (shared family)
-- Retrieved: 2026-08-14
+- Provider: OpenAI
+- Provider identifier: `gpt-5.6`
+- Normalized slug: `gpt-5.6`
+- Guide language: en
+- Translation status: original
+- Evidence status: first-party-guidance
+- Retrieved: 2026-08-13
+- Revision: 2026-08-13 snapshot
 
 ## Prompt recipe
 
@@ -31,10 +35,10 @@
 - Compare modes and efforts on the same representative evaluations. A family
   label is not evidence that one setting is best for a task.
 
-## Official sources
+## Sources
 
 | Type | URL | Retrieved |
 | --- | --- | --- |
-| GPT-5.6 family prompt guidance | https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md | 2026-08-14 |
-| General prompt engineering | https://developers.openai.com/api/docs/guides/prompt-engineering.md | 2026-08-14 |
-| GPT-5.6 family model guide | https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6 | 2026-08-14 |
+| GPT-5.6 family prompt guidance | https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md | 2026-08-13 |
+| General prompt engineering | https://developers.openai.com/api/docs/guides/prompt-engineering.md | 2026-08-13 |
+| GPT-5.6 family model guide | https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6 | 2026-08-13 |

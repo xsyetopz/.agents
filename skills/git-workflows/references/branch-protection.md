@@ -1,5 +1,7 @@
 # Branch Protection Rules
 
+Scope: hosted branch protection and ruleset design for GitHub, GitLab, and compatible providers. A pull request (PR) or merge request (MR) review rule is only a proposal until the target repository exposes the corresponding setting and required check.
+
 Branch protection is the enforcement mechanism for branching models. Without it,
 a workflow is a suggestion. With it, a workflow is a contract.
 
@@ -134,3 +136,8 @@ gh api /repos/owner/repo/branches/main/protection
 # Check if linear history is required (critical for trunk-based)
 gh api /repos/owner/repo/branches/main/protection/required_linear_history
 ```
+
+## Sources
+
+- [Git Workflows source map](sources.md) — provider settings, standards, and freshness limits.
+- [GitHub protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches) and [Bitbucket branch permissions](https://support.atlassian.com/bitbucket-cloud/docs/use-branch-permissions/) — hosted enforcement examples.

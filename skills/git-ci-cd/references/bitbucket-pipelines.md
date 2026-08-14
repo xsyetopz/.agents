@@ -1,5 +1,7 @@
 # Bitbucket Pipelines
 
+Scope: Bitbucket Pipelines YAML (a human-readable configuration format), step execution, caches, artifacts, services, and deployments. Pull request (PR) triggers, variables, and deployment permissions are provider settings; validate them in the target workspace before relying on these examples.
+
 ## Pipeline syntax
 
 Minimum viable `bitbucket-pipelines.yml`:
@@ -120,3 +122,8 @@ pipelines:
 - Re-run: Pipeline detail page -> Rerun
 - Download logs: Pipeline step -> Download
 - Pipeline variables set in Repository Settings -> Pipelines -> Variables
+
+## Sources
+
+- [Git CI/CD source map](sources.md) — provider URLs and checked freshness.
+- [Get started with Bitbucket Pipelines](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/) — current syntax and execution model.

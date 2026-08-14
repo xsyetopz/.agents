@@ -1,5 +1,7 @@
 # Verification and Evaluation
 
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
 ## 1. Verification hierarchy
 
 Prefer the lowest-cost evidence that can falsify the architectural claim, then add higher-level tests for integration risk.
@@ -319,3 +321,7 @@ Before `PASS`:
 - [ ] Any suspected tool defect has a minimal reproducer and explicit policy
   authorization; the architecture gate is blocked while the check is weakened.
 - [ ] No unrequested scope is silently included.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

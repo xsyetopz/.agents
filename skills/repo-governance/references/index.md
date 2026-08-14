@@ -1,13 +1,15 @@
-# Reference index
+# Repo Governance reference router
 
+Choose the smallest package-local route that answers the current governance
+question. Keep audience, owner, scope, precedence, enforcement, and external
+authorization explicit; provider settings still require current verification.
 
-Start here: [this router](index.md).
-Select one governance route; keep audience, owner, scope, and enforcement explicit.
+## When you need | Read
 
-| Trigger | Reference |
+| When you need | Read |
 | --- | --- |
-| AGENTS.md scope, imports, and external-action boundaries | [Agent governance](agent-governance.md) |
-| Contributor, community, security, and provider files | [Human governance](human-governance.md) |
-| Audience, ownership, assistance, and agent-rule contracts | [Governance contracts](contracts.md) |
-| GitHub issue and pull-request form structure | [Issue templates](issue-templates.md) |
-| Provider behavior and primary sources | [Standards](standards.md) |
+| Scope, boundaries, and sibling routing | [Skill scope](../SKILL.md#use-this-skill) |
+| Safety, preservation, and evidence | [Governance rules](../SKILL.md#rules) |
+| Task-specific guidance and examples | [Agent governance](agent-governance.md), [human governance](human-governance.md), [governance contracts](contracts.md), and [issue templates](issue-templates.md) |
+| Verification commands and checks | [Standards and source map](standards.md), [skill verification](../SKILL.md#verify), and the package-local [governance CLI](../scripts/governance.py) |
+| Sources, provenance, and freshness | [Standards and primary sources](standards.md) |

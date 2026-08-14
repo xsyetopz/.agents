@@ -1,5 +1,7 @@
 # Canonical Vocabulary and Universal Decomposition Model
 
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
 ## 1. Distinguish the levels of design language
 
 | Term | Meaning | Evidence required |
@@ -286,3 +288,7 @@ A defensible design can be summarized as:
 > Because **forces and evidence**, we assign **state and responsibilities** to **components/boundaries**, connected by **contracts and control flow**, accepting **consequences**, and verify the result through **measures and tests**.
 
 If any bold phrase is missing, the architecture is incomplete.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

@@ -118,3 +118,8 @@ Distinguish saved account memory, current conversation context, project context,
 ### Acceptance check
 
 The response explicitly identifies the source of each reported item. The saved-memory section contains only entries verified as saved memory; current-chat or project context is either omitted or clearly separated.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

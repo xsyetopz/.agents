@@ -33,7 +33,8 @@
     "references/stash-guide.md",
     "references/submodule-lfs.md",
     "references/git-security-tooling.md",
-    "references/worktree-guide.md"
+    "references/worktree-guide.md",
+    "references/sources.md"
   ],
   "eval_case_ids": [
     "positive-local-commit",

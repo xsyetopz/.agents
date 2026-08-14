@@ -21,7 +21,8 @@
   "reference_paths": [
     "references/index.md",
     "references/changelog.md",
-    "references/readme.md"
+    "references/readme.md",
+    "references/sources.md"
   ],
   "eval_case_ids": [
     "positive-readme-audit",

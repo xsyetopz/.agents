@@ -1,5 +1,7 @@
 # GitHub REST API
 
+Scope: GitHub REST (Representational State Transfer) API requests and `gh` command-line interface (CLI) examples. Resolve the repository, API version, endpoint permissions, and response schema before execution; examples with `POST`, `PUT`, `PATCH`, or `DELETE` are mutation examples and require explicit authorization.
+
 Base URL: `https://api.github.com`
 
 ## Auth
@@ -11,7 +13,7 @@ gh auth status
 # Personal access token
 curl -H "Authorization: Bearer $GITHUB_TOKEN" \
      -H "Accept: application/vnd.github+json" \
-     -H "X-GitHub-Api-Version: 2022-11-28" \
+     -H "X-GitHub-Api-Version: 2026-03-10" \
      https://api.github.com/...
 ```
 
@@ -30,6 +32,8 @@ gh api --paginate /repos/owner/repo/releases --jq '.[].tag_name'
 
 ## Common endpoints
 
+The create, trigger, and other write examples below are illustrative only. Before running one, confirm the exact repository, resource, effect, and token permission; use a read-only request when inspection is sufficient. If the provider rejects the API version, schema, or permission, stop and report `UNVERIFIED` rather than retrying a broader request.
+
 ### Releases
 
 ```bash
@@ -42,8 +46,10 @@ gh release list --repo owner/repo --limit 20
 # Get a specific release by tag
 gh api /repos/owner/repo/releases/tags/v1.2.3
 
-# Raw API - latest
+# Raw API - latest (authenticated; omit the token only for intentionally public reads)
 curl -sS -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2026-03-10" \
   https://api.github.com/repos/owner/repo/releases/latest | jq .
 ```
 
@@ -116,6 +122,10 @@ gh run watch <run-id> --repo owner/repo
 gh api /rate_limit --jq '.rate'
 ```
 
-- Authenticated: 5000/hour
-- Unauthenticated: 60/hour
-- Search endpoints have separate, lower limits
+Rate limits vary by authentication method, endpoint, installation, and current provider policy. Inspect response headers or the provider rate-limit endpoint instead of relying on fixed numbers; unavailable limit evidence is `UNVERIFIED`.
+
+## Sources
+
+- [Git Actions source map](sources.md) — checked provider URLs and freshness limits.
+- [GitHub REST API documentation](https://docs.github.com/en/rest) — endpoint and version reference.
+- [Using pagination in the REST API](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api) — link headers and page limits.

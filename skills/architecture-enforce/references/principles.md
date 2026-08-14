@@ -1,5 +1,7 @@
 # Architecture fitness rules
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Use this reference when selecting boundaries, evaluating a structural proposal,
 or planning a migration. These rules operationalize the core contract; they do
 not replace language and toolchain requirements.
@@ -424,3 +426,7 @@ An attribute is architecturally addressed only when the scenario has an owner,
 a target, a design invariant, and executable or independently reviewable proof.
 Record unknown targets as risks; do not silently substitute a pattern or a
 folder structure for missing requirements.
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

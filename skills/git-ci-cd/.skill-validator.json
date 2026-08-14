@@ -18,6 +18,7 @@
     "references/gitlab-ci.md",
     "references/bitbucket-pipelines.md",
     "references/cross-platform-patterns.md",
+    "references/sources.md",
     "assets/contract.json",
     "evals/evals.json",
     "scripts/check.py"

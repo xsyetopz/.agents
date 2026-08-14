@@ -3,6 +3,9 @@
 Typography and visual formatting patterns that signal AI-generated text. Load
 when auditing document-level formatting, layout, and typographic tells.
 
+Scope: local-policy editing heuristics. The corpus note below is an internal
+observation, not evidence of authorship.
+
 ---
 
 ## Em dashes (— and --)
@@ -15,8 +18,8 @@ Carve-outs (don't count toward the rate):
 
 - List separator: `- **Term** — description` or `- [- link text] — description`
   where the em dash separates a bold lead term or markdown link from its gloss.
-- Changelog version headings: `## [3.21.0] — 2026-07-30` (Keep-a-Changelog
-  format). Adapted from #67.
+- Changelog version headings: `## [3.21.0] — 2026-07-30` (see [Keep a
+  Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/)). Adapted from #67.
 - Bold-lead parentheticals in lists: `- **Lingering-attention claims**
   (\`lingering-attention\`) — the share-post frame...` where a parenthetical or
   inline code follows the bold lead before the em dash. Adapted from #67.
@@ -91,3 +94,7 @@ the period is correct.
 AI stacks compound modifiers: "a high-quality, well-architected, future-proof
 solution." Cut to the modifier that actually matters. Also: hyphenated before
 the noun, unhyphenated after a linking verb — AI frequently gets this wrong.
+
+## Sources
+
+- [Package source map](sources.md); verify the linked source record before relying on current or external claims.

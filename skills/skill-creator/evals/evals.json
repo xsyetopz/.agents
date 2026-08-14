@@ -20,6 +20,11 @@
       "expected_outcome": "Activates skill-creator. It compares meaning and inbound routes before consolidation, keeps one canonical rule plus unique authority and cases, uses package-relative links and the exact common H2 order, and labels unrun evidence unverified."
     },
     {
+      "id": "positive-provenance-and-mermaid",
+      "prompt": "Author a focused reference for a skill package that cites an external specification and contains two Mermaid flowcharts. Add ordinary Sources or References records with claim scope, retrieval gaps, and revisions; use fenced mermaid blocks and GitHub-safe -->|label| edges; preserve source snapshots and report renderer evidence.",
+      "expected_outcome": "Activates skill-creator. It routes to the package provenance guide, records only consulted sources or explicit gaps without fabricated dates or revisions, keeps source snapshots unchanged, defines selector tokens before diagrams, uses standard fenced Mermaid and -->|label| syntax, and marks unrun GitHub rendering UNVERIFIED."
+    },
+    {
       "id": "near-miss-runtime-governance",
       "prompt": "Fix a production API timeout in src/server.ts and rewrite the repository's ownership policy in AGENTS.md. Do not edit any skill files.",
       "expected_outcome": "Does not activate skill-creator. The request is runtime and repository-governance work outside the skill-artifact boundary; it makes no skill-package edits."

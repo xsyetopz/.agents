@@ -36,8 +36,8 @@ Define repository policy with explicit audiences, ownership, scope, and enforcem
 ## Resources
 
 - Start with the package [reference router](references/index.md).
-- Run the package [governance CLI](scripts/governance.py) and [checker](scripts/check.py) for evidence.
-- Use reviewed package templates under `assets/` only after verifying project facts and owners.
+- Load only the routed package-local governance reference needed for the audience or file.
+- Use package-local templates and scripts only after verifying project facts and owners.
 
 ## Verify
 

@@ -170,3 +170,8 @@ Do not add permanent cleanup code, startup deletion, tests for the deletion help
 ### Acceptance check
 
 - The final change removes the accidental artifact route instead of adding a persistent cleanup route. - No new runtime, startup, hook, CI, test, or installer code exists only to delete the one-off artifact. - Tests or smoke checks prove the bad artifact is not produced, bundled, installed, or referenced. - Final reports name the remaining invariant, not a cleanup helper.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

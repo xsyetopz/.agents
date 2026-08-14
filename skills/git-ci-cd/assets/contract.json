@@ -25,7 +25,8 @@
     "references/github-integrations.md",
     "references/gitlab-ci.md",
     "references/bitbucket-pipelines.md",
-    "references/cross-platform-patterns.md"
+    "references/cross-platform-patterns.md",
+    "references/sources.md"
   ],
   "eval_case_ids": [
     "positive-secure-github-workflow",

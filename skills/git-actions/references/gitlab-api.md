@@ -1,5 +1,7 @@
 # GitLab REST API
 
+Scope: GitLab REST (Representational State Transfer) API requests. A merge request (MR) is GitLab's hosted review resource; project `id` and internal `iid` are not interchangeable. Resolve the host, URL-encode namespaced paths, and treat `POST`, `PUT`, `PATCH`, and `DELETE` examples as authorized mutations only.
+
 Base URL: `https://gitlab.com/api/v4` (or self-hosted instance URL)
 
 ## Auth
@@ -47,6 +49,8 @@ glab api --paginate "projects/$PROJECT_ID/releases?per_page=100" | jq '.[].tag_n
 ```
 
 ## Common endpoints
+
+The release, merge-request, and pipeline creation examples below are illustrative only. Confirm the exact project, ref, effect, and token scope before any `POST`, `PUT`, `PATCH`, or `DELETE`; use a read-only request when inspection is sufficient. If a self-managed instance differs from GitLab.com, verify its API version, schema, and limits and report differences as `UNVERIFIED`.
 
 ### Releases
 
@@ -122,5 +126,10 @@ curl -sS -H "PRIVATE-TOKEN: $GITLAB_TOKEN" \
 
 ## Rate limits
 
-GitLab.com: 2000 requests/minute for authenticated users (may vary). Check
-headers: `RateLimit-Limit`, `RateLimit-Remaining`, `RateLimit-Reset`.
+Limits vary by endpoint, authentication, GitLab.com policy, and self-managed configuration. Read `RateLimit-Limit`, `RateLimit-Remaining`, and `RateLimit-Reset` headers when present; missing or unavailable limit evidence is `UNVERIFIED`.
+
+## Sources
+
+- [Git Actions source map](sources.md) — checked provider URLs and freshness limits.
+- [GitLab API documentation](https://docs.gitlab.com/api/) and [GitLab REST API](https://docs.gitlab.com/api/rest/) — endpoint, encoding, pagination, and response reference.
+- [GitLab REST authentication](https://docs.gitlab.com/api/rest/authentication/) — token headers and scopes.

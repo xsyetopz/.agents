@@ -23,6 +23,19 @@ For each named model, record:
 If any item is unverified, describe it as unknown. Do not fill it from model
 family resemblance.
 
+## Terminology
+
+- **Provider identifier** is the exact model string accepted by the named
+  provider surface; preserve its case and version suffix.
+- **Normalized slug** is a stable lowercase route key used only for local
+  filenames and sorting; it is not an API alias.
+- **Source-gap** means no dedicated first-party prompt/profile source was found;
+  it is not evidence of a capability or default.
+- **UNVERIFIED** means a current source, identifier, or runtime observation is
+  still missing. Do not route or make a profile claim until it is checked.
+- **Route layer** means authored guidance that points to source records; it
+  cannot override the source record or create provider behavior.
+
 ## Prompting across reasoning modes
 
 Keep prompts outcome-focused: goal, relevant context, constraints, required
@@ -70,3 +83,9 @@ A different model family can provide useful diversity, but family diversity is
 not proof of correctness. Reviewers need the same evidence, rubric, blinded
 inputs where appropriate, and deterministic acceptance gates. Final acceptance
 remains tied to the target model's real execution environment.
+
+## References
+
+- [Official source records](official-sources.md)
+- [Named-model catalog](models/catalog.json)
+- [GitHub Mermaid diagram syntax](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams)

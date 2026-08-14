@@ -48,3 +48,10 @@ Use at least three substantive positive prompts and three neighboring
 near-misses. A static keyword check measures text shape only; it does not prove
 model activation. Keep fixed cases in `evals/evals.json` and record run evidence
 outside the manifest.
+
+## Sources
+
+- [Agent Skills specification](https://agentskills.io/specification) — external
+  source lead for the open-format fields. Refresh and record a retrieval date
+  before making a current-version claim; this package's narrower description
+  limits are local policy.

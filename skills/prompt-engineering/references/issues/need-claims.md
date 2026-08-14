@@ -123,3 +123,8 @@ direct callers
 - Every utility verdict is preceded by an artifact inventory. The final action names the observed behavior being removed, preserved, narrowed, or replaced.
 - Before stating a purpose verdict or removal plan, the agent can name the exact script, aliases, callers, inputs, reads, writes, deletes, outputs, exit behavior, user-file reach, supported claim, lost coverage, and authorization for the proposed action.
 - - Script-role answers name observed callers and outputs. - Removal commits do not leave stale command references. - Documentation-only gates are not recreated under another script or installer action. - Final explanations separate "what it did" from "what changed."
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

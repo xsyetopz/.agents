@@ -1,5 +1,7 @@
 # Merge Strategies
 
+Scope: merge method selection and revert implications for local Git and hosted review systems. A pull request (PR) or merge request (MR) button is provider UI; the equivalent local command does not prove that the hosted repository permits or records the same method.
+
 When to squash, rebase, or merge-commit. Based on git's actual merge behavior
 and the linear history requirements of trunk-based development.
 
@@ -125,3 +127,8 @@ one package's. Prefer:
   commits
 - **Never** merge commit - in a monorepo, merge commits create meaningless
 branch topology (the branch touched 3 packages; which one was it "about"?)
+
+## Sources
+
+- [Git Workflows source map](sources.md) — provider, Git, and standards references.
+- [Git reference](https://git-scm.com/docs) — merge, rebase, and revert semantics.

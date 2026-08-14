@@ -122,3 +122,8 @@ What product output or state does it change or validate?
 - - Prose-only verifier scripts are removed. - Installer actions perform install lifecycle behavior, not documentation linting. - Release or smoke evidence comes from commands that exercise runtime behavior.
 - - New scripts state a concrete behavioral input and output in the owning artifact or tests. - Documentation cleanup does not add commands, gates, generated reports, or installer actions. - Release evidence comes from product behavior checks, not prose-shape checks. - When a prose-only script is found, references are audited before removal.
 - Every script, command, CI job, installer action, and generated report has a behavior role that can be stated without mentioning wording, headings, labels, assistant process, or documentation ceremony. If prose review is needed, it stays as review.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

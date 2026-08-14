@@ -16,6 +16,7 @@
     "references/structural-patterns.md",
     "references/formatting.md",
     "references/severity-tiers.md",
+    "references/sources.md",
     "assets/contract.json",
     "evals/evals.json",
     "scripts/check.py"

@@ -17,6 +17,7 @@
     "references/github-graphql.md",
     "references/gitlab-api.md",
     "references/version-fetching.md",
+    "references/sources.md",
     "assets/contract.json",
     "evals/evals.json",
     "scripts/check.py"

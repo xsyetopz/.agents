@@ -1,5 +1,7 @@
 # Failure Modes and Anti-Patterns
 
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
 ## 1. Pattern-first architecture
 
 **Symptom:** “Use MVC/microservices/event sourcing/DDD” appears before requirements and forces.
@@ -327,3 +329,7 @@ the gate can no longer detect the risk.
 **Correction:** Report the exact reproducer and environment, keep the original
 check enabled and failing, and request a separately recorded policy change.
 No conversational approval or local config edit authorizes a passing gate.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

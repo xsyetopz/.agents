@@ -1,14 +1,15 @@
-# Reference index
+# Git CI/CD reference router
 
+Use this router to load only the narrowest package-local reference. Keep the
+hosted runner, trust-boundary, permission, and blocking-failure rules in
+`SKILL.md` active.
 
-Start here: [this router](index.md).
-Select one route by pipeline concern; keep trust-boundary and failure rules active.
+## When you need | Read
 
-| Trigger | Reference |
+| When you need | Read |
 | --- | --- |
-| Secrets, permissions, trust boundaries, caches, and dependencies | [Security checklist](security-checklist.md) |
-| GitHub workflow syntax and conventions | [GitHub Actions](github-actions.md) |
-| GitHub repository integrations and maintenance bots | [GitHub integrations](github-integrations.md) |
-| GitLab rules, needs, variables, and images | [GitLab CI](gitlab-ci.md) |
-| Bitbucket deployment, variables, caches, and artifacts | [Bitbucket Pipelines](bitbucket-pipelines.md) |
-| Cross-platform migration and invariants | [Cross-platform patterns](cross-platform-patterns.md) |
+| Scope and boundary | [GitHub Actions](github-actions.md); [GitLab CI](gitlab-ci.md); [Bitbucket Pipelines](bitbucket-pipelines.md) |
+| Safety, permissions, and trust | [CI/CD security checklist](security-checklist.md) |
+| Task patterns and provider semantics | [Cross-platform CI patterns](cross-platform-patterns.md); [GitHub integrations](github-integrations.md); [GitHub Actions](github-actions.md); [GitLab CI](gitlab-ci.md); [Bitbucket Pipelines](bitbucket-pipelines.md) |
+| Verification and evidence | [CI/CD security checklist](security-checklist.md); [Cross-platform CI patterns](cross-platform-patterns.md); [GitHub Actions](github-actions.md); [GitLab CI](gitlab-ci.md); [Bitbucket Pipelines](bitbucket-pipelines.md) |
+| Sources and freshness | [Git CI/CD source map](sources.md) |

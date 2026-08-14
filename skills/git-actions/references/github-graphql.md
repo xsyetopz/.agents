@@ -1,5 +1,7 @@
 # GitHub GraphQL API
 
+Scope: GitHub GraphQL (query language for typed API requests) queries, variables, cursors, and response validation. A query is read-only; a GraphQL mutation changes hosted state and needs the same target, effect, and permission confirmation as a REST write.
+
 Endpoint: `POST https://api.github.com/graphql`
 
 ## When to use
@@ -133,3 +135,8 @@ releases(first: 10, after: $cursor, orderBy: ...) {
   pageInfo { endCursor hasNextPage }
 }
 ```
+
+## Sources
+
+- [Git Actions source map](sources.md) — checked provider URLs and freshness limits.
+- [GitHub GraphQL API documentation](https://docs.github.com/en/graphql) — schema, query, mutation, and pagination reference.

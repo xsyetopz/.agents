@@ -1,6 +1,19 @@
 # Bibliography and Primary References
 
+> Package-local primary/standards source map, not a verified citation set or generated snapshot; source gap: check the exact source, version, and retrieval date. Live verification is required for current behavior.
+
 This bibliography is a source map, not a reading list to copy mechanically. Prefer the primary source that defines a concept, standard, protocol, or tool. Verify publication versions and current product behavior before relying on them.
+
+## GitHub Mermaid compatibility
+
+GitHub requires Mermaid syntax inside a fenced code block with the `mermaid`
+language identifier and warns that third-party Mermaid plugins can produce
+different results. To inspect the renderer version currently used by GitHub,
+render an `info` diagram before relying on version-sensitive syntax. The
+architecture diagrams in this package therefore use stable node IDs, quoted
+labels where punctuation could be ambiguous, and `A -->|label| B` edge labels.
+
+- [GitHub Docs: Creating diagrams](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams) - primary renderer and syntax guidance (checked 2026-08-14; re-check live behavior when publishing).
 
 ## Agent Skills and coding agents
 

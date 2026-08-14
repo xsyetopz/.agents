@@ -35,8 +35,6 @@ Turn architecture policy into repository evidence and blocking checks while pres
 ## Resources
 
 - Start with the package [reference router](references/index.md).
-- Use the package [audit command](scripts/audit_architecture.py) and provider scripts for structural evidence.
-- Run the package [checker](scripts/check.py) before reporting a result.
 
 ## Verify
 

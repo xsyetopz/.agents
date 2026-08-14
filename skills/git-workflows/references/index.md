@@ -1,11 +1,15 @@
-# Reference index
+# Git Workflows reference router
 
+Use this router to load only the narrowest team-policy reference. A proposal is
+advisory until hosted settings, required checks, and recent repository evidence
+are inspected.
 
-Start here: [this router](index.md).
-Select one route by team integration concern; verify enforcement against repository settings.
+## When you need | Read
 
-| Trigger | Reference |
+| When you need | Read |
 | --- | --- |
-| Branching and release model comparison | [Branching models](branching-models.md) |
-| Squash, rebase, or merge-commit tradeoffs | [Merge strategies](merge-strategies.md) |
-| Branch protection and enforcement templates | [Branch protection](branch-protection.md) |
+| Scope and boundary | [Branching models](branching-models.md) |
+| Safety, permissions, and trust | [Branch protection](branch-protection.md) |
+| Task patterns and provider semantics | [Merge strategies](merge-strategies.md); [Branching models](branching-models.md) |
+| Verification and evidence | [Branch protection](branch-protection.md); [Branching models](branching-models.md); [Merge strategies](merge-strategies.md) |
+| Sources and freshness | [Git Workflows source map](sources.md) |

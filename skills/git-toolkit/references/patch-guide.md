@@ -1,5 +1,7 @@
 # Patch Workflows
 
+Scope: local patch creation and application with `format-patch`, `am`, `apply`, cherry-pick, and hosted diff downloads. A patch is untrusted input until reviewed; verify paths, authorship, signatures, and whitespace before applying it.
+
 ## Creating patches
 
 ### format-patch
@@ -116,6 +118,8 @@ abort: `git cherry-pick --abort`.
 
 ## GitHub PR patches
 
+Downloading a hosted patch and piping it directly to `git am` creates local commits. Verify the URL, inspect the patch, and confirm the target branch before applying; unavailable signature or author evidence is `UNVERIFIED`.
+
 Every PR has a `.patch` and `.diff` URL:
 
 ```bash
@@ -125,3 +129,8 @@ curl -sSL https://github.com/owner/repo/pull/42.patch | git am
 # Download PR as diff (single squashed diff)
 curl -sSL https://github.com/owner/repo/pull/42.diff | git apply
 ```
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git command and hosted-boundary references.
+- [Git format-patch documentation](https://git-scm.com/docs/git-format-patch) and [Git apply documentation](https://git-scm.com/docs/git-apply) — current patch semantics.

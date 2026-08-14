@@ -35,7 +35,8 @@ Write and audit repository documentation from current source truth.
 ## Resources
 
 - Start with the package [reference router](references/index.md).
-- Run the package [checker](scripts/check.py) and conditional documentation audits when their inputs exist.
+- Load only the routed package-local README or changelog reference needed for the task.
+- Use package-local checkers and audits only when the target inputs exist.
 
 ## Verify
 

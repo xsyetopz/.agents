@@ -1,6 +1,8 @@
 # Standards and primary sources
 
-Verify current provider behavior before changing templates or hosted controls.
+This source map lists external references for provider behavior and governance
+formats. It is not target-repository policy; verify each page before relying on
+its current behavior.
 
 ## Repository guidance
 

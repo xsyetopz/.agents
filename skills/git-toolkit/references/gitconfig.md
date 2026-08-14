@@ -1,5 +1,7 @@
 # Git Configuration
 
+Scope: local Git configuration precedence and safety settings. Common Vulnerabilities and Exposures (CVE) identifiers in examples identify a published issue; they do not prove that a local installation is affected. A configuration key may come from system, global, local, command, or worktree scope; inspect the effective value before changing it, and do not assume hosted policy follows local config.
+
 Team-wide git configuration patterns. Git reads config from four places in order
 of increasing precedence. Source: `git-config(1)` man page.
 
@@ -18,7 +20,7 @@ where each value comes from.
 ## Team-shared configuration
 
 Git does not natively support a "project config" that commits to the repo. The
-workaround: commit a setup script that applies settings.
+workaround: commit a setup script that applies settings. Treat that script as reviewable code: global settings persist outside the repository and require explicit approval before execution.
 
 ### Approach 1: Setup script (recommended)
 
@@ -47,7 +49,8 @@ git-setup:
 
 ## Security-critical settings
 
-From [dev.to Git security best practices](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-your-code-safe-1nep):
+The following Git settings are local safety guidance; verify the effective scope
+and repository policy before changing them:
 
 ```bash
 # Force push only if local tracking branch matches remote
@@ -161,3 +164,8 @@ for setting in "${required[@]}"; do
   fi
 done
 ```
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git reference and hosted-boundary sources.
+- [Git configuration documentation](https://git-scm.com/docs/git-config) — current precedence and key semantics.

@@ -1,5 +1,7 @@
 # CI/CD Security Checklist
 
+Scope: CI/CD security review across GitHub Actions, GitLab CI, and Bitbucket Pipelines. OpenID Connect (OIDC) is a short-lived identity token flow; PR and MR mean pull request and merge request. This checklist is local guidance, not proof that a hosted control is enabled.
+
 Audit checklist for pipeline security across platforms.
 
 ## Secrets
@@ -57,7 +59,7 @@ messages, issue bodies)
 
 ## Artifact safety
 
-- [ ] Artifact expiry set (GitLab: `expire_in`, GitHub: 90 days default)
+- [ ] Artifact expiry is explicitly configured (for example, GitLab `expire_in`); provider defaults vary and are not evidence of retention policy
 - [ ] Build artifacts in public repos don't contain secrets
 - [ ] Artifacts from forked PRs not accessible to unapproved contributors
 
@@ -69,10 +71,9 @@ messages, issue bodies)
 
 ## Attack vectors
 
-Specific attack patterns that CI/CD guardrails must block. Sources: [GitLab
-CI/CD
-hardening](https://docs.gitlab.com/security/hardening_cicd_recommendations/),
-[hoop.dev](https://hoop.dev/blog/why-github-ci-cd-needs-guardrails).
+Specific attack patterns that CI/CD guardrails must block. Use the [Git CI/CD
+source map](sources.md) for current provider security references; third-party
+posts are not enforcement evidence.
 
 ### Script injection via PR title/body
 
@@ -127,6 +128,13 @@ jobs:
       # NEVER: upload artifacts, use secrets, deploy, push
 ```
 
-If secrets are needed in fork PR tests, use `pull_request_target` with an
-explicit label condition and `permissions:` block - only after thorough
-security review. Default: reject.
+If a deployment needs secrets after a fork PR, separate untrusted tests from a
+trusted, approval-gated job (for example, verify artifacts in `workflow_run`).
+Do not execute fork-controlled code in a target-context workflow merely because
+a label or condition matches; default: reject.
+
+## Sources
+
+- [Git CI/CD source map](sources.md) — provider URLs and freshness limits.
+- [GitHub secure use reference](https://docs.github.com/en/actions/reference/security/secure-use) and [GitLab CI/CD security guidance](https://docs.gitlab.com/security/hardening_cicd_recommendations/) — provider controls.
+- [Creating Mermaid diagrams on GitHub (requested URL)](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams) — rendering requirements; exact URL was not retrievable in this pass, so treat rendering evidence as `UNVERIFIED`.

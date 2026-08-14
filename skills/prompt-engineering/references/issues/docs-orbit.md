@@ -171,3 +171,8 @@ When a command sequence becomes recurring evidence for lifecycle, generated outp
 ### Acceptance check
 
 Recurring product checks are represented by runnable scripts under `scripts/`, and evidence docs point to the script command plus current observed output.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

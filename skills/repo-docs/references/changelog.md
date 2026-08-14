@@ -4,6 +4,9 @@ Use this reference for Keep a Changelog structure, user-facing entries, and
 release-history verification. It is based on [Keep a Changelog
 1.1.0](https://keepachangelog.com/en/1.1.0/).
 
+Scope: local-policy changelog guidance. Examples are illustrative; the target
+repository's release history and versioning policy control final claims.
+
 ## Specification
 
 ### Format
@@ -214,3 +217,10 @@ Keep pre-releases in the history:
 ## [2.0.0-beta.2] - 2024-04-15
 ## [2.0.0-alpha.1] - 2024-04-01
 ```
+
+## Sources
+
+- [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) defines the
+  cited changelog structure and categories.
+- [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html) supports the
+  versioning reference used in the examples.

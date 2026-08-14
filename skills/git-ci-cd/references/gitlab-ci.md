@@ -1,5 +1,7 @@
 # GitLab CI
 
+Scope: GitLab CI/CD YAML, stages, rules, matrices, caches, artifacts, environments, variables, includes, and debugging. A merge request (MR) pipeline may evaluate untrusted code; resolve protected variables, runner trust, and `rules` before execution.
+
 ## Pipeline syntax
 
 Minimum viable `.gitlab-ci.yml`:
@@ -146,3 +148,8 @@ include:
 - Enable debug: set CI/CD variable `CI_DEBUG_TRACE` to `true`
 - Masked variables: GitLab automatically masks values in logs - don't rely on
 it for short secrets (under 4 chars aren't masked)
+
+## Sources
+
+- [Git CI/CD source map](sources.md) — checked provider URLs and freshness limits.
+- [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/) and [GitLab pipeline architecture](https://docs.gitlab.com/ci/pipelines/pipeline_architectures/) — current syntax, rules, and execution model.

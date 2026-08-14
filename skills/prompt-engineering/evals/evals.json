@@ -11,13 +11,18 @@
   "codex_cases": [
     {
       "id": "positive-prompt-audit",
-      "prompt": "Audit a system prompt for DeepSeek V4 Flash (0731). Route to the Chinese model guide, preserve the API ID deepseek-v4-flash while treating 0731 as a version, retain the full reasoning_content and tool-call history caveat, and state any model-index source gaps without inventing a dedicated guide.",
-      "expected_outcome": "Activates prompt-engineering, selects references/models/deepseek-v4-flash-0731.zh-CN.md, distinguishes the API identifier from the 0731 version, preserves the reasoning/tool-history requirement, and reports source gaps honestly with dated first-party evidence."
+      "prompt": "Audit a system prompt for DeepSeek V4 Flash (0731). Route to the Chinese model guide, preserve the exact provider identifier deepseek-v4-flash while treating 0731 as a revision, retain the full reasoning_content and tool-call history caveat, and state any model-index source-gap status without inventing a dedicated guide.",
+      "expected_outcome": "Activates prompt-engineering, selects references/models/deepseek-v4-flash-0731.zh-CN.md, distinguishes the exact provider identifier deepseek-v4-flash from the 0731 revision, preserves the reasoning/tool-history requirement, and reports evidence limits honestly with dated first-party sources."
     },
     {
       "id": "positive-model-reference",
-      "prompt": "For DeepSeek V4 Flash (0731), identify the canonical API ID, language-matched guide, and one tool-history constraint. Then name one listed model with a source gap and say what cannot be inferred.",
-      "expected_outcome": "Returns deepseek-v4-flash, routes to the Chinese guide by its relative path, states the full reasoning_content/tool-call history requirement, and explicitly refuses to turn a source gap into undocumented model behavior."
+      "prompt": "For DeepSeek V4 Flash (0731), identify the provider, exact provider identifier, language-matched guide, and one tool-history constraint. Then name one listed model with source-gap status and say what cannot be inferred.",
+      "expected_outcome": "Returns provider DeepSeek, exact provider identifier deepseek-v4-flash, the zh-CN translated guide by its relative path, states the full reasoning_content/tool-call history requirement, and explicitly refuses to turn a source-gap or UNVERIFIED status into undocumented model behavior."
+    },
+    {
+      "id": "positive-catalog-identity",
+      "prompt": "For the named model Qwen3.8-Max, read the prompt-engineering catalog before the guide. Report the provider, exact provider identifier, normalized slug, language and translation status, source-gap status, source record, and retrieval date. Do not treat the normalized slug as an API alias.",
+      "expected_outcome": "Returns Alibaba Cloud, exact provider identifier qwen3.8-max-preview, normalized slug qwen3.8-max-preview, zh-CN/translated, source-gap, the package-relative source record, and the recorded retrieval date; explicitly distinguishes the local route slug from the provider identifier."
     },
     {
       "id": "near-miss-runtime-fix",

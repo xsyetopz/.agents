@@ -5,6 +5,9 @@ auditing text flow, paragraph rhythm, and overall document organization. For
 sentence-level rules, see `sentence-structure.md`. For specific named
 patterns, see `rhetoric-patterns.md`.
 
+Scope: local-policy structural heuristics. Corpus and paper results are
+contextual, corpus-specific evidence rather than an authorship test.
+
 ---
 
 ## Structural issues
@@ -14,8 +17,9 @@ patterns, see `rhetoric-patterns.md`.
 **Structure is the #1 detection signal.** Measured on the repo corpus, rhythm
 uniformity discriminates human from machine text at **11.7x lift** — an order
 of magnitude stronger than vocabulary (0.9x). This aligns with independent
-findings: StoryScope (Russell et al. 2026) reaches 93.2% F1 on discourse-level
-features alone (#71). Fixing every word on the Tier 1 list while leaving the
+findings: [StoryScope (Russell et al. 2026)](https://arxiv.org/abs/2604.03136)
+reports 93.2% macro-F1 on discourse-level features alone in its fiction corpus
+(#71). Fixing every word on the Tier 1 list while leaving the
 rhythm untouched does not address the structural signal.
 
 - **Sentence length uniformity**: When most sentences are 15–25 words, mix short
@@ -76,3 +80,8 @@ If the text has 5+ flagged vocabulary hits across multiple categories, 3+
 distinct pattern categories triggered, and uniform sentence/paragraph length,
 patching won't fix it — the structure itself is AI-generated. Advise a full
 rewrite.
+
+## Sources
+
+- [StoryScope: Investigating idiosyncrasies in AI fiction](https://arxiv.org/abs/2604.03136)
+  reports the cited discourse-feature result on its evaluated fiction corpus.

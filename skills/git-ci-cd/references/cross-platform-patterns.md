@@ -1,5 +1,7 @@
 # Cross-Platform CI Patterns
 
+Scope: portable continuous integration and continuous delivery (CI/CD) invariants across GitHub Actions, GitLab CI, and Bitbucket Pipelines. A cache, artifact, matrix, or include has provider-specific trust and retention behavior; treat the table as local guidance and verify each target syntax.
+
 Patterns that work across GitHub Actions, GitLab CI, and Bitbucket Pipelines.
 
 ## Caching dependencies
@@ -74,3 +76,8 @@ Structure this as sequential stages with `needs`/`dependencies`.
   workflow_call`)
 - GitLab: `include:` with `local`, `project`, or `template`
 - Bitbucket: YAML anchors and `definitions:` (no cross-repo includes)
+
+## Sources
+
+- [Git CI/CD source map](sources.md) — provider URLs and freshness limits.
+- [GitHub Actions documentation](https://docs.github.com/en/actions), [GitLab CI/CD](https://docs.gitlab.com/ci/), and [Bitbucket Pipelines](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/) — provider-specific syntax and limits.

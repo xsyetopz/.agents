@@ -1,5 +1,7 @@
 # Release Management
 
+Scope: local release tags, Semantic Versioning (SemVer), release branches, hotfixes, and scripts. A local tag or commit does not prove a hosted release; verify publication, signatures, assets, and remote state separately.
+
 Versioning, tagging, and release automation patterns. Based on [Semantic
 Versioning 2.0.0](https://semver.org/).
 
@@ -50,6 +52,8 @@ fi
 ```
 
 ## Tag conventions
+
+Tag creation, pushing, and remote deletion are state changes. Confirm the version, target commit, signing key, and remote policy before running them; a local tag does not prove publication and remote status is `UNVERIFIED` until observed.
 
 ### Lightweight vs annotated
 
@@ -221,3 +225,8 @@ Before every release tag:
 - [ ] Tag protection rules active (no tag deletion, no tag overwrite)
 - [ ] `git status` is clean
 - [ ] Current branch is `main`
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git, SemVer, and hosted-boundary references.
+- [Semantic Versioning 2.0.0](https://semver.org/) and [Git tag documentation](https://git-scm.com/docs/git-tag) — version and tag semantics.

@@ -1,5 +1,11 @@
 # Worked Examples
 
+> Illustrative examples, not evidence or a generated snapshot; source gap: live verification of each workflow against repository facts and current primary sources is required before relying on a claim.
+
+For diagrams intended for GitHub, use the package's
+[Mermaid compatibility note](09-bibliography.md#github-mermaid-compatibility)
+and probe the target renderer with `info`; local rendering is not claimed here.
+
 These examples demonstrate the decision procedure. They are not blueprints. Re-run the gates for the actual system and record where the analogy fails.
 
 ---
@@ -50,22 +56,22 @@ Diagnostics are projections, but the dominant architecture is a transformation p
 
 ```mermaid
 flowchart LR
-  SRC[Source bytes] --> DEC[Decode]
-  DEC --> LEX[Lex]
-  LEX --> PARSE[Parse]
-  PARSE --> AST[Syntax tree]
-  AST --> SEM[Resolve + type]
-  SEM --> IR[Typed IR]
-  IR --> PM[Pass manager]
-  PM --> LIR[Lowered IR]
-  LIR --> BE[Backend port]
-  BE --> OBJ[Object/module]
-  DEC -.error.-> DIAG[Diagnostic model]
+  SRC["Source bytes"] --> DEC["Decode"]
+  DEC --> LEX["Lex"]
+  LEX --> PARSE["Parse"]
+  PARSE --> AST["Syntax tree"]
+  AST --> SEM["Resolve + type"]
+  SEM --> IR["Typed IR"]
+  IR --> PM["Pass manager"]
+  PM --> LIR["Lowered IR"]
+  LIR --> BE["Backend port"]
+  BE --> OBJ["Object/module"]
+  DEC -.error.-> DIAG["Diagnostic model"]
   PARSE -.error.-> DIAG
   SEM -.error.-> DIAG
   PM -.error.-> DIAG
-  DIAG --> CLI[CLI renderer]
-  DIAG --> LSP[LSP projection]
+  DIAG --> CLI["CLI renderer"]
+  DIAG --> LSP["LSP projection"]
 ```
 
 ### Invariants
@@ -196,17 +202,17 @@ Select layered decode with a lossless structural representation and a validated 
 
 ```mermaid
 flowchart TD
-  B[Bytes] --> R[Bounded reader]
-  R --> S[Lossless structural tree]
-  S --> V{Valid?}
-  V - no --> E[Offset-aware error model]
-  V - yes --> M[Semantic model]
-  M --> P[UI/CLI projection]
-  P --> C[Edit command]
-  C --> M2[Validated semantic state]
-  M2 --> ENC[Encoder]
+  B["Bytes"] --> R["Bounded reader"]
+  R --> S["Lossless structural tree"]
+  S --> V{"Valid?"}
+  V -->|no| E["Offset-aware error model"]
+  V -->|yes| M["Semantic model"]
+  M --> P["UI/CLI projection"]
+  P --> C["Edit command"]
+  C --> M2["Validated semantic state"]
+  M2 --> ENC["Encoder"]
   S -.unknown raw fields.-> ENC
-  ENC --> B2[Output bytes]
+  ENC --> B2["Output bytes"]
 ```
 
 ### Invariants
@@ -273,24 +279,24 @@ The durable task state resembles a model and the status renderer resembles a vie
 
 ```mermaid
 flowchart TD
-  U[User objective] --> C[Goal contract]
-  C --> P[Planner]
-  P --> G{Policy gate}
-  G - reject/clarify --> U
-  G - approve --> S[Scheduler]
-  S --> W1[Evidence worker]
-  S --> W2[Design worker]
-  W1 --> EV[Evidence store]
-  W2 --> DR[Draft decision]
-  EV --> V[Verifier]
+  U["User objective"] --> C["Goal contract"]
+  C --> P["Planner"]
+  P --> G{"Policy gate"}
+  G -->|reject/clarify| U
+  G -->|approve| S["Scheduler"]
+  S --> W1["Evidence worker"]
+  S --> W2["Design worker"]
+  W1 --> EV["Evidence store"]
+  W2 --> DR["Draft decision"]
+  EV --> V["Verifier"]
   DR --> V
-  V - contradiction --> P
-  V - pass --> A{Side-effect gate}
-  A - human required --> H[Human approval]
-  H --> X[Executor]
-  A - reversible --> X
-  X --> CK[Checkpoint + event log]
-  CK --> O[Observation renderer]
+  V -->|contradiction| P
+  V -->|pass| A{"Side-effect gate"}
+  A -->|human required| H["Human approval"]
+  H --> X["Executor"]
+  A -->|reversible| X
+  X --> CK["Checkpoint + event log"]
+  CK --> O["Observation renderer"]
   O --> U
 ```
 
@@ -384,3 +390,7 @@ If payment fails after stock reservation, issue `ReleaseReservation` with the wo
 ### MVC placement
 
 MVC may structure a Sales web interface, but it is not the enterprise integration architecture. DDD/context mapping and process management address the dominant forces.
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

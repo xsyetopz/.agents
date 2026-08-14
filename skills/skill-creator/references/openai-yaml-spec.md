@@ -1,5 +1,9 @@
 # `agents/openai.yaml` specification
 
+Use `$name` as a selector token for a catalog skill name; it is literal
+notation, not a shell variable. Define the token before using it in metadata or
+examples.
+
 ## Required interface block
 
 ```yaml
@@ -33,3 +37,7 @@ exist within the skill root.
    skill.
 3. Parse/validate after editing; YAML syntax alone does not prove routing.
 4. Keep this file short and avoid duplicating workflow details from `SKILL.md`.
+
+## Sources
+
+- [Reference provenance guide](reference-provenance.md) for source records, scope boundaries, and freshness labels.

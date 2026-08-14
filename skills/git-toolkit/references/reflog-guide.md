@@ -1,5 +1,7 @@
 # Reflog Guide
 
+Scope: local reflog inspection and recovery of commits, branches, and resets. A reflog is local reference-movement history and may expire; it is not a hosted backup or proof that an object remains available.
+
 The reflog records every change to HEAD and branch tips. It's your undo safety
 net - commits are not truly lost until the reflog expires (default 90 days).
 
@@ -94,3 +96,8 @@ git config gc.reflogExpireUnreachable  # default 30 days
 3. `HEAD@{1}` means "where HEAD was one step ago"
 4. `HEAD@{5.minutes.ago}` and `HEAD@{yesterday}` are also valid
 5. For absolute safety: `git branch backup-before-risky-operation HEAD`
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git recovery and hosted-boundary references.
+- [Git reflog documentation](https://git-scm.com/docs/git-reflog) — current recovery semantics.

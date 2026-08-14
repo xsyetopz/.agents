@@ -1,10 +1,10 @@
 # Branching Models
 
-Comparative analysis of branching models. Source data from
-[trunkbaseddevelopment.com](https://trunkbaseddevelopment.com/), [GitHub
-Flow](https://docs.github.com/en/get-started/using-git/github-flow), [nvie.com
-GitFlow](https://nvie.com/posts/a-successful-git-branching-model/), [GitLab
-Flow](https://docs.gitlab.com/ee/topics/gitlab_flow.html).
+Scope: team branching and release-model comparison. GitHub Flow, GitLab Flow, trunk-based development, GitFlow, and forking are provider or community terms with different enforcement assumptions. Continuous delivery (CD) means deploying tested changes through an automated delivery path; define the model and measure repository constraints before selecting one.
+
+Comparative analysis of branching models. Provider and community source status
+is recorded in the [Git Workflows source map](sources.md); community model names
+are context, not proof of repository enforcement.
 
 ## Comparison matrix
 
@@ -55,7 +55,8 @@ required_linear_history: true
 
 ## Trunk-Based Development - detailed
 
-From [trunkbaseddevelopment.com](https://trunkbaseddevelopment.com/):
+The following trunk-based definition is community model context; see the source
+map for its `UNVERIFIED` status and measure repository constraints before applying it:
 
 > "A source-control branching model, where developers collaborate on code in a
 > single branch called 'trunk' and resist any pressure to create other
@@ -94,13 +95,15 @@ Two permanent branches. Heavy ceremony. Only justified when:
 
 **Branch types:**
 
-```graph
-graph TD
-  main[main] --> m1((●)) --> m2((●)) --> m3((●))
-  m1 --> r1((●)) --> r2((●))
-  m1 --> d1((●)) --> d2((●)) --> d3((●)) --> d4((●)) --> d5((●))
-  d2 --> f1((●)) --> f2((●)) --> f3((●))
-  d4 --> r3((●)) --> r4((●))
+The diagrams use GitHub-compatible `mermaid` fences and `flowchart TD` syntax. A local preview does not prove GitHub rendering; report hosted rendering as `UNVERIFIED` unless checked there.
+
+```mermaid
+flowchart TD
+  main[main] --> m1((commit)) --> m2((commit)) --> m3((commit))
+  m1 --> r1((release)) --> r2((release))
+  m1 --> d1((develop)) --> d2((develop)) --> d3((develop)) --> d4((develop)) --> d5((develop))
+  d2 --> f1((feature)) --> f2((feature)) --> f3((feature))
+  d4 --> r3((release)) --> r4((release))
 ```
 
 **Anti-patterns (when GitFlow is wrong):**
@@ -125,12 +128,17 @@ code full write access to the upstream repo. Always use `pull_request` with
 
 ## Decision flowchart
 
-```graph
-graph TD
-  A{Is the project open source with external contributors?} -->|Yes| B[Forking workflow]
-  A -->|No| C{Do you ship versioned products with long release cycles?}
-  C -->|Yes| D[GitFlow\n(but question this - is trunk-based with release branches sufficient?)]
-  C -->|No| E{Do you deploy continuously with feature flags?}
-  E -->|Yes| F[Trunk-Based Development]
-  E -->|No| G[GitHub Flow\n(the safe default)]
+```mermaid
+flowchart TD
+  A{"Is the project open source with external contributors?"} -->|Yes| B["Forking workflow"]
+  A -->|No| C{"Do you ship versioned products with long release cycles?"}
+  C -->|Yes| D["GitFlow; question whether trunk-based with release branches is sufficient"]
+  C -->|No| E{"Do you deploy continuously with feature flags?"}
+  E -->|Yes| F["Trunk-Based Development"]
+  E -->|No| G["GitHub Flow; safe default"]
 ```
+
+## Sources
+
+- [Git Workflows source map](sources.md) — provider and standards references with freshness limits.
+- [GitHub Flow](https://docs.github.com/en/get-started/using-git/github-flow) and [Git reference](https://git-scm.com/docs) — current provider and Git boundaries (GitHub Flow page unverified in this pass).

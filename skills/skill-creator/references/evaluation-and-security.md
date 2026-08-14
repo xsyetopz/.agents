@@ -17,6 +17,10 @@ fabricated grades, timings, benchmark scores, feedback, or pass claims.
 5. Report uncertainty when a case was not run. Static validation is not a
    behavioral pass.
 
+For source dates, claim scope, and explicit source gaps, use the package
+[reference provenance guide](reference-provenance.md) and keep evidence in the
+reference's ordinary `## Sources` or `## References` section.
+
 ## Expected case dimensions
 
 | Dimension | GREEN expectation | RED expectation |
@@ -61,7 +65,9 @@ not a claim that this package has run them.
    oversized file, or excessive file count. Reject or quarantine before
    discovery.
 
-## Research context and limits
+## Sources
+
+### Research context and limits
 
 The following sources motivate lifecycle review and progressive disclosure; they
 do not establish universal rates or replace package-local evidence:

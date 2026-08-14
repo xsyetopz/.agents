@@ -22,6 +22,7 @@ from validate_skill import (
     check_markdown_links,
     check_required_files,
     check_required_headings,
+    check_skill_creator_references,
     parse_frontmatter,
     validate,
 )
@@ -72,6 +73,7 @@ __all__ = [
     "check_markdown_links",
     "check_required_files",
     "check_required_headings",
+    "check_skill_creator_references",
     "parse_frontmatter",
     "validate",
 ]

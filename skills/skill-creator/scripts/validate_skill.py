@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 
 from agents_yaml import _check_yaml_top_level_syntax, check_agents_yaml
+from check_skill_structure import check_skill_creator_references
 from contract_checks import (
     CODEX_CASE_KEYS,
     COMMON_CONTRACT_FILES,
@@ -152,6 +153,7 @@ __all__ = [
     "check_required_evals",
     "check_required_files",
     "check_required_headings",
+    "check_skill_creator_references",
     "check_symlink_containment",
     "load_config",
     "parse_frontmatter",
@@ -201,6 +203,7 @@ def validate(root: Path) -> tuple[list[str], list[str]]:
     check_duplicate_entrypoints(root, errors)
     check_symlink_containment(root, errors)
     check_global_path_references(root, errors)
+    check_skill_creator_references(root, errors)
     warn_missing_license(root, warnings)
     return errors, warnings
 

@@ -1,5 +1,12 @@
 # Apple HIG Workflow
 
+Scope: local-policy. This authored workflow explains how to apply the bundled
+Apple HIG snapshot; generated topic files remain source material and may need a
+live-page check when guidance is version-sensitive.
+
+Source status: use the [HIG source index](hig-source-index.md) to locate the
+canonical Apple pages, then record the page consulted and its retrieval date.
+
 ## Full workflow
 
 ### 1. Frame the decision
@@ -71,3 +78,9 @@ historical exceptions rather than creating duplicate or fabricated pages.
 If network access is unavailable, label conclusions as snapshot-based and
 include the reference retrieval date. Recheck the live page whenever a change
 log, OS release, API, or review requirement may have changed.
+
+## Sources
+
+- [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
+- [Apple Design — What’s New](https://developer.apple.com/design/whats-new/)
+- [Bundled HIG source index](hig-source-index.md)

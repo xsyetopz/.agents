@@ -4,6 +4,9 @@ The vocabulary replacement catalog organized by detection tier. Load when
 auditing or rewriting to check individual words and phrases against the known
 AI-vocabulary lists.
 
+Scope: local-policy vocabulary guidance. Word choices are editing cues, not
+standalone authorship evidence.
+
 **Caveat.** The "appears far more often in AI text" claim behind Tier 1A is
 inherited, not measured in this repo. Measured against the repo's own machine
 corpus (RAID 2024 + HC3 Dec 2022, 779 units), the entire Tier 1 vocabulary
@@ -199,3 +202,7 @@ rule: 3+ distinct phrases from this table in one piece is a strong signal.
 | (sustainable) reward emissions | Cite the emission schedule and sink |
 | tokenized incentive structures | Describe the actual mechanism |
 | designed for long-term [X] | Cut "designed for" — state the property |
+
+## Sources
+
+- [Package source map](sources.md); verify the linked source record before relying on current or external claims.

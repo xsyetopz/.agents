@@ -1,5 +1,11 @@
 # Graphs and behavioral examples
 
+In this reference, a selector token is literal `$name` notation for a catalog
+skill, not a shell variable. A GitHub-safe Mermaid edge label uses
+`-->|label|` inside a fenced `mermaid` block; define selector tokens before
+their first use. Record external claims with the package
+[reference provenance guide](reference-provenance.md).
+
 ## Contents
 
 - [Routing graph](#routing-graph)
@@ -13,17 +19,17 @@
 ```mermaid
 flowchart LR
   U[User request] --> D{Description terms match?}
-  D -- no --> O[Neighboring task: do not activate]
-  D -- yes --> S[Load SKILL.md]
+  D -->|no| O[Neighboring task: do not activate]
+  D -->|yes| S[Load SKILL.md]
   S --> T{Task detail}
-  T -- metadata --> F[frontmatter-spec.md]
-  T -- package --> P[package-distribution.md]
-  T -- prompt or model --> G[$prompt-engineering]
-  T -- safety or eval --> E[evaluation-and-security.md]
-  T -- validation --> V[validation-guide.md]
+  T -->|metadata| F[frontmatter-spec.md]
+  T -->|package| P[package-distribution.md]
+  T -->|prompt or model| G["$prompt-engineering"]
+  T -->|safety or eval| E[evaluation-and-security.md]
+  T -->|validation| V[validation-guide.md]
   F --> C[Check observable completion]
   P --> C
-  G --> C[Prompt work returns with its own evidence]
+  G -->|return with evidence| C[Prompt work returns with its own evidence]
   E --> C
   V --> C
 ```
@@ -44,8 +50,8 @@ flowchart TD
   F --> G[Structural checks]
   G --> H[Behavioral fixture runs]
   H --> I{Evidence meets contract?}
-  I -- no --> J[Report failure and revise one cause]
-  I -- yes --> K[Report paths, results, and residual risk]
+  I -->|no| J[Report failure and revise one cause]
+  I -->|yes| K[Report paths, results, and residual risk]
   J --> D
 ```
 
@@ -117,9 +123,15 @@ interactive removal cannot be asserted in automation.
 
 - Use fenced blocks with a language tag (`bash`, `python`, `yaml`, `text`, or
   `mermaid`) and keep commands copy-pasteable.
+- For Mermaid, use a fenced `mermaid` block and write labeled edges as
+  `A -->|label| B`; GitHub-compatible rendering is otherwise `UNVERIFIED`.
 - Put expected effects outside the fence so a Markdown reader can distinguish
   instructions from evidence.
 - Escape no command through prose: show explicit source, skill, agent, scope,
   and version where omission could broaden behavior.
 - Do not place a heading inside an example fence and then count it as a required
   heading; structural validators ignore fenced content.
+
+## Sources
+
+- [GitHub Docs: Creating diagrams](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams) — primary source consulted 2026-08-14 for `mermaid` fences and version checks; the edge-label form above is the package's conservative Mermaid convention.

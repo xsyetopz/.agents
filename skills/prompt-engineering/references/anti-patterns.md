@@ -67,3 +67,9 @@ Use references/issue-lookup.md to choose a category, references/issues/index.md
 to route to its category file, and references/issue-corpus-index.md to confirm
 the exact case anchor. Load only the selected case and any official model
 guidance needed for the target.
+
+## References
+
+- [Issue corpus index](issue-corpus-index.md)
+- [Official source records](official-sources.md)
+- [Model reasoning and evidence guide](model-reasoning-guide.md)

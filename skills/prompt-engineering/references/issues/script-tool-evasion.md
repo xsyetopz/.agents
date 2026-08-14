@@ -176,3 +176,8 @@ name the real input and output
 - - A script is not called a prose script until its behavior is traced. - A deletion promise never appears before caller/output/write/install accounting. - Role answers distinguish observed behavior from proposed edits. - Prose-policing automation is not recreated under a different filename, package command, CI job, or install action. - Final reports include changed artifact, source evidence, observed command evidence, and remaining unverified claim.
 - - Script cleanup starts with a role trace. - Removal patches include reference cleanup for command surfaces that called the script. - Documentation-only gates are not moved to another command under a new name. - The final report states whether the script had user-facing install reach.
 - - Script-role answers cite observed behavior and references before recommending deletion. - Deletions leave no stale caller or doc reference. - No new script is added to replace rejected prose-only behavior unless it performs required product work. - Final reports separate observed role, defect, changed files, and remaining unverified claims.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

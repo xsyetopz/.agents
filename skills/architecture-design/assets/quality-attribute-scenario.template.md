@@ -1,5 +1,7 @@
 # Quality-Attribute Scenario <QA-NNN>
 
+> Locally authored template guidance, not evidence or a generated snapshot; source gap: record the exact source, revision, retrieval date, claim scope, and live verification result for external or current assertions in the completed artifact.
+
 ## Use this template
 
 Use for one measurable architectural force. Replace broad labels such as fast,

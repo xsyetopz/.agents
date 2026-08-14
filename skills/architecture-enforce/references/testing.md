@@ -1,5 +1,7 @@
 # Test ownership and placement
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Test placement is part of production architecture. Put a test at the smallest
 boundary whose contract it proves. Its location and build target should make
 that ownership visible.
@@ -331,3 +333,7 @@ default; infrastructure fixtures must expose cleanup and isolation behavior.
 Do not let mocks reproduce vendor/framework APIs across the product. Prefer a
 port-owned fake for domain/application tests and a contract/integration test for
 the real adapter.
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

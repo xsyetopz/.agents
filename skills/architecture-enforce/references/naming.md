@@ -1,5 +1,7 @@
 # Filename contract
 
+> Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against [authority sources](sources.md) is required.
+
 Use this reference after detecting languages, toolchains, frameworks, generators,
 and test runners. It applies to authored source, tests, configuration, IDL,
 schemas, extensionless shebang scripts, and architecture-bearing documentation.
@@ -314,3 +316,7 @@ and [Cargo target layout](https://doc.rust-lang.org/cargo/guide/project-layout.h
 Absence from this list does not downgrade a language's own specification,
 compiler mapping, or package-manager rules. Verify those rules from the pinned
 tool version before renaming.
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

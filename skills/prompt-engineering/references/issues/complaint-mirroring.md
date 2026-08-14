@@ -168,3 +168,8 @@ locate exact paths, aliases, commands, and generated outputs
 - Every utility verdict names the observed behavior and reference trace that support it. Without that trace, the response says what will be inspected instead of declaring whether the artifact belongs.
 - Before changing a class of artifacts, the agent can state the exact member list, shared behavior, callers, outputs, product claims, lost coverage, replacement route, and explicit user approval for the class-level change.
 - The drafted prompt can stand alone as an operational instruction. Removing the prior conversation does not remove any necessary task information, and the prompt contains no complaint, blame, self-analysis, or negative evaluation unless explicitly requested.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

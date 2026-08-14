@@ -1,5 +1,7 @@
 # Authority sources
 
+> Package-local first-party/standards source map, not a verified citation set or generated snapshot; source gap: verify the exact source, version, and retrieval date. Live verification is required for current provider or tool behavior.
+
 Use current, version-appropriate primary sources when a repository contract or
 language rule is unclear. Record retrieval date and pinned tool versions in an
 ADR or review note; these links are starting points, not a substitute for local

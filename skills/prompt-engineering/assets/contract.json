@@ -21,6 +21,7 @@
   "reference_paths": [
     "references/index.md",
     "references/official-sources.md",
+    "references/models/catalog.json",
     "references/official/openai-prompt-engineering.2026-08-13.md",
     "references/models/gpt-5.6.en.md",
     "references/official/openai-gpt-5.6-sol-prompting.2026-08-13.md",
@@ -35,6 +36,7 @@
   "eval_case_ids": [
     "positive-prompt-audit",
     "positive-model-reference",
+    "positive-catalog-identity",
     "near-miss-runtime-fix",
     "safety-failure-authority-bypass"
   ]

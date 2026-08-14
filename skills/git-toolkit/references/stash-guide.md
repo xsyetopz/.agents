@@ -1,5 +1,7 @@
 # Stash Guide
 
+Scope: local stash creation, application, deletion, and recovery. A stash is local work-in-progress state; inspect its contents and target branch before applying or dropping it, and never clear all stashes without explicit authorization.
+
 ## Why stash
 
 Stash captures uncommitted changes - both staged and unstaged - and reverts
@@ -72,6 +74,8 @@ git stash show --stat stash@{0}    # summary only
 
 ## Clear all stashes
 
+`git stash clear` is irreversible for locally reachable stash refs. List and inspect stashes, obtain explicit authorization, and report recovery evidence as `UNVERIFIED` if reflog or object inspection was not run.
+
 ```bash
 git stash clear
 ```
@@ -115,3 +119,8 @@ git fsck --unreachable | grep commit | cut -d' ' -f3 | xargs git log --merges --
 ```
 
 Or use `git reflog show stash` if refs/stash history is available.
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git recovery and hosted-boundary references.
+- [Git stash documentation](https://git-scm.com/docs/git-stash) — current stash semantics.

@@ -8,6 +8,8 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote
 
+from check_skill_structure import check_skill_creator_references
+
 EXPECTED_HEADINGS = [
     "Use this skill",
     "Rules",
@@ -471,6 +473,7 @@ def main() -> int:
     evals = read_json(root / "evals" / "evals.json", errors, "evals/evals.json")
     check_evals(root, evals, case_ids, errors)
     check_paths_and_text(root, errors)
+    check_skill_creator_references(root, errors)
     if errors:
         for error in errors:
             print(f"ERROR: {error}")

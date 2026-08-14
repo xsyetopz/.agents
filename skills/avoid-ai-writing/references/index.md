@@ -1,14 +1,15 @@
-# Reference index
+# Avoid AI Writing reference router
 
+Choose the smallest package-local route that answers the current prose-editing
+question. Keep observable evidence, requested voice, and protected facts in
+scope; this router does not support authorship or plagiarism claims.
 
-Start here: [this router](index.md).
-Select routes by observable prose issue; preserve facts, voice, citations, and requested format.
+## When you need | Read
 
-| Trigger | Reference |
+| When you need | Read |
 | --- | --- |
-| High-signal words and phrases | [Word tables](word-tables.md) |
-| Sentence rhythm and syntax | [Sentence structure](sentence-structure.md) |
-| Rhetorical evidence and recurring artifacts | [Rhetoric patterns](rhetoric-patterns.md) |
-| Headings, paragraph flow, and document shape | [Structural patterns](structural-patterns.md) |
-| Markdown, typography, and layout | [Formatting](formatting.md) |
-| Severity, audience, and voice calibration | [Severity tiers](severity-tiers.md) |
+| Scope, boundaries, and sibling routing | [Skill scope](../SKILL.md#use-this-skill) |
+| Safety, preservation, and evidence | [Editing rules](../SKILL.md#rules) |
+| Task-specific guidance and examples | [Word tables](word-tables.md), [sentence structure](sentence-structure.md), [rhetoric patterns](rhetoric-patterns.md), [structural patterns](structural-patterns.md), and [formatting](formatting.md) |
+| Verification commands and checks | [Severity tiers](severity-tiers.md) and [skill verification](../SKILL.md#verify) |
+| Sources, provenance, and freshness | [Sources and provenance](sources.md) |

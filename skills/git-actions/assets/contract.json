@@ -24,7 +24,8 @@
     "references/github-api.md",
     "references/github-graphql.md",
     "references/gitlab-api.md",
-    "references/version-fetching.md"
+    "references/version-fetching.md",
+    "references/sources.md"
   ],
   "eval_case_ids": [
     "positive-read-release-metadata",

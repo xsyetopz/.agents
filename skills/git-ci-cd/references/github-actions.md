@@ -1,8 +1,10 @@
 # GitHub Actions
 
+Scope: GitHub Actions workflow YAML, events, jobs, matrices, caches, artifacts, reusable workflows, and runner behavior. A workflow triggered by a pull request (PR) can receive untrusted code; resolve event trust, `permissions`, secrets, and deployment environments before running it.
+
 ## Workflow syntax
 
-Minimum viable workflow:
+Minimum viable workflow (pin third-party actions to reviewed commit SHAs in production; the version tags below are illustrative):
 
 ```yaml
 name: CI
@@ -162,3 +164,9 @@ runs:
 - Read raw logs: `gh run view <run-id> --log`
 - Common failure: `set -eo pipefail` causes early exit - use
 `{ command; } || true` for allowed failures
+
+## Sources
+
+- [Git CI/CD source map](sources.md) — checked provider URLs and freshness limits.
+- [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) — current event, permission, and job syntax.
+- [Secure use reference](https://docs.github.com/en/actions/reference/security/secure-use) — trust, secrets, and untrusted-code controls.

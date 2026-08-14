@@ -34,13 +34,22 @@ Turn a structural question into an implementable decision grounded in repository
 ## Resources
 
 - Start with the package [reference router](references/index.md).
-- Use the [ADR and report templates](assets/adr.template.md) when recording a decision.
-- Run [skill checks](scripts/skill_checks.py) and the package [checker](scripts/check.py) for evidence.
+- Use the [ADR template](assets/adr.template.md) and
+  [architecture-report template](assets/architecture-report.template.md) when
+  recording a decision.
+- Use the [bounded-context](assets/bounded-context.template.md),
+  [component-contract](assets/component-contract.template.md),
+  [quality-attribute scenario](assets/quality-attribute-scenario.template.md),
+  [decision matrix](assets/decision-matrix.template.tsv), and
+  [domain map](assets/domain-map.template.tsv) templates when those artifacts
+  are required.
 
 ## Verify
 
 - Done means the decision records owners, boundaries, constraints, candidate trade-offs, migration, rollback, rejected alternatives, and measurable evidence.
-- Run `python3 scripts/check.py`, `python3 scripts/skill_checks.py eval-cases`, and `python3 scripts/skill_checks.py report REPORT --mode R3` from this package.
+- Run `python3 scripts/check.py`, `python3 scripts/skill_checks.py eval-cases`,
+  and `python3 scripts/skill_checks.py report REPORT --mode R3` from this
+  package.
 - For topology work, run the selected enforcement skill's preflight, focused tests, full audit, and provider checks.
 - Report commands, exit codes, changed paths, evidence, and remaining limits.
 - Mark live repository settings, integration runs, or unavailable provider evidence `UNVERIFIED` rather than inferring it.

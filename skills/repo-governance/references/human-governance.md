@@ -1,5 +1,8 @@
 # Human governance
 
+Scope: local-policy human-governance guidance. Verify contacts, owners,
+provider behavior, and hosted settings before publication or mutation.
+
 ## Purpose
 
 Use recognized community-health files for people. Do not put human conduct, review authority, or contribution ownership in `AGENTS.md`.
@@ -47,3 +50,16 @@ Do not use `Co-authored-by` for a model. GitHub treats that trailer as account a
 Local files do not configure branch protection. With separate authorization, use repository rulesets or protected branches to require pull requests, reviews, code-owner review, status checks, resolved conversations, and protection from force pushes or deletion. Use read-only Actions permissions by default. Give apps and bots only the permissions they need.
 
 Do not guess owners, contacts, labels, bypass actors, or enforcement settings. Preview every hosted change.
+
+## Sources
+
+- [GitHub community-health files](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)
+  supports the file-location guidance.
+- [Git trailer documentation](https://git-scm.com/docs/git-interpret-trailers.html)
+  supports the trailer syntax example.
+- [Developer Certificate of Origin 1.1](https://developercertificate.org/),
+  [Linux coding-assistant guidance](https://kernel.org/doc/html/next/process/coding-assistants.html),
+  and [LLVM's AI tool policy](https://llvm.org/docs/AIToolPolicy.html) are
+  cited precedents, not copied policy.
+- [GitHub rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
+  supports the hosted-controls distinction.

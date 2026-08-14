@@ -1,5 +1,8 @@
 # Agent governance
 
+Scope: local-policy agent execution guidance. Keep target-repository facts,
+managed controls, and provider behavior verified at use time.
+
 ## Boundary
 
 `AGENTS.md` is for agent execution. It may contain project facts, commands, architecture rules, validation, safety limits, and external-action permission. Link to `CONTRIBUTING.md` instead of copying human contribution policy.
@@ -36,3 +39,10 @@ Keep `AGENTS.md` as the official source. Provider files should import or point t
 ## Simple English
 
 Prefer one obligation per sentence. Use common verbs such as read, check, run, stop, ask, and report. Keep identifiers, commands, paths, trailer keys, and API names unchanged in translations.
+
+## Sources
+
+- [AGENTS.md](https://agents.md/) provides the public scope and naming context.
+- Provider import behavior: [Claude Code memory](https://code.claude.com/docs/en/memory),
+  [Gemini context files](https://geminicli.com/docs/cli/gemini-md/), and
+  [Cursor rules](https://docs.cursor.com/context/rules-for-ai).

@@ -1,5 +1,7 @@
 # Version Fetching
 
+Scope: read-only release, tag, and artifact version lookup across GitHub and GitLab using the provider command-line interfaces (CLIs) or APIs. A release is hosted metadata around a tag; a tag alone does not prove publication, assets, or release notes. Replace placeholders, bound pagination, and verify checksums or signatures before consuming downloaded artifacts.
+
 Patterns for fetching release versions across platforms.
 
 ## GitHub - latest release
@@ -8,8 +10,11 @@ Patterns for fetching release versions across platforms.
 # gh CLI - one-liner
 gh release view --repo owner/repo --json tagName -q '.tagName'
 
-# Raw API
-curl -sS https://api.github.com/repos/owner/repo/releases/latest | jq -r '.tag_name'
+# Raw API (authenticated; public reads still have lower limits)
+curl -sS -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2026-03-10" \
+  https://api.github.com/repos/owner/repo/releases/latest | jq -r '.tag_name'
 
 # Handle prereleases - get latest non-prerelease
 gh api /repos/owner/repo/releases --jq '
@@ -96,3 +101,8 @@ git ls-remote --tags --sort=version:refname https://github.com/owner/repo.git
 # Releases only (with metadata)
 gh release list --repo owner/repo --limit 10
 ```
+
+## Sources
+
+- [Git Actions source map](sources.md) — provider URLs, source status, and freshness limits.
+- [GitHub REST API documentation](https://docs.github.com/en/rest) and [GitLab REST API](https://docs.gitlab.com/api/rest/) — release and tag endpoint semantics.

@@ -2,6 +2,9 @@
 
 A README is a project's landing page for discovery and evaluation. Use this reference for the minimum structure, source-backed claims, and verification checks that keep the landing page usable.
 
+Scope: local-policy README guidance. Examples and placeholder links are
+illustrative; inspect the target repository before asserting support or status.
+
 ## Minimum structure
 
 Every README includes these sections in order.
@@ -180,7 +183,7 @@ When a project serves an audience that primarily reads another language, provide
 
 ### File naming
 
-Use the `README` stem with a [BCP 47](https://tools.ietf.org/html/bcp47) language suffix:
+Use the `README` stem with a [BCP 47](https://www.rfc-editor.org/info/bcp47/) language suffix:
 
 | File | Language |
 | --- | --- |
@@ -238,3 +241,8 @@ The primary README is the source of truth. A translation that may be stale links
 - All translations preserve the primary heading structure.
 - Stale translations include a warning linking to the primary README.
 - Machine-translated files require a named human maintainer before publication.
+
+## Sources
+
+- [BCP 47](https://www.rfc-editor.org/info/bcp47/) supports the language-tag
+  naming guidance in this reference.

@@ -1,5 +1,7 @@
 # Component Contract: <CMP-NNN / name>
 
+> Locally authored template guidance, not evidence or a generated snapshot; source gap: record the exact source, revision, retrieval date, claim scope, and live verification result for external or current assertions in the completed artifact.
+
 ## Use this template
 
 Use when a component owns an independently testable capability or boundary.

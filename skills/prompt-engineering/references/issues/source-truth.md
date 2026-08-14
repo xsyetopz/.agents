@@ -192,3 +192,8 @@ Produce the concrete correction demonstrated by the example without repeating th
 ### Acceptance check
 
 The observable response avoids the trigger pattern and exhibits the required behavior shown by the example.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

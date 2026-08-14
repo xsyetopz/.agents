@@ -1,5 +1,7 @@
 # Structural examples
 
+> Illustrative examples, not evidence or a generated snapshot; source gap: live verification of each example against repository facts and current primary sources is required before relying on a claim.
+
 Apply the language and toolchain references before adopting a tree. These
 examples show how boundary decisions affect a repository tree.
 
@@ -430,3 +432,7 @@ checkout/
 
 Create layers only where dependency direction or lifecycle differs. Do not call
 pass-through files "corporate architecture."
+
+## Sources
+
+- [Architecture source map](sources.md); verify the linked source record before relying on current or external claims.

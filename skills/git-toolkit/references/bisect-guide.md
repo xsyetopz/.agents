@@ -1,5 +1,7 @@
 # Bisect Guide
 
+Scope: local `git bisect` regression isolation. A good commit is known to pass and a bad commit is known to fail under the same reproducible test; missing or flaky evidence makes the result `UNVERIFIED`.
+
 ## Manual bisect
 
 ```bash
@@ -88,3 +90,8 @@ git bisect visualize    # opens gitk showing the suspect range
 - If the bug is intermittent, run the test multiple times per commit
 - Use `git bisect old` / `git bisect new` instead of `good`/`bad` for
 non-regression searches (e.g., "when was this feature added?")
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — Git reference and evidence limits.
+- [Git reference](https://git-scm.com/docs) — bisect command semantics.

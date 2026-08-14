@@ -122,3 +122,8 @@ Before broadening an already-large artifact, identify its current responsibiliti
 ### Acceptance check
 
 New broad-scope behavior lands in a file whose responsibility is named and bounded, or the agent reports that a split is needed before more implementation. Large multipurpose files are not expanded further without explicit authorization and a stated reason.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

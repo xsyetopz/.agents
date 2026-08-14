@@ -232,3 +232,8 @@ Do not create a format spec until its source path, external URL, or explicit use
 ### Acceptance check
 
 - `specs/` contains real source-backed specs, not product-governance ledgers or plausible local schema names. - Runtime renderer does not require invented governance specs. - Verifier checks that specs exist and are valid JSON, but does not treat them as product authority unless a current ADR says so.
+
+## References
+
+- [Issue corpus index](../issue-corpus-index.md)
+- [Official source records](../official-sources.md)

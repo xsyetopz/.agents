@@ -5,6 +5,9 @@ publication artifacts, and stylistic tells. Load when auditing prose for
 specific recurring patterns. For sentence-level rules, see
 `sentence-structure.md`. For document structure, see `structural-patterns.md`.
 
+Scope: local-policy pattern guidance. Named sources provide examples only; an
+observed pattern does not identify an author or tool.
+
 ---
 
 ## Specific patterns
@@ -87,8 +90,8 @@ keep all three.
 
 Repeating the same sentence opening across multiple sentences: "They assume
 that users will pay... They assume that developers will build... They assume
-that ecosystems will emerge..." Source: tropes.fyi. Fix: collapse into a
-single statement with a list. One instance of deliberate anaphora can be
+that ecosystems will emerge..." Source: [tropes.fyi](https://tropes.fyi/). Fix:
+collapse into a single statement with a list. One instance of deliberate anaphora can be
 effective; three is a pattern recognition failure.
 
 ### Vague attributions
@@ -123,8 +126,8 @@ collaborative opener. Just start with the point.
 ### Patronizing analogy ("Think of it as...")
 
 "Think of it as...", "It's like a...", "Picture it this way:" — AI defaults to
-teacher mode even for expert audiences. Source: tropes.fyi. Fix: state the
-concept directly.
+teacher mode even for expert audiences. Source: [tropes.fyi](https://tropes.fyi/).
+Fix: state the concept directly.
 
 ### Notability name-dropping
 
@@ -331,13 +334,15 @@ emphasis.
 
 AI latches onto a single metaphor and repeats it across the entire piece:
 walls and doors, ecosystem, journey. A human writer uses it and moves on.
-Source: tropes.fyi. Fix: use the metaphor once and let it go.
+Source: [tropes.fyi](https://tropes.fyi/). Fix: use the metaphor once and let it
+go.
 
 ### Content duplication
 
 AI repeats entire paragraphs verbatim, especially in longer output. The same
-claim appears twice, rephrased but identical. Source: tropes.fyi. Fix: cut
-the duplicate. Before publishing a piece over 500 words, scan for paragraphs
+claim appears twice, rephrased but identical. Source:
+[tropes.fyi](https://tropes.fyi/). Fix: cut the duplicate. Before publishing a
+piece over 500 words, scan for paragraphs
 that make the same claim.
 
 ### Vocabulary diversity (stylometric)
@@ -353,3 +358,8 @@ A low TTR alone is not proof, but on general prose it's worth a second look.
 When writing *about* AI writing patterns, quoted examples are exempt from
 flagging. Text inside quotation marks, code blocks, or explicitly marked as
 illustrative ("for example, AI might write...") should not be rewritten.
+
+## Sources
+
+- [Tropes.fyi](https://tropes.fyi/) supplies the named trope examples cited in
+  this reference; it is not an authorship detector.

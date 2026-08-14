@@ -5,6 +5,9 @@ paced. Load when auditing prose at the sentence level. For paragraph and
 document structure, see `structural-patterns.md`. For individual word
 replacement, see `word-tables.md`.
 
+Scope: local-policy sentence-editing guidance. Preserve meaning, voice, facts,
+and citations while applying the narrowest fix.
+
 ---
 
 ## Sentence structure
@@ -69,3 +72,7 @@ Slot-fill constructions that signal generated text:
 - "When it comes to" → describe the subject directly
 - "At the end of the day" → cut
 - "That said" / "That being said" → cut or use "but," "yet," "however"
+
+## Sources
+
+- [Package source map](sources.md); verify the linked source record before relying on current or external claims.

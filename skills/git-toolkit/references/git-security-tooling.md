@@ -1,9 +1,11 @@
 # Git Security Tooling
 
-Production tools for git safety. Do not invent a pre-commit hook or security
-check when a production tool already exists. Sources: [dev.to Git
-security](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-your-code-safe-1nep),
-[git-guardrails](https://git-guardrails.readthedocs.io/en/latest/).
+Scope: local secret scanning and repository-size tooling. Static application security testing (SAST) can flag candidate secrets but cannot prove whether a token is live or revoked; never upload repository contents or expose findings without authorization.
+
+Production tools for Git safety. Do not invent a pre-commit hook or security
+check when a maintained tool already exists. Tool choice and command examples
+are local guidance; verify each project's current release and permissions in
+the [Git Toolkit source map](sources.md).
 
 ## Secret scanning (pre-commit)
 
@@ -51,6 +53,8 @@ security](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-
 
 ## History sanitization
 
+`git filter-repo` and BFG rewrite object IDs and can destroy recovery paths. Make a backup, confirm exact paths and authorization, and verify refs before considering the operation complete; remote cleanup remains outside this package and `UNVERIFIED` until checked.
+
 - **[git-filter-repo](https://github.com/newren/git-filter-repo)** - Official
   replacement for `git filter-branch`. Safe secret and large-file purging.
 
@@ -87,10 +91,16 @@ security](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-
 
 ## Built-in Git safety
 
-From [dev.to Git security best practices](https://dev.to/prankurpandeyy/git-security-best-practices-for-keeping-your-code-safe-1nep):
+The following Git settings are local safety guidance; verify the effective scope
+and repository policy before changing them:
 
 ```bash
 git config --global push.useForceIfIncludes true   # force only if tracking matches
 git config --global push.default current            # push only current branch
 git config --global safe.directory /path/to/repo    # CVE-2022-24765 mitigation
 ```
+
+## Sources
+
+- [Git Toolkit source map](sources.md) — local Git and hosted-boundary references.
+- Tool documentation links in this guide are third-party or project-maintained; verify release, network, and credential behavior before running them.

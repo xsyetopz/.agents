@@ -1,5 +1,7 @@
 # Rigor Modes
 
+> Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the [bibliography](09-bibliography.md) is required before relying on them.
+
 Choose the least expensive mode that can still make the architectural decision safely. Raise rigor when uncertainty, irreversibility, blast radius, novelty, or coordination cost rises.
 
 ## R0 - Orientation
@@ -124,3 +126,7 @@ Rigor controls evidence and completeness, not word count. Use terse tables and d
 | R2 | 2–3 + baseline | 3–5 | 1–4 | Structured review |
 | R3 | 3+ including baseline | 5+ | As needed | Independent/red-team |
 | R4 | As assurance case requires | Hazard-driven | Controlled | Independent authority |
+
+## Sources
+
+- [Package bibliography](09-bibliography.md); verify the linked source record before relying on current or external claims.

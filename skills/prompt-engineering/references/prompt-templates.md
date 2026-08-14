@@ -94,3 +94,9 @@ Deliver:
 Add an example only when it encodes a product requirement or fixes a measured
 gap. Give it a stable ID, realistic input, exact desired output, and a linked
 evaluation. Remove it when ablation preserves the same behavior.
+
+## References
+
+- [Official source records](official-sources.md)
+- [Model reasoning and evidence guide](model-reasoning-guide.md)
+- [GitHub Mermaid diagram syntax](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams)

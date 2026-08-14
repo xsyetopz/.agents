@@ -1,13 +1,13 @@
 # GitHub Integrations
 
+Scope: GitHub-hosted Dependabot, CodeQL, Renovate, stale-issue, and label automation. Dependabot creates automated pull requests; CodeQL is GitHub code scanning; a software bill of materials (SBOM) is a dependency inventory. Treat configuration samples as starting points and validate action versions, permissions, and generated changes.
+
 Automated dependency updates, security scanning, and repository maintenance
 bots. These live in the `.github/` directory and complement CI/CD pipelines.
 
 ## Dependabot
 
-Source: [GitHub Dependabot docs](https://docs.github.com/en/code-
-security/dependabot/dependabot-version-updates/configuring-dependabot-version-
-updates)
+See the [Git CI/CD source map](sources.md) for the current GitHub Dependabot documentation and freshness status.
 
 ### Minimum configuration (`.github/dependabot.yml`)
 
@@ -102,8 +102,7 @@ actions, gomod, terraform, swift, pub, devcontainers, dotnet-sdk.
 
 ## CodeQL
 
-Source: [GitHub CodeQL docs](https://docs.github.com/en/code-security/code-
-scanning/introduction-to-code-scanning/about-code-scanning-with-codeql)
+See the [Git CI/CD source map](sources.md) for the current GitHub code-scanning and CodeQL documentation and freshness status.
 
 ### Default setup (recommended)
 
@@ -152,9 +151,7 @@ Note: PHP, Scala are **not** supported.
 
 ## Renovate
 
-Source: [Renovate docs](https://docs.renovatebot.com/). Alternative to
-Dependabot with more configuration options, monorepo support, and cross-platform
-compatibility (GitHub, GitLab, Bitbucket, Azure DevOps).
+[Renovate documentation](https://docs.renovatebot.com/) is third-party tool guidance and an alternative to Dependabot; verify its current schema, permissions, and platform support before enabling it.
 
 ### Minimum configuration (`renovate.json`)
 
@@ -251,3 +248,9 @@ ci:
   - changed-files:
     - any-glob-to-any-file: '.github/workflows/**'
 ```
+
+## Sources
+
+- [Git CI/CD source map](sources.md) — checked provider URLs and freshness limits.
+- [GitHub supply-chain security](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain) and [GitHub code scanning](https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning) — current provider controls.
+- [Renovate documentation](https://docs.renovatebot.com/) — third-party tool behavior; verify its current schema separately.

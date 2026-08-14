@@ -51,6 +51,10 @@ INDEX_REFERENCE_LINK = re.compile(
     r"\[[^\]]*\]\(\s*((?:\./)?(?:references/)?[A-Za-z0-9_.-]+"
     r"(?:/[A-Za-z0-9_.-]+)*\.md)"
 )
+MERMAID_FENCE_RE = re.compile(r"^\s{0,3}(`{3,}|~{3,})(.*)$")
+MERMAID_DECLARATION_RE = re.compile(r"^\s*(?:flowchart|graph)\b", re.IGNORECASE)
+MERMAID_LEGACY_LABEL_RE = re.compile(r"--\s+[^|>\n]+?\s+-->")
+STALE_SELECTOR = "$" + "openai-docs"
 
 
 def _common_section_bodies(text: str) -> dict[str, str]:
@@ -133,6 +137,82 @@ def root_index_duplicates(skill_text: str, index_text: str) -> set[str]:
     root_links.discard("references/index.md")
     indexed.discard("references/index.md")
     return root_links & indexed
+
+
+def _mermaid_blocks(text: str) -> tuple[list[tuple[int, list[tuple[int, str]]]], list[str]]:
+    """Return Mermaid fences and errors for unterminated fenced blocks."""
+    blocks: list[tuple[int, list[tuple[int, str]]]] = []
+    errors: list[str] = []
+    opening: tuple[str, int, int, list[tuple[int, str]]] | None = None
+    for line_no, line in enumerate(text.splitlines(), 1):
+        match = MERMAID_FENCE_RE.match(line)
+        if opening is None:
+            if not match:
+                continue
+            info = match.group(2).strip().lower()
+            if info == "mermaid":
+                opening = (match.group(1)[0], len(match.group(1)), line_no, [])
+            continue
+        character, length, start, body = opening
+        if match and match.group(1)[0] == character and len(match.group(1)) >= length:
+            blocks.append((start, body))
+            opening = None
+        else:
+            body.append((line_no, line))
+    if opening is not None:
+        errors.append(f"Unterminated Mermaid fence at line {opening[2]}")
+    return blocks, errors
+
+
+def check_skill_creator_references(root: Path, errors: list[str]) -> None:
+    """Check catalog selectors and standard GitHub Mermaid syntax."""
+    if root.name != "skill-creator":
+        return
+    skill = root / "SKILL.md"
+    if skill.is_file():
+        try:
+            skill_text = skill.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as exc:
+            errors.append(f"Unable to read SKILL.md: {exc}")
+        else:
+            if STALE_SELECTOR in skill_text:
+                errors.append(f"SKILL.md: stale non-catalog selector {STALE_SELECTOR!r}")
+    for markdown in sorted((root / "references").rglob("*.md")):
+        relative = markdown.relative_to(root)
+        if (
+            "official" in relative.parts
+            or "generated" in relative.parts
+            or markdown.name.endswith((".snapshot.md", ".generated.md"))
+        ):
+            continue
+        try:
+            text = markdown.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as exc:
+            errors.append(f"Unable to read {relative}: {exc}")
+            continue
+        if STALE_SELECTOR in text:
+            errors.append(
+                f"{relative}: stale non-catalog selector {STALE_SELECTOR!r}"
+            )
+        blocks, fence_errors = _mermaid_blocks(text)
+        for message in fence_errors:
+            errors.append(f"{relative}: {message}")
+        for start, body in blocks:
+            if not any(line.strip() for _line_no, line in body):
+                errors.append(
+                    f"{relative}:{start}: Mermaid fence is empty"
+                )
+            for line_no, line in body:
+                if MERMAID_LEGACY_LABEL_RE.search(line):
+                    errors.append(
+                        f"{relative}:{line_no}: Mermaid edge labels must use -->|label| syntax"
+                    )
+        unfenced = _without_fenced_blocks(text)
+        for line_no, line in enumerate(unfenced.splitlines(), 1):
+            if MERMAID_DECLARATION_RE.match(line):
+                errors.append(
+                    f"{relative}:{line_no}: Mermaid declarations must be in a ```mermaid fence"
+                )
 
 def parse_frontmatter(path: Path) -> tuple[str, bool, list[str]]:
     """Return description, multiline flag, and parse errors."""
@@ -254,6 +334,7 @@ def check(root: Path) -> tuple[list[str], list[str]]:
                     errors.append(
                         f"{prefix}/references/{child.name}: generic root filename"
                     )
+        check_skill_creator_references(package, errors)
 
     # Review authored Markdown labels, excluding source snapshots and explicit
     # evaluation corpus exceptions. Line-level diagnostics make exceptions auditable.
