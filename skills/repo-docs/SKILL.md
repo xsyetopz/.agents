@@ -5,72 +5,67 @@ description: README, CHANGELOG, release notes, repository documentation; exclude
 
 # Repo Docs
 
-## When to use
+## Use this skill
 
 - Create, restructure, or audit README.md and translated README variants.
 - Verify installation, setup, usage, architecture summaries, examples, badges, links, and support claims.
 - Create or correct CHANGELOG.md and release-note entries under the repository's versioning policy.
 - Add or run repository documentation checks.
 
-## When NOT to use
+## Rules
 
-- CONTRIBUTING.md, AGENTS.md, CODEOWNERS, issue forms, or pull-request templates; route to `repo-governance`.
-- API reference generation from source symbols.
-- Product manuals or general prose without a repository-documentation contract.
+- Inspect manifests, entrypoints, configuration, examples, tests, and release
+  history before documenting commands or features.
+- Run documented commands when practical. Mark unverified commands instead of
+  inventing support, benchmarks, compatibility, variables, or roadmap claims.
+- Preserve public names and released history unless migration is authorized.
+- Update every affected language variant or name the variants left stale.
+- Keep claims tied to repository evidence. Follow Keep a Changelog and
+  Semantic Versioning when the repository uses them.
+- Do not use this skill for CONTRIBUTING.md, AGENTS.md, CODEOWNERS, issue forms,
+  pull-request templates, or other governance files; route those to
+  `$repo-governance`. Route API reference generation and product manuals to
+  their owning tools. Use `$avoid-ai-writing` for a prose-style audit.
 
-## Guardrails
+## Steps
 
-- Inspect manifests, entrypoints, configuration, examples, tests, and release history before documenting commands or features.
-- Run documented commands when practical; label unverified commands instead of inventing support, benchmarks, compatibility, variables, or roadmap claims.
-- Preserve established public names and released history unless migration is explicitly authorized.
-- Update every affected language variant or report the exact variants left stale.
-- Keep README claims source-backed; use Keep a Changelog categories and Semantic Versioning semantics when the repository does.
+1. Identify the audience, documentation owner, requested files, and project
+   status.
+2. Inspect source truth, language variants, and release history. Load the
+   matching README or changelog resource.
+3. Draft the smallest coherent surface: installation, minimum usage,
+   verification, links, and support details that apply.
+4. Check links and documented commands. Run repository checks and conditional
+   changelog or version audits when their inputs exist.
+5. Re-read for unsupported claims, stale translations, duplicated policy, and
+   source/documentation drift.
 
-## Workflow
+## Resources
 
-1. Identify audience, documentation owner, requested files, and project status.
-2. Inspect source truth and load the matching README or changelog reference.
-3. Draft the smallest coherent surface with installation, minimum usage, verification, links, and support details that actually apply.
-4. Run links, documented commands, changelog, and repository-specific checks; correct failures rather than suppressing them.
-5. Re-read the diff for unsupported claims, stale translations, duplicated policy, and source/documentation drift.
+- Route selection: [reference index](references/index.md).
+- README structure and claims: [README](references/readme.md).
+- README verification: [README checklist](references/readme.md#verification-checklist).
+- CHANGELOG format and release sections: [CHANGELOG](references/changelog.md).
+- CHANGELOG verification: [CHANGELOG checklist](references/changelog.md#verification-checklist).
+- Route governance files to `$repo-governance`; route release tags and local
+  history to `$git-toolkit`.
 
-## Quick start
+## Verify
+
+Run from this package root:
 
 ```bash
 find . -maxdepth 2 -type f \( -name 'README*' -o -name 'CHANGELOG*' \) -print
 git diff --check
 python3 scripts/check.py
+python3 -m json.tool evals/evals.json >/dev/null
 ```
 
-Then inspect manifests and executable help before writing a command example.
-
-## Reference map
-
-- [Reference index](references/index.md) for artifact-based route selection.
-- [README](references/readme.md) for required landing-page structure and claims.
-- [README verification](references/readme.md#verification-checklist) for links, install, usage, and SEO checks.
-- [CHANGELOG](references/changelog.md) for Keep a Changelog and release sections.
-- [CHANGELOG verification](references/changelog.md#verification-checklist) for release-history validation.
-
-## Completion
-
-Complete when documentation matches current repository behavior, required commands and links are verified or explicitly qualified, related language variants agree, and applicable checks pass with evidence reported.
-
-## Validation
-
-Run from this package root:
+When the target files or metadata exist, also run:
 
 ```bash
-python3 scripts/check.py
-python3 -m json.tool evals/evals.json >/dev/null
-python3 scripts/audit_changelog.py CHANGELOG.md  # when CHANGELOG.md exists
-python3 scripts/audit_semver.py                  # when version metadata is present
+python3 scripts/audit_changelog.py CHANGELOG.md
+python3 scripts/audit_semver.py
 ```
 
-Do not claim the conditional audits ran when their target files or metadata are absent.
-
-## Related skills
-
-- `repo-governance` for contributor and agent policy
-- `avoid-ai-writing` for prose-level style cleanup
-- `git-toolkit` for release tags and local history inspection
+Report skipped conditional checks and any unverified command or link.

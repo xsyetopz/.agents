@@ -9,15 +9,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HEADINGS = [
-    "When to use",
-    "When NOT to use",
-    "Guardrails",
-    "Workflow",
-    "Quick start",
-    "Reference map",
-    "Completion",
-    "Validation",
-    "Related skills",
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify",
 ]
 FILES = [
     "SKILL.md",
