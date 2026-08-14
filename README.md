@@ -62,6 +62,70 @@ For a local checkout, replace `xsyetopz/my-dotagents-btw` with
 
 Replace `prompt-engineering` with the package name you need.
 
+To inspect a project-scoped install, list the selected agent in JSON. Use
+either runner; the project list should include the copied package and
+`skills-lock.json` should contain its lock entry:
+
+```bash
+npx --yes skills@1.5.22 list --agent codex --json
+test -f .agents/skills/prompt-engineering/SKILL.md
+test -f skills-lock.json
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+lock = json.loads(Path("skills-lock.json").read_text())
+assert "prompt-engineering" in lock.get("skills", {})
+PY
+
+bunx --bun skills@1.5.22 list --agent codex --json
+test -f .agents/skills/prompt-engineering/SKILL.md
+test -f skills-lock.json
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+lock = json.loads(Path("skills-lock.json").read_text())
+assert "prompt-engineering" in lock.get("skills", {})
+PY
+```
+
+Remove only the selected package with one runner and the pinned command shape
+`remove --skill <name> --agent codex -y`:
+
+```bash
+npx --yes skills@1.5.22 remove --skill prompt-engineering --agent codex -y
+bunx --bun skills@1.5.22 remove --skill prompt-engineering --agent codex -y
+```
+
+After removal, verify both the list and lock metadata with either runner:
+
+```bash
+npx --yes skills@1.5.22 list --agent codex --json
+# In a fixture containing only prompt-engineering, the output above is [].
+bunx --bun skills@1.5.22 list --agent codex --json
+# The same selected-only fixture also reports [].
+test ! -e .agents/skills/prompt-engineering
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+lock = json.loads(Path("skills-lock.json").read_text())
+assert "prompt-engineering" not in lock.get("skills", {})
+PY
+```
+
+In a fixture containing only the selected package, the post-remove list is
+`[]`. If the project also has unrelated skills, their list rows and lock
+entries remain; only the selected package is removed.
+
+Run the disposable CLI smoke probe with either launcher:
+
+```bash
+RUNNER=npx SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
+RUNNER=bunx SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
+```
+
 ## Check the repository
 
 ```bash
