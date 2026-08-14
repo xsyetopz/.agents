@@ -33,8 +33,9 @@ npx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
 ```
 
 The CLI's accepted options and source behavior are release-specific. Run
-`npx --yes skills@1.5.22 --help` and `remove --help` before automating a new
-pin. Do not substitute `latest` in reproducible documentation.
+`npx --yes skills@1.5.22 --help` and
+`npx --yes skills@1.5.22 remove --help` before automating a new pin. Do not
+substitute `latest` in reproducible documentation.
 
 Both `bunx --yes skills@1.5.22` (used above) and the Bun launcher form
 `bunx --bun skills@1.5.22` resolved the same pinned release in the 2026-08-13

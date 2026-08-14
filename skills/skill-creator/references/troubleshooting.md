@@ -45,9 +45,10 @@
   target, enumerate the agents reported by `list --json`, run the named-agent
   removal from [package distribution](package-distribution.md), then verify
   filesystem, list JSON, and lock entries.
-- **Pinned CLI behavior differs:** run `skills@<version> --help` and
-  `remove --help`, record the exact output and version, and do not silently copy
-  an obsolete command shape into documentation.
+- **Pinned CLI behavior differs:** run
+  `npx --yes skills@1.5.22 --help` and
+  `npx --yes skills@1.5.22 remove --help`, record the exact output and version,
+  and do not silently copy an obsolete command shape into documentation.
 
 ## Safety and evidence failures
 

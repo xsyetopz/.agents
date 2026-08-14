@@ -172,9 +172,10 @@ bunx --bun skills@1.5.22 add xsyetopz/my-dotagents-btw \
 ```
 
 Do not use `latest` or an unpinned `skills` invocation in committed validation or
-user-facing commands. A future CLI pin is a deliberate update: re-run `skills
---help`, repeat isolated `npx` and `bunx` add/list/remove smoke tests, and record
-the new verification date before changing this policy.
+user-facing commands. A future CLI pin is a deliberate update: run the pinned
+`npx --yes skills@1.5.22 --help` and `bunx --bun skills@1.5.22 --help` probes,
+repeat isolated `npx` and `bunx` add/list/remove smoke tests, and record the new
+verification date before changing this policy.
 
 ## Validation contract
 
