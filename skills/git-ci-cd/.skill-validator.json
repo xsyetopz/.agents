@@ -1,17 +1,15 @@
 {
   "required_headings": [
-    "## When to use",
-    "## When NOT to use",
-    "## Guardrails",
-    "## Workflow",
-    "## Quick start",
-    "## Reference map",
-    "## Completion",
-    "## Validation",
-    "## Related skills"
+    "## Use this skill",
+    "## Rules",
+    "## Steps",
+    "## Resources",
+    "## Verify"
   ],
   "required_files": [
+    "SKILL.md",
     "LICENSE",
+    ".skill-validator.json",
     "agents/openai.yaml",
     "references/index.md",
     "references/security-checklist.md",

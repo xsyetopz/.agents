@@ -9,15 +9,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HEADINGS = [
-    "When to use",
-    "When NOT to use",
-    "Guardrails",
-    "Workflow",
-    "Quick start",
-    "Reference map",
-    "Completion",
-    "Validation",
-    "Related skills",
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify",
 ]
 FILES = [
     "SKILL.md",
@@ -181,13 +177,13 @@ def check_files(contract: dict, errors: list[str]) -> None:
 
 def check_skill(text: str, contract: dict, refs: list[str], errors: list[str]) -> None:
     _name, _description = frontmatter(text, errors)
-    headings = {
+    headings = [
         match.group(1).strip()
         for match in re.finditer(r"^##\s+(.+?)\s*$", text, re.MULTILINE)
-    }
-    for heading in contract.get("required_headings", []):
-        if heading not in headings:
-            fail(errors, f"SKILL.md: missing required heading: ## {heading}")
+    ]
+    expected = contract.get("required_headings", [])
+    if headings != expected:
+        fail(errors, f"SKILL.md: level-two headings must be {expected!r}; got {headings!r}")
     if not re.search(r"^#\s+\S+", text, re.MULTILINE):
         fail(errors, "SKILL.md: a title heading is required")
     for relative in refs:
