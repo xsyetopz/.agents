@@ -43,6 +43,14 @@ FRONTMATTER_END = re.compile(r"^\s*---\s*$")
 DESCRIPTION_LINE = re.compile(r"^description:\s*(.*)$")
 HEADING_LINE = re.compile(r"^##\s+(.+?)(?:\s*\{#[^}]+\})?\s*$")
 WORD = re.compile(r"[A-Za-z0-9]+(?:[+./:-][A-Za-z0-9]+)*")
+ROOT_REFERENCE_LINK = re.compile(
+    r"\[[^\]]*\]\(\s*((?:\./)?references/[A-Za-z0-9_.-]+"
+    r"(?:/[A-Za-z0-9_.-]+)*\.md)"
+)
+INDEX_REFERENCE_LINK = re.compile(
+    r"\[[^\]]*\]\(\s*((?:\./)?(?:references/)?[A-Za-z0-9_.-]+"
+    r"(?:/[A-Za-z0-9_.-]+)*\.md)"
+)
 
 
 def _common_section_bodies(text: str) -> dict[str, str]:
@@ -92,6 +100,39 @@ def check_common_section_semantics(text: str) -> list[str]:
             "with UNVERIFIED, unavailable, not run, or skipped."
         )
     return errors
+
+
+def _without_fenced_blocks(text: str) -> str:
+    lines: list[str] = []
+    fence: str | None = None
+    for line in text.splitlines():
+        marker = re.match(r"^\s{0,3}(`{3,}|~{3,})", line)
+        if fence is not None:
+            if marker and marker.group(1)[0] == fence:
+                fence = None
+            continue
+        if marker:
+            fence = marker.group(1)[0]
+            continue
+        lines.append(line)
+    return "\n".join(lines)
+
+
+def root_index_duplicates(skill_text: str, index_text: str) -> set[str]:
+    """Return leaf links repeated in Resources and references/index.md."""
+    resources = _without_fenced_blocks(
+        _common_section_bodies(skill_text).get("Resources", "")
+    )
+    root_links = {match.removeprefix("./") for match in ROOT_REFERENCE_LINK.findall(resources)}
+    indexed: set[str] = set()
+    for match in INDEX_REFERENCE_LINK.findall(_without_fenced_blocks(index_text)):
+        target = match.removeprefix("./")
+        if not target.startswith("references/"):
+            target = f"references/{target}"
+        indexed.add(target)
+    root_links.discard("references/index.md")
+    indexed.discard("references/index.md")
+    return root_links & indexed
 
 def parse_frontmatter(path: Path) -> tuple[str, bool, list[str]]:
     """Return description, multiline flag, and parse errors."""
@@ -184,19 +225,27 @@ def check(root: Path) -> tuple[list[str], list[str]]:
             errors.append(f"{relative}: description exceeds {DESCRIPTION_LIMIT} characters")
         if re.search(r"\buse\s+(?:for|to)\b", description, re.IGNORECASE):
             errors.append(f"{relative}: description uses forbidden 'Use for'/'Use to'")
+        skill_text = (package / "SKILL.md").read_text(encoding="utf-8")
         found = headings(package / "SKILL.md")
         if found != EXPECTED_HEADINGS:
             errors.append(f"{relative}: H2 order differs from the common contract")
         else:
-            for message in check_common_section_semantics(
-                (package / "SKILL.md").read_text(encoding="utf-8")
-            ):
+            for message in check_common_section_semantics(skill_text):
                 errors.append(f"{relative}: {message}")
 
         index = package / "references" / "index.md"
         if not index.is_file():
             prefix = f"skills/{name}" if catalog_mode else name
             errors.append(f"{prefix}: missing references/index.md")
+        else:
+            duplicates = root_index_duplicates(
+                skill_text, index.read_text(encoding="utf-8")
+            )
+            if len(duplicates) >= 3:
+                errors.append(
+                    f"{relative}: Resources repeats {len(duplicates)} leaf links "
+                    "already routed by references/index.md; keep at most two"
+                )
         references = package / "references"
         if references.is_dir():
             for child in sorted(references.iterdir()):

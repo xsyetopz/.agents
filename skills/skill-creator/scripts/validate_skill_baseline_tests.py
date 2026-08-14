@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from check_skill_structure import root_index_duplicates
 from test_support import (
     check_agents_yaml,
     check_broken_references,
@@ -226,6 +227,18 @@ class BaselineValidatorTests(unittest.TestCase):
             check_broken_references("Use ./assets/template.md.\n", root, errors)
 
         self.assertEqual(errors, [])
+
+    def test_root_index_duplicate_guard_counts_three_leaf_routes(self) -> None:
+        names = ("one", "two", "three")
+        resources = "## Resources\n" + "\n".join(
+            f"- [{name}](references/{name}.md)" for name in names
+        )
+        index = "\n".join(f"- [{name}]({name}.md)" for name in names)
+
+        self.assertEqual(
+            root_index_duplicates(resources, index),
+            {f"references/{name}.md" for name in names},
+        )
 
 
 if __name__ == "__main__":
