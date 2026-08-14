@@ -1,0 +1,2 @@
+domain_or_context	semantic_core	state_owner	control_authority	input_model	output_projection	side_effect_boundary	dominant_pattern	secondary_patterns	key_invariants	failure_model	notes
+Example	Concepts and rules	Authoritative store	Coordinator	Commands/events	View/report	Port/adapter	Pattern	Tactics	Invariant	Failure/cancel/recovery	Analogy limits

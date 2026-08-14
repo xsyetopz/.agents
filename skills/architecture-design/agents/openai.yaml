@@ -1,0 +1,4 @@
+interface:
+  display_name: "Architecture Design"
+  short_description: "Design evidence-backed architecture and topology"
+  default_prompt: "Use $architecture-design to compare architecture candidates, map durable ownership and source topology, record the decision, and define fail-closed verification."

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "skill_name": "architecture-design",
+  "required_headings": [
+    "When to use",
+    "When NOT to use",
+    "Guardrails",
+    "Workflow",
+    "Quick start",
+    "Reference map",
+    "Completion",
+    "Validation",
+    "Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/01-core-model.md",
+    "references/02-pattern-catalog.md",
+    "references/04-decision-procedure.md",
+    "references/07-verification-and-evals.md",
+    "references/08-failure-modes.md",
+    "references/10-worked-examples.md",
+    "references/11-rigor-modes.md"
+  ],
+  "eval_case_ids": [
+    "positive-topology-decision",
+    "near-miss-local-edit",
+    "safety-failure-suppression"
+  ]
+}

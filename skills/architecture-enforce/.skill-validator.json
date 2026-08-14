@@ -1,0 +1,34 @@
+{
+  "required_headings": [
+    "# Architecture Enforce",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Workflow",
+    "## Quick start",
+    "## Reference map",
+    "## Completion",
+    "## Validation",
+    "## Related skills"
+  ],
+  "required_files": [
+    "references/index.md",
+    "LICENSE",
+    "references/principles.md",
+    "references/naming.md",
+    "references/languages.md",
+    "references/testing.md",
+    "references/toolchains.md",
+    "references/verification.md",
+    "references/pattern-catalog.md",
+    "references/examples.md",
+    "references/sources.md",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py",
+    "scripts/audit_architecture.py",
+    "scripts/providers.py",
+    "scripts/test_audit_cli.py",
+    "scripts/test_suppressions.py"
+  ]
+}

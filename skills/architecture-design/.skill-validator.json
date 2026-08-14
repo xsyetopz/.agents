@@ -1,0 +1,30 @@
+{
+  "required_headings": [
+    "# Architecture Design",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Workflow",
+    "## Quick start",
+    "## Reference map",
+    "## Completion",
+    "## Validation",
+    "## Related skills"
+  ],
+  "required_files": [
+    "references/index.md",
+    "LICENSE",
+    "references/01-core-model.md",
+    "references/04-decision-procedure.md",
+    "references/07-verification-and-evals.md",
+    "references/08-failure-modes.md",
+    "assets/adr.template.md",
+    "assets/architecture-report.template.md",
+    "assets/eval-cases.jsonl",
+    "assets/contract.json",
+    "scripts/skill_checks.py",
+    "scripts/check.py",
+    "PACKAGE-MANIFEST.sha256",
+    "evals/evals.json"
+  ]
+}

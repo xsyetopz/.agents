@@ -1,0 +1,5 @@
+## Architecture governance
+
+Use `/architecture-design` for architecture selection, design, decomposition, domain boundaries, flowgraphs, ADRs, architecture review, or any change that creates, splits, merges, moves, or renames three or more sibling source files or changes package/directory topology.
+
+The skill's task contract, evidence classification, alternatives, source-topology map (including untracked files), state/control ownership, failure flows, and verification gates are mandatory for architecturally significant work. Reject categorical one-file decomposition and do not force MVC or DDD terminology where the system's actual forces imply another structure. The full pre/post audit is fail-closed; no baseline, exclusion, disabled/advisory mode, threshold override, or exception is acceptance proof. Never suppress lint/check failures with ignore directives, disabled rules/providers/jobs, lowered severity, `allow-failure`, `continue-on-error`, excluded paths, baseline edits, or weakened/deleted tests; fix the owning cause or report a minimal tool reproducer and obtain explicit policy authorization while keeping the gate blocked.
