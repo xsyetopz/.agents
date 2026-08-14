@@ -15,7 +15,7 @@ aec0d20c7b3e7e4996b9bb6a3eb7d6b903bb09ee43a46648e1ad371a193f752b  ./assets/contr
 404d1035b15358f8ac76245b808f59334d70626f2207ba79e553b735cc185931  ./assets/quality-attribute-scenario.template.md
 d6dad65c01c016c3e48efb697eb5c4bda73f576405f34a664e775e544e06f5a4  ./evals/evals.json
 04b03726198e5083385357e854fcb61ab6ec6e6411daa86deec6b88364dd9513  ./references/01-core-model.md
-c6dc6d8b7a48dc515896266dea33c890e971956a3badcbb32152f143b3018270  ./references/02-pattern-catalog.md
+9068e50df8b15191f3c1da5ac0ba56ef913bce96032c33ab9804fd0638d8657a  ./references/02-pattern-catalog.md
 7f8b212c3818d2363fa18a569f06e4a866c3e44600b4be680492bd5b98b6e843  ./references/03-domain-mappings.md
 09b4d01cf87ac6c1068192b064ece6bb677c9b5f13f2da5689e980f2beb4549d  ./references/04-decision-procedure.md
 e7c5cccbf2e3c975d368660054ac6df478aeaf1398125becf231de765e18e158  ./references/05-flowgraphs.md
@@ -25,7 +25,7 @@ e7c5cccbf2e3c975d368660054ac6df478aeaf1398125becf231de765e18e158  ./references/0
 c5698e5ea3164c26d1a707023140ffb04ade6dfb046bd4f4344316a4cdab7eb5  ./references/09-bibliography.md
 87a564e3ed74ea8f76ca2ce65d43944b1fac515ff364e236e55aae659300d2bd  ./references/10-worked-examples.md
 c8d1b5cec0ad625c5e7a381cd44945aa5463fb5ce47ecfc05fbeba809ff8eccf  ./references/11-rigor-modes.md
-baabc254745fdac1b55263c39766fb4402620ab164c97aa2c8796fbe9803db74  ./references/index.md
+36dcffa57fd4c7aab90de2e9e05f6abb25f5339e7d6e71c15979a2bd5af0fe37  ./references/index.md
 72855bf0e394df386c358f277a1b9174cee45e8ba0d1e179d629115f34884b02  ./scripts/check.py
 9934b19ec10d5147ea1171dff4936632377a1887a0937d3f827e6ed54bcb5e35  ./scripts/install.sh
 6f2a1b63e7c54c85d315f39200fb0e46fdff76ca5840ef083b5a323d459900a4  ./scripts/skill_checks.py
