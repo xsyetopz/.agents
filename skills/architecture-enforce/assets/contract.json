@@ -2,15 +2,11 @@
   "schema_version": 1,
   "skill_name": "architecture-enforce",
   "required_headings": [
-    "When to use",
-    "When NOT to use",
-    "Guardrails",
-    "Workflow",
-    "Quick start",
-    "Reference map",
-    "Completion",
-    "Validation",
-    "Related skills"
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify"
   ],
   "required_files": [
     "SKILL.md",

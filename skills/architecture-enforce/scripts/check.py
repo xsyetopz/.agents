@@ -7,15 +7,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 HEADINGS = [
-    "When to use",
-    "When NOT to use",
-    "Guardrails",
-    "Workflow",
-    "Quick start",
-    "Reference map",
-    "Completion",
-    "Validation",
-    "Related skills",
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify",
 ]
 REQUIRED_FILES = [
     "SKILL.md",
@@ -198,9 +194,12 @@ def check_skill(errors: list[str], skill_name: str) -> str:
     titles = re.findall(r"^#\s+(.+?)\s*$", text, re.MULTILINE)
     if len(titles) != 1:
         errors.append("SKILL.md must contain exactly one H1 title")
-    headings = set(re.findall(r"^##\s+(.+?)\s*$", text, re.MULTILINE))
-    missing = [heading for heading in HEADINGS if heading not in headings]
-    errors.extend(f"SKILL.md missing heading: ## {heading}" for heading in missing)
+    headings = re.findall(r"^##\s+(.+?)\s*$", text, re.MULTILINE)
+    if headings != HEADINGS:
+        errors.append(
+            "SKILL.md H2 headings must match the shared ordered structure: "
+            + ", ".join(HEADINGS)
+        )
     if len(text.splitlines()) > 260:
         errors.append("SKILL.md exceeds 260 lines")
     return text

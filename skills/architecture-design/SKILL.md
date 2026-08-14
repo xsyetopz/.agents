@@ -6,83 +6,62 @@ description: architecture decisions, ADRs, bounded contexts, topology, quality t
 # Architecture Design
 
 Turn a structural question into an implementable decision grounded in repository
-facts, domain ownership, quality attributes, and executable verification.
+facts, ownership, quality attributes, and executable checks.
 
-## When to use
+## Use this skill
 
-- Select package, module, service, storage, protocol, or deployment structure.
-- Write an ADR, architecture report, decomposition, or migration plan.
-- Review dependency direction, ownership, lifecycle, public contracts, or boundaries.
-- Change topology or three or more sibling source files.
-- Resolve reliability, security, performance, evolvability, operability, or cost forces.
+Use this skill when a decision changes package, module, service, storage,
+protocol, deployment, ownership, public contracts, or three or more sibling
+source files. Use it for ADRs, architecture reports, decompositions, topology
+reviews, and migration plans involving reliability, security, performance,
+evolvability, operability, or cost.
 
-## When NOT to use
+## Rules
 
-- A local edit whose owner, boundary, and behavior stay unchanged.
-- Naming or formatting work without a structural decision.
-- Pattern selection without repository or product evidence.
-- Runtime implementation work after the structure is already selected; use the owning implementation skill.
+- Do not use it for a local naming, formatting, or behavior-preserving edit with no structural effect; use the owning implementation skill.
+- Inspect callers, contracts, tests, build and deployment graphs, public surfaces, and repository guidance before deciding.
+- State scope, stakeholders, constraints, owners, boundaries, public contracts, and measurable quality scenarios.
+- Compare at least two materially different candidates and a do-less baseline for every nontrivial decision. Record risk, reversibility, cost, and verification for each.
+- Give every changed path one durable owner, responsibility, visibility, lifecycle, dependency direction, and reason it remains separate. Treat helpers, validation, types, managers, open, reduce, and commit as procedural roles, not automatic owners.
+- Never hide a warning or failure with exclusions, threshold changes, ignores, disabled rules, or tolerated failed checks.
 
-## Guardrails
+## Steps
 
-- Inspect callers, contracts, tests, build graph, deployment topology, and repository guidance before deciding.
-- Define decision, forces, constraints, owners, public contracts, and measurable quality scenarios.
-- Compare at least two material candidates and a do-less baseline for nontrivial decisions.
-- Give every changed path one durable owner, reason, visibility, lifecycle, dependencies, and consolidation rationale.
-- Treat helpers, validation, types, managers, open, reduce, and commit as procedural roles, not automatic owners.
-- Never pass by excluding paths, changing thresholds, disabling rules, adding ignores, or tolerating failed checks.
+1. Frame the decision, scope, owners, stakeholders, constraints, quality scenarios, and preserved contracts.
+2. Discover current source topology, dependencies, control and data flow, failure ownership, generated files, and public surfaces.
+3. Inventory tracked, modified, staged, and non-ignored candidates; map each source path to an owner and boundary.
+4. Generate materially different candidates, including do-less; compare quality attributes, migration cost, rollback boundary, reversibility, and operational risk.
+5. Record the selected structure, rejected alternatives, contracts, migration order, rollback boundary, ownership map, and evolution triggers in an ADR or report.
+6. Run capability preflight, focused checks, production or integration entrypoints, architecture audit, and final diff inspection.
 
-## Workflow
+## Resources
 
-1. Frame scope, owner, stakeholders, constraints, and quality scenarios.
-2. Discover current state, dependencies, control/data flow, failure ownership, and public surfaces.
-3. Inventory tracked and untracked candidates and map source-path ownership.
-4. Generate materially different candidates, including do-less; compare risk, reversibility, cost, and verification.
-5. Record the selected structure, rejected alternatives, contracts, migration, rollback boundary, and evolution triggers.
-6. Run capability preflight, focused tests, production entrypoint, architecture audit, and final diff inspection.
+Route only the material needed for the decision:
 
-## Quick start
-
-1. Start with [the ADR template](assets/adr.template.md) or [the architecture-report template](assets/architecture-report.template.md).
-2. Load the [reference map](references/index.md), then use the [decision procedure and workflow](references/04-decision-procedure.md) with the [core model](references/01-core-model.md).
-3. For topology work, activate `$architecture-enforce` and run its package-local preflight and audit.
-4. Run `python3 scripts/check.py` and the focused report checks: `python3 scripts/skill_checks.py eval-cases`.
-
-## Reference map
-
-Load only what answers the current question:
-
-- [Core model](references/01-core-model.md) — frame ownership, forces, and boundaries.
-- [Pattern catalog](references/02-pattern-catalog.md) — compare candidate structures.
-- [Reference map](references/index.md) — route trigger keywords to focused material.
-- [Decision procedure and workflow](references/04-decision-procedure.md) — sequence evidence, gates, and tradeoffs.
-- [Verification and evals](references/07-verification-and-evals.md) — define executable acceptance.
-- [Failure modes](references/08-failure-modes.md) — test safety and architecture failure paths.
-- [Worked examples](references/10-worked-examples.md) — calibrate reports and decisions.
+- [Reference index](references/index.md) — trigger-to-reference routing.
+- [Core model](references/01-core-model.md) — ownership, forces, boundaries, and quality attributes.
+- [Pattern catalog](references/02-pattern-catalog.md) — candidate structures and their preconditions.
+- [Decision procedure](references/04-decision-procedure.md) — evidence sequence, gates, and tradeoffs.
+- [Verification and evals](references/07-verification-and-evals.md) — executable acceptance and evidence.
+- [Failure modes](references/08-failure-modes.md) — failure paths and unsafe shortcuts.
+- [Worked examples](references/10-worked-examples.md) — reports and decisions across domains.
 - [Rigor modes](references/11-rigor-modes.md) — scale analysis to risk.
+- [Bibliography](references/09-bibliography.md) — primary architecture and evaluation sources.
+- [ADR template](assets/adr.template.md), [architecture report](assets/architecture-report.template.md), [quality scenario](assets/quality-attribute-scenario.template.md), and [component contract](assets/component-contract.template.md) — record decisions and evidence.
+- `$architecture-enforce` — apply the selected topology and audit boundaries; `$repo-governance` — persist ownership and repository policy; `$prompt-engineering` — design agent-system or tool-routing instruction architecture.
 
-## Completion
-
-Complete only when the decision is implementable, every changed source path has
-a credible owner and rationale, required structural/runtime checks pass, and no
-warning or error remains unresolved. Report paths, evidence, tradeoffs, and any
-explicitly deferred risk.
-
-## Validation
+## Verify
 
 Run from this package directory:
 
 ```sh
 python3 scripts/check.py
 python3 scripts/skill_checks.py eval-cases
+python3 scripts/skill_checks.py report REPORT --mode R3
 ```
 
-For a report, run `python3 scripts/skill_checks.py report REPORT --mode R3`; for
-an architecture change, `$architecture-enforce` owns the full audit and its
-focused tests. Static PASS is not behavioral proof.
-
-## Related skills
-
-- `$architecture-enforce` — enforce the selected topology and audit boundaries.
-- `$repo-governance` — record durable ownership and repository policy.
-- `$prompt-engineering` — design agent-system or tool-routing instruction architecture.
+For topology work, activate `$architecture-enforce` and run its capability
+preflight, focused tests, full audit, and provider checks. Accept the decision
+only when required checks pass with no unresolved warning or error, every
+changed path has an owner and rationale, and the report names evidence,
+tradeoffs, migration, rollback, rejected alternatives, and deferred risk.
