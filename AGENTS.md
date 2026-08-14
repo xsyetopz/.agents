@@ -165,7 +165,7 @@ Use the verified Vercel Skills CLI pin `skills@1.5.22` for reproducible examples
 and validation:
 
 ```bash
-npx --yes skills@1.5.22 add xsyetopz/my-dotagents-btw \
+bunx --yes skills@1.5.22 add xsyetopz/my-dotagents-btw \
   --skill skill-creator --agent codex --copy -y
 bunx --bun skills@1.5.22 add xsyetopz/my-dotagents-btw \
   --skill skill-creator --agent codex --copy -y
@@ -173,8 +173,8 @@ bunx --bun skills@1.5.22 add xsyetopz/my-dotagents-btw \
 
 Do not use `latest` or an unpinned `skills` invocation in committed validation or
 user-facing commands. A future CLI pin is a deliberate update: run the pinned
-`npx --yes skills@1.5.22 --help` and `bunx --bun skills@1.5.22 --help` probes,
-repeat isolated `npx` and `bunx` add/list/remove smoke tests, and record the new
+`bunx --yes skills@1.5.22 --help` and `bunx --bun skills@1.5.22 --help` probes,
+repeat isolated `bunx` and `bunx` add/list/remove smoke tests, and record the new
 verification date before changing this policy.
 
 ## Validation contract
@@ -204,7 +204,7 @@ Every package checker and validator must exit `0` with `PASS` and no warnings;
 the unit suite must report `OK`; the LOC and Ruff checks must pass; there must
 be exactly the twelve approved root-level entrypoints listed above; and no
 symlink may escape its owning package. Run disposable fixture projects with
-the pinned `npx --yes skills@1.5.22` and `bunx --bun skills@1.5.22` commands as
+the pinned `bunx --yes skills@1.5.22` and `bunx --bun skills@1.5.22` commands as
 documented in `README.md`: each fixture must copy exactly one selected
 project-scoped package, then the matching pinned remove command must remove
 that selected path and leave zero selected lock entries while preserving

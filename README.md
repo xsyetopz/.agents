@@ -49,7 +49,7 @@ cp -R skills/prompt-engineering .agents/skills/
 The pinned Skills CLI can copy one package from GitHub:
 
 ```bash
-npx --yes skills@1.5.22 add xsyetopz/my-dotagents-btw \
+bunx --yes skills@1.5.22 add xsyetopz/my-dotagents-btw \
   --skill prompt-engineering --agent codex --copy -y
 
 bunx --bun skills@1.5.22 add xsyetopz/my-dotagents-btw \
@@ -67,7 +67,7 @@ either runner; the project list should include the copied package and
 `skills-lock.json` should contain its lock entry:
 
 ```bash
-npx --yes skills@1.5.22 list --agent codex --json
+bunx --yes skills@1.5.22 list --agent codex --json
 test -f .agents/skills/prompt-engineering/SKILL.md
 test -f skills-lock.json
 python3 - <<'PY'
@@ -94,14 +94,14 @@ For the disposable project fixture used above, remove the selected package with
 one runner and the pinned command shape `remove --skill <name> --agent codex -y`:
 
 ```bash
-npx --yes skills@1.5.22 remove --skill prompt-engineering --agent codex -y
+bunx --yes skills@1.5.22 remove --skill prompt-engineering --agent codex -y
 bunx --bun skills@1.5.22 remove --skill prompt-engineering --agent codex -y
 ```
 
 After removal, verify both the list and lock metadata with either runner:
 
 ```bash
-npx --yes skills@1.5.22 list --agent codex --json
+bunx --yes skills@1.5.22 list --agent codex --json
 # In a fixture containing only prompt-engineering, the output above is [].
 bunx --bun skills@1.5.22 list --agent codex --json
 # The same selected-only fixture also reports [].
@@ -127,7 +127,7 @@ filesystem, list, and lock after the command regardless of its exit status.
 Run the disposable CLI smoke probe with either launcher:
 
 ```bash
-RUNNER=npx SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
+RUNNER=bunx SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
 RUNNER=bunx SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
 ```
 

@@ -10,14 +10,14 @@
 
 ## Pin and select one skill
 
-The verified release is `skills@1.5.22` (Node `v26.6.0`, `npx 12.0.2`, Bun
+The verified release is `skills@1.5.22` (Node `v26.6.0`, `bunx 12.0.2`, Bun
 `1.3.14`, macOS; accessed 2026-08-13). Pin the version, pass the repository or
 local source explicitly, select `skill-creator` explicitly, target `codex`, and
 copy rather than relying on source-link behavior.
 
 <!-- GREEN: one named skill, pinned version, project-scoped copy -->
 ```bash
-npx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
+bunx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
   --skill skill-creator --agent codex --copy -y
 
 bunx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
@@ -28,13 +28,13 @@ bunx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
 source is unfamiliar:
 
 ```bash
-npx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
+bunx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
   --list --skill skill-creator --agent codex -y
 ```
 
 The CLI's accepted options and source behavior are release-specific. Run
-`npx --yes skills@1.5.22 --help` and
-`npx --yes skills@1.5.22 remove --help` before automating a new pin. Do not
+`bunx --yes skills@1.5.22 --help` and
+`bunx --yes skills@1.5.22 remove --help` before automating a new pin. Do not
 substitute `latest` in reproducible documentation.
 
 Both `bunx --yes skills@1.5.22` (used above) and the Bun launcher form
@@ -46,7 +46,7 @@ probe; keep one form consistent within a smoke-test script.
 From a disposable Git-backed project, run:
 
 ```bash
-npx --yes skills@1.5.22 list --agent codex --json
+bunx --yes skills@1.5.22 list --agent codex --json
 test -f .agents/skills/skill-creator/SKILL.md
 test ! -L .agents/skills/skill-creator
 ```
@@ -63,13 +63,13 @@ when only `--agent codex` is supplied. In the 1.5.22 contract probe, the narrow
 deletion was:
 
 ```bash
-npx --yes skills@1.5.22 remove --skill skill-creator \
+bunx --yes skills@1.5.22 remove --skill skill-creator \
   --agent codex cursor github-copilot kimi-code-cli zed -y
 ```
 
 Use the equivalent `bunx --yes skills@1.5.22` prefix when testing Bun. The
 agent list is observed behavior for this release and target layout, not a
-portable constant: inspect the pinned `npx --yes skills@1.5.22 list --json`,
+portable constant: inspect the pinned `bunx --yes skills@1.5.22 list --json`,
 enumerate the agents that share the target, and adapt only after review. Never pass the literal wildcard
 `--agent '*'`; 1.5.22 rejects it even though help text describes a wildcard.
 Do not use `--all` in a non-empty project: it can remove unrelated skills.
@@ -78,7 +78,7 @@ After any removal—regardless of exit code—verify both filesystem and metadat
 
 ```bash
 test ! -e .agents/skills/skill-creator
-npx --yes skills@1.5.22 list --agent codex --json
+bunx --yes skills@1.5.22 list --agent codex --json
 python3 - <<'PY'
 import json
 from pathlib import Path

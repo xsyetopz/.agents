@@ -18,7 +18,7 @@ die() {
 
 usage() {
   cat >&2 <<'EOF'
-Usage: RUNNER=npx|bunx SOURCE=/path/to/my-agent-skills-btw scripts/skills_cli_smoke.sh
+Usage: RUNNER=bunx|bunx SOURCE=/path/to/my-agent-skills-btw scripts/skills_cli_smoke.sh
 
 Runs a network-backed, project-scoped add/list/remove probe with the pinned
 Vercel skills CLI. The fixture installs skill-creator alongside one unrelated
@@ -43,14 +43,14 @@ if [[ $# -ne 0 ]]; then
   die 2 "unexpected argument: $1"
 fi
 
-RUNNER="${RUNNER:-npx}"
+RUNNER="${RUNNER:-bunx}"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
 SOURCE="${SOURCE:-$REPO_ROOT}"
 
 case "$RUNNER" in
-  npx)
-    CLI=(npx -y "skills@${CLI_VERSION}")
+  bunx)
+    CLI=(bunx -y "skills@${CLI_VERSION}")
     ;;
   bunx)
     # --bun is the verified Bun launcher shape for skills@1.5.22.
@@ -58,7 +58,7 @@ case "$RUNNER" in
     ;;
   *)
     usage
-    die 2 "RUNNER must be npx or bunx (got: $RUNNER)"
+    die 2 "RUNNER must be bunx or bunx (got: $RUNNER)"
     ;;
 esac
 

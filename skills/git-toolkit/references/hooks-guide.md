@@ -45,7 +45,7 @@ set -e
 files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.js$\|\.ts$' || true)
 
 if [ -n "$files" ]; then
-  npx eslint $files
+  bunx eslint $files
 fi
 ```
 
@@ -96,7 +96,7 @@ lifecycle. Don't manually edit `core.hooksPath` in Husky projects.
 
 ```bash
 # Add a hook with Husky
-npx husky add .husky/pre-commit "npm run lint-staged"
+bunx husky add .husky/pre-commit "npm run lint-staged"
 ```
 
 ## pre-commit framework

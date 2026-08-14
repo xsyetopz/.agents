@@ -70,7 +70,7 @@ paths and status.
 Command:
 
 ```bash
-npx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
+bunx --yes skills@1.5.22 add <owner>/my-agent-skills-btw \
   --skill skill-creator --agent codex --copy -y
 ```
 
