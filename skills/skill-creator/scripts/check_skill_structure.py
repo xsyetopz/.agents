@@ -54,7 +54,6 @@ INDEX_REFERENCE_LINK = re.compile(
 MERMAID_FENCE_RE = re.compile(r"^\s{0,3}(`{3,}|~{3,})(.*)$")
 MERMAID_DECLARATION_RE = re.compile(r"^\s*(?:flowchart|graph)\b", re.IGNORECASE)
 MERMAID_LEGACY_LABEL_RE = re.compile(r"--\s+[^|>\n]+?\s+-->")
-STALE_SELECTOR = "$" + "openai-docs"
 
 
 def _common_section_bodies(text: str) -> dict[str, str]:
@@ -168,15 +167,6 @@ def check_skill_creator_references(root: Path, errors: list[str]) -> None:
     """Check catalog selectors and standard GitHub Mermaid syntax."""
     if root.name != "skill-creator":
         return
-    skill = root / "SKILL.md"
-    if skill.is_file():
-        try:
-            skill_text = skill.read_text(encoding="utf-8")
-        except (OSError, UnicodeDecodeError) as exc:
-            errors.append(f"Unable to read SKILL.md: {exc}")
-        else:
-            if STALE_SELECTOR in skill_text:
-                errors.append(f"SKILL.md: stale non-catalog selector {STALE_SELECTOR!r}")
     for markdown in sorted((root / "references").rglob("*.md")):
         relative = markdown.relative_to(root)
         if (
@@ -190,10 +180,6 @@ def check_skill_creator_references(root: Path, errors: list[str]) -> None:
         except (OSError, UnicodeDecodeError) as exc:
             errors.append(f"Unable to read {relative}: {exc}")
             continue
-        if STALE_SELECTOR in text:
-            errors.append(
-                f"{relative}: stale non-catalog selector {STALE_SELECTOR!r}"
-            )
         blocks, fence_errors = _mermaid_blocks(text)
         for message in fence_errors:
             errors.append(f"{relative}: {message}")

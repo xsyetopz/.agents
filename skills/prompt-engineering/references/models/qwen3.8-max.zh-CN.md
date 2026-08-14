@@ -1,6 +1,6 @@
 # Qwen3.8-Max
 
-- Provider: Alibaba Cloud (Qwen)
+- Provider: Alibaba Cloud
 - Provider identifier: `qwen3.8-max-preview`
 - Normalized slug: `qwen3.8-max-preview`
 - Guide language: zh-CN

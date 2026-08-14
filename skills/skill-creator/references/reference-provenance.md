@@ -18,28 +18,33 @@ a required custom schema.
   source snapshot or generated frontmatter is source material, not authored
   guidance.
 
-## Source-record convention
+## Sources and references
 
 Use an ordinary `## Sources` or `## References` section when a reference needs
-citations. A compact table or list is enough; keep it close to the claims it
-supports. Record these fields in prose or table columns when they apply:
+citations. Keep the list or table close to the claims it supports. A compact
+record uses familiar labels only when they help the reader:
 
-| Field | Record |
-| --- | --- |
-| `authority_kind` | `primary`, `secondary`, `authored`, or `repository-policy`; distinguish an official specification from local guidance. |
-| `claim_scope` | The exact subject, audience, version, and boundary; do not generalize beyond it. |
-| `source_url` / `source_record` | A URL actually consulted, or a package-relative record such as `references/foo.md#sources`; use both when useful. |
-| `retrieved_at` / `source_gap` | An ISO date for a consulted source, or a statement such as `source-gap: not retrieved` / `source-gap: local policy`. Local-policy records do not need a URL or date. |
-| `source_revision` | A release, tag, commit, digest, or `unversioned web page` / `not applicable` when no immutable revision exists. Never invent one. |
-| `status` | `active`, `historical`, or `unverified`; make stale or unrun evidence visible. |
+```markdown
+## Sources
 
-Do not fabricate citations, retrieval dates, revisions, benchmark results, or
-source authority. If a source was supplied but not consulted, preserve its URL
-as a source lead and state the source gap. Keep external snapshots unchanged;
-generated frontmatter and source snapshots may retain their original headings
-and links and should not be rewritten as authored guidance. In this package,
-`references/official/**`, `references/generated/**`, `*.snapshot.md`, and
-`*.generated.md` are source material rather than authored references.
+- Source: [Provider documentation](https://example.com/guide)
+  Scope: request fields and response behavior for version 2
+  Accessed: 2026-08-14
+  Status: verified for this review; recheck before making a current claim
+```
+
+Use `Source` for the URL or package-relative citation, `Scope` for the claim's
+boundary, `Accessed` for the date a web page was consulted, and `Status` for a
+clear qualifier such as `verified`, `historical`, or `UNVERIFIED`. Omit labels
+that do not apply. If a supplied source was not consulted, preserve it as a
+source lead and write `Status: UNVERIFIED` or `Source gap: not retrieved`.
+
+Do not fabricate citations, dates, revisions, benchmark results, or authority.
+Keep external snapshots unchanged; generated frontmatter and source snapshots
+may retain their original headings and links and should not be rewritten as
+authored guidance. In this package, `references/official/**`,
+`references/generated/**`, `*.snapshot.md`, and `*.generated.md` are source
+material rather than authored references.
 
 ## GitHub Mermaid guidance
 
@@ -59,11 +64,18 @@ checked on a GitHub-compatible renderer.
 
 ## Sources
 
-| authority_kind | claim_scope | source_url / source_record | retrieved_at / source_gap | source_revision | status |
-| --- | --- | --- | --- | --- | --- |
-| primary | GitHub Mermaid fences and version-compatibility guidance | [GitHub Docs: Creating diagrams](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams) | 2026-08-14 | unversioned web page | active |
-| primary | Portable skill directory, frontmatter, and progressive-disclosure conventions | [Agent Skills specification](https://agentskills.io/specification) | 2026-08-14 | unversioned web page | active |
-| primary | Markdown headings, fenced code blocks, info strings, and links | [CommonMark specification](https://spec.commonmark.org/spec) | 2026-08-14 | unversioned web page | active |
+- Source: [GitHub Docs: Creating diagrams](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams)
+  Scope: Mermaid fences and GitHub renderer-version guidance
+  Accessed: 2026-08-14
+  Status: verified for this review; the local renderer remains UNVERIFIED
+- Source: [Agent Skills specification](https://agentskills.io/specification)
+  Scope: portable skill directories, frontmatter, references, and progressive disclosure
+  Accessed: 2026-08-14
+  Status: verified for this review
+- Source: [CommonMark specification](https://spec.commonmark.org/spec)
+  Scope: Markdown headings, fenced code blocks, info strings, and links
+  Accessed: 2026-08-14
+  Status: verified for this review
 
 The GitHub source does not establish this package's authored edge-label
 convention; that conservative syntax is documented above without a fabricated

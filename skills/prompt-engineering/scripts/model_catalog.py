@@ -115,8 +115,12 @@ def check_guide(entry: dict[str, object], errors: list[str]) -> None:
         match = re.search(pattern, text)
         if not match:
             errors.append(f"model guide metadata missing ({label}): {raw_path}")
-        elif value not in match.group(1):
-            errors.append(f"model guide metadata mismatch ({label}): {raw_path}")
+        else:
+            actual = match.group(1).strip()
+            if actual.startswith("`") and actual.endswith("`"):
+                actual = actual[1:-1]
+            if actual != value:
+                errors.append(f"model guide metadata mismatch ({label}): {raw_path}")
 
     if not re.search(r"^#\s+.+", text, re.MULTILINE):
         errors.append(f"model guide has no title: {raw_path}")

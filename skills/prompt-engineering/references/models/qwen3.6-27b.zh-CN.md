@@ -1,6 +1,6 @@
 # Qwen3.6-27B
 
-- Provider: Alibaba Cloud (Qwen)
+- Provider: Alibaba Cloud
 - Provider identifier: `Qwen3.6-27B`
 - Normalized slug: `qwen3.6-27b`
 - Guide language: zh-CN
