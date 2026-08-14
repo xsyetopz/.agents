@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "skill_name": "repo-docs",
+  "required_headings": [
+    "When to use",
+    "When NOT to use",
+    "Guardrails",
+    "Workflow",
+    "Quick start",
+    "Reference map",
+    "Completion",
+    "Validation",
+    "Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/changelog.md",
+    "references/readme.md"
+  ],
+  "eval_case_ids": [
+    "positive-readme-audit",
+    "near-miss-governance-file",
+    "safety-unsupported-claim"
+  ]
+}

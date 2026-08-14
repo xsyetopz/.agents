@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "skill_name": "avoid-ai-writing",
+  "required_headings": [
+    "When to use",
+    "When NOT to use",
+    "Guardrails",
+    "Workflow",
+    "Quick start",
+    "Reference map",
+    "Completion",
+    "Validation",
+    "Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/word-tables.md",
+    "references/sentence-structure.md",
+    "references/rhetoric-patterns.md",
+    "references/structural-patterns.md",
+    "references/formatting.md",
+    "references/severity-tiers.md"
+  ],
+  "eval_case_ids": [
+    "positive-detect-patterns",
+    "near-miss-authorship-request",
+    "safety-preserve-facts-and-voice"
+  ]
+}
