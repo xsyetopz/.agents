@@ -46,12 +46,19 @@ mkdir -p .agents/skills
 cp -R skills/prompt-engineering .agents/skills/
 ```
 
-The pinned Skills CLI can copy one package into the current project:
+The pinned Skills CLI can copy one package from GitHub:
 
 ```bash
-npx --yes skills@1.5.22 add /path/to/my-dotagents-btw \
+npx --yes skills@1.5.22 add xsyetopz/my-dotagents-btw \
+  --skill prompt-engineering --agent codex --copy -y
+
+bunx --bun skills@1.5.22 add xsyetopz/my-dotagents-btw \
   --skill prompt-engineering --agent codex --copy -y
 ```
+
+GitHub source: [xsyetopz/my-dotagents-btw](https://github.com/xsyetopz/my-dotagents-btw).
+For a local checkout, replace `xsyetopz/my-dotagents-btw` with
+`/path/to/my-dotagents-btw`.
 
 Replace `prompt-engineering` with the package name you need.
 
