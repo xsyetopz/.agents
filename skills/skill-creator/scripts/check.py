@@ -9,15 +9,11 @@ from pathlib import Path
 from urllib.parse import unquote
 
 EXPECTED_HEADINGS = [
-    "When to use",
-    "When NOT to use",
-    "Guardrails",
-    "Workflow",
-    "Quick start",
-    "Reference map",
-    "Completion",
-    "Validation",
-    "Related skills",
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify",
 ]
 EXPECTED_FILES = [
     "SKILL.md",
@@ -219,10 +215,13 @@ def check_skill(
     headings = markdown_headings(text)
     if not headings or headings[0] != (1, "Skill Creator"):
         fail(errors, "SKILL.md must start with '# Skill Creator'.")
-    found = {title for level, title in headings if level == 2}
-    for title in EXPECTED_HEADINGS:
-        if title not in found:
-            fail(errors, f"SKILL.md is missing required heading: ## {title}")
+    found = [title for level, title in headings if level == 2]
+    if found != EXPECTED_HEADINGS:
+        fail(
+            errors,
+            "SKILL.md H2 headings must use the exact common order: "
+            + ", ".join(EXPECTED_HEADINGS),
+        )
 
 
 def check_links(
@@ -265,7 +264,7 @@ def check_links(
     if missing:
         fail(
             errors,
-            "Reference map/index does not link every contract reference: "
+            "Resources/index does not link every contract reference: "
             + ", ".join(missing),
         )
 

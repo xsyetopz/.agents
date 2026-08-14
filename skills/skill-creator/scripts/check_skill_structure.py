@@ -12,15 +12,11 @@ import sys
 from pathlib import Path
 
 EXPECTED_HEADINGS = [
-    "When to use",
-    "When NOT to use",
-    "Guardrails",
-    "Workflow",
-    "Quick start",
-    "Reference map",
-    "Completion",
-    "Validation",
-    "Related skills",
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify",
 ]
 DESCRIPTION_WORDS = (8, 16)
 DESCRIPTION_LIMIT = 140

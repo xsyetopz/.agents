@@ -16,18 +16,19 @@ contract, not as universal Agent Skills requirements.
 Keep one root `SKILL.md`; do not add wrappers, aliases, nested entrypoints, or
 compatibility paths. Preserve this exact H2 order:
 
-1. `When to use`
-2. `When NOT to use`
-3. `Guardrails`
-4. `Workflow`
-5. `Quick start`
-6. `Reference map`
-7. `Completion`
-8. `Validation`
-9. `Related skills`
+1. `Use this skill`
+2. `Rules`
+3. `Steps`
+4. `Resources`
+5. `Verify`
 
-The entrypoint states triggers, boundaries, workflow, completion evidence, and
-focused validation. Detail belongs one hop away in `references/`.
+`Use this skill` contains positive triggers, exclusions, and sibling redirects.
+`Rules` contains only non-negotiable constraints. `Steps` is one complete
+executable path. `Resources` routes package-local references, indexes, assets,
+and scripts. `Verify` combines done state, validation commands, evidence, and
+`UNVERIFIED` conditions. This five-part sequence is this repository's contract,
+not an upstream Agent Skills requirement. Detail belongs one hop away in
+`references/`.
 
 ## Reference names and routes
 

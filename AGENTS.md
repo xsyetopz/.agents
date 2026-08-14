@@ -95,23 +95,22 @@ prompt invokes exactly `$<name>`.
 headings in this order:
 
 ```text
-When to use
-When NOT to use
-Guardrails
-Workflow
-Quick start
-Reference map
-Completion
-Validation
-Related skills
+Use this skill
+Rules
+Steps
+Resources
+Verify
 ```
 
-Keep the entrypoint concise and progressively disclosed: `Workflow` is the
-ordered core behavior, `Quick start` is the smallest executable path,
-`Reference map` routes only the needed local file by trigger, and detail lives
-one link hop away. Do not load every reference by default or duplicate policy
-between sections. The authored Python limit is **500 physical lines per file**
-under `skills/`, including tests; no generated/vendor exemption exists.
+Keep the entrypoint concise and progressively disclosed. `Use this skill` holds
+positive triggers, exclusions, and sibling redirects. `Rules` contains only
+non-negotiable constraints. `Steps` is one complete executable path. `Resources`
+routes package-local references, indexes, assets, and scripts. `Verify` combines
+done state, validation commands, evidence, and `UNVERIFIED` conditions. Do not
+load every reference by default or duplicate policy between sections. The
+five-part sequence is this repository's contract, not an upstream Agent Skills
+requirement. The authored Python limit is **500 physical lines per file** under
+`skills/`, including tests; no generated/vendor exemption exists.
 
 `evals/evals.json` uses only this schema-by-convention (no results or fabricated
 traces):

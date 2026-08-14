@@ -26,8 +26,9 @@ description: artifact nouns, domain terms, bounded exclusion
 - Do not begin with `Use for` or `Use to`; avoid workflow prose, promises, or subjective labels.
 - Keep the open-format ceiling of 1024 characters in mind; the catalog target is intentionally narrower.
 
-Keyword-style descriptions are selectors, not miniature workflows. Keep the
-required `When to use` and `When NOT to use` detail in the entrypoint body.
+Keyword-style descriptions are selectors, not miniature workflows. Keep
+positive triggers, exclusions, and sibling redirects in the `Use this skill`
+section of the entrypoint body.
 
 ## Optional fields
 

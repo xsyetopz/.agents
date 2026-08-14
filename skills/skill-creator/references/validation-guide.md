@@ -51,8 +51,9 @@ forms fail closed.
   `name`/`description`; the directory name matches `name`.
 - `SKILL.md` stays under 500 lines for this package and uses references for
   detail. A hard implementation limit may be stricter; report the actual value.
-- Configured headings are exact and outside fenced blocks; duplicate headings
-  are rejected where the validator supports them.
+- Configured headings are exact, ordered, and outside fenced blocks; old
+  heading aliases are not accepted. Duplicate headings are rejected where the
+  validator supports them.
 - Configured `required_files` resolve under the skill root. These package files
   are not open-format universal requirements.
 - Relative links and `references/`, `assets/`, and `scripts/` paths resolve under

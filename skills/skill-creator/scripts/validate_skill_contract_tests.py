@@ -63,6 +63,41 @@ class PackageContractTests(unittest.TestCase):
 
         self.assertEqual(errors, ["Missing required heading: ## Required"])
 
+    def test_common_heading_contract_rejects_aliases_and_reordering(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = self._skill(
+                Path(directory) / "example",
+                body=(
+                    "# Example\n## Use this skill\n## Rules\n## Verify\n"
+                    "## Steps\n## Resources\n## Workflow\n"
+                ),
+            )
+            errors: list[str] = []
+            check_required_headings(
+                (root / "SKILL.md").read_text(encoding="utf-8"),
+                {
+                    "required_headings": [
+                        "# Example",
+                        "## Use this skill",
+                        "## Rules",
+                        "## Steps",
+                        "## Resources",
+                        "## Verify",
+                    ]
+                },
+                errors,
+            )
+
+        self.assertEqual(
+            errors,
+            [
+                (
+                    "SKILL.md H2 headings must use the exact common order: "
+                    "Use this skill, Rules, Steps, Resources, Verify"
+                )
+            ],
+        )
+
     def test_required_file_cannot_escape_skill_root(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = self._skill(Path(directory) / "example")
@@ -95,15 +130,11 @@ class PackageContractTests(unittest.TestCase):
                         "schema_version": 1,
                         "skill_name": "example",
                         "required_headings": [
-                            "When to use",
-                            "When NOT to use",
-                            "Guardrails",
-                            "Workflow",
-                            "Quick start",
-                            "Reference map",
-                            "Completion",
-                            "Validation",
-                            "Related skills",
+                            "Use this skill",
+                            "Rules",
+                            "Steps",
+                            "Resources",
+                            "Verify",
                         ],
                         "required_files": [
                             "SKILL.md",

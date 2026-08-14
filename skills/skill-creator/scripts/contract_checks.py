@@ -13,15 +13,11 @@ NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SKILL_MD_LINE_WARN = 500
 SKILL_MD_LINE_ERROR = 800
 COMMON_CONTRACT_HEADINGS = [
-    "When to use",
-    "When NOT to use",
-    "Guardrails",
-    "Workflow",
-    "Quick start",
-    "Reference map",
-    "Completion",
-    "Validation",
-    "Related skills",
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify",
 ]
 COMMON_CONTRACT_FILES = [
     "SKILL.md",
@@ -187,14 +183,31 @@ def _config_entries(config: dict, key: str, errors: list[str]) -> list[str]:
 
 
 def check_required_headings(text: str, config: dict, errors: list[str]) -> None:
+    configured = _config_entries(config, "required_headings", errors)
     headings = {
         line.strip()
         for line in strip_fenced_blocks(text).splitlines()
         if HEADING_RE.match(line.strip())
     }
-    for heading in _config_entries(config, "required_headings", errors):
+    for heading in configured:
         if heading not in headings:
             errors.append(f"Missing required heading: {heading}")
+    configured_h2 = [
+        heading.removeprefix("## ")
+        for heading in configured
+        if heading.startswith("## ")
+    ]
+    if configured_h2 == COMMON_CONTRACT_HEADINGS:
+        observed_h2 = [
+            match.group(2).strip()
+            for line in strip_fenced_blocks(text).splitlines()
+            if (match := HEADING_RE.match(line.strip())) and match.group(1) == "##"
+        ]
+        if observed_h2 != COMMON_CONTRACT_HEADINGS:
+            errors.append(
+                "SKILL.md H2 headings must use the exact common order: "
+                + ", ".join(COMMON_CONTRACT_HEADINGS)
+            )
 
 
 def check_required_files(root: Path, config: dict, errors: list[str]) -> None:
@@ -339,7 +352,7 @@ def check_assets_contract(
             reference, route_text, index_text
         ):
             errors.append(
-                f"Reference map/index does not link contract reference: {reference}"
+                f"Resources/index does not link contract reference: {reference}"
             )
 
     case_ids = payload.get("eval_case_ids")
