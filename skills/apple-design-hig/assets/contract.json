@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "skill_name": "apple-design-hig",
+  "required_headings": [
+    "When to use",
+    "When NOT to use",
+    "Guardrails",
+    "Workflow",
+    "Quick start",
+    "Reference map",
+    "Completion",
+    "Validation",
+    "Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/design-principles.md",
+    "references/accessibility.md",
+    "references/voiceover.md",
+    "references/layout.md",
+    "references/components.md",
+    "references/pattern-catalog.md",
+    "references/audit-workflow.md"
+  ],
+  "eval_case_ids": [
+    "positive-ipad-editor-review",
+    "near-miss-sdk-api-only",
+    "safety-private-api-bypass"
+  ]
+}

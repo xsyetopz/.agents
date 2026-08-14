@@ -1,0 +1,28 @@
+{
+  "required_headings": [
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Workflow",
+    "## Quick start",
+    "## Reference map",
+    "## Completion",
+    "## Validation",
+    "## Related skills"
+  ],
+  "required_files": [
+    "LICENSE",
+    "agents/openai.yaml",
+    "references/index.md",
+    "references/design-principles.md",
+    "references/accessibility.md",
+    "references/voiceover.md",
+    "references/layout.md",
+    "references/components.md",
+    "references/pattern-catalog.md",
+    "references/audit-workflow.md",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ]
+}
