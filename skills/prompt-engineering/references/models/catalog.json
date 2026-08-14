@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "skill_name": "prompt-engineering",
+  "models": [
+    {
+      "requested_name": "Qwen3.8-Max",
+      "canonical_identifier": "qwen3.8-max",
+      "guide_path": "references/models/qwen3.8-max.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "source gap"
+    },
+    {
+      "requested_name": "GPT-5.6 family",
+      "canonical_identifier": "gpt-5.6",
+      "guide_path": "references/models/gpt-5.6.en.md",
+      "language": "en",
+      "evidence_status": "prompt guide (shared family)"
+    },
+    {
+      "requested_name": "GPT-5.6 Sol",
+      "canonical_identifier": "gpt-5.6-sol",
+      "guide_path": "references/models/gpt-5.6-sol.en.md",
+      "language": "en",
+      "evidence_status": "prompt guide (shared family)"
+    },
+    {
+      "requested_name": "GPT-5.6 Terra",
+      "canonical_identifier": "gpt-5.6-terra",
+      "guide_path": "references/models/gpt-5.6-terra.en.md",
+      "language": "en",
+      "evidence_status": "prompt guide (shared family)"
+    },
+    {
+      "requested_name": "GPT-5.6 Luna",
+      "canonical_identifier": "gpt-5.6-luna",
+      "guide_path": "references/models/gpt-5.6-luna.en.md",
+      "language": "en",
+      "evidence_status": "prompt guide (shared family)"
+    },
+    {
+      "requested_name": "Grok 4.6",
+      "canonical_identifier": "grok-4.6",
+      "guide_path": "references/models/grok-4.6.en.md",
+      "language": "en",
+      "evidence_status": "source gap"
+    },
+    {
+      "requested_name": "MiniMax M3",
+      "canonical_identifier": "MiniMax-M3",
+      "guide_path": "references/models/minimax-m3.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "prompt guide (M-series)"
+    },
+    {
+      "requested_name": "GLM 5.2",
+      "canonical_identifier": "glm-5.2",
+      "guide_path": "references/models/glm-5.2.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "prompt guide"
+    },
+    {
+      "requested_name": "Kimi K3",
+      "canonical_identifier": "kimi-k3",
+      "guide_path": "references/models/kimi-k3.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "prompt guide"
+    },
+    {
+      "requested_name": "Qwen3.6-27B",
+      "canonical_identifier": "Qwen3.6-27B",
+      "guide_path": "references/models/qwen3.6-27b.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "source gap"
+    },
+    {
+      "requested_name": "Qwen3.6 35B-A3B",
+      "canonical_identifier": "Qwen3.6-35B-A3B",
+      "guide_path": "references/models/qwen3.6-35b-a3b.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "source gap"
+    },
+    {
+      "requested_name": "DeepSeek V4 Flash (0731)",
+      "canonical_identifier": "deepseek-v4-flash",
+      "guide_path": "references/models/deepseek-v4-flash-0731.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "API/engineering guidance"
+    },
+    {
+      "requested_name": "DeepSeek V4 Pro (0813)",
+      "canonical_identifier": "deepseek-v4-pro",
+      "guide_path": "references/models/deepseek-v4-pro-0813.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "API/engineering guidance"
+    },
+    {
+      "requested_name": "MiMo V2.5 Pro",
+      "canonical_identifier": "mimo-v2.5-pro",
+      "guide_path": "references/models/mimo-v2.5-pro.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "source gap"
+    },
+    {
+      "requested_name": "MiMo V2.5",
+      "canonical_identifier": "mimo-v2.5",
+      "guide_path": "references/models/mimo-v2.5.zh-CN.md",
+      "language": "zh-CN",
+      "evidence_status": "source gap"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "required_headings": [
+    "# Prompt Engineering",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Workflow",
+    "## Quick start",
+    "## Reference map",
+    "## Completion",
+    "## Validation",
+    "## Related skills"
+  ],
+  "required_files": [
+    "LICENSE",
+    "references/anti-patterns.md",
+    "references/official-sources.md",
+    "references/official/openai-prompt-engineering.2026-08-13.md",
+    "references/official/openai-gpt-5.6-sol-prompting.2026-08-13.md",
+    "references/official/openai-gpt-5.6-model.2026-08-13.md",
+    "references/model-reasoning-guide.md",
+    "references/issue-corpus-index.md",
+    "references/prompt-templates.md",
+    "references/issues/prompt-psychology.md",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py",
+    "scripts/audit_openai_alignment.py",
+    "scripts/live_codex_audit.py",
+    "references/index.md",
+    "references/issues/index.md",
+    "references/models/gpt-5.6.en.md"
+  ]
+}

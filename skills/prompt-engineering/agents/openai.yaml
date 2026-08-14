@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prompt Engineering"
+  short_description: "Design and behaviorally verify agent instructions"
+  default_prompt: "Use $prompt-engineering to revise this prompt from current official model guidance, remove duplication, define tool and authority contracts, and compare observable baseline and candidate behavior."
