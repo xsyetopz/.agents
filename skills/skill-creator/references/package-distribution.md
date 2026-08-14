@@ -68,8 +68,8 @@ npx --yes skills@1.5.22 remove --skill skill-creator \
 
 Use the equivalent `bunx --yes skills@1.5.22` prefix when testing Bun. The
 agent list is observed behavior for this release and target layout, not a
-portable constant: inspect `skills list --json`, enumerate the agents that
-share the target, and adapt only after review. Never pass the literal wildcard
+portable constant: inspect the pinned `npx --yes skills@1.5.22 list --json`,
+enumerate the agents that share the target, and adapt only after review. Never pass the literal wildcard
 `--agent '*'`; 1.5.22 rejects it even though help text describes a wildcard.
 Do not use `--all` in a non-empty project: it can remove unrelated skills.
 

@@ -90,8 +90,8 @@ assert "prompt-engineering" in lock.get("skills", {})
 PY
 ```
 
-Remove only the selected package with one runner and the pinned command shape
-`remove --skill <name> --agent codex -y`:
+For the disposable project fixture used above, remove the selected package with
+one runner and the pinned command shape `remove --skill <name> --agent codex -y`:
 
 ```bash
 npx --yes skills@1.5.22 remove --skill prompt-engineering --agent codex -y
@@ -118,6 +118,11 @@ PY
 In a fixture containing only the selected package, the post-remove list is
 `[]`. If the project also has unrelated skills, their list rows and lock
 entries remain; only the selected package is removed.
+
+This Codex-only removal command is not a shared-target recipe. If several
+agents use the same `.agents` target, run the pinned `list --json` command first,
+pass every agent sharing the selected package to `remove`, and verify the
+filesystem, list, and lock after the command regardless of its exit status.
 
 Run the disposable CLI smoke probe with either launcher:
 
