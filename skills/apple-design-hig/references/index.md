@@ -1,68 +1,89 @@
----
-title: "Human Interface Guidelines"
-source: https://developer.apple.com/design/human-interface-guidelines/
-retrieved: 2026-07-25
----
-# Human Interface Guidelines
+# Apple HIG reference router
 
-The HIG contains guidance and best practices that can help you design a great experience for any Apple platform.
+Start here: [this router](index.md). For current external pages, use the [Apple HIG source index](hig-source-index.md).
 
-## Design fundamentals
+Select the smallest local reference matching the platform, foundation, pattern, component, or technology question.
 
-Explore the principles that guide design across Apple platforms. For more, see [Getting started](https://developer.apple.com/design/human-interface-guidelines/getting-started).
+## A
 
-- [Design principles](https://developer.apple.com/design/human-interface-guidelines/design-principles)
+[Accessibility](accessibility.md) · [Action Button](action-button.md) · [Action Sheets](action-sheets.md) · [Activity Rings](activity-rings.md) · [Activity Views](activity-views.md) · [Airplay](airplay.md) · [Alerts](alerts.md) · [Always On](always-on.md) · [App Clips](app-clips.md) · [App Icons](app-icons.md) · [App Shortcuts](app-shortcuts.md) · [Apple Pay](apple-pay.md) · [Apple Pencil And Scribble](apple-pencil-and-scribble.md) · [Audit Workflow](audit-workflow.md) · [Augmented Reality](augmented-reality.md)
 
-- [Designing for iOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-ios)
+## B
 
-- [Designing for macOS](https://developer.apple.com/design/human-interface-guidelines/designing-for-macos)
+[Boxes](boxes.md) · [Branding](branding.md) · [Buttons](buttons.md)
 
-## Foundations of design
+## C
 
-Discover key concepts that shape every great experience. For more, see [Foundations](https://developer.apple.com/design/human-interface-guidelines/foundations).
+[Camera Control](camera-control.md) · [Carekit](carekit.md) · [Carplay](carplay.md) · [Charting Data](charting-data.md) · [Charts](charts.md) · [Collaboration And Sharing](collaboration-and-sharing.md) · [Collections](collections.md) · [Color Wells](color-wells.md) · [Color](color.md) · [Column Views](column-views.md) · [Combo Boxes](combo-boxes.md) · [Complications](complications.md) · [Components](components.md) · [Content](content.md) · [Context Menus](context-menus.md) · [Controls](controls.md)
 
-- [Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility)
+## D
 
-- [App icons](https://developer.apple.com/design/human-interface-guidelines/app-icons)
+[Dark Mode](dark-mode.md) · [Design Principles](design-principles.md) · [Designing For Games](designing-for-games.md) · [Designing For Ios](designing-for-ios.md) · [Designing For Ipados](designing-for-ipados.md) · [Designing For Macos](designing-for-macos.md) · [Designing For Tvos](designing-for-tvos.md) · [Designing For Visionos](designing-for-visionos.md) · [Designing For Watchos](designing-for-watchos.md) · [Digit Entry Views](digit-entry-views.md) · [Digital Crown](digital-crown.md) · [Disclosure Controls](disclosure-controls.md) · [Dock Menus](dock-menus.md) · [Drag And Drop](drag-and-drop.md)
 
-- [Color](https://developer.apple.com/design/human-interface-guidelines/color)
+## E
 
-- [Layout](https://developer.apple.com/design/human-interface-guidelines/layout)
+[Edit Menus](edit-menus.md) · [Entering Data](entering-data.md) · [Eyes](eyes.md)
 
-- [Materials](https://developer.apple.com/design/human-interface-guidelines/materials)
+## F
 
-- [Typography](https://developer.apple.com/design/human-interface-guidelines/typography)
+[Feedback](feedback.md) · [File Management](file-management.md) · [Focus And Selection](focus-and-selection.md) · [Foundations](foundations.md)
 
-## New and updated
+## G
 
-Review recent additions and updates to design guidance. For more, see [What’s new](https://developer.apple.com/design/whats-new/).
+[Game Center](game-center.md) · [Game Controls](game-controls.md) · [Gauges](gauges.md) · [Generative Ai](generative-ai.md) · [Gestures](gestures.md) · [Getting Started](getting-started.md) · [Going Full Screen](going-full-screen.md) · [Gyro And Accelerometer](gyro-and-accelerometer.md)
 
-- [Menus](https://developer.apple.com/design/human-interface-guidelines/menus)
+## H
 
-- [Scroll views](https://developer.apple.com/design/human-interface-guidelines/scroll-views)
+[Healthkit](healthkit.md) · [Hig Source Index](hig-source-index.md) · [Home Screen Quick Actions](home-screen-quick-actions.md) · [Homekit](homekit.md)
 
-- [Search fields](https://developer.apple.com/design/human-interface-guidelines/search-fields)
+## I
 
-- [Sidebars](https://developer.apple.com/design/human-interface-guidelines/sidebars)
+[Icloud](icloud.md) · [Icons](icons.md) · [Id Verifier](id-verifier.md) · [Image Views](image-views.md) · [Image Wells](image-wells.md) · [Images](images.md) · [Imessage Apps And Stickers](imessage-apps-and-stickers.md) · [Immersive Experiences](immersive-experiences.md) · [In App Purchase](in-app-purchase.md) · [Inclusion](inclusion.md) · [Inputs](inputs.md)
 
-- [Siri](https://developer.apple.com/design/human-interface-guidelines/siri)
+## K
 
-- [Snippets](https://developer.apple.com/design/human-interface-guidelines/snippets)
+[Keyboards](keyboards.md)
 
-## Topics
+## L
 
-- [Getting started](https://developer.apple.com/design/human-interface-guidelines/getting-started)
+[Labels](labels.md) · [Launching](launching.md) · [Layout And Organization](layout-and-organization.md) · [Layout](layout.md) · [Lists And Tables](lists-and-tables.md) · [Live Activities](live-activities.md) · [Live Photos](live-photos.md) · [Live Viewing Apps](live-viewing-apps.md) · [Loading](loading.md) · [Lockups](lockups.md)
 
-- [Foundations](https://developer.apple.com/design/human-interface-guidelines/foundations)
+## M
 
-- [Patterns](https://developer.apple.com/design/human-interface-guidelines/patterns)
+[Mac Catalyst](mac-catalyst.md) · [Machine Learning](machine-learning.md) · [Managing Accounts](managing-accounts.md) · [Managing Notifications](managing-notifications.md) · [Maps](maps.md) · [Materials](materials.md) · [Menus And Actions](menus-and-actions.md) · [Menus](menus.md) · [Modality](modality.md) · [Motion](motion.md) · [Multitasking](multitasking.md)
 
-- [Components](https://developer.apple.com/design/human-interface-guidelines/components)
+## N
 
-- [Inputs](https://developer.apple.com/design/human-interface-guidelines/inputs)
+[Navigation And Search](navigation-and-search.md) · [Nearby Interactions](nearby-interactions.md) · [Nfc](nfc.md) · [Notifications](notifications.md)
 
-- [Technologies](https://developer.apple.com/design/human-interface-guidelines/technologies)
+## O
 
-## References
+[Offering Help](offering-help.md) · [Onboarding](onboarding.md) · [Ornaments](ornaments.md) · [Outline Views](outline-views.md)
 
-- [Technologies](https://developer.apple.com/documentation/technologies)
+## P
+
+[Page Controls](page-controls.md) · [Panels](panels.md) · [Path Controls](path-controls.md) · [Pattern Catalog](pattern-catalog.md) · [Photo Editing](photo-editing.md) · [Pickers](pickers.md) · [Playing Audio](playing-audio.md) · [Playing Haptics](playing-haptics.md) · [Playing Video](playing-video.md) · [Pointing Devices](pointing-devices.md) · [Pop Up Buttons](pop-up-buttons.md) · [Popovers](popovers.md) · [Presentation](presentation.md) · [Printing](printing.md) · [Privacy](privacy.md) · [Progress Indicators](progress-indicators.md) · [Pull Down Buttons](pull-down-buttons.md)
+
+## R
+
+[Rating Indicators](rating-indicators.md) · [Ratings And Reviews](ratings-and-reviews.md) · [Remotes](remotes.md) · [Researchkit](researchkit.md) · [Right To Left](right-to-left.md)
+
+## S
+
+[Scroll Views](scroll-views.md) · [Search Fields](search-fields.md) · [Searching](searching.md) · [Segmented Controls](segmented-controls.md) · [Selection And Input](selection-and-input.md) · [Settings](settings.md) · [Sf Symbols](sf-symbols.md) · [Shareplay](shareplay.md) · [Shazamkit](shazamkit.md) · [Sheets](sheets.md) · [Sidebars](sidebars.md) · [Sign In With Apple](sign-in-with-apple.md) · [Siri](siri.md) · [Sliders](sliders.md) · [Snippets](snippets.md) · [Spatial Layout](spatial-layout.md) · [Split Views](split-views.md) · [Status Bars](status-bars.md) · [Status](status.md) · [Steppers](steppers.md) · [System Experiences](system-experiences.md)
+
+## T
+
+[Tab Bars](tab-bars.md) · [Tab Views](tab-views.md) · [Tap To Pay On Iphone](tap-to-pay-on-iphone.md) · [Technologies](technologies.md) · [Text Fields](text-fields.md) · [Text Views](text-views.md) · [The Menu Bar](the-menu-bar.md) · [Toggles](toggles.md) · [Token Fields](token-fields.md) · [Toolbars](toolbars.md) · [Top Shelf](top-shelf.md) · [Typography](typography.md)
+
+## U
+
+[Undo And Redo](undo-and-redo.md)
+
+## V
+
+[Virtual Keyboards](virtual-keyboards.md) · [Voiceover](voiceover.md)
+
+## W
+
+[Wallet](wallet.md) · [Watch Faces](watch-faces.md) · [Web Views](web-views.md) · [Whats New](whats-new.md) · [Widgets](widgets.md) · [Windows](windows.md) · [Workouts](workouts.md) · [Writing](writing.md)

@@ -1,5 +1,7 @@
 # Architecture design reference map
 
+
+Start here: [this router](index.md).
 Use this router to select one focused reference; the decision procedure also
 contains the end-to-end phase gates.
 

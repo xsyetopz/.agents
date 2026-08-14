@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Select one route by team integration concern; verify enforcement against repository settings.
 
 | Trigger | Reference |

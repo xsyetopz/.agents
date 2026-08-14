@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Select one route by pipeline concern; keep trust-boundary and failure rules active.
 
 | Trigger | Reference |

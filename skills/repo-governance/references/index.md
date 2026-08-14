@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Select one governance route; keep audience, owner, scope, and enforcement explicit.
 
 | Trigger | Reference |

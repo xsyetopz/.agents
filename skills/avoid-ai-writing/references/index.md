@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Select routes by observable prose issue; preserve facts, voice, citations, and requested format.
 
 | Trigger | Reference |

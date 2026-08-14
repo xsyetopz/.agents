@@ -120,6 +120,26 @@ def parse_frontmatter(text: str, errors: list[str]) -> tuple[dict[str, str], str
     return fields, "\n".join(lines[end + 1 :])
 
 
+def _linked_package_paths(source: Path, text: str, errors: list[str]) -> set[str]:
+    """Resolve links from one Markdown file to package-relative paths."""
+    mapped: set[str] = set()
+    for match in LINK_RE.finditer(text):
+        target = match.group(1).split("#", 1)[0].split("?", 1)[0].strip()
+        if not target or target.startswith(("http://", "https://", "mailto:", "#", "//")):
+            continue
+        candidate = (source.parent / target).resolve()
+        try:
+            relative = candidate.relative_to(ROOT.resolve()).as_posix()
+        except ValueError:
+            add(errors, f"{source.relative_to(ROOT)}: link leaves package ({target})")
+            continue
+        if not candidate.exists():
+            add(errors, f"{source.relative_to(ROOT)}: broken local link ({target})")
+            continue
+        mapped.add(relative)
+    return mapped
+
+
 def check_skill(errors: list[str], contract: dict[str, object]) -> None:
     path = ROOT / "SKILL.md"
     text = read_text(path, errors, "SKILL.md")
@@ -154,18 +174,19 @@ def check_skill(errors: list[str], contract: dict[str, object]) -> None:
             errors,
             f"SKILL.md: level-two headings must be {EXPECTED_HEADINGS!r}; got {sections!r}",
         )
-    links = {
-        match.group(1).split("#", 1)[0].split("?", 1)[0].strip()
-        for match in LINK_RE.finditer(body)
-    }
+    mapped = _linked_package_paths(path, body, errors)
+    index = ROOT / "references" / "index.md"
+    index_text = read_text(index, errors, "references/index.md")
+    if index_text is not None:
+        mapped.update(_linked_package_paths(index, index_text, errors))
     reference_paths = contract.get("reference_paths")
     if not isinstance(reference_paths, list):
         return
     for reference in reference_paths:
-        if isinstance(reference, str) and reference not in links:
+        if isinstance(reference, str) and reference not in mapped:
             add(
                 errors,
-                f"SKILL.md: contract reference is not routed by a link ({reference})",
+                f"SKILL.md or references/index.md does not route contract reference ({reference})",
             )
 
 

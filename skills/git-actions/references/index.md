@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Select one route by API operation; keep the package guardrails active.
 
 | Trigger | Reference |

@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Route one task to one package-local reference. Read only the row that supplies
 the required evidence; keep source snapshots and client-specific guidance
 separate from authored rules.

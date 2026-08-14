@@ -12,12 +12,13 @@ Use current Apple Human Interface Guidelines to make an Apple-platform interface
 - Design or review an iOS, iPadOS, macOS, watchOS, tvOS, or visionOS interface.
 - Choose native navigation, presentation, input, feedback, typography, color, motion, or system experiences.
 - Check adaptation across devices, input modes, appearances, Dynamic Type, VoiceOver, and other accessibility needs.
-- Do not use for Swift, SwiftUI, UIKit, or SDK/API correctness without a design question; App Store policy, entitlements, provisioning, privacy manifests, legal advice; or generic web and cross-platform UX.
+- Do not use for Swift, SwiftUI, UIKit, SDK/API correctness without a design question; App Store policy, entitlements, provisioning, privacy manifests, legal advice; or generic web and cross-platform UX.
+- Redirect SwiftUI implementation review to `$swiftui-pro`, broad interface refinement to `$impeccable`, screenshot acceptance to `$design-proof-gate`, and Canvas2D 3D implementation to `$using-easeljs`.
 
 ## Rules
 
 - Treat the live Apple Human Interface Guidelines as authority; bundled references are an offline index.
-- Resolve platform, device class, input method, and accessibility context before recommending a pattern.
+- Resolve platform, device class, input method, appearance, and accessibility context before recommending a pattern.
 - Prefer system components. Justify deviations with a concrete product constraint.
 - Separate HIG recommendations, implementation requirements, and inferred design judgment. Do not invent Apple rules or API guarantees.
 
@@ -25,24 +26,20 @@ Use current Apple Human Interface Guidelines to make an Apple-platform interface
 
 1. State the interface decision, platform context, constraints, and affected users.
 2. Inspect the existing interface when one exists.
-3. Open the matching platform, foundation, pattern, component, and accessibility references.
+3. Use the reference router to select platform, foundation, pattern, component, and accessibility material.
 4. Verify material guidance against the live HIG and cite exact pages.
 5. Recommend a pattern, rejected alternatives, accessibility effects, and implementation implications.
 6. If files change, verify relevant sizes, input modes, appearances, and accessibility settings.
 
 ## Resources
 
-- Start with the [HIG reference index](references/index.md).
-- Foundations: [foundations](references/foundations.md), [design principles](references/design-principles.md), [typography](references/typography.md), [color](references/color.md), and [accessibility](references/accessibility.md).
-- Platform adaptation: [iOS](references/designing-for-ios.md), [iPadOS](references/designing-for-ipados.md), [macOS](references/designing-for-macos.md), [watchOS](references/designing-for-watchos.md), [tvOS](references/designing-for-tvos.md), and [visionOS](references/designing-for-visionos.md).
-- Patterns and components: [pattern catalog](references/pattern-catalog.md), [layout](references/layout.md), [motion](references/motion.md), [components](references/components.md), [controls](references/controls.md), and [inputs](references/inputs.md).
-- Presentation and inclusion: [navigation and search](references/navigation-and-search.md), [presentation](references/presentation.md), [inclusion](references/inclusion.md), and [VoiceOver](references/voiceover.md).
-- Repeatable audit sequence: [audit workflow](references/audit-workflow.md).
-- Sibling routes: `$swiftui-pro` for SwiftUI implementation review, `$impeccable` for broad interface refinement, and `$design-proof-gate` for screenshot acceptance.
+- Start with the package [reference router](references/index.md).
+- Run the package [checker](scripts/check.py) for structural evidence.
 
 ## Verify
 
-- Name the platform context and cite current HIG pages for material recommendations.
-- Separate design advice from implementation contracts and state accessibility effects.
+- Done means the platform context is named, current HIG pages support material recommendations, and accessibility effects are stated.
 - Run `python3 scripts/check.py` and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
 - Confirm mapped references resolve. Static checks do not prove live-source freshness or behavioral quality.
+- Report commands, exit codes, changed paths, evidence, and remaining limits.
+- Mark live HIG, hosted, or behavioral evidence `UNVERIFIED` when it was not available or not run.

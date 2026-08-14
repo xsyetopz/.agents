@@ -40,6 +40,33 @@ WINDOWS_GLOBAL = re.compile(
 )
 
 
+def routed_paths(skill_text: str, errors: list[str]) -> set[str]:
+    """Resolve links in SKILL.md and its package-local reference router."""
+    mapped: set[str] = set()
+    sources = [(ROOT / "SKILL.md", skill_text)]
+    index = ROOT / "references" / "index.md"
+    try:
+        sources.append((index, index.read_text(encoding="utf-8")))
+    except (OSError, UnicodeDecodeError) as exc:
+        fail(errors, f"references/index.md cannot be read: {exc}")
+    for source, text in sources:
+        for match in LINK.finditer(text):
+            target = match.group(1).split("#", 1)[0].split("?", 1)[0].strip()
+            if not target or target.startswith(("http://", "https://", "mailto:", "#", "//")):
+                continue
+            candidate = (source.parent / target).resolve()
+            try:
+                relative = candidate.relative_to(ROOT.resolve()).as_posix()
+            except ValueError:
+                fail(errors, f"{source.relative_to(ROOT)} link leaves package: {target}")
+                continue
+            if not candidate.is_file():
+                fail(errors, f"{source.relative_to(ROOT)} has broken link: {target}")
+                continue
+            mapped.add(relative)
+    return mapped
+
+
 def fail(errors: list[str], message: str) -> None:
     errors.append(message)
 
@@ -188,21 +215,14 @@ def check_skill(text: str, contract: dict, refs: list[str], errors: list[str]) -
         )
     if not re.search(r"^#\s+\S+", text, re.MULTILINE):
         fail(errors, "SKILL.md: a title heading is required")
+    mapped = routed_paths(text, errors)
     for relative in refs:
-        if f"]({relative})" not in text and f"](./{relative})" not in text:
+        if relative not in mapped:
             fail(
                 errors,
-                f"SKILL.md: reference is not routed in Reference map: {relative}",
+                "SKILL.md or references/index.md does not route reference: "
+                + relative,
             )
-    for raw in LINK.findall(text):
-        target = raw.split("#", 1)[0].split("?", 1)[0].strip()
-        if not target or target.startswith(
-            ("http://", "https://", "mailto:", "#", "//")
-        ):
-            continue
-        path = safe_path(target, errors)
-        if path is not None and not path.exists():
-            fail(errors, f"SKILL.md: broken local link: {target}")
 
 
 def check_evals(contract: dict, errors: list[str]) -> None:

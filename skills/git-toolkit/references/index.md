@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Select one route by local Git operation; inspect state and preserve recovery evidence.
 
 | Trigger | Reference |

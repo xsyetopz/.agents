@@ -28,6 +28,35 @@ GLOBAL_PATH = re.compile(
     r"(?:~|\$HOME)(?:[/\\]|$)|[A-Za-z]:[/\\](?:Users|home)(?:[/\\]|$))"
 )
 
+LINK = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+
+
+def routed_paths(skill_text: str, errors: list[str]) -> set[str]:
+    """Resolve links in SKILL.md and its package-local reference router."""
+    mapped: set[str] = set()
+    sources = [(ROOT / "SKILL.md", skill_text)]
+    index = ROOT / "references" / "index.md"
+    try:
+        sources.append((index, index.read_text(encoding="utf-8")))
+    except (OSError, UnicodeDecodeError) as exc:
+        errors.append(f"references/index.md cannot be read: {exc}")
+    for source, text in sources:
+        for match in LINK.finditer(text):
+            target = match.group(1).split("#", 1)[0].split("?", 1)[0].strip()
+            if not target or target.startswith(("http://", "https://", "mailto:", "#", "//")):
+                continue
+            candidate = (source.parent / target).resolve()
+            try:
+                relative = candidate.relative_to(ROOT.resolve()).as_posix()
+            except ValueError:
+                errors.append(f"{source.relative_to(ROOT)} link leaves package: {target}")
+                continue
+            if not candidate.is_file():
+                errors.append(f"{source.relative_to(ROOT)} has broken link: {target}")
+                continue
+            mapped.add(relative)
+    return mapped
+
 
 def safe_path(raw: object, label: str, errors: list[str]) -> Path | None:
     if not isinstance(raw, str) or not raw.strip():
@@ -165,14 +194,18 @@ def check_contract(skill_text: str, errors: list[str], skill_name: str) -> None:
     if not isinstance(refs, list) or not refs:
         errors.append("contract.reference_paths must be a non-empty array")
     else:
+        mapped = routed_paths(skill_text, errors)
         for raw in refs:
             relative = safe_path(raw, "contract.reference_paths entry", errors)
             if relative is None:
                 continue
             if not str(raw).startswith("references/") or not (ROOT / relative).is_file():
                 errors.append(f"missing package reference: {raw}")
-            if str(raw) not in skill_text:
-                errors.append(f"reference not routed by SKILL.md: {raw}")
+            if str(raw) not in mapped:
+                errors.append(
+                    "reference not routed by SKILL.md or references/index.md: "
+                    + str(raw)
+                )
     ids = payload.get("eval_case_ids")
     if not isinstance(ids, list) or len(ids) < 3 or any(not isinstance(item, str) or not item for item in ids) or len(set(ids)) != len(ids):
         errors.append("contract.eval_case_ids must contain at least three unique IDs")

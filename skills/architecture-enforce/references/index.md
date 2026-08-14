@@ -1,5 +1,7 @@
 # Architecture enforcement reference map
 
+
+Start here: [this router](index.md).
 Use this router to select the smallest reference that answers the current
 boundary, audit, or migration question.
 

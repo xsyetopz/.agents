@@ -1,5 +1,7 @@
 # Prompt Engineering Reference Router
 
+
+Start here: [this router](index.md).
 Use this router to select one route before opening a deeper reference. Keep
 selection conditional; do not load the full corpus by default.
 
@@ -7,6 +9,8 @@ selection conditional; do not load the full corpus by default.
 | --- | --- |
 | Source dates, URLs, and snapshot hashes | [official-sources.md](official-sources.md) |
 | Generic provider prompting | [official/openai-prompt-engineering.2026-08-13.md](official/openai-prompt-engineering.2026-08-13.md) |
+| GPT-5.6 official prompting snapshot | [official/openai-gpt-5.6-sol-prompting.2026-08-13.md](official/openai-gpt-5.6-sol-prompting.2026-08-13.md) |
+| GPT-5.6 model and API facts | [official/openai-gpt-5.6-model.2026-08-13.md](official/openai-gpt-5.6-model.2026-08-13.md) |
 | GPT-5.6 family or variant | [models/index.md](models/index.md), then [models/gpt-5.6.en.md](models/gpt-5.6.en.md) |
 | Reasoning modes and cross-model comparison | [model-reasoning-guide.md](model-reasoning-guide.md) |
 | Reusable prompt structure | [prompt-templates.md](prompt-templates.md) |

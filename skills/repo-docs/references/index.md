@@ -1,5 +1,7 @@
 # Reference index
 
+
+Start here: [this router](index.md).
 Select one artifact route; use the merged reference for both rules and verification.
 
 | Trigger | Reference |

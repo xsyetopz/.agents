@@ -1,6 +1,6 @@
 84c9c38d6c9e47ce4cc16f15c95ffd8b61b713ba23ebb7e4aff8980401b2ad14  ./.skill-validator.json
 1126322e2cc8d165adc4c792eeb195717de2bcc7b39be1ce77959d78e87ef685  ./LICENSE
-eec6884ef695dd8e5c60808dddf78d10a3d92005f36a225ea315de951ebc252d  ./SKILL.md
+b2766916af20befe163c53cdb35cf8a43f6f51ad756b726b848a6815d15ca14a  ./SKILL.md
 c8bf9f1821bf59b19b1b5f6bb3f1445bd649ffb5bdb9f80a432eca138a1dfa4b  ./agents/openai.yaml
 8e9c98851186fc0071150fd6d5750e3d0821c4b90c0abea55363a6edcada8cbb  ./assets/AGENTS.md.snippet
 b89a75af1f359780098fae6920d207d8248514e5ec1565d31f0d71805a62adb4  ./assets/CLAUDE.md.snippet
@@ -25,8 +25,8 @@ d50c51167700ae2904575cdac895c31a1d5a8ced795940063db3e665147cd84b  ./references/0
 1f4d7ac143e7bacee4b30964eaba7de2f958997bc2d307c633c9021018fff2d7  ./references/09-bibliography.md
 3f0d399e8ba1d219b01e31ce478785f6783213de677231e7bd39364b83ff2ecb  ./references/10-worked-examples.md
 c374e34500f71ca8d0cae788d75379b5eca42f170b8c7804edc40999cf7606b7  ./references/11-rigor-modes.md
-01cf3a142393ed76f88f1487f84c1468532a78059856c78d771a40a9cfbe9d75  ./references/index.md
-07092d5661a6e12de6b87af20f3125a6f02500426bd66caecd8bf3d276e8cfab  ./scripts/check.py
+8480adccb12ec279cbefe47875f5deb38dd073f3891cc6a6feb1e7a8d73177e7  ./references/index.md
+72855bf0e394df386c358f277a1b9174cee45e8ba0d1e179d629115f34884b02  ./scripts/check.py
 9934b19ec10d5147ea1171dff4936632377a1887a0937d3f827e6ed54bcb5e35  ./scripts/install.sh
 6f2a1b63e7c54c85d315f39200fb0e46fdff76ca5840ef083b5a323d459900a4  ./scripts/skill_checks.py
 4a16aa8aec8a784a7d818ddafffca91efdfee1bc1d68a624d2e1ecf8d33d4ba6  ./scripts/skill_checks_test.py

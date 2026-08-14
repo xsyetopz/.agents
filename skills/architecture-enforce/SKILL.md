@@ -5,31 +5,23 @@ description: architecture enforcement, topology refactors, ownership boundaries,
 
 # Architecture Enforce
 
-Turn architecture policy into repository evidence and blocking checks while
-preserving behavior unless a requested migration explicitly changes it.
+Turn architecture policy into repository evidence and blocking checks while preserving behavior unless a requested migration explicitly changes it.
 
 ## Use this skill
 
-Use this skill when changing or auditing packages, directories, modules, schemas,
-APIs, tests, generated boundaries, build graphs, deployables, languages,
-storage, protocols, public contracts, or three or more sibling files. Use it for
-file shattering, flat folders, filename colonies, helper or manager
-proliferation, dependency cycles, ownership drift, and lint, test, architecture,
-or CI suppressions.
-
-Do not use it for an isolated formatting or comment edit, architecture ideation
-before a target is selected (use `$architecture-design`), or generated output
-when the canonical generator input is available.
+- Change or audit packages, directories, modules, schemas, APIs, tests, generated boundaries, build graphs, deployables, languages, storage, protocols, public contracts, or three or more sibling files.
+- Use it for file shattering, flat folders, filename colonies, helper or manager proliferation, dependency cycles, ownership drift, and lint, test, architecture, or CI suppressions.
+- Do not use for isolated formatting or comment edits, architecture ideation before a target is selected, or generated output when canonical generator input is available.
+- Redirect target selection and ADRs to `$architecture-design`, repository policy to `$repo-governance`, and pipeline gates to `$git-ci-cd`.
 
 ## Rules
 
 - Read repository instructions, owning code, callers, tests, build configuration, generators, and public contracts before editing.
 - Assign every changed path one durable owner, responsibility, visibility, lifecycle, dependency direction, and reason it remains separate.
 - Prefer cohesive capability modules over one-type, one-operation, phase, helper, validation, or filename-prefix colonies.
-- Inventory tracked, modified, staged, and non-ignored untracked authored source; keep tracked files auditable.
+- Inventory tracked, modified, staged, and non-ignored authored source; keep tracked files auditable.
 - Every warning and error blocks. Never add ignores, exclusions, advisory modes, allow-failure paths, lower thresholds, or weakened tests.
-- Change canonical generator inputs; do not hand-edit generated output.
-- Preserve public entrypoints and contracts unless the migration explicitly records the change, migration order, rollback boundary, and verification.
+- Change canonical generator inputs; do not hand-edit generated output. Preserve public entrypoints and contracts unless migration evidence records the change.
 
 ## Steps
 
@@ -42,34 +34,14 @@ when the canonical generator input is available.
 
 ## Resources
 
-Route only the material needed for the audit:
-
-- [Reference index](references/index.md) — trigger-to-reference routing.
-- [Core principles](references/principles.md) — ownership, boundaries, quality scenarios, and fail-closed checks.
-- [Naming and fragmentation](references/naming.md) — file shattering and categorical decomposition.
-- [Language conventions](references/languages.md) — ecosystem boundaries and naming authority.
-- [Testing](references/testing.md) — test placement and executable contracts.
-- [Toolchains](references/toolchains.md) — build and generator ownership.
-- [Audit tooling](references/audit-tooling.md) — providers and audit interpretation.
-- [Verification](references/verification.md) — evidence-producing acceptance gates.
-- [Pattern catalog](references/pattern-catalog.md) — structural alternatives and tradeoffs.
-- [Examples](references/examples.md) — topology tables and migrations.
-- [Authority sources](references/sources.md) — primary conventions and tool documentation.
-- `$architecture-design` — select and document the target structure first; `$repo-governance` — persist ownership and repository policy; `$git-ci-cd` — enforce architecture gates in pipelines.
+- Start with the package [reference router](references/index.md).
+- Use the package [audit command](scripts/audit_architecture.py) and provider scripts for structural evidence.
+- Run the package [checker](scripts/check.py) before reporting a result.
 
 ## Verify
 
-Run from this package directory:
-
-```sh
-python3 scripts/check.py
-python3 scripts/providers.py capabilities --root . --format json
-python3 scripts/audit_architecture.py . --format json
-```
-
-Then run the relevant package tests, including `test_audit_cli.py`,
-`test_suppressions.py`, provider tests, and façade tests. Accept only when
-contracts are preserved or explicitly migrated, every changed path has a durable
-owner, the audit has zero warnings or errors, and the diff contains no
-suppression bypass. Report exact commands, exit codes, findings, evidence,
-remaining risk, and any rollback boundary.
+- Done means every changed path has a durable owner, the audit has zero warnings or errors, contracts are preserved or explicitly migrated, and no suppression bypass remains.
+- Run `python3 scripts/check.py`, `python3 scripts/providers.py capabilities --root . --format json`, and `python3 scripts/audit_architecture.py . --format json` from this package.
+- Run relevant package tests, including audit CLI, suppression, provider, and façade tests.
+- Report commands, exit codes, changed paths, evidence, and remaining limits.
+- Mark missing provider data, hosted settings, integration runs, or unavailable runtime evidence `UNVERIFIED`.
