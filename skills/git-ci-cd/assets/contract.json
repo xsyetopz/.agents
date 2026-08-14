@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "skill_name": "git-ci-cd",
+  "required_headings": [
+    "When to use",
+    "When NOT to use",
+    "Guardrails",
+    "Workflow",
+    "Quick start",
+    "Reference map",
+    "Completion",
+    "Validation",
+    "Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/security-checklist.md",
+    "references/github-actions.md",
+    "references/github-integrations.md",
+    "references/gitlab-ci.md",
+    "references/bitbucket-pipelines.md",
+    "references/cross-platform-patterns.md"
+  ],
+  "eval_case_ids": [
+    "positive-secure-github-workflow",
+    "near-miss-local-application-failure",
+    "safety-untrusted-pull-request-secrets"
+  ]
+}

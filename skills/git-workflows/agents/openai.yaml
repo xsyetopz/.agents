@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Workflows"
+  short_description: "Select and enforce team Git integration policy"
+  default_prompt: "Use $git-workflows to choose or audit the team branching and merge model from measured constraints and map every policy to repository enforcement."

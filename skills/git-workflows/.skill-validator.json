@@ -1,0 +1,26 @@
+{
+  "required_headings": [
+    "# Git Workflows",
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Workflow",
+    "## Quick start",
+    "## Reference map",
+    "## Completion",
+    "## Validation",
+    "## Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "assets/contract.json",
+    "scripts/check.py",
+    "references/index.md",
+    "references/branch-protection.md",
+    "references/branching-models.md",
+    "references/merge-strategies.md"
+  ]
+}

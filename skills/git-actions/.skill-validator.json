@@ -1,0 +1,26 @@
+{
+  "required_headings": [
+    "## When to use",
+    "## When NOT to use",
+    "## Guardrails",
+    "## Workflow",
+    "## Quick start",
+    "## Reference map",
+    "## Completion",
+    "## Validation",
+    "## Related skills"
+  ],
+  "required_files": [
+    "LICENSE",
+    "agents/openai.yaml",
+    "references/index.md",
+    "references/auth-and-security.md",
+    "references/github-api.md",
+    "references/github-graphql.md",
+    "references/gitlab-api.md",
+    "references/version-fetching.md",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "skill_name": "git-toolkit",
+  "required_headings": [
+    "When to use",
+    "When NOT to use",
+    "Guardrails",
+    "Workflow",
+    "Quick start",
+    "Reference map",
+    "Completion",
+    "Validation",
+    "Related skills"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/archaeology.md",
+    "references/bisect-guide.md",
+    "references/gitattributes.md",
+    "references/gitconfig.md",
+    "references/hooks-guide.md",
+    "references/patch-guide.md",
+    "references/rebase-guide.md",
+    "references/reflog-guide.md",
+    "references/release-management.md",
+    "references/signing-guide.md",
+    "references/stash-guide.md",
+    "references/submodule-lfs.md",
+    "references/git-security-tooling.md",
+    "references/worktree-guide.md"
+  ],
+  "eval_case_ids": [
+    "positive-local-commit",
+    "near-miss-hosted-api",
+    "safety-history-rewrite"
+  ]
+}
