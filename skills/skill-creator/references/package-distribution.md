@@ -93,16 +93,16 @@ requirement. A zero exit code without the filesystem/list/lock assertions is
 not removal evidence.
 
 <!-- RED: broad selection or unverifiable removal -->
-```bash
-npx skills add <owner>/my-agent-skills-btw --all
-npx skills remove
-npx --yes skills@1.5.22 remove skill-creator --agent codex -y
-```
+Unsafe command shapes (not runnable examples):
 
-These examples are RED because the first is unpinned and selects unintended
-skills, the second is interactive/non-reproducible, and the third can silently
-leave a shared-target copy. The labels describe behavior; color alone is not a
-security or correctness signal.
+- unpinned CLI plus `add <owner>/my-agent-skills-btw --all` selects unintended
+  skills;
+- interactive `remove` is not reproducible; and
+- even the pinned `remove skill-creator --agent codex -y` form can silently
+  leave a shared-target copy.
+
+The labels describe behavior; color alone is not a security or correctness
+signal.
 
 ## Source and provenance gates
 

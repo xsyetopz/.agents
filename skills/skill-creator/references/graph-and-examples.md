@@ -104,12 +104,10 @@ disable checks, install globally by default, or execute unreviewed content.
 Require source/revision review, scoped permissions, and explicit approval for
 any external or destructive action.
 
-Command:
+Unsafe command shapes (not runnable examples):
 
-```bash
-npx skills add <owner>/my-agent-skills-btw --all
-npx skills remove
-```
+- unpinned CLI plus `add <owner>/my-agent-skills-btw --all`;
+- interactive `remove` with no selected skill.
 
 Expected behavior: reject as unpinned, broad, and interactive. `--all` can copy
 unintended skills, `latest`/unversioned invocation is not reproducible, and
