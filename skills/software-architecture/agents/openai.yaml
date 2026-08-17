@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Architecture"
+  short_description: "Design, audit, and enforce software boundaries"
+  default_prompt: "Use $software-architecture to decide or enforce this topology from repository evidence, preserve contracts, and verify the result without custom schema or generated output files."

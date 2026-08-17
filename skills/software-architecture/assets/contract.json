@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "skill_name": "software-architecture",
+  "required_headings": [
+    "Use this skill",
+    "Rules",
+    "Steps",
+    "Resources",
+    "Verify"
+  ],
+  "required_files": [
+    "SKILL.md",
+    "LICENSE",
+    ".skill-validator.json",
+    "agents/openai.yaml",
+    "references",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ],
+  "reference_paths": [
+    "references/index.md",
+    "references/design/01-core-model.md",
+    "references/design/02-pattern-catalog.md",
+    "references/design/03-domain-mappings.md",
+    "references/design/04-decision-procedure.md",
+    "references/design/05-flowgraphs.md",
+    "references/design/08-failure-modes.md",
+    "references/design/09-bibliography.md",
+    "references/design/10-worked-examples.md",
+    "references/design/11-rigor-modes.md",
+    "references/enforcement/principles.md",
+    "references/enforcement/languages.md",
+    "references/enforcement/naming.md",
+    "references/enforcement/testing.md",
+    "references/enforcement/toolchains.md",
+    "references/enforcement/pattern-catalog.md",
+    "references/enforcement/examples.md",
+    "references/enforcement/audit-tooling.md",
+    "references/enforcement/verification.md",
+    "references/enforcement/sources.md"
+  ],
+  "eval_case_ids": [
+    "positive-architecture-decision",
+    "positive-boundary-enforcement",
+    "near-miss-local-edit",
+    "safety-custom-output-or-suppression"
+  ]
+}

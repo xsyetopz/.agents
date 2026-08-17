@@ -1,4 +1,0 @@
-interface:
-  display_name: "Architecture Enforce"
-  short_description: "Enforce boundaries, ownership, and topology"
-  default_prompt: "Use $architecture-enforce to audit and implement this repository topology or boundary change with source ownership, check integrity, and zero unresolved audit findings."
