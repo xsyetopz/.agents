@@ -35,22 +35,27 @@ canonical owner and update this file when the repository contract changes.
 
   ```text
   skills/apple-design-hig/
-  skills/architecture-design/
-  skills/architecture-enforce/
   skills/avoid-ai-writing/
   skills/git-actions/
   skills/git-ci-cd/
-  skills/git-toolkit/
   skills/git-workflows/
+  skills/no-legacy-cleanup/
   skills/prompt-engineering/
   skills/repo-docs/
-  skills/repo-governance/
   skills/skill-creator/
+  skills/software-architecture/
   ```
 
 - `skills/skill-creator/` is the maintained destination authoring skill. It is
   not copied from the old source `/Users/krystian/.agents/skills/skill-creator/`.
-- The other eleven packages are imported from the source worktree
+- `skills/no-legacy-cleanup/` is maintained in this repository. It is not an
+  alias, wrapper, or compatibility path for another package.
+- `skills/software-architecture/`, `skills/git-workflows/`, and
+  `skills/repo-docs/` are maintained merged destinations. Do not overwrite them
+  with one old source package: they consolidate the former architecture design
+  and enforcement, local Git and team workflow, and repository documentation
+  and governance packages respectively.
+- The other five packages are imported from the source worktree
   `/Users/krystian/.agents/skills/` only when their files are non-gitignored.
   Include reviewed, nonignored working-tree files and operational resources;
   selection follows that worktree's `.gitignore`, not tracking status alone.
@@ -84,11 +89,17 @@ evals/evals.json            # schema_version 1 evaluation manifest
 scripts/check.py            # stdlib-only copied-package checker
 ```
 
+Every package-provided executable or tool under `scripts/` must be a Python 3
+`.py` file; do not ship shell scripts or custom generators. Each `SKILL.md`
+`Rules` section must explicitly forbid inventing custom schema files and custom
+generated files as skill outputs, while allowing only established
+repository-owned formats and canonical inputs.
+
 `assets/contract.json` is required even when a skill has no other binary or
 template asset. Additional assets are allowed only when the skill uses them;
 do not add empty or fake assets. `agents/openai.yaml` must retain its validated
 `interface.display_name`, `short_description`, and `default_prompt`; the
-prompt invokes exactly `$<name>`.
+prompt invokes exactly `/skill:<name>`.
 
 `SKILL.md` has valid two-field frontmatter on line 1, a directory-matching
 `name`, a concrete selection-facing `description`, and these exact level-two
@@ -151,11 +162,11 @@ activation or security pass.
   structure, workflow, validation, and safety; it must not require GPT-5.6 or
   another named model for ordinary skill creation.
 - Prompt design and audits, tool-routing policy, behavioral evals, and
-  model-family guidance belong to `$prompt-engineering`. GPT-5.6 is one
+  model-family guidance belong to `/skill:prompt-engineering`. GPT-5.6 is one
   optional model family among many; route named-model work there rather than
   duplicating provider guidance in `skill-creator`.
 - Official OpenAI prompting pages and Markdown snapshots are owned by
-  `prompt-engineering`. Refresh them through `$openai-docs` when a named model
+  `prompt-engineering`. Refresh them through `/skill:openai-docs` when a named model
   is intentionally updated; do not create hand-authored model guides in
   `skill-creator`.
 
@@ -184,10 +195,10 @@ package-local tooling are present:
 
 ```bash
 for d in \
-  skills/apple-design-hig skills/architecture-design skills/architecture-enforce \
-  skills/avoid-ai-writing skills/git-actions skills/git-ci-cd skills/git-toolkit \
-  skills/git-workflows skills/prompt-engineering skills/repo-docs \
-  skills/repo-governance skills/skill-creator; do
+  skills/apple-design-hig skills/avoid-ai-writing skills/git-actions \
+  skills/git-ci-cd skills/git-workflows skills/no-legacy-cleanup \
+  skills/prompt-engineering skills/repo-docs skills/skill-creator \
+  skills/software-architecture; do
   (cd "$d" && python3 scripts/check.py) || exit 1
   python3 -m json.tool "$d/evals/evals.json" >/dev/null || exit 1
   python3 skills/skill-creator/scripts/validate_skill.py "$d" || exit 1
@@ -202,7 +213,7 @@ bash -n scripts/skills_cli_smoke.sh
 
 Every package checker and validator must exit `0` with `PASS` and no warnings;
 the unit suite must report `OK`; the LOC and Ruff checks must pass; there must
-be exactly the twelve approved root-level entrypoints listed above; and no
+be exactly the ten approved root-level entrypoints listed above; and no
 symlink may escape its owning package. Run disposable fixture projects with
 the pinned `bunx --yes skills@1.5.22` and `bunx --bun skills@1.5.22` commands as
 documented in `README.md`: each fixture must copy exactly one selected

@@ -19,24 +19,24 @@ class FrontmatterDescriptionTests(unittest.TestCase):
     def test_folded_description_is_parsed_as_catalog_text(self) -> None:
         metadata, body = parse_frontmatter(
             """---
-name: git-toolkit
+name: example-skill
 description: >
-  Use when asked to stage, commit, amend, or write a Conventional Commit.
-  Covers git add, git commit, status, diff, and restore.
+  Use when asked to validate a folded catalog description.
+  Covers multiline parsing and whitespace normalization.
 metadata:
   author: example
 ---
-# Git Toolkit
+# Example Skill
 """
         )
 
-        self.assertEqual(metadata["name"], "git-toolkit")
+        self.assertEqual(metadata["name"], "example-skill")
         self.assertEqual(
             metadata["description"],
-            "Use when asked to stage, commit, amend, or write a Conventional Commit. "
-            "Covers git add, git commit, status, diff, and restore.",
+            "Use when asked to validate a folded catalog description. "
+            "Covers multiline parsing and whitespace normalization.",
         )
-        self.assertEqual(body, "# Git Toolkit")
+        self.assertEqual(body, "# Example Skill")
 
     def test_description_limit_uses_full_folded_value(self) -> None:
         metadata, _ = parse_frontmatter(

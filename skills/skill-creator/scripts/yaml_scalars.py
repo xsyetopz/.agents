@@ -1,9 +1,8 @@
 """Small, strict YAML scalar helpers used by the skill validator.
 
 The validator intentionally supports the metadata subset used by Agent Skills
-rather than depending on a third-party YAML parser.  Keeping scalar handling in
-its own module lets the CLI facade and contract checks stay small while keeping
-all direct imports from the original validator available through that facade.
+rather than depending on a third-party YAML parser. Scalar handling lives in
+this module so the command-line validator and focused checks stay small.
 """
 
 from __future__ import annotations

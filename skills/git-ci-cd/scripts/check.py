@@ -125,7 +125,9 @@ def _linked_package_paths(source: Path, text: str, errors: list[str]) -> set[str
     mapped: set[str] = set()
     for match in LINK_RE.finditer(text):
         target = match.group(1).split("#", 1)[0].split("?", 1)[0].strip()
-        if not target or target.startswith(("http://", "https://", "mailto:", "#", "//")):
+        if not target or target.startswith(
+            ("http://", "https://", "mailto:", "#", "//")
+        ):
             continue
         candidate = (source.parent / target).resolve()
         try:

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Git Toolkit"
-  short_description: "Stage, commit, rebase, recover, and inspect Git"
-  default_prompt: "Use $git-toolkit for this local Git task, including staging and Conventional Commits; preserve unrelated changes and verify the resulting status and history."

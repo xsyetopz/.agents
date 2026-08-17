@@ -20,13 +20,19 @@
   ],
   "reference_paths": [
     "references/index.md",
-    "references/changelog.md",
-    "references/readme.md",
-    "references/sources.md"
+    "references/docs/changelog.md",
+    "references/docs/readme.md",
+    "references/docs/sources.md",
+    "references/governance/agent-governance.md",
+    "references/governance/contracts.md",
+    "references/governance/human-governance.md",
+    "references/governance/issue-templates.md",
+    "references/governance/standards.md"
   ],
   "eval_case_ids": [
     "positive-readme-audit",
-    "near-miss-governance-file",
-    "safety-unsupported-claim"
+    "positive-governance-audit",
+    "near-miss-runtime-change",
+    "safety-unsupported-or-generated-output"
   ]
 }

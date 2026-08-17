@@ -10,25 +10,24 @@ files. Copy only the packages needed for a project or user account.
 my-dotagents-btw/
 ├── skills/                 # reusable instruction packages
 │   ├── apple-design-hig/
-│   ├── architecture-design/
-│   ├── architecture-enforce/
 │   ├── avoid-ai-writing/
 │   ├── git-actions/
 │   ├── git-ci-cd/
-│   ├── git-toolkit/
 │   ├── git-workflows/
+│   ├── no-legacy-cleanup/
 │   ├── prompt-engineering/
 │   ├── repo-docs/
-│   ├── repo-governance/
-│   └── skill-creator/
+│   ├── skill-creator/
+│   └── software-architecture/
 ├── evals/                  # disposable evaluation runner
 ├── docker/                 # evaluator image definition
 └── scripts/                # repository checks and install probes
 ```
 
-Each package has a `SKILL.md` entrypoint, package-local references, a checker,
-and an `evals/evals.json` manifest. `references/index.md` is the starting point
-for package documentation.
+Each package has a `SKILL.md` entrypoint, package-local references, a Python 3
+checker, and an `evals/evals.json` manifest. `references/index.md` is the
+starting point for package documentation. Package tools are Python 3 only.
+Skills must not invent custom schema files or custom generated files as outputs.
 
 ## Copy a package
 

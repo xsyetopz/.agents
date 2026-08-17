@@ -78,7 +78,9 @@ def _common_section_bodies(text: str) -> dict[str, str]:
     for position, (title, start) in enumerate(positions):
         if title not in EXPECTED_HEADINGS:
             continue
-        end = positions[position + 1][1] if position + 1 < len(positions) else len(lines)
+        end = (
+            positions[position + 1][1] if position + 1 < len(positions) else len(lines)
+        )
         bodies[title] = "\n".join(lines[start + 1 : end]).strip()
     return bodies
 
@@ -94,8 +96,7 @@ def check_common_section_semantics(text: str) -> list[str]:
     verify = bodies.get("Verify", "")
     if PACKAGE_CHECK_COMMAND not in verify:
         errors.append(
-            "SKILL.md section '## Verify' must include "
-            f"{PACKAGE_CHECK_COMMAND}."
+            f"SKILL.md section '## Verify' must include {PACKAGE_CHECK_COMMAND}."
         )
     if not UNAVAILABLE_MARKER_RE.search(verify):
         errors.append(
@@ -126,7 +127,9 @@ def root_index_duplicates(skill_text: str, index_text: str) -> set[str]:
     resources = _without_fenced_blocks(
         _common_section_bodies(skill_text).get("Resources", "")
     )
-    root_links = {match.removeprefix("./") for match in ROOT_REFERENCE_LINK.findall(resources)}
+    root_links = {
+        match.removeprefix("./") for match in ROOT_REFERENCE_LINK.findall(resources)
+    }
     indexed: set[str] = set()
     for match in INDEX_REFERENCE_LINK.findall(_without_fenced_blocks(index_text)):
         target = match.removeprefix("./")
@@ -138,7 +141,9 @@ def root_index_duplicates(skill_text: str, index_text: str) -> set[str]:
     return root_links & indexed
 
 
-def _mermaid_blocks(text: str) -> tuple[list[tuple[int, list[tuple[int, str]]]], list[str]]:
+def _mermaid_blocks(
+    text: str,
+) -> tuple[list[tuple[int, list[tuple[int, str]]]], list[str]]:
     """Return Mermaid fences and errors for unterminated fenced blocks."""
     blocks: list[tuple[int, list[tuple[int, str]]]] = []
     errors: list[str] = []
@@ -185,9 +190,7 @@ def check_skill_creator_references(root: Path, errors: list[str]) -> None:
             errors.append(f"{relative}: {message}")
         for start, body in blocks:
             if not any(line.strip() for _line_no, line in body):
-                errors.append(
-                    f"{relative}:{start}: Mermaid fence is empty"
-                )
+                errors.append(f"{relative}:{start}: Mermaid fence is empty")
             for line_no, line in body:
                 if MERMAID_LEGACY_LABEL_RE.search(line):
                     errors.append(
@@ -199,6 +202,7 @@ def check_skill_creator_references(root: Path, errors: list[str]) -> None:
                 errors.append(
                     f"{relative}:{line_no}: Mermaid declarations must be in a ```mermaid fence"
                 )
+
 
 def parse_frontmatter(path: Path) -> tuple[str, bool, list[str]]:
     """Return description, multiline flag, and parse errors."""
@@ -255,9 +259,7 @@ def headings(path: Path) -> list[str]:
 
 
 def baseline_tone(relative: str) -> bool:
-    if relative.startswith("apple-design-hig/"):
-        return True
-    return relative.startswith("prompt-engineering/references/issues/")
+    return relative.startswith("apple-design-hig/")
 
 
 def check(root: Path) -> tuple[list[str], list[str]]:
@@ -288,7 +290,9 @@ def check(root: Path) -> tuple[list[str], list[str]]:
                 f"{DESCRIPTION_WORDS[0]}–{DESCRIPTION_WORDS[1]}"
             )
         if len(description) > DESCRIPTION_LIMIT:
-            errors.append(f"{relative}: description exceeds {DESCRIPTION_LIMIT} characters")
+            errors.append(
+                f"{relative}: description exceeds {DESCRIPTION_LIMIT} characters"
+            )
         if re.search(r"\buse\s+(?:for|to)\b", description, re.IGNORECASE):
             errors.append(f"{relative}: description uses forbidden 'Use for'/'Use to'")
         skill_text = (package / "SKILL.md").read_text(encoding="utf-8")
@@ -331,7 +335,11 @@ def check(root: Path) -> tuple[list[str], list[str]]:
         text = path.read_text(encoding="utf-8")
         for line_no, line in enumerate(text.splitlines(), 1):
             for term in FORBIDDEN_LABELS:
-                if not re.search(r"(?<![A-Za-z0-9_-])" + re.escape(term) + r"(?![A-Za-z0-9_-])", line, re.IGNORECASE):
+                if not re.search(
+                    r"(?<![A-Za-z0-9_-])" + re.escape(term) + r"(?![A-Za-z0-9_-])",
+                    line,
+                    re.IGNORECASE,
+                ):
                     continue
                 if baseline_tone(rel.removeprefix("skills/")):
                     notes.append(f"BASELINE tone label: {rel}:{line_no} ({term})")

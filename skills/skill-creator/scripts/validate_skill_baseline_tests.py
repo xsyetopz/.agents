@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from check_skill_structure import root_index_duplicates
+from check_skill_structure import baseline_tone, root_index_duplicates
 from test_support import (
     check_agents_yaml,
     check_broken_references,
@@ -154,20 +154,20 @@ class BaselineValidatorTests(unittest.TestCase):
 
     def test_openai_metadata_requires_exact_skill_reference(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            root = Path(directory) / "git-toolkit"
+            root = Path(directory) / "example-skill"
             (root / "agents").mkdir(parents=True)
             (root / "agents" / "openai.yaml").write_text(
                 "interface:\n"
-                "  display_name: Git Toolkit\n"
-                "  short_description: Stage and commit local Git changes\n"
-                "  default_prompt: Use $git-workflows to commit.\n",
+                "  display_name: Example Skill\n"
+                "  short_description: Exercise exact selector validation\n"
+                "  default_prompt: Use $other-skill for this task.\n",
                 encoding="utf-8",
             )
             errors: list[str] = []
             check_agents_yaml(root, errors)
 
         self.assertIn(
-            "agents/openai.yaml default_prompt must mention $git-toolkit.",
+            "agents/openai.yaml default_prompt must mention $example-skill.",
             errors,
         )
 
@@ -227,6 +227,12 @@ class BaselineValidatorTests(unittest.TestCase):
             check_broken_references("Use ./assets/template.md.\n", root, errors)
 
         self.assertEqual(errors, [])
+
+    def test_deleted_prompt_issue_path_is_not_a_baseline_tone_exception(self) -> None:
+        self.assertFalse(
+            baseline_tone("prompt-engineering/references/issues/source-truth.md")
+        )
+        self.assertTrue(baseline_tone("apple-design-hig/references/audit-workflow.md"))
 
     def test_root_index_duplicate_guard_counts_three_leaf_routes(self) -> None:
         names = ("one", "two", "three")

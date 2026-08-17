@@ -21,6 +21,7 @@ Use current Apple Human Interface Guidelines to make an Apple-platform interface
 - Resolve platform, device class, input method, appearance, and accessibility context before recommending a pattern.
 - Prefer system components. Justify deviations with a concrete product constraint.
 - Separate HIG recommendations, implementation requirements, and inferred design judgment. Do not invent Apple rules or API guarantees.
+- Do not invent custom schema files or custom generated files as outputs. Use only established repository-owned formats and canonical inputs.
 
 ## Steps
 

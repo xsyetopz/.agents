@@ -23,10 +23,6 @@ HIG_PREFIX_LOWER = "doc://com.apple.HIG/design/human-interface-guidelines/"
 ROOT_IDENTIFIER = "doc://com.apple.HIG/design/human-interface-guidelines"
 
 
-class HIGResponseError(TypeError, RuntimeError):
-    """Represent an invalid response while preserving the historical error API."""
-
-
 def fetch_json(base_url: str, slug: str, timeout: float) -> dict:
     normalized_base = base_url.rstrip("/")
     url = (
@@ -53,7 +49,7 @@ def fetch_json(base_url: str, slug: str, timeout: float) -> dict:
     except TimeoutError as error:
         raise RuntimeError(f"Apple HIG request timed out: {url}") from error
     if not isinstance(payload, dict):
-        raise HIGResponseError(f"Apple HIG returned a non-object JSON payload: {url}")
+        raise TypeError(f"Apple HIG returned a non-object JSON payload: {url}")
     return payload
 
 
@@ -249,7 +245,7 @@ def main() -> int:
         else:
             print_catalog(records, sections, retrieved)
         return 0
-    except RuntimeError as error:
+    except (RuntimeError, TypeError) as error:
         print(f"error: {error}", file=sys.stderr)
         return 1
 

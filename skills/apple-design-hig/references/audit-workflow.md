@@ -1,7 +1,7 @@
 # Apple HIG Workflow
 
 Scope: local-policy. This authored workflow explains how to apply the bundled
-Apple HIG snapshot; generated topic files remain source material and may need a
+Apple HIG snapshot. Bundled topic files remain source material and may need a
 live-page check when guidance is version-sensitive.
 
 Source status: use the [HIG source index](hig-source-index.md) to locate the
@@ -48,24 +48,24 @@ orientations/window sizes, localization directions, assistive technologies,
 reduced-motion settings, and empty/loading/error states. Report what was tested
 and what still requires an Apple-device or SDK check.
 
-## Refresh and validation
+## Snapshot audit and validation
 
 Run commands from the skill directory:
 
 ```sh
-python3 scripts/harvest_hig.py harvest
-python3 scripts/harvest_hig.py validate
-python3 scripts/harvest_hig.py table-smoke
+python3 scripts/check.py
+python3 -m json.tool evals/evals.json >/dev/null
 python3 scripts/hig_catalog.py --all --deep
+python3 scripts/hig_catalog.py --topic foundations
 ```
 
-`harvest` replaces the generated `references/` directory from Apple's DocC JSON
-and the What's New page, writing one file per current HIG URL (`index.md` for
-the root) and `whats-new.md`. Binary images, videos, and audio are intentionally
-omitted; their alt text, captions, and external references remain. `validate`
-checks front matter, URL/slugs, links, and What's New coverage. `table-smoke`
-exercises table-bearing pages. The catalog helper is for live discovery, not a
-citation substitute.
+The package checker validates the copied skill structure and mapped references.
+The catalog helper reads Apple's live DocC JSON and prints the current catalog
+or one topic summary to standard output. These commands do not modify the
+bundled references. Compare the printed source URLs and retrieval date with the
+local snapshot, then report stale or missing coverage instead of creating a
+custom generated file. The catalog helper is for live discovery, not a citation
+substitute.
 
 Apple currently exposes HIG articles through
 `https://developer.apple.com/tutorials/data/design/human-interface-guidelines/`

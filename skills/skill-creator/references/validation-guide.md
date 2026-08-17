@@ -63,7 +63,7 @@ forms fail closed.
 - Relative links and `references/`, `assets/`, and `scripts/` paths resolve under
   the skill root. External HTTPS links are allowed but should be reviewed.
 - `agents/openai.yaml`, when present, has its three package-required interface
-  fields and the exact `$skill-creator` invocation token. Keep selector descriptions
+  fields and the exact `/skill:skill-creator` invocation token. Keep selector descriptions
   one-line, keyword-style, and within the catalog word/character target.
 - No root assumptions, host-specific absolute paths, symlinks to a global checkout, wrappers,
   aliases, or duplicate `SKILL.md` entrypoints exist.

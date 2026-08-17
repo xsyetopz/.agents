@@ -13,7 +13,7 @@ Find observable prose patterns and make only the requested edits. Do not infer w
 - Edit or rewrite prose while preserving the requested voice, audience, register, facts, citations, terminology, and format.
 - Audit sentence, paragraph, document, or Markdown structure.
 - Do not use for authorship, plagiarism, originality, policy evasion, factual, medical, legal, citation, or source verification; code cleanup; or exact imitation of a living writer.
-- Redirect README and changelog structure to `$repo-docs`, policy files to `$repo-governance`, and agent prompt design to `$prompt-engineering`.
+- Redirect repository documentation and policy files to `/skill:repo-docs`, and agent prompt design to `/skill:prompt-engineering`.
 
 ## Rules
 
@@ -21,6 +21,7 @@ Find observable prose patterns and make only the requested edits. Do not infer w
 - Preserve claims, numbers, names, links, citations, code, terminology, and voice unless the request authorizes a change.
 - Do not add anecdotes, feelings, uncertainty, slang, deliberate errors, fabricated sources, or new claims to make text seem human.
 - Treat word tables as search aids, not deletion lists. Use the narrowest fix.
+- Do not invent custom schema files or custom generated files as outputs. Use only established repository-owned formats and canonical inputs.
 
 ## Steps
 

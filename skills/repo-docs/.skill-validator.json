@@ -1,6 +1,6 @@
 {
   "required_headings": [
-    "# Repo Docs",
+    "# Repository Documentation and Governance",
     "## Use this skill",
     "## Rules",
     "## Steps",
@@ -13,10 +13,18 @@
     ".skill-validator.json",
     "agents/openai.yaml",
     "assets/contract.json",
+    "evals/evals.json",
     "scripts/check.py",
     "references/index.md",
-    "references/changelog.md",
-    "references/readme.md",
-    "references/sources.md"
+    "references/docs/changelog.md",
+    "references/docs/readme.md",
+    "references/docs/sources.md",
+    "references/governance/agent-governance.md",
+    "references/governance/contracts.md",
+    "references/governance/human-governance.md",
+    "references/governance/issue-templates.md",
+    "references/governance/standards.md",
+    "scripts/audit_changelog.py",
+    "scripts/audit_semver.py"
   ]
 }

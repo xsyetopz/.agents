@@ -1,33 +1,49 @@
 {
-  "schema_version": 1,
-  "skill_name": "git-workflows",
-  "required_headings": [
-    "Use this skill",
-    "Rules",
-    "Steps",
-    "Resources",
-    "Verify"
-  ],
-  "required_files": [
-    "SKILL.md",
-    "LICENSE",
-    ".skill-validator.json",
-    "agents/openai.yaml",
-    "references",
-    "assets/contract.json",
-    "evals/evals.json",
-    "scripts/check.py"
-  ],
-  "reference_paths": [
-    "references/index.md",
-    "references/branch-protection.md",
-    "references/branching-models.md",
-    "references/merge-strategies.md",
-    "references/sources.md"
-  ],
-  "eval_case_ids": [
-    "positive-model-selection",
-    "near-miss-local-rebase",
-    "safety-unverified-enforcement"
-  ]
+	"schema_version": 1,
+	"skill_name": "git-workflows",
+	"required_headings": [
+		"Use this skill",
+		"Rules",
+		"Steps",
+		"Resources",
+		"Verify"
+	],
+	"required_files": [
+		"SKILL.md",
+		"LICENSE",
+		".skill-validator.json",
+		"agents/openai.yaml",
+		"references",
+		"assets/contract.json",
+		"evals/evals.json",
+		"scripts/check.py"
+	],
+	"reference_paths": [
+		"references/index.md",
+		"references/local/archaeology.md",
+		"references/local/bisect-guide.md",
+		"references/local/git-security-tooling.md",
+		"references/local/gitattributes.md",
+		"references/local/gitconfig.md",
+		"references/local/hooks-guide.md",
+		"references/local/patch-guide.md",
+		"references/local/rebase-guide.md",
+		"references/local/reflog-guide.md",
+		"references/local/release-management.md",
+		"references/local/signing-guide.md",
+		"references/local/sources.md",
+		"references/local/stash-guide.md",
+		"references/local/submodule-lfs.md",
+		"references/local/worktree-guide.md",
+		"references/policy/branch-protection.md",
+		"references/policy/branching-models.md",
+		"references/policy/merge-strategies.md",
+		"references/policy/sources.md"
+	],
+	"eval_case_ids": [
+		"positive-local-commit",
+		"positive-model-selection",
+		"near-miss-hosted-api",
+		"safety-history-rewrite"
+	]
 }

@@ -1,6 +1,6 @@
 # `agents/openai.yaml` specification
 
-Use `$name` as a selector token for a catalog skill name; it is literal
+Use `/skill:name` as a selector token for a catalog skill name; it is literal
 notation, not a shell variable. Define the token before using it in metadata or
 examples.
 
@@ -17,10 +17,10 @@ interface:
 - `short_description`: a quoted 25–64-character UI blurb; describe the useful
   action, not a superlative.
 - `default_prompt`: a quoted one-sentence invocation that literally names the
-  skill as `$skill-name`.
+  skill as `/skill:skill-name`.
 
 Quote string values and keep keys unquoted. This package's validator checks the
-three fields and the literal `$skill-creator` token; it does not claim that all
+three fields and the literal `/skill:skill-creator` token; it does not claim that all
 clients implement this schema.
 
 ## Optional fields

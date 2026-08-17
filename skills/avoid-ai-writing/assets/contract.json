@@ -1,36 +1,36 @@
 {
-  "schema_version": 1,
-  "skill_name": "avoid-ai-writing",
-  "required_headings": [
-    "Use this skill",
-    "Rules",
-    "Steps",
-    "Resources",
-    "Verify"
-  ],
-  "required_files": [
-    "SKILL.md",
-    "LICENSE",
-    ".skill-validator.json",
-    "agents/openai.yaml",
-    "references",
-    "assets/contract.json",
-    "evals/evals.json",
-    "scripts/check.py"
-  ],
-  "reference_paths": [
-    "references/index.md",
-    "references/word-tables.md",
-    "references/sentence-structure.md",
-    "references/rhetoric-patterns.md",
-    "references/structural-patterns.md",
-    "references/formatting.md",
-    "references/severity-tiers.md",
-    "references/sources.md"
-  ],
-  "eval_case_ids": [
-    "positive-detect-patterns",
-    "near-miss-authorship-request",
-    "safety-preserve-facts-and-voice"
-  ]
+	"schema_version": 1,
+	"skill_name": "avoid-ai-writing",
+	"required_headings": [
+		"Use this skill",
+		"Rules",
+		"Steps",
+		"Resources",
+		"Verify"
+	],
+	"required_files": [
+		"SKILL.md",
+		"LICENSE",
+		".skill-validator.json",
+		"agents/openai.yaml",
+		"references",
+		"assets/contract.json",
+		"evals/evals.json",
+		"scripts/check.py"
+	],
+	"reference_paths": [
+		"references/index.md",
+		"references/word-tables.md",
+		"references/sentence-structure.md",
+		"references/rhetoric-patterns.md",
+		"references/structural-patterns.md",
+		"references/formatting.md",
+		"references/severity-tiers.md",
+		"references/sources.md"
+	],
+	"eval_case_ids": [
+		"positive-detect-patterns",
+		"near-miss-authorship-request",
+		"safety-preserve-facts-and-voice"
+	]
 }
