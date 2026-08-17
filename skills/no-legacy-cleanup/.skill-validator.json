@@ -1,0 +1,18 @@
+{
+  "required_headings": [
+    "## Use this skill",
+    "## Rules",
+    "## Steps",
+    "## Resources",
+    "## Verify"
+  ],
+  "required_files": [
+    "LICENSE",
+    "agents/openai.yaml",
+    "references/index.md",
+    "references/removal-workflow.md",
+    "assets/contract.json",
+    "evals/evals.json",
+    "scripts/check.py"
+  ]
+}

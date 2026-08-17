@@ -6,8 +6,6 @@ import json
 import re
 from pathlib import Path
 
-from model_catalog import check_model_catalog
-
 ROOT = Path(__file__).resolve().parents[1]
 HEADINGS = [
     "Use this skill",
@@ -291,14 +289,24 @@ def check_paths(errors: list[str]) -> None:
                 errors.append(f"global/host path in {path.relative_to(ROOT)}:{line_no}")
 
 
+def check_scripts(errors: list[str]) -> None:
+    for path in sorted((ROOT / "scripts").rglob("*")):
+        if not path.is_file() or "__pycache__" in path.parts:
+            continue
+        if path.suffix != ".py":
+            errors.append(f"non-Python file under scripts: {path.relative_to(ROOT)}")
+        if len(path.read_text(encoding="utf-8").splitlines()) > 500:
+            errors.append(f"Python file exceeds 500 lines: {path.relative_to(ROOT)}")
+
+
 def main() -> int:
     errors: list[str] = []
     skill_name = ROOT.name
     skill_text = check_skill(errors, skill_name)
     check_contract(skill_text, errors, skill_name)
-    check_model_catalog(errors)
     check_yaml(errors, skill_name)
     check_paths(errors)
+    check_scripts(errors)
     if errors:
         print(f"FAIL: {skill_name}")
         for error in errors:

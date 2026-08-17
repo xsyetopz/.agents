@@ -1,66 +1,50 @@
 ---
 name: prompt-engineering
-description: Prompt design, tool routing, behavioral evaluation, and named-model guidance; excludes runtime code.
+description: Agent prompt design, intent, authority, corrections, tool routing, direct responses, behavioral evaluation, and model guidance.
 ---
 
 # Prompt Engineering
 
-Treat prompts as versioned behavior. Optimize for observable outcomes and independent evidence.
+Design prompts from observed behavior, real authority, and measurable outcomes.
 
 ## Use this skill
 
-- Write or revise system prompts, developer prompts, `AGENTS.md`, `SKILL.md`, or tool descriptions.
-- Debug instruction, authority, tool-routing, approval, or output failures.
-- Adapt instructions to a named model, provider, mode, API, or agent surface
-  when that target is explicitly in scope.
-- Build prompt ablations, behavioral evaluations, graders, or regression suites.
-- Remove duplicated instructions, irrelevant tools, examples, or stale context.
-- Do not use for runtime invariants, unrelated tool/API defects, model selection without a representative workload, or one-off answers with no reusable prompt artifact.
-- For current provider or product documentation, consult the provider's
-  first-party documentation and record the URL, retrieval date, and evidence
-  limits; do not require a provider-specific documentation skill.
-- Redirect agent-system structure or tool-boundary design to
-  `$architecture-design`.
+- Write or revise system prompts, developer prompts, `AGENTS.md`, `SKILL.md`, tool descriptions, and prompt-owned examples.
+- Diagnose agents that misread intent, invent facts or architecture, ignore corrections, misuse tools, narrate themselves, or claim unsupported blockers.
+- Design behavioral evaluations for prompt changes and compare prompt versions on the same workload.
+- Use dated first-party sources when an explicitly named model or provider is in scope.
+- Do not use for unrelated runtime defects, repository architecture, documentation-only cleanup, or model selection without a representative workload.
+- Redirect runtime and product boundaries to `/skill:software-architecture`, repository prose to `/skill:repo-docs`, and CI behavior to `/skill:git-ci-cd`.
 
 ## Rules
 
-- For named models and providers, use dated first-party sources. Mark source gaps; do not fill them with inference.
-- Preserve explicitly requested models. Never invent names, effort tiers, context limits, pricing, availability, or behavior; a named family is one conditional route, not a package default.
-- Keep authority and approval in one policy. External, destructive, costly, credential, and production effects require confirmation.
-- Separate instructions, examples, and untrusted data. Delimiters aid interpretation but do not create a security boundary.
-- Route only relevant tools and define trigger, input/output, evidence, stop/retry, and approval boundaries.
-- Validate real behavior in an isolated fixture and inspect tool/filesystem effects separately from final-answer quality.
+- A question, complaint, correction, negative finding, pasted error, or stated goal is not edit authority. Answer or clarify, then stop unless the user explicitly requested a change or execution.
+- Inspect the actual prompt owner and the challenged artifact before diagnosing it. Trace callers, consumers, reads, writes, side effects, source authority, and uncovered behavior before proposing removal or replacement.
+- Keep user requirements, observed repository facts, verified external facts, open questions, and agent proposals distinct.
+- Preserve the user's concrete correction. Remove the rejected assumption instead of renaming it or wrapping it in a new abstraction.
+- Do not invent files, directories, schemas, manifests, wrappers, compatibility paths, model identifiers, effort levels, capabilities, or source-of-truth claims.
+- Use a named skill, workflow, generator, or source through its documented native route. Report an unavailable route; do not substitute manual parsing or a familiar alternative.
+- Keep responses direct. Lead with the requested result or observed fact. Omit apologies, praise, self-analysis, repeated prompt text, and process narration unless the user asks for them.
+- Test observable behavior. Do not use phrase scans, heading checks, or documentation consistency as proof of runtime, tool, installation, or mutation behavior.
+- Do not invent custom schema files or custom generated files as outputs. Use only established repository-owned formats and canonical inputs.
 
 ## Steps
 
-1. Identify target model or surface, prompt owner, baseline, failing behavior, tools, authority, and completion evidence.
-2. Fetch official guidance when named-model or current-provider claims matter; map each claim to a source.
-3. State each instruction once. Remove one instruction group, example group, or tool at a time when testing causality; examples are optional unless a product requirement or measured gap needs one.
-4. Run static checks and paired baseline/candidate behavioral cases, including
-   no-tool, required-tool, pressure, ambiguous, authorized, and forbidden-effect
-   cases on the same representative evaluations.
-5. Run the real model or installed agent when available. Inspect program output and final assistant message independently, keep only non-regressing changes, and report source dates and limits.
+1. Identify the prompt owner, target agent or model surface, explicit request, allowed effects, baseline behavior, consumers, and completion evidence.
+2. Read the complete owning prompt and the minimum callers, tool contracts, repository instructions, and failing exchanges needed to establish the behavior.
+3. Record working evidence as user requirements, observed facts, verified external facts, open questions, and proposals. Do not promote one category into another.
+4. Rewrite the smallest owning prompt surface. State each rule once, use concrete triggers and actions, preserve exact user terms, and remove conflicting or unsupported guidance.
+5. Compare baseline and candidate on the same natural cases: answer-only, correction, missing artifact, ambiguous authority, authorized change, required tool, forbidden effect, and genuine blocker.
+6. Inspect tool and filesystem effects separately from the final response. Keep the change only when required behavior passes without a material regression.
 
 ## Resources
 
-- Start with the package [reference router](references/index.md); generic
-  source and provenance routes come before conditional provider/model routes.
-- The generic OpenAI source route is the dated snapshot
-  [official/openai-prompt-engineering.2026-08-13.md](references/official/openai-prompt-engineering.2026-08-13.md);
-  use it only when the named OpenAI surface is in scope.
-- For a named provider or model, open only the matching route and its source
-  record. Provider and model names in this package are conditional identifiers,
-  not defaults for unrelated workloads.
+- Start with [references/index.md](references/index.md) and open only the route needed for the task.
+- The router owns generic workflow, communication, evaluation, and conditional provider-source routes. Do not load them all by default.
 
 ## Verify
 
-- Done means current sources support model claims, representative cases pass,
-  forbidden effects remain absent, and final-answer quality is assessed
-  separately from tool effects.
-- Run `python3 scripts/check.py`, `python3 scripts/audit_openai_alignment.py`, and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
-- The package [alignment audit](scripts/audit_openai_alignment.py) checks the
-  dated source snapshots and conditional routing; the package [checker](scripts/check.py)
-  checks the copied-package contract.
-- Run `python3 scripts/live_codex_audit.py` only with an installed-Codex isolated fixture; retain prompts, outputs, and filesystem evidence.
-- Report commands, exit codes, changed paths, evidence, and remaining limits.
-- Mark missing binary, authentication, model availability, network, or live behavioral evidence `UNVERIFIED`.
+- Done means the owning prompt changed, representative baseline and candidate cases were compared, required effects occurred, forbidden effects did not occur, and the final response met the task without unsupported claims.
+- Run `python3 scripts/check.py` and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
+- Run the repository validator and relevant behavioral lane when available. Record the exact prompt version, fixture, model or agent surface, commands, outputs, and changed paths outside `evals/evals.json`.
+- Static package checks prove structure only. Mark unavailable model, authentication, network, native skill route, or live behavioral evidence `UNVERIFIED`.

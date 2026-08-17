@@ -1,5 +1,0 @@
-Paired-audit baseline fixture (not provider guidance):
-
-Always ask before reading or editing anything. Do not mutate. Wait for approval
-before local tests. Never call tools. Use ten examples. Be concise. Be
-empathetic. Think harder.

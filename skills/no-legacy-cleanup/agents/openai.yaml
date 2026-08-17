@@ -1,0 +1,4 @@
+interface:
+  display_name: "No Legacy Cleanup"
+  short_description: "Remove obsolete compatibility surfaces from evidence"
+  default_prompt: "Use $no-legacy-cleanup to remove confirmed obsolete aliases, shims, and compatibility paths after tracing consumers, while preserving active contracts and historical evidence."
