@@ -59,13 +59,16 @@ class OpenAIYamlTests(unittest.TestCase):
                 "  display_name: Example\n"
                 "  short_description: Build and validate an example agent skill\n"
                 "  default_prompt: >\n"
-                "    Use /skill:example to create the requested skill.\n",
+                "    Use $example to create the requested skill.\n",
                 encoding="utf-8",
             )
             errors: list[str] = []
             check_agents_yaml(root, errors)
-
-        self.assertEqual(errors, [])
+            self.assertEqual(errors, [])
+            path = root / "agents" / "openai.yaml"
+            path.write_text(path.read_text().replace("$example", "$example and /skill:wrong"))
+            check_agents_yaml(root, errors)
+            self.assertIn("must invoke exactly $example", "\n".join(errors))
 
     def test_openai_yaml_accepts_flow_interface_mapping(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

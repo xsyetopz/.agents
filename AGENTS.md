@@ -101,7 +101,7 @@ repository-owned formats and canonical inputs.
 template asset. Additional assets are allowed only when the skill uses them;
 do not add empty or fake assets. `agents/openai.yaml` must retain its validated
 `interface.display_name`, `short_description`, and `default_prompt`; the
-prompt invokes exactly `/skill:<name>`.
+prompt invokes exactly `$<name>`.
 
 `SKILL.md` has valid two-field frontmatter on line 1, a directory-matching
 `name`, a concrete selection-facing `description`, and these exact level-two

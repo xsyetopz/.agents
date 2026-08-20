@@ -186,21 +186,14 @@ def check_agents_yaml(root: Path, errors: list[str]) -> None:
     if not isinstance(default_prompt, str) or not default_prompt.strip():
         errors.append("agents/openai.yaml is missing required 'default_prompt'.")
     else:
-        canonical = f"/skill:{root.name}"
-        canonical_tokens = re.findall(r"/skill:[a-z0-9-]+", default_prompt)
-        legacy = f"${root.name}"
-        legacy_tokens = re.findall(r"\$[a-z0-9-]+", default_prompt)
-        if canonical_tokens:
-            if canonical_tokens != [canonical] or legacy_tokens:
-                errors.append(
-                    "agents/openai.yaml default_prompt must invoke exactly "
-                    f"{canonical}."
-                )
-        elif legacy not in default_prompt:
-            errors.append(f"agents/openai.yaml default_prompt must mention {legacy}.")
-        elif legacy_tokens != [legacy]:
+        expected = f"${root.name}"
+        tokens = re.findall(r"\$[a-z0-9-]+", default_prompt)
+        slash_tokens = re.findall(r"/skill:[a-z0-9-]+", default_prompt)
+        if expected not in default_prompt:
+            errors.append(f"agents/openai.yaml default_prompt must mention {expected}.")
+        elif tokens != [expected] or slash_tokens:
             errors.append(
-                f"agents/openai.yaml default_prompt must invoke exactly {legacy}."
+                f"agents/openai.yaml default_prompt must invoke exactly {expected}."
             )
 
 

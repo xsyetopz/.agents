@@ -241,9 +241,10 @@ def check_openai(errors: list[str]) -> None:
     if not match:
         return
     prompt = match.group(1).strip().strip("\"'")
-    tokens = re.findall(r"/skill:[A-Za-z0-9-]+", prompt)
-    expected = "/skill:" + ROOT.name
-    if tokens != [expected]:
+    tokens = re.findall(r"\$[A-Za-z0-9-]+", prompt)
+    slash_tokens = re.findall(r"/skill:[A-Za-z0-9-]+", prompt)
+    expected = "$" + ROOT.name
+    if tokens != [expected] or slash_tokens:
         add(
             errors, f"agents/openai.yaml: default_prompt must invoke exactly {expected}"
         )
