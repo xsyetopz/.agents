@@ -2,7 +2,7 @@
 # Codex package version pinned so an evaluation can be reproduced later.
 FROM node:22.14.0-bookworm-slim@sha256:1c18d9ab3af4585870b92e4dbc5cac5a0dc77dd13df1a5905cea89fc720eb05b
 
-ARG CODEX_VERSION=0.147.0
+ARG CODEX_VERSION=0.148.0
 
 USER root
 RUN apt-get update \
