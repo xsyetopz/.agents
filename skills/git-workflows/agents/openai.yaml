@@ -1,4 +1,4 @@
 interface:
   display_name: "Git Workflows"
-  short_description: "Operate Git and design team integration policy"
-  default_prompt: "Use $git-workflows for this local Git or team integration task; preserve unrelated work, keep recovery evidence, and verify local and hosted state separately."
+  short_description: "Operate Git and enforce fallback commit conventions"
+  default_prompt: "Use $git-workflows for this local Git or team integration task; follow existing commit guidance, or install the Conventional Commits fallback hook when guidance is absent and workflow mutation is authorized."

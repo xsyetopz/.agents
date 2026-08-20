@@ -51,19 +51,9 @@ if [ -n "$files" ]; then
 fi
 ```
 
-### commit-msg - enforce conventional commits
+### commit-msg - enforce a repository-owned convention
 
-```bash
-#!/bin/bash
-# .githooks/commit-msg
-commit_regex='^(feat|fix|docs|style|refactor|perf|test|chore|ci|build|revert)(\(.+\))?: .{1,72}$'
-
-if ! grep -qE "$commit_regex" "$1"; then
-  echo "Commit message must follow conventional commits format."
-  echo "Example: feat(auth): add login form"
-  exit 1
-fi
-```
+Use the [Conventional Commits fallback](conventional-commits.md) only when no repository contribution or commit guidance exists. Its package hook avoids inventing a fixed type list or subject-length rule.
 
 ### pre-push - run tests
 
