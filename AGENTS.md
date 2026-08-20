@@ -178,9 +178,9 @@ Use the verified Vercel Skills CLI pin `skills@1.5.22` for reproducible examples
 and validation:
 
 ```bash
-bunx --yes skills@1.5.22 add xsyetopz/my-dotagents-btw \
+bunx --yes skills@1.5.22 add xsyetopz/.agents \
   --skill skill-creator --agent codex --copy -y
-bunx --bun skills@1.5.22 add xsyetopz/my-dotagents-btw \
+bunx --bun skills@1.5.22 add xsyetopz/.agents \
   --skill skill-creator --agent codex --copy -y
 ```
 

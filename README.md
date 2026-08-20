@@ -1,4 +1,4 @@
-# my-dotagents-btw
+# .agents
 
 A personal source directory for the user’s `.agents/` folder. It contains
 reusable instruction packages, references, scripts, templates, and evaluation
@@ -7,7 +7,7 @@ files. Copy only the packages needed for a project or user account.
 ## Layout
 
 ```text
-my-dotagents-btw/
+.agents/
 ├── skills/                 # reusable instruction packages
 │   ├── apple-design-hig/
 │   ├── avoid-ai-writing/
@@ -49,16 +49,16 @@ cp -R skills/prompt-engineering .agents/skills/
 The pinned Skills CLI can copy one package from GitHub:
 
 ```bash
-bunx --yes skills@1.5.22 add xsyetopz/my-dotagents-btw \
+bunx --yes skills@1.5.22 add xsyetopz/.agents \
   --skill prompt-engineering --agent codex --copy -y
 
-bunx --bun skills@1.5.22 add xsyetopz/my-dotagents-btw \
+bunx --bun skills@1.5.22 add xsyetopz/.agents \
   --skill prompt-engineering --agent codex --copy -y
 ```
 
-GitHub source: [xsyetopz/my-dotagents-btw](https://github.com/xsyetopz/my-dotagents-btw).
-For a local checkout, replace `xsyetopz/my-dotagents-btw` with
-`/path/to/my-dotagents-btw`.
+GitHub source: [xsyetopz/.agents](https://github.com/xsyetopz/.agents).
+For a local checkout, replace `xsyetopz/.agents` with
+`/path/to/.agents`.
 
 Replace `prompt-engineering` with the package name you need.
 
