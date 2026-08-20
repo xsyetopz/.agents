@@ -36,6 +36,7 @@ canonical owner and update this file when the repository contract changes.
   ```text
   skills/apple-design-hig/
   skills/avoid-ai-writing/
+  skills/bun-1-4-migration/
   skills/git-actions/
   skills/git-ci-cd/
   skills/git-workflows/
@@ -48,8 +49,9 @@ canonical owner and update this file when the repository contract changes.
 
 - `skills/skill-creator/` is the maintained destination authoring skill. It is
   not copied from the old source `/Users/krystian/.agents/skills/skill-creator/`.
-- `skills/no-legacy-cleanup/` is maintained in this repository. It is not an
-  alias, wrapper, or compatibility path for another package.
+- `skills/no-legacy-cleanup/` and `skills/bun-1-4-migration/` are maintained in
+  this repository. They are not aliases, wrappers, or compatibility paths for
+  another package.
 - `skills/software-architecture/`, `skills/git-workflows/`, and
   `skills/repo-docs/` are maintained merged destinations. Do not overwrite them
   with one old source package: they consolidate the former architecture design
@@ -195,8 +197,9 @@ package-local tooling are present:
 
 ```bash
 for d in \
-  skills/apple-design-hig skills/avoid-ai-writing skills/git-actions \
-  skills/git-ci-cd skills/git-workflows skills/no-legacy-cleanup \
+  skills/apple-design-hig skills/avoid-ai-writing skills/bun-1-4-migration \
+  skills/git-actions skills/git-ci-cd skills/git-workflows \
+  skills/no-legacy-cleanup \
   skills/prompt-engineering skills/repo-docs skills/skill-creator \
   skills/software-architecture; do
   (cd "$d" && python3 scripts/check.py) || exit 1
@@ -213,7 +216,7 @@ bash -n scripts/skills_cli_smoke.sh
 
 Every package checker and validator must exit `0` with `PASS` and no warnings;
 the unit suite must report `OK`; the LOC and Ruff checks must pass; there must
-be exactly the ten approved root-level entrypoints listed above; and no
+be exactly the eleven approved root-level entrypoints listed above; and no
 symlink may escape its owning package. Run disposable fixture projects with
 the pinned `bunx --yes skills@1.5.22` and `bunx --bun skills@1.5.22` commands as
 documented in `README.md`: each fixture must copy exactly one selected

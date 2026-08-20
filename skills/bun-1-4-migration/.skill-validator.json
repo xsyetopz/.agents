@@ -1,0 +1,22 @@
+{
+  "required_headings": [
+    "## Use this skill",
+    "## Rules",
+    "## Steps",
+    "## Resources",
+    "## Verify"
+  ],
+  "required_files": [
+    "LICENSE",
+    "agents/openai.yaml",
+    "references/index.md",
+    "references/migration-workflow.md",
+    "references/replacement-matrix.md",
+    "references/biome-2-5.md",
+    "assets/contract.json",
+    "assets/biome.json",
+    "evals/evals.json",
+    "scripts/check.py",
+    "scripts/audit_bun14.py"
+  ]
+}

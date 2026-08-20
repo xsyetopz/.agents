@@ -11,6 +11,7 @@ my-dotagents-btw/
 ├── skills/                 # reusable instruction packages
 │   ├── apple-design-hig/
 │   ├── avoid-ai-writing/
+│   ├── bun-1-4-migration/
 │   ├── git-actions/
 │   ├── git-ci-cd/
 │   ├── git-workflows/
