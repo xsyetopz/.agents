@@ -59,7 +59,7 @@ class OpenAIYamlTests(unittest.TestCase):
                 "  display_name: Example\n"
                 "  short_description: Build and validate an example agent skill\n"
                 "  default_prompt: >\n"
-                "    Use $example to create the requested skill.\n",
+                "    Use /skill:example to create the requested skill.\n",
                 encoding="utf-8",
             )
             errors: list[str] = []
