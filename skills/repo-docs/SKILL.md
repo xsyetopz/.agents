@@ -13,7 +13,7 @@ Write and audit repository documentation and governance from current source trut
 - Create or update CONTRIBUTING, AGENTS, CLAUDE, CODEOWNERS, provider imports, pull-request templates, issue templates, and nested instruction scope.
 - Separate product documentation, human contribution policy, and coding-agent execution rules while keeping one canonical owner for each rule or claim.
 - Do not use for runtime code, branching or merge policy, CI/CD implementation, hosted settings mutation, or reusable skill authoring.
-- Redirect local Git and team integration work to `/skill:git-workflows`, CI/CD to `/skill:git-ci-cd`, hosted API calls to `/skill:git-actions`, reusable skills to `/skill:skill-creator`, and prose-style audits to `/skill:avoid-ai-writing`.
+- Redirect local Git and team integration work to `$git-workflows`, CI/CD to `$git-ci-cd`, hosted API calls to `$git-actions`, reusable skills to `$skill-creator`, and prose-style audits to `$avoid-ai-writing`.
 
 ## Rules
 

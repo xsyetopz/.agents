@@ -12,7 +12,7 @@ Use authenticated GitHub or GitLab APIs for narrowly scoped hosted-repository op
 - Read or change GitHub or GitLab repositories, releases, tags, issues, pull or merge requests, checks, workflows, artifacts, or settings through a provider API or its supported CLI.
 - Automate pagination, REST (Representational State Transfer) or GraphQL requests, rate-limit handling, version lookup, or artifact retrieval.
 - Do not use for local Git commands, CI/CD authoring or diagnosis, branching policy, or a public read-only explanation that needs no API call.
-- Redirect local Git work and branching or merge policy to `/skill:git-workflows`, and pipeline work to `/skill:git-ci-cd`.
+- Redirect local Git work and branching or merge policy to `$git-workflows`, and pipeline work to `$git-ci-cd`.
 
 ## Rules
 

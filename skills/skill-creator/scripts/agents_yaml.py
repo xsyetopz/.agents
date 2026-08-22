@@ -188,7 +188,7 @@ def check_agents_yaml(root: Path, errors: list[str]) -> None:
     else:
         expected = f"${root.name}"
         tokens = re.findall(r"\$[a-z0-9-]+", default_prompt)
-        slash_tokens = re.findall(r"/skill:[a-z0-9-]+", default_prompt)
+        slash_tokens = re.findall(r"$[a-z0-9-]+", default_prompt)
         if expected not in default_prompt:
             errors.append(f"agents/openai.yaml default_prompt must mention {expected}.")
         elif tokens != [expected] or slash_tokens:

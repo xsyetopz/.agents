@@ -242,7 +242,7 @@ def check_openai(errors: list[str]) -> None:
         return
     prompt = match.group(1).strip().strip("\"'")
     tokens = re.findall(r"\$[A-Za-z0-9-]+", prompt)
-    slash_tokens = re.findall(r"/skill:[A-Za-z0-9-]+", prompt)
+    slash_tokens = re.findall(r"$[A-Za-z0-9-]+", prompt)
     expected = "$" + ROOT.name
     if tokens != [expected] or slash_tokens:
         add(
@@ -430,7 +430,11 @@ def check_biome_template(errors: list[str]) -> None:
         add(errors, "assets/biome.json: schema must target Biome 2.5.9")
     linter = payload.get("linter")
     domains = linter.get("domains") if isinstance(linter, dict) else None
-    expected_domains = {"project": "recommended", "test": "recommended", "types": "recommended"}
+    expected_domains = {
+        "project": "recommended",
+        "test": "recommended",
+        "types": "recommended",
+    }
     if domains != expected_domains:
         add(errors, "assets/biome.json: domains must omit react and match the baseline")
 

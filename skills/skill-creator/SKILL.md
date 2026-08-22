@@ -8,7 +8,7 @@ description: Agent Skill authoring, metadata, references, evals, package checks,
 Author one bounded, portable Agent Skill. Keep the root entrypoint concise, route detail through the reference router, and leave observable evidence for structural, behavioral, and distribution claims.
 Each section has one role: Use this skill holds triggers, exclusions, and sibling redirects; Rules holds constraints; Steps is one path; Resources routes package-local references; Verify states done conditions, commands, evidence, and UNVERIFIED limits.
 
-`/skill:name` is a selector token: it names one catalog skill package, not a shell
+`$name` is a selector token: it names one catalog skill package, not a shell
 variable. Use only selectors listed in the catalog, and define the token before
 its first use in any diagram or example.
 
@@ -16,7 +16,7 @@ its first use in any diagram or example.
 
 - Create, revise, validate, package, or evaluate a skill artifact; design selector metadata, references, assets, evals, and client routing; or consolidate duplicate reference content.
 - Do not use for runtime application changes, prompt or model design, repository governance, current OpenAI product documentation, or release documentation.
-- Redirect prompt and model work to `/skill:prompt-engineering`, and repository documentation or governance to `/skill:repo-docs`.
+- Redirect prompt and model work to `$prompt-engineering`, and repository documentation or governance to `$repo-docs`.
 
 ## Rules
 

@@ -13,7 +13,7 @@ Operate a local Git repository and design team integration policy with explicit 
 - Establish commit-message policy and a tracked `commit-msg` hook when the repository has no contribution or commit guidance.
 - Choose or audit branching, release, hotfix, merge, branch-protection, review, queue, or stale-branch policy.
 - Do not use for hosted API calls, CI/CD workflow authoring, or remote mutation without exact authorization.
-- Redirect hosted GitHub or GitLab API work to `/skill:git-actions`, pipeline work to `/skill:git-ci-cd`, and contributor documentation or CODEOWNERS to `/skill:repo-docs`.
+- Redirect hosted GitHub or GitLab API work to `$git-actions`, pipeline work to `$git-ci-cd`, and contributor documentation or CODEOWNERS to `$repo-docs`.
 
 ## Rules
 

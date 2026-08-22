@@ -164,11 +164,11 @@ activation or security pass.
   structure, workflow, validation, and safety; it must not require GPT-5.6 or
   another named model for ordinary skill creation.
 - Prompt design and audits, tool-routing policy, behavioral evals, and
-  model-family guidance belong to `/skill:prompt-engineering`. GPT-5.6 is one
+  model-family guidance belong to `$prompt-engineering`. GPT-5.6 is one
   optional model family among many; route named-model work there rather than
   duplicating provider guidance in `skill-creator`.
 - Official OpenAI prompting pages and Markdown snapshots are owned by
-  `prompt-engineering`. Refresh them through `/skill:openai-docs` when a named model
+  `prompt-engineering`. Refresh them through `$openai-docs` when a named model
   is intentionally updated; do not create hand-authored model guides in
   `skill-creator`.
 

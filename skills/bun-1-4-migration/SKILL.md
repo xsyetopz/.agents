@@ -13,7 +13,7 @@ Consolidate a repository on Bun 1.4+ without trading correctness for tool reduct
 - Evaluate replacing Node.js, Deno, Jest, Vitest, Vite, webpack, esbuild, ESLint, Prettier, script runners, or redundant runtime libraries.
 - Initialize Biome 2.5.9 in a new Bun project that has no Biome configuration, or bump an existing Biome configuration without overwriting it.
 - Do not use for other new-project setup, a generic dependency upgrade, or a replacement that lacks repository-specific compatibility evidence.
-- Redirect general CI design to `/skill:git-ci-cd`, architecture changes to `/skill:software-architecture`, and obsolete compatibility cleanup after migration to `/skill:no-legacy-cleanup`.
+- Redirect general CI design to `$git-ci-cd`, architecture changes to `$software-architecture`, and obsolete compatibility cleanup after migration to `$no-legacy-cleanup`.
 
 ## Rules
 

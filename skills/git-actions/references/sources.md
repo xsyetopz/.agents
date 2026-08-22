@@ -26,4 +26,4 @@ GitHub, GitLab, and their CLIs can change defaults, permissions, pagination,
 rate limits, and field names. If authentication, provider access, or response
 validation is unavailable, report the result as `UNVERIFIED` rather than
 inferring remote state. Bitbucket and other hosted providers are outside this
-skill; route pipeline work to `/skill:git-ci-cd`.
+skill; route pipeline work to `$git-ci-cd`.

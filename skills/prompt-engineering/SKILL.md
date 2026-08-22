@@ -14,7 +14,7 @@ Design prompts from observed behavior, real authority, and measurable outcomes.
 - Design behavioral evaluations for prompt changes and compare prompt versions on the same workload.
 - Use dated first-party sources when an explicitly named model or provider is in scope.
 - Do not use for unrelated runtime defects, repository architecture, documentation-only cleanup, or model selection without a representative workload.
-- Redirect runtime and product boundaries to `/skill:software-architecture`, repository prose to `/skill:repo-docs`, and CI behavior to `/skill:git-ci-cd`.
+- Redirect runtime and product boundaries to `$software-architecture`, repository prose to `$repo-docs`, and CI behavior to `$git-ci-cd`.
 
 ## Rules
 

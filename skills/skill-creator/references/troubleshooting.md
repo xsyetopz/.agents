@@ -37,7 +37,7 @@
 ## Metadata and CLI failures
 
 - **`openai.yaml` failure:** check quoted values, 25–64-character
-  `short_description`, and literal `/skill:skill-creator` in `default_prompt`; this
+  `short_description`, and literal `$skill-creator` in `default_prompt`; this
   file is package/client-specific.
 - **CLI finds too many skills:** pass the source and `--skill skill-creator`
   explicitly. Never use repository-root `add --all` for this package.

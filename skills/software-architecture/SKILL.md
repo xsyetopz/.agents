@@ -13,7 +13,7 @@ Design, audit, and enforce software boundaries from repository evidence while pr
 - Enforce a selected topology, dependency direction, cohesive ownership boundary, generated-source boundary, or structural migration.
 - Use it for architecture drift, cycles, fragmented sibling files, helper or manager colonies, public-surface changes, and architecture-check failures.
 - Do not use for isolated formatting, comments, local naming, or other behavior-preserving edits with no structural effect.
-- Redirect repository policy and documentation to `/skill:repo-docs`, pipeline gates to `/skill:git-ci-cd`, and prompt/tool-routing design to `/skill:prompt-engineering`.
+- Redirect repository policy and documentation to `$repo-docs`, pipeline gates to `$git-ci-cd`, and prompt/tool-routing design to `$prompt-engineering`.
 
 ## Rules
 

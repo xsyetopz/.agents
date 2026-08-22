@@ -1,6 +1,6 @@
 # Graphs and behavioral examples
 
-In this reference, a selector token is literal `/skill:name` notation for a catalog
+In this reference, a selector token is literal `$name` notation for a catalog
 skill, not a shell variable. A GitHub-safe Mermaid edge label uses
 `-->|label|` inside a fenced `mermaid` block; define selector tokens before
 their first use. Record external claims with the package

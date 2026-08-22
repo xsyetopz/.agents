@@ -7,7 +7,7 @@ a required custom schema.
 
 ## Definitions
 
-- **Selector token**: the literal `/skill:name` notation for one catalog skill. It is
+- **Selector token**: the literal `$name` notation for one catalog skill. It is
   not shell interpolation; use a catalog name and define it before its first
   use in a diagram or example.
 - **Provenance**: the record of where a claim came from, what the claim covers,

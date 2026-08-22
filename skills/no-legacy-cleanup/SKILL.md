@@ -12,7 +12,7 @@ Remove obsolete compatibility surfaces without deleting active contracts or hist
 - Remove an obsolete alias, forwarding wrapper, compatibility shim, deprecated command, shadow package, duplicate entrypoint, or stale migration path.
 - Finish a rename or consolidation after the canonical replacement is live and remaining consumers must move atomically.
 - Do not use to design an active migration, break a supported public contract, erase release history, or delete a fixture that still verifies required behavior.
-- Redirect active boundary or migration design to `/skill:software-architecture`, documentation history to `/skill:repo-docs`, and skill package structure to `/skill:skill-creator`.
+- Redirect active boundary or migration design to `$software-architecture`, documentation history to `$repo-docs`, and skill package structure to `$skill-creator`.
 
 ## Rules
 

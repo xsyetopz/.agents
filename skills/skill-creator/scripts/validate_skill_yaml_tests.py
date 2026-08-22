@@ -66,7 +66,7 @@ class OpenAIYamlTests(unittest.TestCase):
             check_agents_yaml(root, errors)
             self.assertEqual(errors, [])
             path = root / "agents" / "openai.yaml"
-            path.write_text(path.read_text().replace("$example", "$example and /skill:wrong"))
+            path.write_text(path.read_text().replace("$example", "$example and $wrong"))
             check_agents_yaml(root, errors)
             self.assertIn("must invoke exactly $example", "\n".join(errors))
 

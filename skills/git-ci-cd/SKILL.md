@@ -14,7 +14,7 @@ Author, review, migrate, and diagnose continuous integration and continuous deli
 - Review permissions, OpenID Connect (OIDC), forks, reusable workflows, actions, images, caches, artifacts, runner isolation, and secret flow.
 - Migrate a pipeline across GitHub, GitLab, Bitbucket, or another supported platform when the target syntax and trust model are explicit.
 - Do not use for local Git commands, hosted REST or GraphQL calls, branching or merge policy, or application failures that reproduce outside CI.
-- Redirect local Git work and branching or merge policy to `/skill:git-workflows`, and hosted API calls to `/skill:git-actions`.
+- Redirect local Git work and branching or merge policy to `$git-workflows`, and hosted API calls to `$git-actions`.
 
 ## Rules
 
