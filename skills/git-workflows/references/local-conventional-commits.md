@@ -18,7 +18,7 @@ When no guidance exists and the task authorizes repository commit-workflow chang
 
 1. Adopt Conventional Commits for new commit subjects: `type(scope): description`. The scope is optional; `!` may mark a breaking change.
 2. If the repository already owns a hook manager or tracked hook path, add an equivalent `commit-msg` hook through that mechanism. Do not create a parallel hook system.
-3. Otherwise copy the package [commit-msg hook](../../assets/commit-msg) to `.githooks/commit-msg`.
+3. Otherwise copy the package [commit-msg hook](../assets/commit-msg) to `.githooks/commit-msg`.
 4. Run:
 
    ```bash

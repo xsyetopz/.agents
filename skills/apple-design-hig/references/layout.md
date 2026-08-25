@@ -5,6 +5,19 @@ retrieved: 2026-07-25
 ---
 # Layout
 
+## Contents
+
+- [Best practices](#best-practices)
+- [Visual hierarchy](#visual-hierarchy)
+- [Adaptability](#adaptability)
+- [Guides and safe areas](#guides-and-safe-areas)
+- [Platform considerations](#platform-considerations)
+- [Specifications](#specifications)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 A consistent layout that adapts to various contexts makes your experience more approachable and helps people enjoy their favorite apps and games on all their devices.
 
 *Image description: A sketch of a small rectangle in the upper-left quadrant of a larger rectangle, suggesting the position of a user interface element within a window. The image is overlaid with rectangular and circular grid lines and is tinted yellow to subtly reflect the yellow in the original six-color Apple logo.*
@@ -57,7 +70,7 @@ Here are some of the most common device and system variations you need to handle
 
 **Design a layout that adapts gracefully to context changes while remaining recognizably consistent.** People expect your experience to work well and remain familiar when they rotate their device, resize a window, add another display, or switch to a different device. You can help ensure an adaptable interface by respecting system-defined safe areas, margins, and guides (where available) and specifying layout modifiers to fine-tune the placement of views in your interface.
 
-**Be prepared for text-size changes.** People appreciate apps and games that respond when they choose a different text size. When you support [Dynamic Type](https://developer.apple.com/design/human-interface-guidelines/typography#Supporting-Dynamic-Type) - a feature that lets people choose the size of visible text in iOS, iPadOS, tvOS, visionOS, and watchOS - your app or game can respond appropriately when people adjust text size. To support Dynamic Type in your Unity-based game, use Apple’s accessibility plug-in (for developer guidance, see [Apple – Accessibility](https://github.com/apple/unityplugins/blob/main/plug-ins/Apple.Accessibility/Apple.Accessibility_Unity/Assets/Apple.Accessibility/Documentation%7E/Apple.Accessibility.md)). For guidance on displaying text in your app, see [Typography](https://developer.apple.com/design/human-interface-guidelines/typography).
+**Be prepared for text-size changes.** People appreciate apps and games that respond when they choose a different text size. When you support [Dynamic Type](https://developer.apple.com/design/human-interface-guidelines/typography#Supporting-Dynamic-Type) - a feature that lets people choose the size of visible text in iOS, iPadOS, tvOS, visionOS, and watchOS - your app or game can respond appropriately when people adjust text size. To support Dynamic Type in your Unity-based game, use Apple’s accessibility plug-in (for developer guidance, see Apple – Accessibility (https://github.com/apple/unityplugins/blob/main/plug-ins/Apple.Accessibility/Apple.Accessibility_Unity/Assets/Apple.Accessibility/Documentation%7E/Apple.Accessibility.md)). For guidance on displaying text in your app, see [Typography](https://developer.apple.com/design/human-interface-guidelines/typography).
 
 **Preview your app on multiple devices, using different orientations, localizations, and text sizes.** You can streamline the testing process by first testing versions of your experience that use the largest and the smallest layouts. Although it’s generally best to preview features like wide-gamut color on actual devices, you can test on a simulated device in Device Hub to check for clipping and other layout issues. For example, if your iOS app or game supports landscape mode, you can use the simulator to make sure your layouts look great whether the device rotates left or right.
 

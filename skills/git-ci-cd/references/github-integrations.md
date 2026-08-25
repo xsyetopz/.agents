@@ -7,7 +7,7 @@ bots. These live in the `.github/` directory and complement CI/CD pipelines.
 
 ## Dependabot
 
-See the [Git CI/CD source map](sources.md) for the current GitHub Dependabot documentation and freshness status.
+See the Git CI/CD source map (see `sources.md`) for the current GitHub Dependabot documentation and freshness status.
 
 ### Minimum configuration (`.github/dependabot.yml`)
 
@@ -102,7 +102,7 @@ actions, gomod, terraform, swift, pub, devcontainers, dotnet-sdk.
 
 ## CodeQL
 
-See the [Git CI/CD source map](sources.md) for the current GitHub code-scanning and CodeQL documentation and freshness status.
+See the Git CI/CD source map (see `sources.md`) for the current GitHub code-scanning and CodeQL documentation and freshness status.
 
 ### Default setup (recommended)
 
@@ -251,6 +251,6 @@ ci:
 
 ## Sources
 
-- [Git CI/CD source map](sources.md) — checked provider URLs and freshness limits.
+- Git CI/CD source map (see `sources.md`) — checked provider URLs and freshness limits.
 - [GitHub supply-chain security](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain) and [GitHub code scanning](https://docs.github.com/en/code-security/concepts/code-scanning/code-scanning) — current provider controls.
 - [Renovate documentation](https://docs.renovatebot.com/) — third-party tool behavior; verify its current schema separately.

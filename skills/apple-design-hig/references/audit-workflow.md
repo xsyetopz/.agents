@@ -4,7 +4,7 @@ Scope: local-policy. This authored workflow explains how to apply the bundled
 Apple HIG snapshot. Bundled topic files remain source material and may need a
 live-page check when guidance is version-sensitive.
 
-Source status: use the [HIG source index](hig-source-index.md) to locate the
+Source status: use the HIG source index (see `hig-source-index.md`) to locate the
 canonical Apple pages, then record the page consulted and its retrieval date.
 
 ## Full workflow
@@ -17,9 +17,10 @@ audit, redesign, or implementation.
 
 ### 2. Find the page
 
-Read `references/index.md`, search the reference directory by title or slug, and
-follow links from the matching page. Use `references/whats-new.md` to discover
-recent topics; never assume a fixed topic list is exhaustive.
+Use the direct reference routes in `../SKILL.md`, search the reference directory by
+title or slug, and open the smallest matching page. Use
+`references/whats-new.md` to discover recent topics; never assume a fixed topic
+list is exhaustive.
 
 ### 3. Check current evidence
 
@@ -53,13 +54,11 @@ and what still requires an Apple-device or SDK check.
 Run commands from the skill directory:
 
 ```sh
-python3 scripts/check.py
-python3 -m json.tool evals/evals.json >/dev/null
+python3 scripts/hig_catalog.py --help
 python3 scripts/hig_catalog.py --all --deep
 python3 scripts/hig_catalog.py --topic foundations
 ```
 
-The package checker validates the copied skill structure and mapped references.
 The catalog helper reads Apple's live DocC JSON and prints the current catalog
 or one topic summary to standard output. These commands do not modify the
 bundled references. Compare the printed source URLs and retrieval date with the
@@ -83,4 +82,4 @@ log, OS release, API, or review requirement may have changed.
 
 - [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/)
 - [Apple Design — What’s New](https://developer.apple.com/design/whats-new/)
-- [Bundled HIG source index](hig-source-index.md)
+- Bundled HIG source index (see `hig-source-index.md`)

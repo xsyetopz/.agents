@@ -228,5 +228,5 @@ Before every release tag:
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git, SemVer, and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — Git, SemVer, and hosted-boundary references.
 - [Semantic Versioning 2.0.0](https://semver.org/) and [Git tag documentation](https://git-scm.com/docs/git-tag) — version and tag semantics.

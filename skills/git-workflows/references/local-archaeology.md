@@ -168,5 +168,5 @@ change that caused a regression.
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git reference and hosted-boundary sources.
+- Git Workflows source map (see `local-sources.md`) — Git reference and hosted-boundary sources.
 - [Git reference](https://git-scm.com/docs) — current command semantics.

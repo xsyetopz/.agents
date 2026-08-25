@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Fetch the live Apple HIG catalog or one topic as concise Markdown/JSON.
 
 The HIG UI is JavaScript-rendered. Apple publishes the same documentation data

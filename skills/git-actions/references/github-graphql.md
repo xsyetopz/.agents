@@ -138,5 +138,5 @@ releases(first: 10, after: $cursor, orderBy: ...) {
 
 ## Sources
 
-- [Git Actions source map](sources.md) — checked provider URLs and freshness limits.
+- Git Actions source map (see `sources.md`) — checked provider URLs and freshness limits.
 - [GitHub GraphQL API documentation](https://docs.github.com/en/graphql) — schema, query, mutation, and pagination reference.

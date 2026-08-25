@@ -5,6 +5,19 @@ retrieved: 2026-07-25
 ---
 # Widgets
 
+## Contents
+
+- [Anatomy](#anatomy)
+- [Best practices](#best-practices)
+- [Rendering modes](#rendering-modes)
+- [Previews and placeholders](#previews-and-placeholders)
+- [Platform considerations](#platform-considerations)
+- [Specifications](#specifications)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 A widget provides quick access to essential information and focused interactions from your app or game in additional contexts.
 
 *Image description: A stylized representation of a set of different-sized widgets on an iPad Home Screen. The image is tinted red to subtly reflect the red in the original six-color Apple logo.*

@@ -125,5 +125,5 @@ pipelines:
 
 ## Sources
 
-- [Git CI/CD source map](sources.md) — provider URLs and checked freshness.
+- Git CI/CD source map (see `sources.md`) — provider URLs and checked freshness.
 - [Get started with Bitbucket Pipelines](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/) — current syntax and execution model.

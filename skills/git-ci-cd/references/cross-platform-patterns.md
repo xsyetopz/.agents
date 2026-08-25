@@ -79,5 +79,5 @@ Structure this as sequential stages with `needs`/`dependencies`.
 
 ## Sources
 
-- [Git CI/CD source map](sources.md) — provider URLs and freshness limits.
+- Git CI/CD source map (see `sources.md`) — provider URLs and freshness limits.
 - [GitHub Actions documentation](https://docs.github.com/en/actions), [GitLab CI/CD](https://docs.gitlab.com/ci/), and [Bitbucket Pipelines](https://support.atlassian.com/bitbucket-cloud/docs/get-started-with-bitbucket-pipelines/) — provider-specific syntax and limits.

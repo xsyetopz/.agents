@@ -132,5 +132,5 @@ curl -sSL https://github.com/owner/repo/pull/42.diff | git apply
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git command and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — Git command and hosted-boundary references.
 - [Git format-patch documentation](https://git-scm.com/docs/git-format-patch) and [Git apply documentation](https://git-scm.com/docs/git-apply) — current patch semantics.

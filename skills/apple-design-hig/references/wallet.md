@@ -5,6 +5,21 @@ retrieved: 2026-07-25
 ---
 # Wallet
 
+## Contents
+
+- [Passes](#passes)
+- [Pass anatomy](#pass-anatomy)
+- [Designing passes](#designing-passes)
+- [Pass styles](#pass-styles)
+- [Pass images](#pass-images)
+- [Order tracking](#order-tracking)
+- [Identity verification](#identity-verification)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 Wallet helps people securely store their credit and debit cards, driver’s license or state ID, transit cards, event tickets, keys, and more on iPhone and Apple Watch.
 
 *Image description: A sketch of the Wallet icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*

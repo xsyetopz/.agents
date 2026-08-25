@@ -167,5 +167,5 @@ done
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git reference and hosted-boundary sources.
+- Git Workflows source map (see `local-sources.md`) — Git reference and hosted-boundary sources.
 - [Git configuration documentation](https://git-scm.com/docs/git-config) — current precedence and key semantics.

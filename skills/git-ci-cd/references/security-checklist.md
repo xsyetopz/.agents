@@ -71,8 +71,8 @@ messages, issue bodies)
 
 ## Attack vectors
 
-Specific attack patterns that CI/CD guardrails must block. Use the [Git CI/CD
-source map](sources.md) for current provider security references; third-party
+Specific attack patterns that CI/CD guardrails must block. Use the Git CI/CD
+source map (see `sources.md`) for current provider security references; third-party
 posts are not enforcement evidence.
 
 ### Script injection via PR title/body
@@ -135,6 +135,6 @@ a label or condition matches; default: reject.
 
 ## Sources
 
-- [Git CI/CD source map](sources.md) — provider URLs and freshness limits.
+- Git CI/CD source map (see `sources.md`) — provider URLs and freshness limits.
 - [GitHub secure use reference](https://docs.github.com/en/actions/reference/security/secure-use) and [GitLab CI/CD security guidance](https://docs.gitlab.com/security/hardening_cicd_recommendations/) — provider controls.
 - [Creating Mermaid diagrams on GitHub (requested URL)](https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams) — rendering requirements; exact URL was not retrievable in this pass, so treat rendering evidence as `UNVERIFIED`.

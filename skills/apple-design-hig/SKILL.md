@@ -1,46 +1,70 @@
 ---
 name: apple-design-hig
-description: Apple HIG, native platform UX, accessibility, and cross-device interface decisions; excludes SDK and generic web UX.
+description: Use this skill when making Apple-platform HIG, native UX, accessibility, or cross-device interface decisions; use SDK documentation for implementation APIs and a generic UX workflow for non-Apple web design.
 ---
 
 # Apple Design HIG
 
-Use current Apple Human Interface Guidelines to make an Apple-platform interface decision and record its source.
+Make Apple-platform interface decisions from current Human Interface Guidelines, explicit context, and accessibility evidence.
 
-## Use this skill
+## Workflow
 
-- Design or review an iOS, iPadOS, macOS, watchOS, tvOS, or visionOS interface.
-- Choose native navigation, presentation, input, feedback, typography, color, motion, or system experiences.
-- Check adaptation across devices, input modes, appearances, Dynamic Type, VoiceOver, and other accessibility needs.
-- Do not activate for Swift, SwiftUI, UIKit, or other SDK/API correctness work; use the implementation-specific documentation or skill for the target project.
-- Do not activate for generic web or cross-platform UX, App Store policy, entitlements, provisioning, privacy manifests, or legal advice.
+1. Name the interface decision, platform, device class, input modes, appearances, accessibility needs, constraints, and affected users.
+2. Inspect the existing interface and separate product constraints from assumed platform rules.
+3. Load only the matching package references from the direct routes below; use `hig-source-index.md` for source coverage and `audit-workflow.md` for a full review.
+   - [Accessibility](references/accessibility.md) · [Action button](references/action-button.md) · [Action sheets](references/action-sheets.md) · [Activity rings](references/activity-rings.md)
+   - [Activity views](references/activity-views.md) · [AirPlay](references/airplay.md) · [Alerts](references/alerts.md) · [Always On](references/always-on.md)
+   - [App Clips](references/app-clips.md) · [App icons](references/app-icons.md) · [App Shortcuts](references/app-shortcuts.md) · [Apple Pay](references/apple-pay.md)
+   - [Apple Pencil and Scribble](references/apple-pencil-and-scribble.md) · [Apple HIG Workflow](references/audit-workflow.md) · [Augmented reality](references/augmented-reality.md) · [Boxes](references/boxes.md)
+   - [Branding](references/branding.md) · [Buttons](references/buttons.md) · [Camera Control](references/camera-control.md) · [CareKit](references/carekit.md)
+   - [CarPlay](references/carplay.md) · [Charting data](references/charting-data.md) · [Charts](references/charts.md) · [Collaboration and sharing](references/collaboration-and-sharing.md)
+   - [Collections](references/collections.md) · [Color wells](references/color-wells.md) · [Color](references/color.md) · [Column views](references/column-views.md)
+   - [Combo boxes](references/combo-boxes.md) · [Complications](references/complications.md) · [Components](references/components.md) · [Content](references/content.md)
+   - [Context menus](references/context-menus.md) · [Controls](references/controls.md) · [Dark Mode](references/dark-mode.md) · [Design principles](references/design-principles.md)
+   - [Designing for games](references/designing-for-games.md) · [Designing for iOS](references/designing-for-ios.md) · [Designing for iPadOS](references/designing-for-ipados.md) · [Designing for macOS](references/designing-for-macos.md)
+   - [Designing for tvOS](references/designing-for-tvos.md) · [Designing for visionOS](references/designing-for-visionos.md) · [Designing for watchOS](references/designing-for-watchos.md) · [Digit entry views](references/digit-entry-views.md)
+   - [Digital Crown](references/digital-crown.md) · [Disclosure controls](references/disclosure-controls.md) · [Dock menus](references/dock-menus.md) · [Drag and drop](references/drag-and-drop.md)
+   - [Edit menus](references/edit-menus.md) · [Entering data](references/entering-data.md) · [Eyes](references/eyes.md) · [Feedback](references/feedback.md)
+   - [File management](references/file-management.md) · [Focus and selection](references/focus-and-selection.md) · [Foundations](references/foundations.md) · [Game Center](references/game-center.md)
+   - [Game controls](references/game-controls.md) · [Gauges](references/gauges.md) · [Generative AI](references/generative-ai.md) · [Gestures](references/gestures.md)
+   - [Getting started](references/getting-started.md) · [Going full screen](references/going-full-screen.md) · [Gyroscope and accelerometer](references/gyro-and-accelerometer.md) · [HealthKit](references/healthkit.md)
+   - [Human Interface Guidelines](references/hig-source-index.md) · [Home Screen quick actions](references/home-screen-quick-actions.md) · [HomeKit](references/homekit.md) · [iCloud](references/icloud.md)
+   - [Icons](references/icons.md) · [ID Verifier](references/id-verifier.md) · [Image views](references/image-views.md) · [Image wells](references/image-wells.md)
+   - [Images](references/images.md) · [iMessage apps and stickers](references/imessage-apps-and-stickers.md) · [Immersive experiences](references/immersive-experiences.md) · [In-app purchase](references/in-app-purchase.md)
+   - [Inclusion](references/inclusion.md) · [Inputs](references/inputs.md) · [Keyboards](references/keyboards.md) · [Labels](references/labels.md)
+   - [Launching](references/launching.md) · [Layout and organization](references/layout-and-organization.md) · [Layout](references/layout.md) · [Lists and tables](references/lists-and-tables.md)
+   - [Live Activities](references/live-activities.md) · [Live Photos](references/live-photos.md) · [Live-viewing apps](references/live-viewing-apps.md) · [Loading](references/loading.md)
+   - [Lockups](references/lockups.md) · [Mac Catalyst](references/mac-catalyst.md) · [Machine learning](references/machine-learning.md) · [Managing accounts](references/managing-accounts.md)
+   - [Managing notifications](references/managing-notifications.md) · [Maps](references/maps.md) · [Materials](references/materials.md) · [Menus and actions](references/menus-and-actions.md)
+   - [Menus](references/menus.md) · [Modality](references/modality.md) · [Motion](references/motion.md) · [Multitasking](references/multitasking.md)
+   - [Navigation and search](references/navigation-and-search.md) · [Nearby interactions](references/nearby-interactions.md) · [NFC](references/nfc.md) · [Notifications](references/notifications.md)
+   - [Offering help](references/offering-help.md) · [Onboarding](references/onboarding.md) · [Ornaments](references/ornaments.md) · [Outline views](references/outline-views.md)
+   - [Page controls](references/page-controls.md) · [Panels](references/panels.md) · [Path controls](references/path-controls.md) · [Patterns](references/pattern-catalog.md)
+   - [Photo editing](references/photo-editing.md) · [Pickers](references/pickers.md) · [Playing audio](references/playing-audio.md) · [Playing haptics](references/playing-haptics.md)
+   - [Playing video](references/playing-video.md) · [Pointing devices](references/pointing-devices.md) · [Pop-up buttons](references/pop-up-buttons.md) · [Popovers](references/popovers.md)
+   - [Presentation](references/presentation.md) · [Printing](references/printing.md) · [Privacy](references/privacy.md) · [Progress indicators](references/progress-indicators.md)
+   - [Pull-down buttons](references/pull-down-buttons.md) · [Rating indicators](references/rating-indicators.md) · [Ratings and reviews](references/ratings-and-reviews.md) · [Remotes](references/remotes.md)
+   - [ResearchKit](references/researchkit.md) · [Right to left](references/right-to-left.md) · [Scroll views](references/scroll-views.md) · [Search fields](references/search-fields.md)
+   - [Searching](references/searching.md) · [Segmented controls](references/segmented-controls.md) · [Selection and input](references/selection-and-input.md) · [Settings](references/settings.md)
+   - [SF Symbols](references/sf-symbols.md) · [SharePlay](references/shareplay.md) · [ShazamKit](references/shazamkit.md) · [Sheets](references/sheets.md)
+   - [Sidebars](references/sidebars.md) · [Sign in with Apple](references/sign-in-with-apple.md) · [Siri](references/siri.md) · [Sliders](references/sliders.md)
+   - [Snippets](references/snippets.md) · [Spatial layout](references/spatial-layout.md) · [Split views](references/split-views.md) · [Status bars](references/status-bars.md)
+   - [Status](references/status.md) · [Steppers](references/steppers.md) · [System experiences](references/system-experiences.md) · [Tab bars](references/tab-bars.md)
+   - [Tab views](references/tab-views.md) · [Tap to Pay on iPhone](references/tap-to-pay-on-iphone.md) · [Technologies](references/technologies.md) · [Text fields](references/text-fields.md)
+   - [Text views](references/text-views.md) · [The menu bar](references/the-menu-bar.md) · [Toggles](references/toggles.md) · [Token fields](references/token-fields.md)
+   - [Toolbars](references/toolbars.md) · [Top Shelf](references/top-shelf.md) · [Typography](references/typography.md) · [Undo and redo](references/undo-and-redo.md)
+   - [Virtual keyboards](references/virtual-keyboards.md) · [VoiceOver](references/voiceover.md) · [Wallet](references/wallet.md) · [Watch faces](references/watch-faces.md)
+   - [Web views](references/web-views.md) · [What’s New in Apple Design](references/whats-new.md) · [Widgets](references/widgets.md) · [Windows](references/windows.md)
+   - [Workouts](references/workouts.md) · [Writing](references/writing.md)
+4. Verify material guidance against the live Apple HIG and cite the exact pages used.
+5. Recommend the smallest native pattern, state rejected alternatives, and describe accessibility and implementation implications.
+6. When live discovery is needed, run `python3 scripts/hig_catalog.py --help` before the relevant catalog query; run the target project's interface and accessibility checks after edits.
+7. Return the decision, platform differences, evidence, commands, changed paths, and any live HIG, device, SDK, hosted, or behavioral evidence that remains `UNVERIFIED`.
 
-## Rules
+## Gotchas
 
-- Treat the live Apple Human Interface Guidelines as authority; bundled references are an offline index.
-- Resolve platform, device class, input method, appearance, and accessibility context before recommending a pattern.
-- Prefer system components. Justify deviations with a concrete product constraint.
-- Separate HIG recommendations, implementation requirements, and inferred design judgment. Do not invent Apple rules or API guarantees.
-- Do not invent custom schema files or custom generated files as outputs. Use only established repository-owned formats and canonical inputs.
-
-## Steps
-
-1. State the interface decision, platform context, constraints, and affected users.
-2. Inspect the existing interface when one exists.
-3. Use the reference router to select platform, foundation, pattern, component, and accessibility material.
-4. Verify material guidance against the live HIG and cite exact pages.
-5. Recommend a pattern, rejected alternatives, accessibility effects, and implementation implications.
-6. If files change, verify relevant sizes, input modes, appearances, and accessibility settings.
-
-## Resources
-
-- Start with the package [reference router](references/index.md).
-- The router links the local HIG snapshot and the authored audit workflow; use those routes before searching individual topics.
-
-## Verify
-
-- Done means the platform context is named, current HIG pages support material recommendations, and accessibility effects are stated.
-- Run `python3 scripts/check.py` and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
-- Confirm mapped references resolve. Static checks do not prove live-source freshness or behavioral quality.
-- Report commands, exit codes, changed paths, evidence, and remaining limits.
-- Mark live HIG, hosted, or behavioral evidence `UNVERIFIED` when it was not available or not run.
+- Bundled references are an offline snapshot; the live Apple HIG owns version-sensitive guidance.
+- Prefer system components unless a concrete product constraint justifies a deviation.
+- Keep HIG recommendations, SDK requirements, and inferred design judgment distinct.
+- Route Swift, SwiftUI, UIKit, and other API correctness to implementation documentation; route generic web UX, App Store policy, provisioning, privacy manifests, and legal questions elsewhere.
+- Use established repository formats and canonical inputs rather than inventing custom schema or generated evidence files.

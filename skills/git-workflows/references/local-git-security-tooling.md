@@ -5,7 +5,7 @@ Scope: local secret scanning and repository-size tooling. Static application sec
 Production tools for Git safety. Do not invent a pre-commit hook or security
 check when a maintained tool already exists. Tool choice and command examples
 are local guidance; verify each project's current release and permissions in
-the [Git Workflows source map](sources.md).
+the Git Workflows source map (see `local-sources.md`).
 
 ## Secret scanning (pre-commit)
 
@@ -102,5 +102,5 @@ git config --global safe.directory /path/to/repo    # CVE-2022-24765 mitigation
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — local Git and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — local Git and hosted-boundary references.
 - Tool documentation links in this guide are third-party or project-maintained; verify release, network, and credential behavior before running them.

@@ -88,5 +88,5 @@ git worktree list | awk 'NR>1 {print $1}' | xargs git worktree remove
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git worktree and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — Git worktree and hosted-boundary references.
 - [Git worktree documentation](https://git-scm.com/docs/git-worktree) — current lifecycle semantics.

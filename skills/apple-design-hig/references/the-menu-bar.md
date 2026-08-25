@@ -5,6 +5,25 @@ retrieved: 2026-07-25
 ---
 # The menu bar
 
+## Contents
+
+- [Anatomy](#anatomy)
+- [Best practices](#best-practices)
+- [App menu](#app-menu)
+- [File menu](#file-menu)
+- [Edit menu](#edit-menu)
+- [Format menu](#format-menu)
+- [View menu](#view-menu)
+- [App-specific menus](#app-specific-menus)
+- [Window menu](#window-menu)
+- [Help menu](#help-menu)
+- [Dynamic menu items](#dynamic-menu-items)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 On a Mac or an iPad, the menu bar at the top of the screen displays the top-level menus in your app or game.
 
 *Image description: A stylized representation of the macOS menu bar displaying a selected menu. The image is tinted red to subtly reflect the red in the original six-color Apple logo.*

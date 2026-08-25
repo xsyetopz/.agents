@@ -5,6 +5,22 @@ retrieved: 2026-07-25
 ---
 # Apple Pay
 
+## Contents
+
+- [Offering Apple Pay](#offering-apple-pay)
+- [Streamlining checkout](#streamlining-checkout)
+- [Displaying a website icon](#displaying-a-website-icon)
+- [Handling problems](#handling-problems)
+- [Supporting subscriptions](#supporting-subscriptions)
+- [Supporting donations](#supporting-donations)
+- [Using Apple Pay buttons](#using-apple-pay-buttons)
+- [Referring to Apple Pay](#referring-to-apple-pay)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 Apple Pay is a secure, easy way to make payments for physical goods and services, donations, and subscriptions in apps and in any browser.
 
 *Image description: A sketch of a dollar sign, suggesting Apple Pay. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*

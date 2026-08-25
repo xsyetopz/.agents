@@ -174,5 +174,5 @@ yarn.lock -diff merge=ours
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git reference and standards links.
+- Git Workflows source map (see `local-sources.md`) — Git reference and standards links.
 - [Git attributes documentation](https://git-scm.com/docs/gitattributes) — current pattern and filter semantics.

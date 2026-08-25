@@ -5,6 +5,11 @@ retrieved: 2026-07-25
 ---
 # What’s New in Apple Design
 
+## Contents
+
+- Chronological source entries
+
+
 - [Updated iOS and iPadOS UI Kit for Figma](https://developer.apple.com/design/resources/#ios-apps) - June 23, 2026; resources; Updated iOS 27 and iPadOS 27 design kit for Figma.
 
 - [Updated macOS UI Kit for Figma](https://developer.apple.com/design/resources/#macos-apps) - June 23, 2026; resources; Updated macOS 27 design kit for Figma.

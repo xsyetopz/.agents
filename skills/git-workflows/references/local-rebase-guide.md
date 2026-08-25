@@ -102,5 +102,5 @@ git rebase --abort
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git history and hosted-boundary sources.
+- Git Workflows source map (see `local-sources.md`) — Git history and hosted-boundary sources.
 - [Git rebase documentation](https://git-scm.com/docs/git-rebase) — current rebase semantics.

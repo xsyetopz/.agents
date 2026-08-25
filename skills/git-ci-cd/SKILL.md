@@ -1,47 +1,27 @@
 ---
 name: git-ci-cd
-description: CI/CD pipeline authoring, review, migration, and failure diagnosis across GitHub, GitLab, and Bitbucket with trust controls.
+description: Use this skill when authoring, reviewing, migrating, or diagnosing GitHub, GitLab, or Bitbucket CI/CD pipelines with trust controls; use $git-actions for hosted API calls and an application-debugging workflow for runtime code failures.
 ---
 
 # Git CI/CD
 
-Author, review, migrate, and diagnose continuous integration and continuous delivery (CI/CD) pipelines without weakening trust or failure signals. This package covers workflow files and hosted runner behavior, not hosted API calls or local application debugging.
+Author, review, migrate, and diagnose CI/CD pipelines without weakening trust boundaries or failure signals.
 
-## Use this skill
+## Workflow
 
-- Create or change workflow files, jobs, matrices, caches, artifacts, services, deployments, runners, or environments.
-- Diagnose failed, flaky, slow, duplicated, or platform-specific pipeline behavior.
-- Review permissions, OpenID Connect (OIDC), forks, reusable workflows, actions, images, caches, artifacts, runner isolation, and secret flow.
-- Migrate a pipeline across GitHub, GitLab, Bitbucket, or another supported platform when the target syntax and trust model are explicit.
-- Do not use for local Git commands, hosted REST or GraphQL calls, branching or merge policy, or application failures that reproduce outside CI.
-- Redirect local Git work and branching or merge policy to `$git-workflows`, and hosted API calls to `$git-actions`.
+1. Identify provider, event, trust boundary, required checks, services, artifacts, deployment target, environment controls, and rollback needs.
+2. Reproduce failures locally when they are application-owned; inspect workflow owners, reusable workflows, settings, and logs for pipeline-owned behavior.
+3. Load only the matching provider, security, or source reference from the direct routes below.
+   - [Bitbucket Pipelines](references/bitbucket-pipelines.md) · [Cross-Platform CI Patterns](references/cross-platform-patterns.md) · [GitHub Actions](references/github-actions.md) · [GitHub Integrations](references/github-integrations.md)
+   - [GitLab CI](references/gitlab-ci.md) · [CI/CD Security Checklist](references/security-checklist.md) · [Git CI/CD source map](references/sources.md)
+4. Change the owning workflow with explicit trusted events, least permissions, immutable dependencies where available, lockfile installs, scoped caches, useful concurrency, retention, and visible failures.
+5. Validate syntax, dependency resolution, permissions, secret flow, artifacts, platform lint, and local equivalents; use a hosted run when authorized and material.
+6. Return the changed workflow, checks, trust analysis, rollback evidence, and unavailable hosted, runner-isolation, deployment, or provider-freshness evidence as `UNVERIFIED`.
 
-## Rules
+## Gotchas
 
-- Never run untrusted pull-request (PR) or merge-request (MR) code with write tokens or production secrets. Never print secrets or hide command errors.
-- Reject broad permissions, ambiguous deployment refs, unsafe caches, mutable dependencies when immutable pins are available, and deployment from unreviewed code unless an approved exception is documented.
-- Require explicit trusted events and permissions, pinned dependencies, lockfile-based installation, relevant cache keys, useful concurrency, retention, environment controls, and visible failures.
-- Do not weaken a check with `continue-on-error`, `allow_failure`, exit-zero wrappers, or hidden errors.
-- Distinguish provider syntax from local recommendations. A passing local lint does not prove hosted settings, runner isolation, deployment safety, or secret masking.
-- Do not invent custom schema files or custom generated files as outputs. Use only established repository-owned formats and canonical inputs.
-
-## Steps
-
-1. Identify platform, event, trust boundary, required checks, deployment target, and rollback needs.
-2. Reproduce an application failure locally when it is not pipeline-owned; inspect workflows, reusable owners, settings, and logs.
-3. Load only the matching route from `references/index.md`, then use the source map for current provider syntax and security claims.
-4. Change the owning workflow without disabling or downgrading checks.
-5. Validate syntax, local equivalents, dependency resolution, permissions, artifacts, and platform lint or run when authorized.
-6. Inspect final status, skipped or environment-blocked checks, rollback behavior, and evidence freshness.
-
-## Resources
-
-- Start with the package-local [reference router](references/index.md).
-- Use the package-local [source map](references/sources.md) for provider URLs, diagram syntax, scope, and freshness.
-
-## Verify
-
-- Done means syntax and local checks pass, hosted validation runs when possible, permissions and trust boundaries are verified, failures remain blocking, and skipped or unavailable evidence is reported.
-- Run `python3 scripts/check.py` and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
-- Inspect dependency pins, permissions, cache scope, artifacts, runner isolation, deployment ref, rollback path, and the provider source record.
-- Report commands, exit codes, changed paths, evidence, and remaining limits. Mark hosted runs, runner isolation, deployment safety, provider freshness, or unavailable evidence `UNVERIFIED`.
+- Untrusted PR or MR code never receives write tokens or production secrets.
+- Keep failures blocking; `continue-on-error`, `allow_failure`, exit-zero wrappers, and hidden errors are not fixes.
+- Local lint cannot prove hosted settings, runner isolation, deployment safety, or secret masking.
+- Route hosted REST or GraphQL calls to `$git-actions`, local Git and team policy to `$git-workflows`, and runtime failures that reproduce outside CI to application debugging.
+- Use established repository formats and canonical inputs rather than custom schemas or generated files.

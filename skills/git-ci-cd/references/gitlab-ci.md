@@ -151,5 +151,5 @@ it for short secrets (under 4 chars aren't masked)
 
 ## Sources
 
-- [Git CI/CD source map](sources.md) — checked provider URLs and freshness limits.
+- Git CI/CD source map (see `sources.md`) — checked provider URLs and freshness limits.
 - [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/) and [GitLab pipeline architecture](https://docs.gitlab.com/ci/pipelines/pipeline_architectures/) — current syntax, rules, and execution model.

@@ -5,6 +5,25 @@ retrieved: 2026-07-25
 ---
 # Machine learning
 
+## Contents
+
+- [Planning your design](#planning-your-design)
+- [The role of machine learning in your app](#the-role-of-machine-learning-in-your-app)
+- [Explicit feedback](#explicit-feedback)
+- [Implicit feedback](#implicit-feedback)
+- [Calibration](#calibration)
+- [Mistakes](#mistakes)
+- [Corrections](#corrections)
+- [Multiple options](#multiple-options)
+- [Confidence](#confidence)
+- [Attribution](#attribution)
+- [Limitations](#limitations)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 Machine learning enables apps and games to learn from data and usage patterns, letting you improve existing experiences and create engaging new ones.
 
 *Image description: A sketch of sparkly stars, suggesting intelligence. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*

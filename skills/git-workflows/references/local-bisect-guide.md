@@ -93,5 +93,5 @@ non-regression searches (e.g., "when was this feature added?")
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git reference and evidence limits.
+- Git Workflows source map (see `local-sources.md`) — Git reference and evidence limits.
 - [Git reference](https://git-scm.com/docs) — bisect command semantics.

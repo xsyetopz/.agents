@@ -155,6 +155,6 @@ Both should return `200`. A `401` means the token is invalid or expired.
 
 ## Sources
 
-- [Git Actions source map](sources.md) — provider authentication and secret-handling URLs.
+- Git Actions source map (see `sources.md`) — provider authentication and secret-handling URLs.
 - [GitHub authentication documentation](https://docs.github.com/en/authentication) and [GitLab REST authentication](https://docs.gitlab.com/api/rest/authentication/) — current provider boundaries.
 - [OWASP Secrets Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) — independent security baseline (verify freshness before relying on it).

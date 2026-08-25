@@ -130,5 +130,5 @@ branch topology (the branch touched 3 packages; which one was it "about"?)
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — provider, Git, and standards references.
+- Git Workflows source map (see `policy-sources.md`) — provider, Git, and standards references.
 - [Git reference](https://git-scm.com/docs) — merge, rebase, and revert semantics.

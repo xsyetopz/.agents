@@ -53,7 +53,7 @@ fi
 
 ### commit-msg - enforce a repository-owned convention
 
-Use the [Conventional Commits fallback](conventional-commits.md) only when no repository contribution or commit guidance exists. Its package hook avoids inventing a fixed type list or subject-length rule.
+Use the Conventional Commits fallback (see `local-conventional-commits.md`) only when no repository contribution or commit guidance exists. Its package hook avoids inventing a fixed type list or subject-length rule.
 
 ### pre-push - run tests
 
@@ -110,5 +110,5 @@ Install: `pre-commit install` Run manually: `pre-commit run --all-files`
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git command and security references.
+- Git Workflows source map (see `local-sources.md`) — Git command and security references.
 - [Git hooks documentation](https://git-scm.com/docs/githooks) — lifecycle and execution semantics.

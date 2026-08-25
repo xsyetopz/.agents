@@ -1,45 +1,27 @@
 ---
 name: git-actions
-description: Remote GitHub or GitLab API operations with scope, least privilege, schema checks, and verified remote evidence.
+description: Use this skill when performing scoped GitHub or GitLab API operations with least privilege, schema checks, and verified remote evidence; use $git-workflows for local Git and $git-ci-cd for pipeline files.
 ---
 
 # Git Actions
 
-Use authenticated GitHub or GitLab APIs for narrowly scoped hosted-repository operations and evidence. This package does not execute local Git commands or decide team policy.
+Use authenticated GitHub or GitLab APIs for narrowly scoped hosted-repository operations and verifiable evidence.
 
-## Use this skill
+## Workflow
 
-- Read or change GitHub or GitLab repositories, releases, tags, issues, pull or merge requests, checks, workflows, artifacts, or settings through a provider API or its supported CLI.
-- Automate pagination, REST (Representational State Transfer) or GraphQL requests, rate-limit handling, version lookup, or artifact retrieval.
-- Do not use for local Git commands, CI/CD authoring or diagnosis, branching policy, or a public read-only explanation that needs no API call.
-- Redirect local Git work and branching or merge policy to `$git-workflows`, and pipeline work to `$git-ci-cd`.
+1. Identify provider, host, owner or namespace, repository or project, resource, read/write intent, fields, API version, pagination model, and completion evidence.
+2. Load only the matching provider, security, or source reference from the direct routes below.
+   - [Auth and Security](references/auth-and-security.md) · [GitHub REST API](references/github-api.md) · [GitHub GraphQL API](references/github-graphql.md) · [GitLab REST API](references/gitlab-api.md)
+   - [Git Actions source map](references/sources.md) · [Version Fetching](references/version-fetching.md)
+3. Treat the operation as read-only until the user authorizes the exact hosted mutation, target, and effect.
+4. Use existing `gh`, `glab`, or credential-helper authentication; validate URLs, identifiers, GraphQL variables, JSON, fork content, and pagination bounds.
+5. Make the narrowest call with explicit fields, then validate status, response schema, target identity, resource ID or URL, permissions, and rate-limit caveats.
+6. Verify mutations independently when possible and return the request boundary, result identifier, source freshness, and unavailable credentials, remote state, authorization, or provider evidence as `UNVERIFIED`.
 
-## Rules
+## Gotchas
 
-- Treat every request as read-only until the user authorizes the exact hosted mutation, target, and effect.
-- Resolve host, owner, repository or project, resource identifier, API version, pagination model, and mutation scope before calling.
-- Use existing `gh`, `glab`, or credential-helper authentication. Never print, persist, broaden, or transmit tokens.
-- Validate URLs, paths, identifiers, GraphQL variables, and JSON. Treat fork and pull-request content as untrusted input.
-- Check response schema, target identity, resource ID or URL, permissions, and rate-limit caveats. Provider defaults and limits are current claims only when the routed source map has been checked.
-- Do not invent custom schema files or custom generated files as outputs. Use only established repository-owned formats and canonical inputs.
-
-## Steps
-
-1. Identify provider, host, owner or namespace, repository or project, resource, read/write intent, and required fields.
-2. Load only the matching route from `references/index.md`, then resolve the provider's current source record and command syntax.
-3. Confirm exact mutation authority before any write, merge, dispatch, delete, publish, or settings change.
-4. Make the narrowest API call with explicit fields, safe variables, and bounded pagination.
-5. Validate status and response schema, then verify target and resulting effect independently when possible.
-6. Report resource ID or URL, permission limits, source freshness, and any unverified condition.
-
-## Resources
-
-- Start with the package-local [reference router](references/index.md).
-- Use the package-local [source map](references/sources.md) for provider URLs, scope, and freshness.
-
-## Verify
-
-- Done means the request is schema-checked, permissions and pagination are understood, secrets remain protected, and the hosted target and effect are verified or explicitly unavailable.
-- Run `python3 scripts/check.py` and `python3 -m json.tool evals/evals.json >/dev/null` from this package.
-- Capture the request, response status, resource identifier, authorization boundary, and source record without exposing credentials.
-- Report commands, exit codes, changed paths, evidence, and remaining limits. Mark credentials, remote state, authorization, provider freshness, or unavailable API evidence `UNVERIFIED`; never infer a successful mutation.
+- Existing authentication may be used without printing, persisting, broadening, or transmitting tokens.
+- Pull-request and fork content remains untrusted input even when the API response is trusted transport.
+- A successful status code does not prove the intended target or effect; verify both.
+- Route local Git and team policy to `$git-workflows`, and pipeline authoring or diagnosis to `$git-ci-cd`.
+- Use established repository formats and canonical inputs rather than custom schemas or generated files.

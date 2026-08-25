@@ -167,6 +167,6 @@ runs:
 
 ## Sources
 
-- [Git CI/CD source map](sources.md) — checked provider URLs and freshness limits.
+- Git CI/CD source map (see `sources.md`) — checked provider URLs and freshness limits.
 - [Workflow syntax for GitHub Actions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax) — current event, permission, and job syntax.
 - [Secure use reference](https://docs.github.com/en/actions/reference/security/secure-use) — trust, secrets, and untrusted-code controls.

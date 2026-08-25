@@ -5,6 +5,21 @@ retrieved: 2026-07-25
 ---
 # Complications
 
+## Contents
+
+- [Best practices](#best-practices)
+- [Visual design](#visual-design)
+- [Circular](#circular)
+- [Corner](#corner)
+- [Inline](#inline)
+- [Rectangular](#rectangular)
+- [Legacy templates](#legacy-templates)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 A complication displays timely, relevant information on the watch face, where people can view it each time they raise their wrist.
 
 *Image description: A stylized representation of an Apple Watch face that includes the time and a set of differently sized complications with labels. The image is tinted red to subtly reflect the red in the original six-color Apple logo.*

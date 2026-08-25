@@ -3,7 +3,7 @@
 Scope: team branching and release-model comparison. GitHub Flow, GitLab Flow, trunk-based development, GitFlow, and forking are provider or community terms with different enforcement assumptions. Continuous delivery (CD) means deploying tested changes through an automated delivery path; define the model and measure repository constraints before selecting one.
 
 Comparative analysis of branching models. Provider and community source status
-is recorded in the [Git Workflows source map](sources.md); community model names
+is recorded in the Git Workflows source map (see `policy-sources.md`); community model names
 are context, not proof of repository enforcement.
 
 ## Comparison matrix
@@ -140,5 +140,5 @@ flowchart TD
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — provider and standards references with freshness limits.
+- Git Workflows source map (see `policy-sources.md`) — provider and standards references with freshness limits.
 - [GitHub Flow](https://docs.github.com/en/get-started/using-git/github-flow) and [Git reference](https://git-scm.com/docs) — current provider and Git boundaries (GitHub Flow page unverified in this pass).

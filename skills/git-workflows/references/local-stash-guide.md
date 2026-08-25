@@ -122,5 +122,5 @@ Or use `git reflog show stash` if refs/stash history is available.
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git recovery and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — Git recovery and hosted-boundary references.
 - [Git stash documentation](https://git-scm.com/docs/git-stash) — current stash semantics.

@@ -111,5 +111,5 @@ echo "$(git config --get user.email) $(cat path/to/id_ed25519.pub)" > path/to/al
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git signing and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — Git signing and hosted-boundary references.
 - [Git commit documentation](https://git-scm.com/docs/git-commit) and [GitHub authentication documentation](https://docs.github.com/en/authentication) — local signing and provider verification boundaries.

@@ -104,5 +104,5 @@ gh release list --repo owner/repo --limit 10
 
 ## Sources
 
-- [Git Actions source map](sources.md) — provider URLs, source status, and freshness limits.
+- Git Actions source map (see `sources.md`) — provider URLs, source status, and freshness limits.
 - [GitHub REST API documentation](https://docs.github.com/en/rest) and [GitLab REST API](https://docs.gitlab.com/api/rest/) — release and tag endpoint semantics.

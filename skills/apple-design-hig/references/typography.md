@@ -5,6 +5,20 @@ retrieved: 2026-07-25
 ---
 # Typography
 
+## Contents
+
+- [Ensuring legibility](#ensuring-legibility)
+- [Conveying hierarchy](#conveying-hierarchy)
+- [Using system fonts](#using-system-fonts)
+- [Using custom fonts](#using-custom-fonts)
+- [Supporting Dynamic Type](#supporting-dynamic-type)
+- [Platform considerations](#platform-considerations)
+- [Specifications](#specifications)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 Your typographic choices can help you display legible text, convey an information hierarchy, communicate important content, and express your brand or style.
 
 *Image description: A sketch of a small letter A to the left of a large letter A, suggesting the use of typography to convey hierarchical information. The image is overlaid with rectangular and circular grid lines and is tinted yellow to subtly reflect the yellow in the original six-color Apple logo.*

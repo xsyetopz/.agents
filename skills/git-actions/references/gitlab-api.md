@@ -130,6 +130,6 @@ Limits vary by endpoint, authentication, GitLab.com policy, and self-managed con
 
 ## Sources
 
-- [Git Actions source map](sources.md) — checked provider URLs and freshness limits.
+- Git Actions source map (see `sources.md`) — checked provider URLs and freshness limits.
 - [GitLab API documentation](https://docs.gitlab.com/api/) and [GitLab REST API](https://docs.gitlab.com/api/rest/) — endpoint, encoding, pagination, and response reference.
 - [GitLab REST authentication](https://docs.gitlab.com/api/rest/authentication/) — token headers and scopes.

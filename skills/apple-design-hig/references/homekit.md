@@ -5,6 +5,20 @@ retrieved: 2026-07-25
 ---
 # HomeKit
 
+## Contents
+
+- [Terminology and layout](#terminology-and-layout)
+- [Setup](#setup)
+- [Siri interactions](#siri-interactions)
+- [Custom functionality](#custom-functionality)
+- [Using HomeKit icons](#using-homekit-icons)
+- [Referring to HomeKit](#referring-to-homekit)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 HomeKit lets people securely control connected accessories in their homes using Siri or the Home app on iPhone, iPad, Apple Watch, and Mac.
 
 *Image description: A sketch of the HomeKit icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*

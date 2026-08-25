@@ -99,5 +99,5 @@ git config gc.reflogExpireUnreachable  # default 30 days
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git recovery and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — Git recovery and hosted-boundary references.
 - [Git reflog documentation](https://git-scm.com/docs/git-reflog) — current recovery semantics.

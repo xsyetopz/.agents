@@ -5,6 +5,19 @@ retrieved: 2026-07-25
 ---
 # Game Center
 
+## Contents
+
+- [Accessing Game Center](#accessing-game-center)
+- [Achievements](#achievements)
+- [Leaderboards](#leaderboards)
+- [Challenges](#challenges)
+- [Multiplayer activities](#multiplayer-activities)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 Game Center is Apple’s social gaming network, which lets players track their progress and connect with friends across Apple platforms, and boosts the discovery of your game across players’ devices.
 
 *Image description: A sketch of the Game Center icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*

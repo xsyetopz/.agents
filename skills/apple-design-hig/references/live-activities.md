@@ -5,6 +5,19 @@ retrieved: 2026-07-25
 ---
 # Live Activities
 
+## Contents
+
+- [Anatomy](#anatomy)
+- [Best practices](#best-practices)
+- [Presentation](#presentation)
+- [CarPlay](#carplay)
+- [Platform considerations](#platform-considerations)
+- [Specifications](#specifications)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 A Live Activity lets people track the progress of an activity, event, or task at a glance.
 
 *Image description: A stylized representation of the Dynamic Island, in collapsed and expanded form, displaying the score of a live sporting event. The image is tinted red to subtly reflect the red in the original six-color Apple logo.*

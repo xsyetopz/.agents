@@ -126,6 +126,6 @@ Rate limits vary by authentication method, endpoint, installation, and current p
 
 ## Sources
 
-- [Git Actions source map](sources.md) — checked provider URLs and freshness limits.
+- Git Actions source map (see `sources.md`) — checked provider URLs and freshness limits.
 - [GitHub REST API documentation](https://docs.github.com/en/rest) — endpoint and version reference.
 - [Using pagination in the REST API](https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api) — link headers and page limits.

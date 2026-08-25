@@ -5,6 +5,19 @@ retrieved: 2026-07-25
 ---
 # App Clips
 
+## Contents
+
+- [Designing your App Clip](#designing-your-app-clip)
+- [Creating content for an App Clip card](#creating-content-for-an-app-clip-card)
+- [App Clip Codes](#app-clip-codes)
+- [Printing guidelines](#printing-guidelines)
+- [Legal requirements](#legal-requirements)
+- [Platform considerations](#platform-considerations)
+- [Resources](#resources)
+- [Change log](#change-log)
+- [References](#references)
+
+
 An App Clip is a lightweight version of your app or game that provides an on-the-go or demo experience that’s instantly available.
 
 *Image description: A sketch of an app icon surrounded by a dashed line, suggesting an App Clip. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*

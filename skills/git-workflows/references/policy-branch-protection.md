@@ -139,5 +139,5 @@ gh api /repos/owner/repo/branches/main/protection/required_linear_history
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — provider settings, standards, and freshness limits.
+- Git Workflows source map (see `policy-sources.md`) — provider settings, standards, and freshness limits.
 - [GitHub protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches) and [Bitbucket branch permissions](https://support.atlassian.com/bitbucket-cloud/docs/use-branch-permissions/) — hosted enforcement examples.

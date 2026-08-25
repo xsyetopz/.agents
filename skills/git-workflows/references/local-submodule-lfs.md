@@ -122,5 +122,5 @@ GIT_TRACE=1 GIT_TRANSFER_TRACE=1 GIT_CURL_VERBOSE=1 git lfs push origin main
 
 ## Sources
 
-- [Git Workflows source map](sources.md) — Git, LFS, and hosted-boundary references.
+- Git Workflows source map (see `local-sources.md`) — Git, LFS, and hosted-boundary references.
 - [Git submodule documentation](https://git-scm.com/docs/git-submodule) and [Git LFS](https://git-lfs.com/) — command and storage semantics (LFS page unverified in this pass).
