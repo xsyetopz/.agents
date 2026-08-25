@@ -6,7 +6,7 @@
 set -Eeuo pipefail
 
 readonly CLI_VERSION="1.5.22"
-readonly SKILL_NAME="skill-creator"
+readonly SKILL_NAME="repository-documentation"
 readonly TARGET_AGENT="codex"
 
 die() {
@@ -18,10 +18,10 @@ die() {
 
 usage() {
   cat >&2 <<'EOF'
-Usage: RUNNER=bunx|bunx SOURCE=/path/to/my-agent-skills-btw scripts/skills_cli_smoke.sh
+Usage: RUNNER=bunx|bunx-bun SOURCE=/path/to/my-agent-skills-btw scripts/skills_cli_smoke.sh
 
 Runs a network-backed, project-scoped add/list/remove probe with the pinned
-Vercel skills CLI. The fixture installs skill-creator alongside one unrelated
+Vercel skills CLI. The fixture installs repository-documentation alongside one unrelated
 local skill, then proves targeted removal preserves that unrelated skill.
 SOURCE defaults to the repository containing this script. The fixture, HOME,
 and CODEX_HOME are temporary and are removed on exit.
@@ -50,21 +50,21 @@ SOURCE="${SOURCE:-$REPO_ROOT}"
 
 case "$RUNNER" in
   bunx)
-    CLI=(bunx -y "skills@${CLI_VERSION}")
+    CLI=(bunx --yes "skills@${CLI_VERSION}")
     ;;
-  bunx)
+  bunx-bun)
     # --bun is the verified Bun launcher shape for skills@1.5.22.
     CLI=(bunx --bun "skills@${CLI_VERSION}")
     ;;
   *)
     usage
-    die 2 "RUNNER must be bunx or bunx (got: $RUNNER)"
+    die 2 "RUNNER must be bunx or bunx-bun (got: $RUNNER)"
     ;;
 esac
 
 command -v python3 >/dev/null 2>&1 || die 2 "python3 is required to assert JSON and lock state"
 command -v git >/dev/null 2>&1 || die 2 "git is required for the disposable project fixture"
-command -v "$RUNNER" >/dev/null 2>&1 || die 2 "$RUNNER is not available"
+command -v bunx >/dev/null 2>&1 || die 2 "bunx is not available"
 
 if [[ "$SOURCE" != /* ]]; then
   SOURCE="$(cd -- "$SOURCE" 2>/dev/null && pwd -P)" || die 3 "SOURCE does not resolve: $SOURCE"
@@ -125,7 +125,7 @@ name: smoke-unrelated
 description: Disposable unrelated skill used to prove targeted removal preserves neighbors.
 ---
 
-This fixture skill must remain installed while skill-creator is removed.
+This fixture skill must remain installed while repository-documentation is removed.
 EOF
 
 tree_digest() {
@@ -216,11 +216,11 @@ with open(sys.argv[1], encoding="utf-8") as handle:
 if not isinstance(rows, list) or len(rows) != 2:
     raise SystemExit(f"expected two project rows, got {rows!r}")
 by_name = {row.get("name"): row for row in rows}
-if set(by_name) != {"smoke-unrelated", "skill-creator"}:
+if set(by_name) != {"smoke-unrelated", "repository-documentation"}:
     raise SystemExit(f"unexpected project names: {by_name!r}")
 if by_name["smoke-unrelated"] != baseline[0]:
     raise SystemExit("unrelated list row changed during selected install")
-selected = by_name["skill-creator"]
+selected = by_name["repository-documentation"]
 if selected.get("scope") != "project" or selected.get("path") != sys.argv[3]:
     raise SystemExit(f"unexpected selected row: {selected!r}")
 if selected.get("sourceType") != "local" or selected.get("agents") != ["Codex"]:
@@ -241,11 +241,11 @@ with open(sys.argv[2], encoding="utf-8") as handle:
 if data.get("version") != 1:
     raise SystemExit(f"unexpected lock version: {data!r}")
 skills = data.get("skills")
-if not isinstance(skills, dict) or set(skills) != {"smoke-unrelated", "skill-creator"}:
+if not isinstance(skills, dict) or set(skills) != {"smoke-unrelated", "repository-documentation"}:
     raise SystemExit(f"expected exactly two selected skills in lock: {skills!r}")
 if skills["smoke-unrelated"] != baseline["skills"]["smoke-unrelated"]:
     raise SystemExit("unrelated lock entry changed during selected install")
-entry = skills["skill-creator"]
+entry = skills["repository-documentation"]
 if entry.get("sourceType") != "local" or not entry.get("computedHash"):
     raise SystemExit(f"unexpected selected lock entry: {entry!r}")
 PY
@@ -260,7 +260,7 @@ import sys
 
 with open(sys.argv[1], encoding="utf-8") as handle:
     rows = json.load(handle)
-matches = [row for row in rows if row.get("name") == "skill-creator" and row.get("path") == sys.argv[2]]
+matches = [row for row in rows if row.get("name") == "repository-documentation" and row.get("path") == sys.argv[2]]
 if len(matches) != 1:
     raise SystemExit(f"expected one shared-target row, got {matches!r}")
 agents = matches[0].get("agents")

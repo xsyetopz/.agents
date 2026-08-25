@@ -1,8 +1,9 @@
 # .agents
 
 A personal source directory for the user’s `.agents/` folder. It contains
-reusable instruction packages, references, scripts, templates, and evaluation
-files. Copy only the packages needed for a project or user account.
+reusable instruction packages, references, deterministic tools, templates, and
+Codex interface metadata. Copy only the packages needed for a project or user
+account.
 
 ## Layout
 
@@ -10,25 +11,23 @@ files. Copy only the packages needed for a project or user account.
 .agents/
 ├── skills/                 # reusable instruction packages
 │   ├── apple-design-hig/
-│   ├── avoid-ai-writing/
-│   ├── bun-1-4-migration/
+│   ├── architecture-boundaries/
+│   ├── bun-migration/
 │   ├── git-actions/
 │   ├── git-ci-cd/
 │   ├── git-workflows/
-│   ├── no-legacy-cleanup/
-│   ├── prompt-engineering/
-│   ├── repo-docs/
-│   ├── skill-creator/
-│   └── software-architecture/
-├── evals/                  # disposable evaluation runner
-├── docker/                 # evaluator image definition
+│   ├── legacy-cleanup/
+│   └── repository-documentation/
 └── scripts/                # repository checks and install probes
 ```
 
-Each package has a `SKILL.md` entrypoint, package-local references, a Python 3
-checker, and an `evals/evals.json` manifest. `references/index.md` is the
-starting point for package documentation. Package tools are Python 3 only.
-Skills must not invent custom schema files or custom generated files as outputs.
+Each package has a `SKILL.md` entrypoint, Codex interface metadata, and a
+package-local `license.txt`. References, scripts, and assets are included only
+when the workflow uses them. Every reference is one level below its package
+root and linked directly from the decision step that needs it; packages contain
+no reference indexes or reference-to-reference Markdown chains. Deterministic
+scripts are executable. Skills must not invent custom schema files or custom
+generated files as outputs.
 
 ## Copy a package
 
@@ -36,31 +35,31 @@ User scope:
 
 ```bash
 mkdir -p ~/.agents/skills
-cp -R skills/prompt-engineering ~/.agents/skills/
+cp -R skills/repository-documentation ~/.agents/skills/
 ```
 
 Project scope:
 
 ```bash
 mkdir -p .agents/skills
-cp -R skills/prompt-engineering .agents/skills/
+cp -R skills/repository-documentation .agents/skills/
 ```
 
 The pinned Skills CLI can copy one package from GitHub:
 
 ```bash
 bunx --yes skills@1.5.22 add xsyetopz/.agents \
-  --skill prompt-engineering --agent codex --copy -y
+  --skill repository-documentation --agent codex --copy -y
 
 bunx --bun skills@1.5.22 add xsyetopz/.agents \
-  --skill prompt-engineering --agent codex --copy -y
+  --skill repository-documentation --agent codex --copy -y
 ```
 
 GitHub source: [xsyetopz/.agents](https://github.com/xsyetopz/.agents).
 For a local checkout, replace `xsyetopz/.agents` with
 `/path/to/.agents`.
 
-Replace `prompt-engineering` with the package name you need.
+Replace `repository-documentation` with the package name you need.
 
 To inspect a project-scoped install, list the selected agent in JSON. Use
 either runner; the project list should include the copied package and
@@ -68,25 +67,25 @@ either runner; the project list should include the copied package and
 
 ```bash
 bunx --yes skills@1.5.22 list --agent codex --json
-test -f .agents/skills/prompt-engineering/SKILL.md
+test -f .agents/skills/repository-documentation/SKILL.md
 test -f skills-lock.json
 python3 - <<'PY'
 import json
 from pathlib import Path
 
 lock = json.loads(Path("skills-lock.json").read_text())
-assert "prompt-engineering" in lock.get("skills", {})
+assert "repository-documentation" in lock.get("skills", {})
 PY
 
 bunx --bun skills@1.5.22 list --agent codex --json
-test -f .agents/skills/prompt-engineering/SKILL.md
+test -f .agents/skills/repository-documentation/SKILL.md
 test -f skills-lock.json
 python3 - <<'PY'
 import json
 from pathlib import Path
 
 lock = json.loads(Path("skills-lock.json").read_text())
-assert "prompt-engineering" in lock.get("skills", {})
+assert "repository-documentation" in lock.get("skills", {})
 PY
 ```
 
@@ -94,24 +93,24 @@ For the disposable project fixture used above, remove the selected package with
 one runner and the pinned command shape `remove --skill <name> --agent codex -y`:
 
 ```bash
-bunx --yes skills@1.5.22 remove --skill prompt-engineering --agent codex -y
-bunx --bun skills@1.5.22 remove --skill prompt-engineering --agent codex -y
+bunx --yes skills@1.5.22 remove --skill repository-documentation --agent codex -y
+bunx --bun skills@1.5.22 remove --skill repository-documentation --agent codex -y
 ```
 
 After removal, verify both the list and lock metadata with either runner:
 
 ```bash
 bunx --yes skills@1.5.22 list --agent codex --json
-# In a fixture containing only prompt-engineering, the output above is [].
+# In a fixture containing only repository-documentation, the output above is [].
 bunx --bun skills@1.5.22 list --agent codex --json
 # The same selected-only fixture also reports [].
-test ! -e .agents/skills/prompt-engineering
+test ! -e .agents/skills/repository-documentation
 python3 - <<'PY'
 import json
 from pathlib import Path
 
 lock = json.loads(Path("skills-lock.json").read_text())
-assert "prompt-engineering" not in lock.get("skills", {})
+assert "repository-documentation" not in lock.get("skills", {})
 PY
 ```
 
@@ -128,22 +127,20 @@ Run the disposable CLI smoke probe with either launcher:
 
 ```bash
 RUNNER=bunx SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
-RUNNER=bunx SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
+RUNNER=bunx-bun SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
 ```
 
 ## Check the repository
 
 ```bash
-python3 skills/skill-creator/scripts/check_skill_structure.py "$PWD"
 for d in skills/*; do
-  (cd "$d" && python3 scripts/check.py) || exit 1
+  test -f "$d/SKILL.md" || exit 1
+  test -f "$d/agents/openai.yaml" || exit 1
+  test -f "$d/license.txt" || exit 1
 done
 python3 scripts/check_python_loc.py
 uvx ruff@0.16.1 check --isolated skills scripts
-```
-
-Run the disposable static evaluator when Docker or OrbStack is available:
-
-```bash
-bash evals/run_container_eval.sh --static-only --all
+find skills -name SKILL.md -print | sort
+find skills -type l -print
+bash -n scripts/skills_cli_smoke.sh
 ```
