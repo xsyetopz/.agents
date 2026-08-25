@@ -1,4 +1,0 @@
-interface:
-  display_name: "Prompt Engineering"
-  short_description: "Design direct, evidence-first agent prompts"
-  default_prompt: "Use $prompt-engineering to revise this prompt from observed behavior and repository authority, preserve intent and corrections, and test tool effects separately from the final answer."

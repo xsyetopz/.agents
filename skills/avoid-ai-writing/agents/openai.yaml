@@ -1,4 +1,0 @@
-interface:
-  display_name: "Avoid AI Writing"
-  short_description: "Detect or repair concrete AI-style prose patterns"
-  default_prompt: "Use $avoid-ai-writing in the requested detect, edit, or rewrite mode; preserve facts and voice, report observable prose patterns, and do not claim authorship detection."
