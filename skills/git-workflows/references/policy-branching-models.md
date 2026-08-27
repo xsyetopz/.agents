@@ -65,7 +65,7 @@ map for its `UNVERIFIED` status and measure repository constraints before applyi
 Key insight: the dividing line between "small team" and "scaled" is commit rate,
 not team size. When commits to trunk happen frequently enough that manual review
 becomes a bottleneck, you introduce short-lived feature branches for review --
-but never for artifact creation or publication.
+and reserve that path for artifact creation or publication.
 
 **Release strategies:**
 
@@ -108,7 +108,7 @@ flowchart TD
 
 **Anti-patterns (when GitFlow is wrong):**
 
-- Web applications - you don't maintain multiple versions simultaneously
+- Web applications - maintain one active version unless a release policy defines parallel support
 - Continuous deployment - release branches add days of delay
 - Small teams (< 5) - the ceremony exceeds the benefit
 - Microservices - each service deploys independently; GitFlow assumes a

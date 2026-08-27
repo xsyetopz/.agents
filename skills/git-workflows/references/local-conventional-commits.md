@@ -10,14 +10,14 @@ Inspect before adding policy or hooks:
 - Commit templates, `commitlint`, gitlint, Lefthook, pre-commit, Husky, tracked hook directories, package scripts, and the effective `core.hooksPath`.
 - Recent accepted commit subjects as evidence of established practice, not authority by themselves.
 
-If any repository-owned contribution or commit guidance exists, follow it. Do not replace it with Conventional Commits or rewrite its hook unless the user explicitly requests that policy change.
+If any repository-owned contribution or commit guidance exists, follow it. Keep the repository-owned policy and hook unless the user explicitly requests a policy change.
 
 ## Install the fallback
 
 When no guidance exists and the task authorizes repository commit-workflow changes:
 
 1. Adopt Conventional Commits for new commit subjects: `type(scope): description`. The scope is optional; `!` may mark a breaking change.
-2. If the repository already owns a hook manager or tracked hook path, add an equivalent `commit-msg` hook through that mechanism. Do not create a parallel hook system.
+2. If the repository already owns a hook manager or tracked hook path, add an equivalent `commit-msg` hook through that mechanism. Extend the existing hook manager rather than creating a parallel system.
 3. Otherwise copy the package [commit-msg hook](../assets/commit-msg) to `.githooks/commit-msg`.
 4. Run:
 

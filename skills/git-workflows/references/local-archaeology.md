@@ -1,6 +1,6 @@
 # Git Archaeology
 
-Scope: local Git history search and attribution using commits, refs, and path-limited inspection. A ref is a name pointing to an object; commands read the current checkout unless an explicit repository and revision are supplied. Do not infer authorship or intent from a matching line alone.
+Scope: local Git history search and attribution using commits, refs, and path-limited inspection. A ref is a name pointing to an object; commands read the current checkout unless an explicit repository and revision are supplied. Attribute authorship or intent only after checking commit, ref, and path context.
 
 Finding when and why code changed. Not `git log` - the deep tools.
 

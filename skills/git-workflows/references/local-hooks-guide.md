@@ -84,7 +84,7 @@ Use sparingly - hooks exist for a reason.
 ## Husky (Node.js)
 
 If the project uses Husky, hooks are in `.husky/` and managed by Husky's install
-lifecycle. Don't manually edit `core.hooksPath` in Husky projects.
+lifecycle. Manage `core.hooksPath` through the Husky project configuration.
 
 ```bash
 # Add a hook with Husky

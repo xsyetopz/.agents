@@ -4,7 +4,7 @@ This map distinguishes Git's local command semantics from hosted-provider
 boundary documentation. A `Checked` date means the linked page was opened
 while this package was revised on 2026-08-14; an unmarked or `UNVERIFIED`
 entry must be checked before relying on a current claim. The operational
-examples remain local guidance and never prove a remote effect.
+examples remain local guidance; remote effects require remote evidence.
 
 | Scope | Authoritative source | Status |
 | --- | --- | --- |

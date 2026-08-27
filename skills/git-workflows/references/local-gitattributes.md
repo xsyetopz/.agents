@@ -80,7 +80,7 @@ pnpm-lock.yaml -diff
 ### Lockfile merge - always regenerate
 
 ```gitattributes
-# Never attempt to merge lockfiles - always take ours and regenerate
+# Merge lockfiles by taking ours and regenerating
 package-lock.json merge=ours
 pnpm-lock.yaml merge=ours
 
@@ -157,7 +157,7 @@ git commit -m "Normalize line endings with .gitattributes"
 *.woff2 binary
 *.zip binary
 
-# Lockfiles - hide from diff, never merge
+# Lockfiles - hide from diff, use ours and regenerate
 package-lock.json -diff merge=ours
 pnpm-lock.yaml -diff merge=ours
 yarn.lock -diff merge=ours

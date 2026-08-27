@@ -125,8 +125,8 @@ one package's. Prefer:
 - **Squash merge** for most PRs - keeps history clean at repo scale
 - **Rebase merge** when a PR spans multiple packages with logically separate
   commits
-- **Never** merge commit - in a monorepo, merge commits create meaningless
-branch topology (the branch touched 3 packages; which one was it "about"?)
+- Keep merge commits out of the default monorepo strategy because they create
+ambiguous branch topology (the branch touched 3 packages; which one was it "about"?)
 
 ## Sources
 

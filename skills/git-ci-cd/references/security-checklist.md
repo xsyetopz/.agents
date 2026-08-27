@@ -9,7 +9,7 @@ Audit checklist for pipeline security across platforms.
 - [ ] No secrets in pipeline YAML files - use platform secrets/variables
 - [ ] Tokens have minimal scope (repo-only, not org-wide)
 - [ ] Short-lived tokens preferred over long-lived PATs
-- [ ] Secrets never echoed, logged, or printed in error messages
+- [ ] Keep secrets out of echoed, logged, and printed error messages
 - [ ] Debug mode (`ACTIONS_STEP_DEBUG`, `CI_DEBUG_TRACE`) is off in production
 
 ## Branch protection

@@ -73,7 +73,7 @@ git config --global pull.verifySignatures true
 ## Workflow-critical settings
 
 ```bash
-# Always rebase on pull, never create merge commits
+# Always rebase on pull; preserve linear history
 # Critical for linear history workflows
 git config pull.rebase true
 

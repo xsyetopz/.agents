@@ -5,8 +5,8 @@ Scope: local stash creation, application, deletion, and recovery. A stash is loc
 ## Why stash
 
 Stash captures uncommitted changes - both staged and unstaged - and reverts
-the working tree to HEAD. It's for temporary work-in-progress that you don't
-want to commit yet.
+the working tree to HEAD. Use it for temporary work-in-progress that is not
+ready for a commit.
 
 ## Core operations
 

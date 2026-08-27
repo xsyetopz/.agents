@@ -67,8 +67,8 @@ Personal access token scopes:
 
 ## Security rules
 
-1. **Never** hardcode tokens in scripts or pipeline YAML
-2. **Never** echo, log, or print tokens
+1. Keep tokens out of scripts and pipeline YAML
+2. Keep token values out of command output and logs
 3. Use environment variables with restricted scope tokens
 4. Prefer CLI tools (`gh`, `glab`) over raw `curl` - they handle auth and token
    refresh

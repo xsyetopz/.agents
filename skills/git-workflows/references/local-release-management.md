@@ -58,7 +58,7 @@ Tag creation, pushing, and remote deletion are state changes. Confirm the versio
 ### Lightweight vs annotated
 
 ```bash
-# Lightweight (pointer to commit) - DO NOT USE for releases
+# Lightweight (pointer to commit) - use annotated or signed tags for releases
 git tag v1.0.0
 
 # Annotated (full object with tagger, date, message) - USE THIS
@@ -197,7 +197,7 @@ echo "$VERSION" | grep -qE '^v?[0-9]+\.[0-9]+\.[0-9]+' || {
   echo "ERROR: invalid version: $VERSION" >&2; exit 1
 }
 
-# Ensure on main and clean
+# Check the current branch is main and the worktree is clean
 BRANCH=$(git branch --show-current)
 [ "$BRANCH" = "main" ] || { echo "ERROR: must be on main branch" >&2; exit 1; }
 [ -z "$(git status --porcelain)" ] || { echo "ERROR: working tree not clean" >&2; exit 1; }
