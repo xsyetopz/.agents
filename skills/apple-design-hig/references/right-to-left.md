@@ -53,7 +53,7 @@ If your app covers mathematical concepts or other number-centric topics, it’s 
 
 *Image description: From the right, the numerals one, two, and three in Eastern Arabic numerals. Eastern Arabic numerals*
 
-**Don’t reverse the order of numerals in a specific number.** Regardless of the current language or the surrounding content, the digits in a specific number - such as “541,” a phone number, or a credit card number - always appear in the same order.
+**Don’t reverse the order of numerals in a specific number.** Regardless of the current language or the surrounding content, the digits in a specific number - such as "541," a phone number, or a credit card number - always appear in the same order.
 
 *Image description: From the left, the two words order and number followed by the number 123456 in Latin script. Latin*
 
@@ -83,7 +83,7 @@ If your app covers mathematical concepts or other number-centric topics, it’s 
 
 **Flip controls that help people navigate or access items in a fixed order.** For example, in the RTL context, a back button must point to the right so the flow of screens matches the reading order of the RTL language. Similarly, next or previous buttons that let people access items in an ordered list need to flip in the RTL context to match the reading order.
 
-**Preserve the direction of a control that refers to an actual direction or points to an onscreen area.** For example, if you provide a control that means “to the right,” it must always point right, regardless of the current context.
+**Preserve the direction of a control that refers to an actual direction or points to an onscreen area.** For example, if you provide a control that means "to the right," it must always point right, regardless of the current context.
 
 **Visually balance adjacent Latin and RTL scripts when necessary.** In buttons, labels, and titles, Arabic or Hebrew text can appear too small when next to uppercased Latin text, because Arabic and Hebrew don’t include uppercase letters. To visually balance Arabic or Hebrew text with Latin text that uses all capitals, it often works well to increase the RTL font size by about 2 points.
 

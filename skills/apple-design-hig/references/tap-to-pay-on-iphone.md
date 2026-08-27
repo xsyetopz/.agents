@@ -87,7 +87,7 @@ Checking out is a time-sensitive action, and merchants need the process to work 
 
 **Make it easy for merchants to switch between Tap to Pay on iPhone and the hardware accessories you support.** Even though your support for Tap to Pay on iPhone is separate from your support for a hardware accessory, such as a Bluetooth chip and PIN card reader, you can streamline the user experience by helping merchants set up both methods at the same time. After setup, make sure merchants can choose the appropriate payment-acceptance method during the checkout flow without having to visit your app settings.
 
-**For the label of the button that activates the feature, use “Tap to Pay on iPhone” or, if space is constrained, “Tap to Pay.”** The exception is if Tap to Pay on iPhone is the only payment-acceptance method you support. In this case, you can reuse your existing Charge or Checkout buttons to activate Tap to Pay on iPhone. If you support multiple payment-acceptance methods and you use icons in the buttons that activate them, use the `wave.3.right.circle` or `wave.3.right.circle.fill` [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols) in your Tap to Pay on iPhone button. Always avoid including the Apple logo in Tap to Pay on iPhone buttons.
+**For the label of the button that activates the feature, use "Tap to Pay on iPhone" or, if space is constrained, "Tap to Pay."** The exception is if Tap to Pay on iPhone is the only payment-acceptance method you support. In this case, you can reuse your existing Charge or Checkout buttons to activate Tap to Pay on iPhone. If you support multiple payment-acceptance methods and you use icons in the buttons that activate them, use the `wave.3.right.circle` or `wave.3.right.circle.fill` [SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols) in your Tap to Pay on iPhone button. Always avoid including the Apple logo in Tap to Pay on iPhone buttons.
 
 *Image description: An illustration of a 'Tap to Pay' button containing an icon. The button correctly includes a wave symbol followed by the words 'Tap to Pay on iPhone'.*
 
@@ -97,9 +97,9 @@ Checking out is a time-sensitive action, and merchants need the process to work 
 
 *Image description: An X in a circle to indicate incorrect usage.*
 
-> Use the “Tap to Pay on iPhone” label only for payment actions. For language you can use for nonpayment actions, see [Additional interactions](https://developer.apple.com/design/human-interface-guidelines/tap-to-pay-on-iphone#Additional-interactions).
+> Use the "Tap to Pay on iPhone" label only for payment actions. For language you can use for nonpayment actions, see [Additional interactions](https://developer.apple.com/design/human-interface-guidelines/tap-to-pay-on-iphone#Additional-interactions).
 
-**Design your Tap to Pay on iPhone button to match the other buttons in your app.** Although you must use the labels “Tap to Pay on iPhone” or “Tap to Pay” as described above, you can use the button color and shape that coordinate best with your interface.
+**Design your Tap to Pay on iPhone button to match the other buttons in your app.** Although you must use the labels "Tap to Pay on iPhone" or "Tap to Pay" as described above, you can use the button color and shape that coordinate best with your interface.
 
 **Determine the final amount that customers need to pay before merchants initiate the Tap to Pay on iPhone experience.** For example, if your app supports tipping or other customer interactions that can affect the total, make sure merchants offer these interactions before displaying the Tap to Pay on iPhone screen. Aim to display the final amount customers need to pay in the Tap to Pay on iPhone screen.
 
@@ -145,11 +145,11 @@ After you receive payment card data, you might also encounter scenarios like the
 
 Tap to Pay on iPhone lets merchants read a payment card when there’s no transaction amount to support use cases like looking up a past transaction, or retaining card information to ensure future payment, issue refunds, or verify customer information.
 
-**Use a generic label in a button that opens the Tap to Pay on iPhone screen to read a payment card when there’s no transaction amount.** Don’t include “Tap to Pay on iPhone” or “Tap to Pay” in such a label; instead, use a generic label like “Look Up,” “Store Card,” “Verify,” or “Refund.”
+**Use a generic label in a button that opens the Tap to Pay on iPhone screen to read a payment card when there’s no transaction amount.** Don’t include "Tap to Pay on iPhone" or "Tap to Pay" in such a label; instead, use a generic label like "Look Up," "Store Card," "Verify," or "Refund."
 
 When customers have other types of NFC-compatible cards or passes in Apple Wallet - such as loyalty, discount, and points cards - Tap to Pay on iPhone lets merchants read these items at the same time that they read a payment card or independently.
 
-**If your app supports an independent loyalty card transaction, distinguish this flow from a payment-acceptance flow that uses Tap to Pay on iPhone.** It works well to give merchants a separate, clearly labeled button to initiate a loyalty card transaction. To help merchants avoid choosing the wrong button by mistake, avoid including “Tap to Pay on iPhone,” “Tap to Pay,” or other payment-related terms in the label for a loyalty-transaction button.
+**If your app supports an independent loyalty card transaction, distinguish this flow from a payment-acceptance flow that uses Tap to Pay on iPhone.** It works well to give merchants a separate, clearly labeled button to initiate a loyalty card transaction. To help merchants avoid choosing the wrong button by mistake, avoid including "Tap to Pay on iPhone," "Tap to Pay," or other payment-related terms in the label for a loyalty-transaction button.
 
 *Image description: An illustration of a button labeled 'Loyalty Card'.*
 

@@ -65,7 +65,7 @@ A checkbox is a small, square button that’s empty when the button is off, cont
 
 *Image description: An illustration showing a layout that includes two levels of checkboxes.*
 
-**Consider using radio buttons if you need to present a set of more than two mutually exclusive options.** When people need to choose from options in addition to just “on” or “off,” using multiple radio buttons can help you clarify each option with a unique label.
+**Consider using radio buttons if you need to present a set of more than two mutually exclusive options.** When people need to choose from options in addition to just "on" or "off," using multiple radio buttons can help you clarify each option with a unique label.
 
 **Consider using a label to introduce a group of checkboxes if their relationship isn’t clear.** Describe the set of options, and align the label’s baseline with the first checkbox in the group.
 

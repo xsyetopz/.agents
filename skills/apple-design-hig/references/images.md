@@ -23,7 +23,7 @@ When creating bitmap images, you specify a *scale factor* which determines the r
 
 *Image description: Image of a circle that's in high resolution at a scale factor of @3x, and is 30 by 30 pixels. 3x (30x30 px)*
 
-**Provide high-resolution assets for all bitmap images in your app, for every device you support.** As you add each image to your project’s asset catalog, identify its scale factor by appending “@1x,” “@2x,” or “@3x” to its filename. Use the following values for guidance; for additional scale factors, see [Layout](https://developer.apple.com/design/human-interface-guidelines/layout).
+**Provide high-resolution assets for all bitmap images in your app, for every device you support.** As you add each image to your project’s asset catalog, identify its scale factor by appending "@1x," "@2x," or "@3x" to its filename. Use the following values for guidance; for additional scale factors, see [Layout](https://developer.apple.com/design/human-interface-guidelines/layout).
 
 | Platform | Scale factors |
 | --- | --- |

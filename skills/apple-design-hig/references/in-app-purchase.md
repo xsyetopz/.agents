@@ -47,11 +47,11 @@ For marketing and business guidance, see [In-app purchase](https://developer.app
 
 People can use Family Sharing to share access to their purchased content - such as auto-renewable subscriptions and non-consumable in-app purchases - with up to five additional family members, across all their Apple devices. To encourage people to take advantage of the Family Sharing support you offer, consider the following guidelines.
 
-**Prominently mention Family Sharing in places where people learn about the content you offer.** For example, including “Family” or “Shareable” in a subscription or item name and referring to Family Sharing in your sign-up screen can highlight the feature and help people make an informed choice.
+**Prominently mention Family Sharing in places where people learn about the content you offer.** For example, including "Family" or "Shareable" in a subscription or item name and referring to Family Sharing in your sign-up screen can highlight the feature and help people make an informed choice.
 
 **Help people understand the benefits of Family Sharing and how to participate.** When you turn on Family Sharing, people can receive notifications about the change, depending on their current settings. For example, an existing subscriber whose sharing setting is turned off (the default) receives a notice from Apple that invites them to share their subscription with family members. Similarly, a family member can get a notification about content that’s being shared with them. (To learn more about the types of notifications people can receive, see [Auto-renewable subscriptions](https://developer.apple.com/app-store/subscriptions/).)
 
-**Aim to customize your in-app messaging so that it makes sense to both purchasers and family members.** For example, when a family member views shared content for the first time, you might welcome them with wording like “Your family subscription includes…”.
+**Aim to customize your in-app messaging so that it makes sense to both purchasers and family members.** For example, when a family member views shared content for the first time, you might welcome them with wording like "Your family subscription includes…".
 
 ### Providing help with in-app purchases
 
@@ -61,7 +61,7 @@ Sometimes, people need help with a purchase or want to request a refund. To help
 
 *Image description: A partial screenshot of an app’s help screen on iPhone. The Back button is in the top-left of the screen. In a list titled ’How can we help?’ there are the following five help items, each of which can open a new screen: Missing a Purchase, Frequently Asked Questions, Request a Refund, Submit Feedback, and Contact Us.*
 
-**Use a simple title for the refund action, like “Refund” or “Request a Refund”.** The system-provided refund flow makes it clear that people request a refund from Apple, so there’s no need to reiterate this information.
+**Use a simple title for the refund action, like "Refund" or "Request a Refund".** The system-provided refund flow makes it clear that people request a refund from Apple, so there’s no need to reiterate this information.
 
 **Help people find the problematic purchase.** For each recent purchase you display, include contextual information that helps people identify the one they want. For example, you might display an image of the product - along with its name and description - and list the original purchase date.
 
@@ -143,7 +143,7 @@ For developer guidance on implementing offer codes, see [Offer codes](https://de
 
 **Tell people how to redeem a custom code.** Because people can’t redeem a custom code by entering it in their App Store account settings, it’s important to let them know that they can redeem it through a redemption URL or within your app.
 
-**Consider supporting offer redemption within your app.** The system automatically provides screens that present the offer-redemption flow, whether people redeem the offer in your app or in the App Store. When you use StoreKit API to let people redeem offer codes within your app, the only custom UI you need to create is one that initiates the system-provided flow. For developer guidance, see [presentOfferCodeRedeemSheet(in:)](https://developer.apple.com/documentation/StoreKit/AppStore/presentOfferCodeRedeemSheet(in:)) and [offerCodeRedemption(isPresented:onCompletion:)](https://developer.apple.com/documentation/SwiftUI/View/offerCodeRedemption(isPresented:onCompletion:)). There are several natural places to provide this custom UI. For example, you could add a “Redeem Code” button to your paywall, onboarding screens, or your app’s settings screen.
+**Consider supporting offer redemption within your app.** The system automatically provides screens that present the offer-redemption flow, whether people redeem the offer in your app or in the App Store. When you use StoreKit API to let people redeem offer codes within your app, the only custom UI you need to create is one that initiates the system-provided flow. For developer guidance, see [presentOfferCodeRedeemSheet(in:)](https://developer.apple.com/documentation/StoreKit/AppStore/presentOfferCodeRedeemSheet(in:)) and [offerCodeRedemption(isPresented:onCompletion:)](https://developer.apple.com/documentation/SwiftUI/View/offerCodeRedemption(isPresented:onCompletion:)). There are several natural places to provide this custom UI. For example, you could add a "Redeem Code" button to your paywall, onboarding screens, or your app’s settings screen.
 
 *Image description: A screenshot of the Forest Explorer app’s subscription sign-up page on iPhone. The Redeem Code button is highlighted out of the three subscription buttons.*
 

@@ -55,7 +55,7 @@ The carousel actions layout style focuses on full-screen video and images and in
 
 This layout style extends the carousel actions layout style, giving you the opportunity to include some information about the content. For example, you might provide information like a plot summary, cast list, and other metadata that helps people decide whether to choose the content.
 
-**Provide a title that identifies the currently playing content.** The content title appears near the top of the screen so it’s easy for people to read it at a glance. Above the title, you can also provide a succinct phrase or app attribution, like “Featured on *My App*.”
+**Provide a title that identifies the currently playing content.** The content title appears near the top of the screen so it’s easy for people to read it at a glance. Above the title, you can also provide a succinct phrase or app attribution, like "Featured on *My App*."
 
 ### Sectioned content row
 

@@ -37,7 +37,7 @@ Follow these guidelines to offer Sign in with Apple when it’s most convenient 
 
 **As soon as Sign in with Apple completes, welcome people to their new account.** Help people use their new account right away; don’t delay the experience by asking for information that isn’t required.
 
-**Indicate when people are currently signed in.** You can help people confirm their sign-in method by displaying a phrase like “Using Sign in with Apple” in places like a settings or account interface.
+**Indicate when people are currently signed in.** You can help people confirm their sign-in method by displaying a phrase like "Using Sign in with Apple" in places like a settings or account interface.
 
 ## Collecting data
 

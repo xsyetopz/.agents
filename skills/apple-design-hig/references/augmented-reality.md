@@ -63,7 +63,7 @@ Before people can enjoy an AR experience in your app, they need to move their de
 
 **Avoid trying to precisely align objects with the edges of detected surfaces.** In AR, surface boundaries are approximations that may change as people’s surroundings are further analyzed.
 
-**Incorporate plane classification information to inform object placement.** For example, only let people place a virtual piece of furniture on a plane that’s classified as “floor,” or require a plane to be classified as “table” in order to place a virtual game board.
+**Incorporate plane classification information to inform object placement.** For example, only let people place a virtual piece of furniture on a plane that’s classified as "floor," or require a plane to be classified as "table" in order to place a virtual game board.
 
 ## Designing object interactions
 

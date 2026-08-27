@@ -17,7 +17,6 @@ retrieved: 2026-07-25
 - [Change log](#change-log)
 - [References](#references)
 
-
 A widget provides quick access to essential information and focused interactions from your app or game in additional contexts.
 
 *Image description: A stylized representation of a set of different-sized widgets on an iPad Home Screen. The image is tinted red to subtly reflect the red in the original six-color Apple logo.*
@@ -173,7 +172,7 @@ For additional design guidance, see [Rendering modes](https://developer.apple.co
 
 **Avoid mirroring your widget’s appearance within your app.** Including an element in your app that looks like your widget but doesn’t behave like it can confuse people. Additionally, people may be less likely to try other ways to interact with such an element in your app because they expect it to behave like a widget.
 
-**Let people know when authentication adds value.** If your widget provides additional functionality when someone is signed in to your app, make sure people know that. For example, an app that shows upcoming reservations might include a message like “Sign in to view reservations” when people are signed out.
+**Let people know when authentication adds value.** If your widget provides additional functionality when someone is signed in to your app, make sure people know that. For example, an app that shows upcoming reservations might include a message like "Sign in to view reservations" when people are signed out.
 
 ### Updating widget content
 
@@ -261,7 +260,7 @@ For developer guidance, see [widgetAccentable(_:)](https://developer.apple.com/d
 
 *Image description: An image of a small Tips widget that displays actual data on top of a yellow background. The horizontal bars in the placeholder widget are replaced by three short lines of text in different shades of yellow.*
 
-**Write a succinct widget description.** The widget gallery displays descriptions that help people understand what each widget does. Begin a description with an action verb - for example, “See the current weather conditions and forecast for a location” or “Keep track of your upcoming events and meetings.” Avoid including unnecessary phrases that reference the widget itself, like “This widget shows…,” “Use this widget to…,” or “Add this widget.” Use approachable language and [sentence-style capitalization](https://support.apple.com/guide/applestyleguide/c-apsgb744e4a3/web#apdca93e113f1d64).
+**Write a succinct widget description.** The widget gallery displays descriptions that help people understand what each widget does. Begin a description with an action verb - for example, "See the current weather conditions and forecast for a location" or "Keep track of your upcoming events and meetings." Avoid including unnecessary phrases that reference the widget itself, like "This widget shows…," "Use this widget to…," or "Add this widget." Use approachable language and [sentence-style capitalization](https://support.apple.com/guide/applestyleguide/c-apsgb744e4a3/web#apdca93e113f1d64).
 
 **Group your widget’s sizes together, and provide a single description.** If your widget is available in multiple sizes, group them together so people don’t think each size is a different widget. Provide a single description of your widget - regardless of how many sizes you offer - to avoid repetition and to help people understand how each size provides a slightly different perspective on the same content and functionality.
 

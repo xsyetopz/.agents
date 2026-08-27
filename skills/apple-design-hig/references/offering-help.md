@@ -71,7 +71,7 @@ A *tooltip* (called a *help tag* in user documentation) displays a small, transi
 
 **Describe only the control that people indicate interest in.** When people want to know how to use a specific control, they don’t want to learn how to use nearby controls or how to perform a larger task.
 
-**Explain the action or task the control initiates.** It often works well to begin the description with a verb - for example, “Restore default settings” or “Add or remove a language from the list.”
+**Explain the action or task the control initiates.** It often works well to begin the description with a verb - for example, "Restore default settings" or "Add or remove a language from the list."
 
 **In general, avoid repeating a control’s name in its tooltip.** Repeating the name takes up space in the tooltip and rarely adds value to the description.
 

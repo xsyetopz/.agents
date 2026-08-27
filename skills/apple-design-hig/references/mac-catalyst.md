@@ -59,7 +59,7 @@ To learn more about the characteristics that distinguish the Mac experience, see
 
 ## Choose an idiom
 
-When you first create your Mac app using Mac Catalyst, Xcode defaults to the “Scale Interface to Match iPad” setting, or *iPad idiom*. With this setting, the system ensures that your Mac app appears consistent with the macOS display environment without requiring significant changes to the app’s layout. However, text and graphics may appear slightly less detailed because iPadOS views and text scale down to 77% in macOS when you use the iPad idiom. For example, the system scales text that uses the iPadOS baseline font size of 17pt down to 13pt in macOS.
+When you first create your Mac app using Mac Catalyst, Xcode defaults to the "Scale Interface to Match iPad" setting, or *iPad idiom*. With this setting, the system ensures that your Mac app appears consistent with the macOS display environment without requiring significant changes to the app’s layout. However, text and graphics may appear slightly less detailed because iPadOS views and text scale down to 77% in macOS when you use the iPad idiom. For example, the system scales text that uses the iPadOS baseline font size of 17pt down to 13pt in macOS.
 
 When your app feels at home on the Mac using the iPad idiom, consider switching to the *Mac idiom*. With this setting, text and artwork render in more detail, some interface elements and views take on an even more Mac-like appearance, and graphics-intensive apps may see improved performance and lower power consumption.
 

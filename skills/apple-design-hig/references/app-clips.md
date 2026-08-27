@@ -17,7 +17,6 @@ retrieved: 2026-07-25
 - [Change log](#change-log)
 - [References](#references)
 
-
 An App Clip is a lightweight version of your app or game that provides an on-the-go or demo experience that’s instantly available.
 
 *Image description: A sketch of an app icon surrounded by a dashed line, suggesting an App Clip. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
@@ -304,7 +303,7 @@ Always test printed App Clip Codes before you distribute them to be sure they’
 
 **Use high-resolution images and printer settings.** When rasterizing the SVG file, set the image resolution to at least 600 ppi, and print your App Clip Codes with a minimum resolution of 300 dpi. Consider leveling and calibrating your printer before printing to ensure a high print quality, and avoid poor color channel alignment, inaccurate gamma values, artifacts, or printing elliptical or otherwise distorted App Clip Codes. When using receipt printers, print App Clip Codes as close to the paper’s maximum bounds as possible.
 
-**Use correct color settings when you convert the generated SVG file to a CMYK image.** Both the [App Clip Code Generator](https://developer.apple.com/app-clips/resources/) command-line tool and [App Store Connect](https://appstoreconnect.apple.com) generate App Clip Codes as SVG files in the sRGB color space. To print colors that match the SVG file, convert the sRGB image to a CMYK image. Use a relative calorimetric (media-relative) intent when performing the conversion. Use “Generic CMYK ICC profile” on CMYK printers or “Gracol 2013 ICC profile” on CMYKOV printers and allow for a color tolerance CIELab Delta E of 2.5.
+**Use correct color settings when you convert the generated SVG file to a CMYK image.** Both the [App Clip Code Generator](https://developer.apple.com/app-clips/resources/) command-line tool and [App Store Connect](https://appstoreconnect.apple.com) generate App Clip Codes as SVG files in the sRGB color space. To print colors that match the SVG file, convert the sRGB image to a CMYK image. Use a relative calorimetric (media-relative) intent when performing the conversion. Use "Generic CMYK ICC profile" on CMYK printers or "Gracol 2013 ICC profile" on CMYKOV printers and allow for a color tolerance CIELab Delta E of 2.5.
 
 **If you’re using a printer that only prints in grayscale, only generate grayscale App Clip Codes.** Codes generated in color and then printed in grayscale may work less reliably.
 

@@ -21,7 +21,7 @@ When your app runs in other platforms, consider using a modal view to present su
 
 **Prefer simple adjustment controls in a panel.** As much as possible, avoid including controls that require typing text or selecting items to act upon because these actions can require multiple steps. Instead, consider using controls like sliders and steppers because these components can give people more direct control.
 
-**Write a brief title that describes the panel’s purpose.** Because a panel often floats above other open windows in your app, it needs a title bar so people can position it where they want. Create a short title using a noun - or a noun phrase with [title-style capitalization](https://support.apple.com/guide/applestyleguide/c-apsgb744e4a3/web#apdca93e113f1d64) - that can help people recognize the panel onscreen. For example, macOS provides familiar panels titled “Fonts” and “Colors,” and many apps use the title “Inspector.”
+**Write a brief title that describes the panel’s purpose.** Because a panel often floats above other open windows in your app, it needs a title bar so people can position it where they want. Create a short title using a noun - or a noun phrase with [title-style capitalization](https://support.apple.com/guide/applestyleguide/c-apsgb744e4a3/web#apdca93e113f1d64) - that can help people recognize the panel onscreen. For example, macOS provides familiar panels titled "Fonts" and "Colors," and many apps use the title "Inspector."
 
 **Show and hide panels appropriately.** When your app becomes active, bring all of its open panels to the front, regardless of which window was active when the panel opened. When your app is inactive, hide all of its panels.
 
@@ -29,7 +29,7 @@ When your app runs in other platforms, consider using a modal view to present su
 
 **In general, avoid making a panel’s minimize button available.** People don’t usually need to minimize a panel, because it displays only when needed and disappears when the app is inactive.
 
-**Refer to panels by title in your interface and in help documentation.** In menus, use the panel’s title without including the term *panel*: for example, “Show Fonts,” “Show Colors,” and “Show Inspector.” In help documentation, it can be confusing to introduce “panel” as a different type of window, so it’s generally best to refer to a panel by its title or - when it adds clarity - by appending *window* to the title. For example, the title “Inspector” often supplies enough context to stand on its own, whereas it can be clearer to use “Fonts window”  and “Colors window” instead of just “Fonts” and “Colors.”
+**Refer to panels by title in your interface and in help documentation.** In menus, use the panel’s title without including the term *panel*: for example, "Show Fonts," "Show Colors," and "Show Inspector." In help documentation, it can be confusing to introduce "panel" as a different type of window, so it’s generally best to refer to a panel by its title or - when it adds clarity - by appending *window* to the title. For example, the title "Inspector" often supplies enough context to stand on its own, whereas it can be clearer to use "Fonts window"  and "Colors window" instead of just "Fonts" and "Colors."
 
 ## HUD-style panels
 

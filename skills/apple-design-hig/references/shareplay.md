@@ -21,7 +21,7 @@ When someone shares content during a FaceTime call, the system asks each partici
 
 **Support Picture in Picture (PiP) when possible.** On iPhone and iPad, people can open a shared video in a PiP window. On a Mac, a shared video opens in a background window that people can move into the foreground when they want to watch.
 
-**Use the term *SharePlay* correctly.** You can use *SharePlay* as a noun - as in “Join SharePlay” - and also as a verb when describing a direct action in your interface. For example, in a button or sheet that lets people share a movie-viewing activity, you can use a phrase like “SharePlay Movie.” Avoid using an adjective with SharePlay; for example, in your visionOS app, don’t add terms like *virtual* or *spatial*. Avoid changing the term *SharePlay* in any way; for example, don’t use variations like *SharePlayed*, *SharePlays*, or *SharePlaying*.
+**Use the term *SharePlay* correctly.** You can use *SharePlay* as a noun - as in "Join SharePlay" - and also as a verb when describing a direct action in your interface. For example, in a button or sheet that lets people share a movie-viewing activity, you can use a phrase like "SharePlay Movie." Avoid using an adjective with SharePlay; for example, in your visionOS app, don’t add terms like *virtual* or *spatial*. Avoid changing the term *SharePlay* in any way; for example, don’t use variations like *SharePlayed*, *SharePlays*, or *SharePlaying*.
 
 ## Sharing activities
 
@@ -53,7 +53,7 @@ visionOS uses the concept of *shared context* to describe the characteristics of
 
 When people feel that they’re truly sharing an experience, social dynamics can encourage authentic, intuitive interactions. For example, people can communicate verbally and nonverbally to make plans, take turns, and share resources.
 
-> During a shared activity, the system helps preserve people’s privacy by obscuring some visual details about wearers. In addition, a person can adjust their spatial Persona if they want. Although the system can place spatial Personas shoulder to shoulder and it supports shared gestures like a handshake or “high five,” spatial Personas remain apart.
+> During a shared activity, the system helps preserve people’s privacy by obscuring some visual details about wearers. In addition, a person can adjust their spatial Persona if they want. Although the system can place spatial Personas shoulder to shoulder and it supports shared gestures like a handshake or "high five," spatial Personas remain apart.
 
 **Choose the spatial Persona template that suits your shared activity.** When you design a shared activity, you can use a spatial Persona template to specify a layout for arranging spatial Personas in the shared activity space. The system provides three spatial Persona templates: side-by-side, surround, and conversational.
 

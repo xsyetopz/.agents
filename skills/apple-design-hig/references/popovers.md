@@ -31,7 +31,7 @@ A popover is a transient view that appears above other content when people click
 
 **Provide a smooth transition when changing the size of a popover.** Some popovers provide both condensed and expanded views of the same information. If you adjust the size of a popover, animate the change to avoid giving the impression that a new popover replaced the old one.
 
-**Avoid using the word *popover* in help documentation.** Instead, refer to a specific task or selection. For example, instead of “Select the Show button at the bottom of the popover,” you might write “Select the Show button.”
+**Avoid using the word *popover* in help documentation.** Instead, refer to a specific task or selection. For example, instead of "Select the Show button at the bottom of the popover," you might write "Select the Show button."
 
 **Avoid using a popover to show a warning.** People can miss a popover or accidentally close it. If you need to warn people, use an [alert](https://developer.apple.com/design/human-interface-guidelines/alerts) instead.
 

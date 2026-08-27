@@ -205,7 +205,7 @@ Using a process called *annotating*, you can assign a specific color - or a spec
 
 For guidance, see [Icons](https://developer.apple.com/design/human-interface-guidelines/icons).
 
-**Assign negative side margins to your custom symbol if necessary.** SF Symbols supports negative side margins to aid optical horizontal alignment when a symbol contains a badge or other elements that increase its width. For example, negative side margins can help you horizontally align a stack of folder symbols, some of which include a badge. The name of each margin includes the relevant configuration  - such as “left-margin-Regular-M” - so be sure to use this naming pattern if you add margins to your custom symbols.
+**Assign negative side margins to your custom symbol if necessary.** SF Symbols supports negative side margins to aid optical horizontal alignment when a symbol contains a badge or other elements that increase its width. For example, negative side margins can help you horizontally align a stack of folder symbols, some of which include a badge. The name of each margin includes the relevant configuration  - such as "left-margin-Regular-M" - so be sure to use this naming pattern if you add margins to your custom symbols.
 
 **Optimize layers to use animations with custom symbols.** If you want to animate your symbol by layer, make sure to annotate the layers in the SF Symbols app. The Z-order determines the order that you want to apply colors to the layers of a variable color symbol, and you can choose whether to animate those changes from front-to-back, or back-to-front. You can also animate by layer groups to have related layers move together.
 

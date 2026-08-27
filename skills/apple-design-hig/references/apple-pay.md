@@ -20,7 +20,6 @@ retrieved: 2026-07-25
 - [Change log](#change-log)
 - [References](#references)
 
-
 Apple Pay is a secure, easy way to make payments for physical goods and services, donations, and subscriptions in apps and in any browser.
 
 *Image description: A sketch of a dollar sign, suggesting Apple Pay. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
@@ -45,7 +44,7 @@ For developer guidance, see [Apple Pay](https://developer.apple.com/documentatio
 
 **Use Apple Pay buttons only to initiate payment or, when appropriate, the Apple Pay setup process.** When people choose an Apple Pay button to make a purchase, but their device doesn’t have Apple Pay set up, they’re given the opportunity to set up Apple Pay. Don’t use Apple Pay buttons in any other way.
 
-**If you use a custom button to start the Apple Pay payment process, make sure your custom button doesn’t display “Apple Pay” or the Apple Pay logo.** In this scenario, you must let people know that you accept Apple Pay by displaying the [Apple Pay mark](https://developer.apple.com/design/human-interface-guidelines/apple-pay#Apple-Pay-mark) graphic or referencing Apple Pay in text on the same page that displays your payment button.
+**If you use a custom button to start the Apple Pay payment process, make sure your custom button doesn’t display "Apple Pay" or the Apple Pay logo.** In this scenario, you must let people know that you accept Apple Pay by displaying the [Apple Pay mark](https://developer.apple.com/design/human-interface-guidelines/apple-pay#Apple-Pay-mark) graphic or referencing Apple Pay in text on the same page that displays your payment button.
 
 *Image description: An illustration that shows the correct arrangement of the Apple Pay logo above a custom button titled 'Order Now'.*
 
@@ -91,7 +90,7 @@ For developer guidance, see [Apple Pay](https://developer.apple.com/documentatio
 
 **Report transaction results in the payment sheet.** In failure cases, such as a bad address, provide error messages so people can take steps to fix the problem.
 
-**Display an order confirmation or thank-you page.** After the payment sheet shows the result of the transaction, display an order confirmation page to thank people for their purchase, provide details about when the order will ship, and indicate how to check its status. Listing Apple Pay on the confirmation page isn’t necessary, but if you do, show it after the last four digits of the account used to process the transaction or as a separate note. For example, ”1234 (Apple Pay)” or ”Paid with Apple Pay.”
+**Display an order confirmation or thank-you page.** After the payment sheet shows the result of the transaction, display an order confirmation page to thank people for their purchase, provide details about when the order will ship, and indicate how to check its status. Listing Apple Pay on the confirmation page isn’t necessary, but if you do, show it after the last four digits of the account used to process the transaction or as a separate note. For example, "1234 (Apple Pay)" or "Paid with Apple Pay."
 
 ### Customizing the payment sheet
 
@@ -157,7 +156,7 @@ For developer guidance, see [PKPaymentAuthorizationViewControllerDelegate](https
 
 **Accurately report problems to the system.** When a problem occurs, provide a custom error message and the correct status code so the system can show the most relevant error on the payment sheet. For developer guidance, see [PKPaymentError](https://developer.apple.com/documentation/PassKit/PKPaymentError) (iOS, watchOS) and [Apple Pay Status Codes](https://developer.apple.com/documentation/ApplePayontheWeb/apple-pay-status-codes) (web).
 
-**Explain the problem clearly and succinctly when data is invalid or incorrectly formatted.** Reference the relevant field and indicate exactly what’s expected. For example, if people enter an invalid zip code, instead of showing “Address is invalid,” show a specific message like “Zip code doesn’t match city.” If the shipping address is unserviceable, indicate why with a message like “Shipping not available for this state.” Use noun phrases with sentence-style capitalization and no ending punctuation. Aim to keep messages at 128 characters or fewer to avoid truncation.
+**Explain the problem clearly and succinctly when data is invalid or incorrectly formatted.** Reference the relevant field and indicate exactly what’s expected. For example, if people enter an invalid zip code, instead of showing "Address is invalid," show a specific message like "Zip code doesn’t match city." If the shipping address is unserviceable, indicate why with a message like "Shipping not available for this state." Use noun phrases with sentence-style capitalization and no ending punctuation. Aim to keep messages at 128 characters or fewer to avoid truncation.
 
 ### Payment processing problems
 

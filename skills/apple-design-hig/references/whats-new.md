@@ -9,7 +9,6 @@ retrieved: 2026-07-25
 
 - Chronological source entries
 
-
 - [Updated iOS and iPadOS UI Kit for Figma](https://developer.apple.com/design/resources/#ios-apps) - June 23, 2026; resources; Updated iOS 27 and iPadOS 27 design kit for Figma.
 
 - [Updated macOS UI Kit for Figma](https://developer.apple.com/design/resources/#macos-apps) - June 23, 2026; resources; Updated macOS 27 design kit for Figma.
@@ -326,7 +325,7 @@ retrieved: 2026-07-25
 
 - [Apple Pay](https://developer.apple.com/design/human-interface-guidelines/apple-pay) - June 10, 2024; Guidance; Updated links to developer guidance for offering Apple Pay on the web.
 
-- [“I taught myself”: Tucker MacDonald and the rise of Tide Guide](https://developer.apple.com/news/?id=4r9b23wx) - May 9, 2024; Articles; Lots of apps have great origin stories, but the tale of Tucker MacDonald and Tide Guide seems tailor-made for the Hollywood treatment.
+- ["I taught myself": Tucker MacDonald and the rise of Tide Guide](https://developer.apple.com/news/?id=4r9b23wx) - May 9, 2024; Articles; Lots of apps have great origin stories, but the tale of Tucker MacDonald and Tide Guide seems tailor-made for the Hollywood treatment.
 
 - [Apple Pencil and Scribble](https://developer.apple.com/design/human-interface-guidelines/apple-pencil-and-scribble) - May 7, 2024; Guidance; Added guidance for handling squeeze and barrel roll on Apple Pencil Pro.
 
@@ -352,7 +351,7 @@ retrieved: 2026-07-25
 
 - [Uncovering the hidden joys of Finding Hannah](https://developer.apple.com/news/?id=p09o9fxd) - March 7, 2024; Articles; On its surface, Finding Hannah is a bright and playful hidden-object game - but dig a little deeper and you’ll find something much more.
 
-- [“The best version we’ve ever made”](https://developer.apple.com/news/?id=you1yc2h) - February 8, 2024; Articles; Michael Simmons discusses bringing Fantastical to visionOS.
+- ["The best version we’ve ever made"](https://developer.apple.com/news/?id=you1yc2h) - February 8, 2024; Articles; Michael Simmons discusses bringing Fantastical to visionOS.
 
 - [Design kit](https://developer.apple.com/design/resources/#visionos-apps) - February 5, 2024; Resources; Updated visionOS design kits for Figma and Sketch.
 
@@ -380,11 +379,11 @@ retrieved: 2026-07-25
 
 - [App icons](https://developer.apple.com/design/human-interface-guidelines/app-icons) - January 31, 2024; Guidance; Clarified platform availability for alternate app icons.
 
-- [“So much possibility”: How Ryan McLeod rebooted Blackbox for Apple Vision Pro](https://developer.apple.com/news/?id=you1yc2h) - January 30, 2024; Articles; The inventive game comes to the infinite canvas.
+- ["So much possibility": How Ryan McLeod rebooted Blackbox for Apple Vision Pro](https://developer.apple.com/news/?id=you1yc2h) - January 30, 2024; Articles; The inventive game comes to the infinite canvas.
 
 - [SF Symbols 5.1](https://developer.apple.com/design/resources/#sf-symbols) - January 16, 2024; Resources; Version 5.1 adds over 400 localized symbols and minor bug fixes.
 
-- [Realizing their vision: How djay designed for visionOS](https://developer.apple.com/news/?id=q0cq9dv9) - January 11, 2024; Articles; The team behind djay reveals why Apple Vision Pro represents “the culmination of everything” for their app.
+- [Realizing their vision: How djay designed for visionOS](https://developer.apple.com/news/?id=q0cq9dv9) - January 11, 2024; Articles; The team behind djay reveals why Apple Vision Pro represents "the culmination of everything" for their app.
 
 - [Q&A: Building apps for visionOS](https://developer.apple.com/news/?id=prl6dp5r) - January 11, 2024; Articles; Get advice directly from Apple experts on creating incredible apps and games for Apple Vision Pro.
 

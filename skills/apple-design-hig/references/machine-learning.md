@@ -23,7 +23,6 @@ retrieved: 2026-07-25
 - [Change log](#change-log)
 - [References](#references)
 
-
 Machine learning enables apps and games to learn from data and usage patterns, letting you improve existing experiences and create engaging new ones.
 
 *Image description: A sketch of sparkly stars, suggesting intelligence. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
@@ -266,13 +265,13 @@ Although it might seem like higher confidence produces a higher quality result -
 
 **Know what your confidence values mean before you decide how to present them.** For example, people may forgive low-quality results from [critical or complementary](https://developer.apple.com#Critical-or-complementary) features - especially when results are accompanied by [attribution](https://developer.apple.com#Attribution) or other contextual information - but presenting low-quality results in a prominent way is likely to erode trust in your app.
 
-**In general, translate confidence values into concepts that people already understand.** Simply displaying a confidence value doesn’t necessarily help people understand how it relates to a result. For example, a feature that suggests new music based on a person’s listening habits might calculate that there’s a 97% match between a new song and the songs they usually listen to. However, displaying “97% match” next to the new song as an attribution doesn’t communicate enough information to help people make a choice. In contrast, providing an attribution that clearly identifies the behavior - such as “Because you listen to pop music” - can be more actionable.
+**In general, translate confidence values into concepts that people already understand.** Simply displaying a confidence value doesn’t necessarily help people understand how it relates to a result. For example, a feature that suggests new music based on a person’s listening habits might calculate that there’s a 97% match between a new song and the songs they usually listen to. However, displaying "97% match" next to the new song as an attribution doesn’t communicate enough information to help people make a choice. In contrast, providing an attribution that clearly identifies the behavior - such as "Because you listen to pop music" - can be more actionable.
 
-**In situations where attributions aren’t helpful, consider ranking or ordering the results in a way that implies confidence levels.** If you must display confidence directly, consider expressing it in terms of semantic categories. For example, a feature that predicts travel prices might replace ranges of confidence numbers with categories like “high chance” and “low chance” to give context to the values and help people understand and compare the results.
+**In situations where attributions aren’t helpful, consider ranking or ordering the results in a way that implies confidence levels.** If you must display confidence directly, consider expressing it in terms of semantic categories. For example, a feature that predicts travel prices might replace ranges of confidence numbers with categories like "high chance" and "low chance" to give context to the values and help people understand and compare the results.
 
 **In scenarios where people expect statistical or numerical information, display confidence values that help them interpret the results.** For example, weather predictions, sports statistics, and polling numbers are often accompanied by specific values that express the accuracy of the data as an interval or a percentage.
 
-**Whenever possible, help people make decisions by conveying confidence in terms of actionable suggestions.** Understanding people’s goals is key to expressing confidence in ways that help them make decisions. For example, if your feature predicts when an item will be at its lowest price, you know that people want to optimize how they spend their time and money. For a feature like this, displaying percentages or other numerical confidence values would be less valuable than providing actionable suggestions like “This is a good time to buy,” or “Consider waiting for a better price.”
+**Whenever possible, help people make decisions by conveying confidence in terms of actionable suggestions.** Understanding people’s goals is key to expressing confidence in ways that help them make decisions. For example, if your feature predicts when an item will be at its lowest price, you know that people want to optimize how they spend their time and money. For a feature like this, displaying percentages or other numerical confidence values would be less valuable than providing actionable suggestions like "This is a good time to buy," or "Consider waiting for a better price."
 
 **Consider changing how you present results based on different confidence thresholds.** If high or low levels of confidence have a meaningful impact on the ways people can experience the results, it’s a good idea to adapt your presentation accordingly. For example, when confidence is high, the face recognition feature in Photos simply displays the photos that contain a specific person, but when confidence is lower, the feature asks people to confirm whether the photos contain the person before showing more.
 
@@ -280,7 +279,7 @@ Although it might seem like higher confidence produces a higher quality result -
 
 ## Attribution
 
-An attribution expresses the underlying basis or rationale for a result, without explaining exactly how a model works. Depending on the design of your app, you might want to use attributions to impart transparency and give people insight into your results. For example, if your app suggests books for people to read, you might use an attribution like “Because you’ve read mysteries” when you suggest books in the “thrillers” category.
+An attribution expresses the underlying basis or rationale for a result, without explaining exactly how a model works. Depending on the design of your app, you might want to use attributions to impart transparency and give people insight into your results. For example, if your app suggests books for people to read, you might use an attribution like "Because you’ve read mysteries" when you suggest books in the "thrillers" category.
 
 *Image description: An illustration of a screen on iPhone, which shows an area that contains recommended videos. The area is labeled 'For You' and includes a row of two video icons. A third video icon is partially visible on the right side of the screen, hinting at additional recommendations.*
 
@@ -294,11 +293,11 @@ To help you decide whether to include attributions in your app, consider how you
 
 - Promote trust in your app over time
 
-**Consider using attributions to help people distinguish among results.** For example, if you present a set of results as [multiple options](https://developer.apple.com#Multiple-options), including attributions can help people choose an option based on their understanding of the premise that led to it, such as “New books by authors you’ve read.”
+**Consider using attributions to help people distinguish among results.** For example, if you present a set of results as [multiple options](https://developer.apple.com#Multiple-options), including attributions can help people choose an option based on their understanding of the premise that led to it, such as "New books by authors you’ve read."
 
 **Avoid being too specific or too general.** Overly specific attributions can make people feel like they have to do additional work to interpret the results, whereas overly general attributions typically don’t provide useful information. In apps that make content recommendations, general attributions can make people feel like your app is not treating them as individuals, but overly specific attributions can make people think that your app is watching them too closely. The best attributions strike a balance between these extremes.
 
-**Keep attributions factual and based on objective analysis.** To be useful, an attribution needs to help people reason about a result; you don’t want to provoke an emotional response. Don’t provide an attribution that implies understanding or judgment of people’s emotions, preferences, or beliefs. For example, an app that recommends new content to people can use an attribution like “Because you’ve read nonfiction” instead of an attribution like “Because you love nonfiction.”
+**Keep attributions factual and based on objective analysis.** To be useful, an attribution needs to help people reason about a result; you don’t want to provoke an emotional response. Don’t provide an attribution that implies understanding or judgment of people’s emotions, preferences, or beliefs. For example, an app that recommends new content to people can use an attribution like "Because you’ve read nonfiction" instead of an attribution like "Because you love nonfiction."
 
 **In general, avoid technical or statistical jargon.** In most situations, using percentages, statistics, and other technical jargon doesn’t help people assess the results you provide. The exception to this is when the result itself is of a statistical or technical nature, such as information in the areas of weather, sports, polling and election results, or scientific data.
 
@@ -320,7 +319,7 @@ An important part of the design process is to identify the scenarios where limit
 
 **Demonstrate how to get the best results.** If you don’t provide guidance for using a feature, people may assume it’ll do everything they want. When you proactively show people how to get good results, you help them benefit from the feature and establish a more accurate mental model of the feature’s capabilities. There are many ways to show people the best ways to use a feature, such as:
 
-- Use placeholder text to suggest input. In Photos, the search bar displays the text “Photos, People, Places…” to help people understand what they can search for before they begin typing. Photos also displays a description of how it scans the photo library to offer search suggestions.
+- Use placeholder text to suggest input. In Photos, the search bar displays the text "Photos, People, Places…" to help people understand what they can search for before they begin typing. Photos also displays a description of how it scans the photo library to offer search suggestions.
 
 - As people interact with the feature, provide feedback on their actions to guide them toward a result without overwhelming them. For example, while people are interacting with Memoji, the feature responds to current conditions and suggests how people can improve their results by adjusting the lighting or moving closer to the camera.
 

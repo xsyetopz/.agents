@@ -17,7 +17,7 @@ Live-viewing apps need to elevate and prioritize live content. In every screen, 
 
 **Let people tap once - or not at all - to start playback.** For example, you might display a Watch Now button on top of featured or recently viewed live content. When people tap this button, it immediately disappears and playback begins, replacing your app’s UI with a full-screen, immersive viewing experience.
 
-**Make sure live content looks live.** People need to be able to distinguish live content from VOD content. Although simply playing live content is the best way to make it feel live, you can also help people recognize live content by marking it in some way. For example, you might display other channels in a collection row titled “Live” and give each item a visual indicator - such as a badge, symbol, or sash - that identifies it as live.
+**Make sure live content looks live.** People need to be able to distinguish live content from VOD content. Although simply playing live content is the best way to make it feel live, you can also help people recognize live content by marking it in some way. For example, you might display other channels in a collection row titled "Live" and give each item a visual indicator - such as a badge, symbol, or sash - that identifies it as live.
 
 **Consider indicating the progress of currently playing live content.** People appreciate knowing where they’ll land when they jump into in-progress live content. You can use a progress bar or other indicator to show people how much content remains.
 

@@ -9,7 +9,7 @@ On devices without physical keyboards, the system offers various types of virtua
 
 *Image description: A stylized representation of a numeric keypad shown on top of a grid that suggests the canvas of a design tool. The image is tinted red to subtly reflect the red in the original six-color Apple logo.*
 
-A virtual keyboard can provide a specific set of keys that are optimized for the current task; for example, a keyboard that supports entering email addresses can include the “@” character and a period or even “.com”.  A virtual keyboard doesn’t support keyboard shortcuts.
+A virtual keyboard can provide a specific set of keys that are optimized for the current task; for example, a keyboard that supports entering email addresses can include the "@" character and a period or even ".com".  A virtual keyboard doesn’t support keyboard shortcuts.
 
 When it makes sense in your app, you can replace the system-provided keyboard with a custom view that supports app-specific data entry.  In iOS, iPadOS, and tvOS, you can also create an app extension that offers a custom keyboard people can install and use in place of the standard keyboard.
 

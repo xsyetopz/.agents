@@ -81,7 +81,7 @@ The system defines several place card styles, which specify the size, appearance
 
 - The *callout* style displays a place card in a popover style next to the selected place. You can further specify the style of a callout - the *full* callout style displays a large, detailed place card, and the *compact* callout style displays a space-saving, more concise place card. If you don’t specify a callout style, the system defaults to the *automatic* callout style, which determines the callout style based on your map’s view size.
 
-- The *caption* style displays an “Open in Apple Maps” link.
+- The *caption* style displays an "Open in Apple Maps" link.
 
 - The *sheet* style displays a place card in a [sheet](https://developer.apple.com/design/human-interface-guidelines/sheets).
 

@@ -17,7 +17,6 @@ retrieved: 2026-07-25
 - [Change log](#change-log)
 - [References](#references)
 
-
 Game Center is Apple’s social gaming network, which lets players track their progress and connect with friends across Apple platforms, and boosts the discovery of your game across players’ devices.
 
 *Image description: A sketch of the Game Center icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
@@ -70,10 +69,10 @@ Your game can include custom links into the Game Overlay (in iOS, iPadOS, macOS)
 | --- | --- | --- |
 | Game Center | GameKit, GameCenter, game center | Use the system-provided translation of *Game Center* |
 | Game Center Profile | Profile, Account, Player Info | Use the system-provided translation of *Game Center* and localize *Profile* |
-| Achievements | Awards, Trophies, Medals |  |
-| Leaderboards | Rankings, Scores, Leaders |  |
-| Challenges | Competitions |  |
-| Add Friends | Add, Add Profiles, Include Friends |  |
+| Achievements | Awards, Trophies, Medals | |
+| Leaderboards | Rankings, Scores, Leaders | |
+| Challenges | Competitions | |
+| Add Friends | Add, Add Profiles, Include Friends | |
 
 ## Achievements
 
@@ -93,7 +92,7 @@ Achievements give players an added incentive to stay engaged with your game. Gam
 
 *Image description: A diagram of an achievement card, with callouts indicating the achievement image, title, and description.*
 
-**Give players a sense of progress.** When you use progressive achievements, the system displays player progress and provides encouraging messages like “Youʼre more than halfway to completing Great Lakes Freighter in The Coast. Keep going!” to help motivate players to complete them.
+**Give players a sense of progress.** When you use progressive achievements, the system displays player progress and provides encouraging messages like "Youʼre more than halfway to completing Great Lakes Freighter in The Coast. Keep going!" to help motivate players to complete them.
 
 ### Creating achievement images
 
@@ -133,19 +132,19 @@ Leaderboards are a great way to encourage friendly competition within your game.
 
 - A *classic leaderboard* tracks a player’s best all-time score. Classic leaderboards are always active with no ending. The following are examples of goals you might include in a classic leaderboard:
 
-    - Strive for the most perfect score in a rhythm game.
+  - Strive for the most perfect score in a rhythm game.
 
-    - Collect the most coins in a single dungeon run.
+  - Collect the most coins in a single dungeon run.
 
-    - Achieve the longest continuous time in an endless runner.
+  - Achieve the longest continuous time in an endless runner.
 
 - A *recurring leaderboard* resets based on a time interval you define, such as every week or every day. Recurring leaderboards can increase engagement by giving players more chances to take the lead. The following are examples of features that work well with recurring leaderboards:
 
-    - Daily rotating puzzles
+  - Daily rotating puzzles
 
-    - Seasonal or holiday-themed events
+  - Seasonal or holiday-themed events
 
-    - Weekly leaderboards for different battle modes
+  - Weekly leaderboards for different battle modes
 
 **Take advantage of leaderboard sets for multiple leaderboards.** Leaderboard sets are an organization system that can make it easier for players to find the board they’re looking for. Consider grouping leaderboard sets by themes or gameplay experiences, such as:
 
@@ -224,7 +223,7 @@ Game Center supports both real-time and turn-based multiplayer activities that m
 
 *Image description: An iPhone screenshot of the game The Coast with the Game Overlay open, showing the detail view of a single multiplayer level. Multiplayer level detail*
 
-**Use party codes to invite players to multiplayer activities.** Game Center party codes are a great way to coordinate real-time multiplayer sessions whether you use Game Center matchmaking and networking facilities or provide your own. Game Center generates alpha-numeric party codes that are typically eight characters long, such as “2MP4-9CMF.”  When integrating party codes into your multiplayer games, consider the following guidelines for the best player experience:
+**Use party codes to invite players to multiplayer activities.** Game Center party codes are a great way to coordinate real-time multiplayer sessions whether you use Game Center matchmaking and networking facilities or provide your own. Game Center generates alpha-numeric party codes that are typically eight characters long, such as "2MP4-9CMF."  When integrating party codes into your multiplayer games, consider the following guidelines for the best player experience:
 
 - Allow players to join gameplay late, leave early, and return later.
 

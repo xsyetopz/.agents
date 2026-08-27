@@ -19,7 +19,7 @@ audit, redesign, or implementation.
 
 Use the direct reference routes in `../SKILL.md`, search the reference directory by
 title or slug, and open the smallest matching page. Use
-`references/whats-new.md` to discover recent topics; never assume a fixed topic
+`references/whats-new.md` to discover recent topics; use the current topic list
 list is exhaustive.
 
 ### 3. Check current evidence
@@ -39,7 +39,7 @@ model.
 
 Prefer system components, semantic controls, platform conventions, SF Symbols,
 system typography, and adaptive layout. Link relevant API documentation, note
-SDK availability, and do not invent behavior that the HIG does not specify.
+SDK availability, and describe only behavior that the HIG specifies.
 
 ### 6. Deliver and verify
 
@@ -60,7 +60,7 @@ python3 scripts/hig_catalog.py --topic foundations
 ```
 
 The catalog helper reads Apple's live DocC JSON and prints the current catalog
-or one topic summary to standard output. These commands do not modify the
+or one topic summary to standard output. These commands are read-only and leave the
 bundled references. Compare the printed source URLs and retrieval date with the
 local snapshot, then report stale or missing coverage instead of creating a
 custom generated file. The catalog helper is for live discovery, not a citation

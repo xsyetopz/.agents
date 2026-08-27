@@ -59,7 +59,7 @@ For developer guidance, see [HKActivityRingView](https://developer.apple.com/doc
 
 ## Apple Health icon
 
-The Apple Health icon shows that an app works with HealthKit and the Health app. The following guidelines help you use the icon correctly. To learn how to refer to HealthKit and the Health app in copy and UI text, see [Editorial guidelines](https://developer.apple.com/design/human-interface-guidelines/healthkit#Editorial-guidelines); to learn about using the “Works with Apple Health” badge in your marketing communications, see [Works with Apple Health](https://developer.apple.com/health-fitness/works-with-apple-health/).
+The Apple Health icon shows that an app works with HealthKit and the Health app. The following guidelines help you use the icon correctly. To learn how to refer to HealthKit and the Health app in copy and UI text, see [Editorial guidelines](https://developer.apple.com/design/human-interface-guidelines/healthkit#Editorial-guidelines); to learn about using the "Works with Apple Health" badge in your marketing communications, see [Works with Apple Health](https://developer.apple.com/health-fitness/works-with-apple-health/).
 
 *Image description: A screenshot of an onboarding screen for an app named Eating Habits, which displays the Apple Health icon and text that describes how syncing health data from Eating Habits can help people manage their health. At the bottom of the screen is a Sync Health Data button and a Skip for Now button.*
 
@@ -83,7 +83,7 @@ The Apple Health icon shows that an app works with HealthKit and the Health app.
 
 **Refer to the Health app as *Apple Health* or *the Apple Health app*.** In your app and marketing text, using *Apple Health* adds clarity.
 
-**Don’t use the term *HealthKit*.** *HealthKit* is a developer-facing term that names the framework your app uses to access health data. If you need to explain to people how your app works with their data, use the term *the Apple Health app*. For example, you might say that your app “works with the Apple Health app” or “uses data from the Apple Health app.”
+**Don’t use the term *HealthKit*.** *HealthKit* is a developer-facing term that names the framework your app uses to access health data. If you need to explain to people how your app works with their data, use the term *the Apple Health app*. For example, you might say that your app "works with the Apple Health app" or "uses data from the Apple Health app."
 
 **Use correct capitalization when using the term *Apple Health*.** *Apple Health* is two words, with an uppercase A and uppercase H, followed by lowercase letters. You can display *Apple Health* entirely in uppercase only when you need to conform to an established typographic interface style, such as in an app that capitalizes all text.
 

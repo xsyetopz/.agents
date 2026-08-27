@@ -31,7 +31,7 @@ People expect undo and redo to let them reverse their recent actions, so they’
 
 **Avoid redefining standard gestures for undo and redo.** For example, people can use a three-finger swipe to initiate an undo or redo, or shake their iPhone. As with all standard gestures, redefining them in your interface runs the risk of confusing people and making your experience unpredictable.
 
-**Briefly and precisely describe the operation to be undone or redone.** The undo and redo alert title automatically includes a prefix of “Undo ” or “Redo ” (including the trailing space). You need to provide an additional word or two that describes what’s being undone or redone, to appear after this prefix. For example, you might create alert titles such as “Undo Name” or “Redo Address Change.”
+**Briefly and precisely describe the operation to be undone or redone.** The undo and redo alert title automatically includes a prefix of "Undo " or "Redo " (including the trailing space). You need to provide an additional word or two that describes what’s being undone or redone, to appear after this prefix. For example, you might create alert titles such as "Undo Name" or "Redo Address Change."
 
 ### macOS
 

@@ -19,7 +19,6 @@ retrieved: 2026-07-25
 - [Change log](#change-log)
 - [References](#references)
 
-
 Wallet helps people securely store their credit and debit cards, driver’s license or state ID, transit cards, event tickets, keys, and more on iPhone and Apple Watch.
 
 *Image description: A sketch of the Wallet icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
@@ -44,7 +43,7 @@ Passes are digital representations of information that people can add to Wallet,
 
 *Image description: A screenshot of a food truck app on iPhone displaying a coupon pass offering 20% off a dozen donuts, with an Add to Apple Wallet button below the pass.*
 
-**Let people jump from your app to their pass in Wallet.** Wherever your app displays information about a pass that exists in Wallet, you can offer a link that opens it directly. Label the link something like “View in Wallet.”
+**Let people jump from your app to their pass in Wallet.** Wherever your app displays information about a pass that exists in Wallet, you can offer a link that opens it directly. Label the link something like "View in Wallet."
 
 **Tell the system when your passes expire.** Wallet automatically hides expired passes to reduce crowding, and provides a button that lets people revisit them. To help ensure the system hides passes appropriately, set the expiration date, relevant date, and voided properties of each pass correctly; for developer guidance, see [Pass](https://developer.apple.com/documentation/WalletPasses/Pass).
 
@@ -80,7 +79,7 @@ Pass fields are organized into the following areas:
 
 - Secondary and auxiliary fields: Show useful, but less critical information.
 
-- Footer fields: Show supplemental information, such as pass category (for example, “Family” or “Annual”).
+- Footer fields: Show supplemental information, such as pass category (for example, "Family" or "Annual").
 
 - Back fields: Show supplemental details that appear in pass details in Wallet.
 
@@ -120,7 +119,7 @@ Use Pass Designer to design and preview passes for Apple Wallet. Starting from A
 
 *Image description: An X in a circle to indicate incorrect usage.*
 
-**Use language that works on any device.** Passes can appear on multiple devices, so use text that makes sense everywhere. For example, “Slide to view” is meaningful on iPhone but doesn’t apply on Apple Watch.
+**Use language that works on any device.** Passes can appear on multiple devices, so use text that makes sense everywhere. For example, "Slide to view" is meaningful on iPhone but doesn’t apply on Apple Watch.
 
 ## Pass styles
 
@@ -330,13 +329,13 @@ The [Wallet Orders](https://developer.apple.com/documentation/WalletOrders) sche
 
 **Make it easy for people to add an order to Wallet.** For example, when a customer completes an Apple Pay transaction in your app or website, use [PKPaymentOrderDetails](https://developer.apple.com/documentation/PassKit/PKPaymentOrderDetails) (app) or [ApplePayPaymentOrderDetails](https://developer.apple.com/documentation/ApplePayontheWeb/ApplePayPaymentOrderDetails) (web) to automatically add the order to Wallet. In iOS 17 and later, you can use [AddOrderToWalletButton](https://developer.apple.com/documentation/FinanceKitUI/AddOrderToWalletButton) to display the system-provided Track with Apple Wallet button in relevant areas of your app or website - such as in pages for order confirmation, status, or tracking - or in emails to customers. If a person already added an order to Wallet, trying to add it again opens Wallet and displays the order.
 
-**Make information about an order available immediately after people place it.** People need to confirm that their order was received, even when payment, processing, and fulfillment are still pending. If you won’t have details until a later time, provide the data you have at the time of the order and supply a status [description](https://developer.apple.com/documentation/walletorders/order) like “Check back later for full order details.”
+**Make information about an order available immediately after people place it.** People need to confirm that their order was received, even when payment, processing, and fulfillment are still pending. If you won’t have details until a later time, provide the data you have at the time of the order and supply a status [description](https://developer.apple.com/documentation/walletorders/order) like "Check back later for full order details."
 
 **Provide fulfillment information as soon as it’s available, and keep the status up to date.** When you supply fulfillment data or you change the status of an order, the system updates the order information and can automatically send a notification to customers. The system uses the fulfillment status you report to update the order’s current status to a value like Order Placed, Processing, Ready for Pickup, Picked Up, Out for Delivery, Delivered, or - if something goes wrong - Issue or Canceled. For guidance on describing a status, see [Displaying order and fulfillment details](https://developer.apple.com/design/human-interface-guidelines/wallet#Displaying-order-and-fulfillment-details).
 
 **Supply a high-resolution logo image that uses a nontransparent background.** The system displays your logo image in the dashboard and detail view, so you want to make sure that people can instantly recognize it at various sizes. Use the PNG or JPEG format to create a logo image that measures 300x300 pixels. To help ensure that your logo image renders correctly, be sure to use a nontransparent background. For developer guidance, see [logo](https://developer.apple.com/documentation/walletorders/merchant).
 
-**Supply distinct, high-resolution product images that use nontransparent backgrounds.** The system displays a product’s image - along with descriptive information you supply - in the detail views, order dashboard, and notifications for an order or a fulfillment. When creating a product image, use a straightforward depiction and a solid, nontransparent background. Showing a product in a “lifestyle” context or against a busy background can make the item hard to distinguish at small sizes. For each product, use the PNG or JPEG format to create an image that measures 300x300 pixels.
+**Supply distinct, high-resolution product images that use nontransparent backgrounds.** The system displays a product’s image - along with descriptive information you supply - in the detail views, order dashboard, and notifications for an order or a fulfillment. When creating a product image, use a straightforward depiction and a solid, nontransparent background. Showing a product in a "lifestyle" context or against a busy background can make the item hard to distinguish at small sizes. For each product, use the PNG or JPEG format to create an image that measures 300x300 pixels.
 
 *Image description: An illustration of a donut, representing a product image. Horizontal and vertical lines extend along the bottom and right side of the image, and include labels that denote the illustration is 300 pixels wide by 300 pixels high.*
 
@@ -372,7 +371,7 @@ An order gives people ways to contact the merchant and displays details about th
 
 **Keep the fulfillment screen centered on order tracking.** For example, if you recommend your app or other services to customers, be sure to prioritize order-tracking information over other content in the screen.
 
-**Choose shipping-fulfillment values that match the details you have about the shipping process.** If you know the carrier, enter its name in the `carrier` property; otherwise, leave the default “Track Shipment” value. If you can access details about a carrier’s interim shipping steps - such as when a fulfillment is on the way or out for delivery - indicate each step by using specific status values like `onTheWay`, `outForDelivery`, or `delivered`. In contrast, if you don’t have access to a carrier’s shipping details, use the `shipped` status. In both cases, provide a tracking link (when one is available) so people can track their order on their own. For developer guidance, see [ShippingFulfillment](https://developer.apple.com/documentation/WalletOrders/ShippingFulfillment).
+**Choose shipping-fulfillment values that match the details you have about the shipping process.** If you know the carrier, enter its name in the `carrier` property; otherwise, leave the default "Track Shipment" value. If you can access details about a carrier’s interim shipping steps - such as when a fulfillment is on the way or out for delivery - indicate each step by using specific status values like `onTheWay`, `outForDelivery`, or `delivered`. In contrast, if you don’t have access to a carrier’s shipping details, use the `shipped` status. In both cases, provide a tracking link (when one is available) so people can track their order on their own. For developer guidance, see [ShippingFulfillment](https://developer.apple.com/documentation/WalletOrders/ShippingFulfillment).
 
 **Keep customers informed through relevant fulfillment status descriptions.** A great status message is approachable, accurate, and clearly related to the status it describes. In addition to supplying information that helps people understand the status of their order, a status message also gives you an opportunity to use your brand’s communication style.
 
@@ -410,7 +409,7 @@ For each purpose string, aim for a brief, complete sentence that’s direct, spe
 | *Image description: An illustration of a Verify Age with Apple Wallet button.* | Your app can complete the current transaction after you verify a person’s age. An example transaction is making a car available to lease. |
 | *Image description: An illustration of a Verify Identity with Apple Wallet button.* | Your app can complete the current transaction after you verify a person’s identity. An example transaction is a car rental. |
 | *Image description: An illustration of a Continue with Apple Wallet button.* | Verify with Wallet forms one part of a verification process that also requires people to supply additional information not provided by Verify with Wallet, such as a Social Security number or phone number. Examples include opening a financial account or performing a background check. |
-| *Image description: An illustration of a Verify with Apple Wallet button.* | Your app can complete the current verification flow without additional steps, but the “Verify Age,” “Verify Identity,” and “Continue” button labels aren’t appropriate for your use case. An example is an app that helps people sign up for a government service. |
+| *Image description: An illustration of a Verify with Apple Wallet button.* | Your app can complete the current verification flow without additional steps, but the "Verify Age," "Verify Identity," and "Continue" button labels aren’t appropriate for your use case. An example is an app that helps people sign up for a government service. |
 
 All button labels are also available in a multiline variant that the system automatically uses when horizontal space is constrained. For developer guidance, see [PKIdentityButton.Label](https://developer.apple.com/documentation/PassKit/PKIdentityButton/Label).
 

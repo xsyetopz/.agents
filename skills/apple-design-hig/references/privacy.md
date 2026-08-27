@@ -67,7 +67,7 @@ Here are several examples of the standard system alert:
 
 Ideally, the current context helps people understand why you’re requesting their permission. If it’s essential to provide additional details, you can display a custom screen or window before the system alert appears. The following guidelines apply to custom views that display before system alerts that request permission to access protected data and resources, including camera, microphone, location, contact, calendar, and tracking.
 
-**Include only one button and make it clear that it opens the system alert.** People can feel manipulated when a custom screen or window also includes a button that doesn’t open the alert because the experience diverts them from making their choice. Another type of manipulation is using a term like “Allow” to title the custom screen’s button. If the custom button seems similar in meaning and visual weight to the allow button in the alert, people can be more likely to choose the alert’s allow button without meaning to. Use a term like “Continue” or “Next” to title the single button in your custom screen or window, clarifying that its action is to open the system alert.
+**Include only one button and make it clear that it opens the system alert.** People can feel manipulated when a custom screen or window also includes a button that doesn’t open the alert because the experience diverts them from making their choice. Another type of manipulation is using a term like "Allow" to title the custom screen’s button. If the custom button seems similar in meaning and visual weight to the allow button in the alert, people can be more likely to choose the alert’s allow button without meaning to. Use a term like "Continue" or "Next" to title the single button in your custom screen or window, clarifying that its action is to open the system alert.
 
 *Image description: A screenshot of an app's pre-alert screen that reads Turning on location services allows us to provide features like: alerts when your friends are nearby, news of events happening near you, tagging and sharing your location. You can change this later in the Settings app. Below the text is a button titled Next.*
 
@@ -97,7 +97,7 @@ There are several prohibited custom-screen designs that will cause rejection. So
 
 *Image description: A screenshot of an app’s pre-tracking message that reads Allow tracking for a better experience. Below the text is a bar graph image that shows four bars increasing in height from left to right. Below the graph is a button titled Allow Tracking.*
 
-*Image description: An X in a circle to indicate an incorrect example. Don’t display a custom screen that mirrors the functionality of the system alert. In particular, don’t create a button title that uses “Allow” or similar terms, because people don’t allow anything in a pre-alert screen.*
+*Image description: An X in a circle to indicate an incorrect example. Don’t display a custom screen that mirrors the functionality of the system alert. In particular, don’t create a button title that uses "Allow" or similar terms, because people don’t allow anything in a pre-alert screen.*
 
 *Image description: A screenshot of an app’s pre-tracking message that reads Choose Allow when prompted. Below the text is an image of the system-provided alert. Below the image is a button titled Continue. The Allow While Using the App button in the system-provided alert image is circled.*
 
@@ -125,7 +125,7 @@ After people confirm their understanding of the button’s action, simply tappin
 
 **Consider customizing the location button to harmonize with your UI.** Specifically, you can:
 
-- Choose the system-provided title that works best with your feature, such as “Current Location” or “Share My Current Location.”
+- Choose the system-provided title that works best with your feature, such as "Current Location" or "Share My Current Location."
 
 - Choose the filled or outlined location glyph.
 

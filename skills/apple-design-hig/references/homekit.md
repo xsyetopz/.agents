@@ -18,7 +18,6 @@ retrieved: 2026-07-25
 - [Change log](#change-log)
 - [References](#references)
 
-
 HomeKit lets people securely control connected accessories in their homes using Siri or the Home app on iPhone, iPad, Apple Watch, and Mac.
 
 *Image description: A sketch of the HomeKit icon. The image is overlaid with rectangular and circular grid lines and is tinted blue to subtly reflect the blue in the original six-color Apple logo.*
@@ -47,7 +46,7 @@ It’s crucial for your app to use the terminology and object model that HomeKit
 
 In the HomeKit model, the [home](https://developer.apple.com#Homes) object is the root of a hierarchy that contains all other objects, such as [rooms](https://developer.apple.com#Rooms), [accessories](https://developer.apple.com#Accessories-services-and-characteristics), and [zones](https://developer.apple.com#Zones). When there’s more than one home, each home is the root of a different hierarchy.
 
-**Acknowledge the hierarchical model that HomeKit uses.** Even if your app doesn’t organize accessories by rooms and zones in its UI, it’s useful to reference the HomeKit model when helping people set up or control their accessories. People need to know where accessories are located so they can use Siri and HomePod to control them by speaking commands like “Siri, turn on the lights upstairs,” or “It’s dark in here.” For more guidance, see [Siri interactions](https://developer.apple.com/design/human-interface-guidelines/homekit#Siri-interactions).
+**Acknowledge the hierarchical model that HomeKit uses.** Even if your app doesn’t organize accessories by rooms and zones in its UI, it’s useful to reference the HomeKit model when helping people set up or control their accessories. People need to know where accessories are located so they can use Siri and HomePod to control them by speaking commands like "Siri, turn on the lights upstairs," or "It’s dark in here." For more guidance, see [Siri interactions](https://developer.apple.com/design/human-interface-guidelines/homekit#Siri-interactions).
 
 **Make it easy for people to find an accessory’s related HomeKit details.** If your app’s organization is based on accessories, don’t hide other HomeKit information, such as an accessory’s zone or room, in a hard-to-discover settings screen. Instead, consider making the related HomeKit information easily available in an accessory detail view.
 
@@ -61,7 +60,7 @@ HomeKit uses the term *home* to represent a physical home, office, or other loca
 
 ### Rooms
 
-A *room* represents a physical room in a home. Rooms don’t have attributes like size or location; they’re simply names that have meaning to people, such as *Bedroom* or *Office*. When people assign accessories to a room, they can use voice commands like “Siri, turn on all the lights except the bedroom,” or “Siri, turn on the kitchen and hallway lights.”
+A *room* represents a physical room in a home. Rooms don’t have attributes like size or location; they’re simply names that have meaning to people, such as *Bedroom* or *Office*. When people assign accessories to a room, they can use voice commands like "Siri, turn on all the lights except the bedroom," or "Siri, turn on the kitchen and hallway lights."
 
 ### Accessories, services, and characteristics
 
@@ -87,13 +86,13 @@ A *scene* is a group of actions that control one or more services in one or more
 
 ### Zones
 
-A *zone* represents an area in the home that contains multiple rooms, such as *upstairs* or *downstairs*. Setting up a zone is optional, but doing so lets people control multiple accessories at one time. For example, assigning all downstairs lights to a zone named *downstairs* lets people use voice commands like “Siri, turn off all the lights downstairs.”
+A *zone* represents an area in the home that contains multiple rooms, such as *upstairs* or *downstairs*. Setting up a zone is optional, but doing so lets people control multiple accessories at one time. For example, assigning all downstairs lights to a zone named *downstairs* lets people use voice commands like "Siri, turn off all the lights downstairs."
 
 ## Setup
 
 **Use the system-provided setup flow to give people a familiar experience.** The HomeKit setup flow works more quickly than traditional setup flows because it lets people name accessories, join networks, pair with HomeKit, assign room and service categories, and designate favorites in just a few steps. Using the system-provided setup flow lets you concentrate on promoting the custom functionality that makes your accessory unique. For developer guidance, see [performAccessorySetup(using:completionHandler:)](https://developer.apple.com/documentation/HomeKit/HMAccessorySetupManager/performAccessorySetup(using:completionHandler:)).
 
-**Provide context to explain why you need access to people’s Home data.** Create a purpose string with a phrase that describes why you’re asking for permission to access data, such as “Lets you control this accessory with the Apple Home app and Siri across your Apple devices.”
+**Provide context to explain why you need access to people’s Home data.** Create a purpose string with a phrase that describes why you’re asking for permission to access data, such as "Lets you control this accessory with the Apple Home app and Siri across your Apple devices."
 
 **Don’t require people to create an account or supply personal information.** Instead, defer to HomeKit for any information you might need. If your app provides additional services that require an account, such as cloud services, make account setup optional and wait until after initial HomeKit setup to offer it.
 
@@ -120,7 +119,7 @@ A *zone* represents an area in the home that contains multiple rooms, such as *u
 | *Image description: A checkmark in a circle to indicate correct usage.* | 2nd garage door |
 | *Image description: An X in a circle to indicate incorrect usage.* | #2 garage door |
 
-**Help people avoid creating names that include location information.** Although it’s natural for someone to use “kitchen light” to name a light in the kitchen, including the room name in the service name can lead to unpredictable results when controlling the accessory by voice. Your app can detect service names that duplicate location information and help people fix them. For example, you might present a post-setup experience that removes the room or zone from a service name and encourages people to assign the accessory to that room or zone instead.
+**Help people avoid creating names that include location information.** Although it’s natural for someone to use "kitchen light" to name a light in the kitchen, including the room name in the service name can lead to unpredictable results when controlling the accessory by voice. Your app can detect service names that duplicate location information and help people fix them. For example, you might present a post-setup experience that removes the room or zone from a service name and encourages people to assign the accessory to that room or zone instead.
 
 ## Siri interactions
 
@@ -128,7 +127,7 @@ HomeKit supports powerful, hands-free control using voice commands. You can help
 
 **Present example voice commands to demonstrate using Siri to control accessories during setup.** As soon as people complete the setup of a new accessory, consider using the service name they chose in a few example Siri phrases and encourage people to try them out.
 
-**After setup, consider teaching people about more complex Siri commands.** People might not be aware of the broad range of natural language phrases they can use with Siri and HomePod to control their accessories. After setup is complete, find useful places throughout your app to help people learn about these types of commands. For example, in a scene detail view, you could tell people, *You can say “Hey Siri, set ‘Movie Time.’”*
+**After setup, consider teaching people about more complex Siri commands.** People might not be aware of the broad range of natural language phrases they can use with Siri and HomePod to control their accessories. After setup is complete, find useful places throughout your app to help people learn about these types of commands. For example, in a scene detail view, you could tell people, *You can say "Hey Siri, set ‘Movie Time.’"*
 
 In addition to recognizing the names of homes, rooms, zones, services, and scenes, Siri can also use information such as accessory category and characteristic to identify a service. For example, when people use terms like *brighter* or *dim*, Siri recognizes that they’re referring to a service that has a brightness characteristic, even if they don’t speak the name of the service.
 
@@ -136,35 +135,35 @@ To illustrate the power and flexibility of Siri commands, here are some examples
 
 | Phrase | Siri understands |
 | --- | --- |
-| “Turn on the floor lamp” | Service (*floor lamp*) |
-| “Show me the entryway camera” | Service (*entryway camera*) |
-| “Turn on the light” | Accessory category (*light*) |
-| “Turn off the living room light” | Room (*living room*) |
+| "Turn on the floor lamp" | Service (*floor lamp*) |
+| "Show me the entryway camera" | Service (*entryway camera*) |
+| "Turn on the light" | Accessory category (*light*) |
+| "Turn off the living room light" | Room (*living room*) |
 | | Accessory category (*light*) |
-| “Make the living room a little bit brighter” | Room (*living room*) |
+| "Make the living room a little bit brighter" | Room (*living room*) |
 | | Accessory category (implied) |
 | | Brightness characteristic (*brighter*) |
-| “Turn on the recessed lights” | Service group (*recessed lights*) |
-| “Turn off the lights upstairs” | Accessory category (*lights*) |
+| "Turn on the recessed lights" | Service group (*recessed lights*) |
+| "Turn off the lights upstairs" | Accessory category (*lights*) |
 | | Zone (*upstairs*) |
-| “Dim the lights in the bedroom and nursery” | Accessory category (*lights*) |
+| "Dim the lights in the bedroom and nursery" | Accessory category (*lights*) |
 | | Brightness characteristic (*dim*) |
 | | Rooms (*bedroom*, *nursery*) |
-| “Run Good night” | Scene (*Good night*) |
-| “Is someone in the living room?” | Accessory category (implied) |
+| "Run Good night" | Scene (*Good night*) |
+| "Is someone in the living room?" | Accessory category (implied) |
 | | Occupancy detection characteristic (implied) |
-| “Is my security system tripped?” | Accessory category (*security system*) |
-| “Did I leave the garage door open?” | Accessory category (*garage door*) |
+| "Is my security system tripped?" | Accessory category (*security system*) |
+| "Did I leave the garage door open?" | Accessory category (*garage door*) |
 | | Open characteristic (*open*) |
-| “Did I forget to turn off the lights in the Tahoe House?” | Accessory category (*lights*) |
+| "Did I forget to turn off the lights in the Tahoe House?" | Accessory category (*lights*) |
 | | Home (*Tahoe House*) |
-| “It’s dark in here” | Current home (*here*) |
+| "It’s dark in here" | Current home (*here*) |
 | | Current room (via HomePod) |
 | | Accessory category (implied) |
 
-**Recommend that people create zones and service groups, if they make sense for your accessory.** If people might benefit from using context-specific voice commands to control your accessory, suggest these types of interactions and help people set them up. For example, if you provide an accessory such as a light, switch, or thermostat, you could suggest setting up a zone named “upstairs” or a service group named “media center” to support commands like “Siri, turn off the upstairs lights,” or “Siri, activate the media center.”
+**Recommend that people create zones and service groups, if they make sense for your accessory.** If people might benefit from using context-specific voice commands to control your accessory, suggest these types of interactions and help people set them up. For example, if you provide an accessory such as a light, switch, or thermostat, you could suggest setting up a zone named "upstairs" or a service group named "media center" to support commands like "Siri, turn off the upstairs lights," or "Siri, activate the media center."
 
-**Offer shortcuts only for accessory-specific functionality that HomeKit doesn’t support.** HomeKit lets people use ordinary (or natural) language to control accessories without requiring any additional configuration, so you avoid confusing people by offering shortcuts that duplicate HomeKit functionality. Instead, consider offering shortcuts for complementary functionality that your app provides. For example, if people often want to order filters for an air conditioner that you support, you might offer a shortcut like “Order AC filters.”
+**Offer shortcuts only for accessory-specific functionality that HomeKit doesn’t support.** HomeKit lets people use ordinary (or natural) language to control accessories without requiring any additional configuration, so you avoid confusing people by offering shortcuts that duplicate HomeKit functionality. Instead, consider offering shortcuts for complementary functionality that your app provides. For example, if people often want to order filters for an air conditioner that you support, you might offer a shortcut like "Order AC filters."
 
 **If your app supports both HomeKit and shortcuts, help people understand the difference between these types of voice control.** People can get confused if they’re presented with multiple methods of voice control. Be sure you clearly indicate what’s possible with shortcuts, and never encourage people to create a shortcut for a scene or action that HomeKit already supports.
 
@@ -172,7 +171,7 @@ To illustrate the power and flexibility of Siri commands, here are some examples
 
 Your app is a great place to help people appreciate the unique functionality of your accessory. For example, an app for a light that displays different colors could help people create HomeKit scenes using colors imported from their photos.
 
-**Be clear about what people can do in your app and when they might want to use the Home app.** For example, if your app supports only lights, consider encouraging people to create a “Movie Time” scene that not only dims the lights, but also closes the shades, and turns on the TV to a specific input. To do this, first guide people to set up a scene that includes only your accessory’s actions - in this scenario, dimming the lights. Then, your app can suggest that people open the Home app to add their HomeKit-compatible shades and TV to the scene you helped them create. For guidance on how to refer to the Home app, see [Referring to HomeKit](https://developer.apple.com/design/human-interface-guidelines/homekit#Referring-to-HomeKit).
+**Be clear about what people can do in your app and when they might want to use the Home app.** For example, if your app supports only lights, consider encouraging people to create a "Movie Time" scene that not only dims the lights, but also closes the shades, and turns on the TV to a specific input. To do this, first guide people to set up a scene that includes only your accessory’s actions - in this scenario, dimming the lights. Then, your app can suggest that people open the Home app to add their HomeKit-compatible shades and TV to the scene you helped them create. For guidance on how to refer to the Home app, see [Referring to HomeKit](https://developer.apple.com/design/human-interface-guidelines/homekit#Referring-to-HomeKit).
 
 **Defer to HomeKit if your database differs from the HomeKit database.** Give people a seamless experience by automatically reflecting changes made in the Home app or in other third-party HomeKit apps. If you must ask people to manage conflicts in your app, present the conflict visually so that they have a clear picture of the choice they need to confirm. For example, if someone changes an accessory’s service name in the Home app, your app can detect this change and could show both names side by side to confirm that the person wants to use the new name in your app, too.
 

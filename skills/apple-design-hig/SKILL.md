@@ -5,13 +5,15 @@ description: Use this skill when making Apple-platform HIG, native UX, accessibi
 
 # Apple Design HIG
 
-Make Apple-platform interface decisions from current Human Interface Guidelines, explicit context, and accessibility evidence.
+Resolve an Apple-platform interface decision from current Human Interface Guidelines, product context, and accessibility evidence.
+
+State the decision, platform, device class, input modes, appearances, accessibility needs, constraints, affected users, and acceptance check. Keep product requirements, HIG guidance, SDK facts, and design judgment distinct. Safe local inspection and validation may proceed; live or external checks and product changes follow the user's authorization.
 
 ## Workflow
 
-1. Name the interface decision, platform, device class, input modes, appearances, accessibility needs, constraints, and affected users.
-2. Inspect the existing interface and separate product constraints from assumed platform rules.
-3. Load only the matching package references from the direct routes below; use `hig-source-index.md` for source coverage and `audit-workflow.md` for a full review.
+1. Inspect the existing interface and separate product constraints from assumed platform rules.
+2. Load only the matching package references from the direct routes below; use `hig-source-index.md` for source coverage and `audit-workflow.md` for a full review.
+   - [GOOD/RED implementation examples](references/examples.md) (read before choosing a native component or accessibility implementation; RED marks a contrast, while GOOD is the implementation pattern)
    - [Accessibility](references/accessibility.md) · [Action button](references/action-button.md) · [Action sheets](references/action-sheets.md) · [Activity rings](references/activity-rings.md)
    - [Activity views](references/activity-views.md) · [AirPlay](references/airplay.md) · [Alerts](references/alerts.md) · [Always On](references/always-on.md)
    - [App Clips](references/app-clips.md) · [App icons](references/app-icons.md) · [App Shortcuts](references/app-shortcuts.md) · [Apple Pay](references/apple-pay.md)
@@ -56,15 +58,15 @@ Make Apple-platform interface decisions from current Human Interface Guidelines,
    - [Virtual keyboards](references/virtual-keyboards.md) · [VoiceOver](references/voiceover.md) · [Wallet](references/wallet.md) · [Watch faces](references/watch-faces.md)
    - [Web views](references/web-views.md) · [What’s New in Apple Design](references/whats-new.md) · [Widgets](references/widgets.md) · [Windows](references/windows.md)
    - [Workouts](references/workouts.md) · [Writing](references/writing.md)
-4. Verify material guidance against the live Apple HIG and cite the exact pages used.
-5. Recommend the smallest native pattern, state rejected alternatives, and describe accessibility and implementation implications.
-6. When live discovery is needed, run `python3 scripts/hig_catalog.py --help` before the relevant catalog query; run the target project's interface and accessibility checks after edits.
-7. Return the decision, platform differences, evidence, commands, changed paths, and any live HIG, device, SDK, hosted, or behavioral evidence that remains `UNVERIFIED`.
+3. Verify material guidance against the live Apple HIG and cite the exact pages used.
+4. Recommend the smallest native pattern, state rejected alternatives, and describe accessibility and implementation implications.
+5. When live discovery is needed, run `python3 scripts/hig_catalog.py --help` before the relevant catalog query; run the target project's interface and accessibility checks after edits.
+6. Return the decision, platform differences, evidence, commands, changed paths, and any live HIG, device, SDK, hosted, or behavioral evidence that remains `UNVERIFIED`.
 
 ## Gotchas
 
-- Bundled references are an offline snapshot; the live Apple HIG owns version-sensitive guidance.
+- Bundled references are an offline snapshot; the live Apple HIG provides version-sensitive guidance.
 - Prefer system components unless a concrete product constraint justifies a deviation.
 - Keep HIG recommendations, SDK requirements, and inferred design judgment distinct.
 - Route Swift, SwiftUI, UIKit, and other API correctness to implementation documentation; route generic web UX, App Store policy, provisioning, privacy manifests, and legal questions elsewhere.
-- Use established repository formats and canonical inputs rather than inventing custom schema or generated evidence files.
+- Use established repository formats and canonical inputs; keep new output in the repository's existing formats.

@@ -73,7 +73,7 @@ An approachable app or game doesn’t require people to have particular skills o
 
 Throughout history, cultures around the world have recognized a spectrum of self-identity and expression that expands beyond the binary variants of woman and man.
 
-You can help everyone feel welcome in your app or game by avoiding unnecessary references to specific genders. For example, a recipe-sharing app that uses copy like “You can let a subscriber post his or her recipes to your shared folder” could avoid unnecessary gender references by using an alternative like “Subscribers can post recipes to your shared folder.” In addition to using the gender-neutral noun “subscribers,” the revised copy avoids the unnecessary singular pronouns “his” and “her,” helping the sentence remain inclusive when it’s localized for languages that use gendered pronouns.
+You can help everyone feel welcome in your app or game by avoiding unnecessary references to specific genders. For example, a recipe-sharing app that uses copy like "You can let a subscriber post his or her recipes to your shared folder" could avoid unnecessary gender references by using an alternative like "Subscribers can post recipes to your shared folder." In addition to using the gender-neutral noun "subscribers," the revised copy avoids the unnecessary singular pronouns "his" and "her," helping the sentence remain inclusive when it’s localized for languages that use gendered pronouns.
 
 In addition, you can often avoid referencing a specific gender in an avatar, emoji, glyph, or game character. To welcome everyone to your app or game, prefer giving people the tools they need to customize such items as they choose.
 

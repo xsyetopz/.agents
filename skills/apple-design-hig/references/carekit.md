@@ -94,7 +94,7 @@ In CareKit 2.0, CareKit UI defines five styles of task views: simple, instructio
 
 *Image description: An illustration of a task for taking a single dose of medicine at a specific time of day. The filled-in circle and checkmark indicate that the task is complete.*
 
-**Use the instructions style when you need to add informative text to a simple task.** For example, if a single-step medication task needs to include additional information - such as “Take on an empty stomach” or “Take at bedtime” - you can use an instructions-style task to display it.
+**Use the instructions style when you need to add informative text to a simple task.** For example, if a single-step medication task needs to include additional information - such as "Take on an empty stomach" or "Take at bedtime" - you can use an instructions-style task to display it.
 
 *Image description: An illustration of a task for taking a single dose of medicine at a specific time of day. The task includes instructions for how to take the dose. Below the instructions, the task shows the word completed and a checkmark to indicate that the task is complete.*
 

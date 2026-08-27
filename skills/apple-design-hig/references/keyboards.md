@@ -173,7 +173,7 @@ Here are the modifier keys and the symbols that represent them.
 | Option | *Image description: Line segments that suggest a horizontally transformed Z shape combined with a short horizontal segment aligned with the top of the Z.* | Use the Option modifier sparingly for less-common commands or power features. |
 | Control | *Image description: A shallow, upside-down V shape.* | Avoid using the Control key as a modifier. The system uses Control in many systemwide features and shortcuts, like moving focus or capturing screenshots. |
 
-> Some languages require modifier keys to generate certain characters. For example, on a French keyboard, Option-5 generates the “{“ character. It’s usually safe to use the Command key as a modifier, but avoid using an additional modifier with characters that aren’t available on all keyboards. If you must use a modifier other than Command, prefer using it only with the alphabetic characters.
+> Some languages require modifier keys to generate certain characters. For example, on a French keyboard, Option-5 generates the "{" character. It’s usually safe to use the Command key as a modifier, but avoid using an additional modifier with characters that aren’t available on all keyboards. If you must use a modifier other than Command, prefer using it only with the alphabetic characters.
 
 **List modifier keys in the correct order.** If you use more than one modifier key in a custom shortcut, always list them in this order: Control, Option, Shift, Command.
 

@@ -23,7 +23,7 @@ A disclosure triangle shows and hides information and functionality associated w
 
 A disclosure triangle points inward from the leading edge when its content is hidden and down when its content is visible. Clicking or tapping the disclosure triangle switches between these two states, and the view expands or collapses accordingly to accommodate the content.
 
-**Provide a descriptive label when using a disclosure triangle.** Make sure your labels indicate what is disclosed or hidden, like “Advanced Options.”
+**Provide a descriptive label when using a disclosure triangle.** Make sure your labels indicate what is disclosed or hidden, like "Advanced Options."
 
 For developer guidance, see [NSButton.BezelStyle.disclosure](https://developer.apple.com/documentation/AppKit/NSButton/BezelStyle-swift.enum/disclosure).
 

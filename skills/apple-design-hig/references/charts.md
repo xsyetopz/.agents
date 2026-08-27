@@ -131,7 +131,7 @@ The following guidelines can help you write useful accessibility labels for char
 
 - **Avoid using subjective terms.** Subjective words - like rapidly, gradually, and almost - communicate your interpretation of the data. To help people form their own interpretations, use actual values in your descriptions.
 
-- **Maximize clarity in data descriptions by avoiding potentially ambiguous formats and abbreviations.** For example, using “June 6” is clearer than using “6/6”; similarly, spelling out “60 minutes” or “60 meters” is clearer than using the abbreviation “60m.”
+- **Maximize clarity in data descriptions by avoiding potentially ambiguous formats and abbreviations.** For example, using "June 6" is clearer than using "6/6"; similarly, spelling out "60 minutes" or "60 meters" is clearer than using the abbreviation "60m."
 
 - **Describe what the chart’s details represent, not what they look like.** Consider a chart that uses red and blue colors to help people visually distinguish two different data series. It’s crucial to create accessibility labels that identify what each series represents, but describing the colors that visually represent them can add unnecessary information and be distracting.
 

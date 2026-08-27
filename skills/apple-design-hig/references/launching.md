@@ -31,7 +31,7 @@ Launching begins when someone opens your app or game, includes an initial downlo
 
 **Avoid including text on your launch screen, even if your first screen displays text.** Because the content in a launch screen doesn’t change, any text you display won’t be localized.
 
-**Don’t advertise.** The launch screen isn’t a branding opportunity. Avoid creating a screen that looks like a splash screen or an “About” window, and don’t include logos or other branding elements unless they’re a fixed part of your app’s first screen.
+**Don’t advertise.** The launch screen isn’t a branding opportunity. Avoid creating a screen that looks like a splash screen or an "About" window, and don’t include logos or other branding elements unless they’re a fixed part of your app’s first screen.
 
 ## Platform considerations
 
