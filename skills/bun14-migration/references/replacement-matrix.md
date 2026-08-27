@@ -20,9 +20,9 @@ Use this table after inventorying active consumers. **Required** applies when th
 | `ws` | Bun WebSocket APIs | Conditional | Client/server architecture and protocol behavior |
 | SQLite, SQL, Redis, image, Markdown, cron, or PTY libraries | Relevant Bun API | Conditional | Full API, platform, operational, and data compatibility |
 | TypeScript typechecking or declarations | Existing TypeScript tool | Keep | Bun transpilation does not replace these checks |
-| New Bun project without Biome | `@biomejs/biome@2.5.9` plus the package `biome.json` template | Recommended | Generate only when neither `biome.json` nor `biome.jsonc` exists; omit the `react` domain |
-| Existing Biome configuration | Biome 2.5.9 | Version-only | Preserve the file; update only the package version and an existing schema URL |
-| Existing ESLint or Prettier | Biome 2.5.9 | Conditional | Verify rules, plugins, ignores, scripts, editor integration, and formatting before removal |
+| New Bun project without Biome | `@biomejs/biome@2.5.10` plus the package `biome.json` template | Recommended | Generate only when neither `biome.json` nor `biome.jsonc` exists; omit the `react` domain |
+| Existing Biome configuration | Biome 2.5.10 | Version-only | Preserve the file; update only the package version and an existing schema URL |
+| Existing ESLint or Prettier | Biome 2.5.10 | Conditional | Verify rules, plugins, ignores, scripts, editor integration, and formatting before removal |
 
 When a conditional replacement fails, keep the tool and run it under Bun where supported. Do not describe that as a native replacement.
 

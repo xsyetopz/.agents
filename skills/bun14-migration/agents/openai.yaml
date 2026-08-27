@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bun Migration"
+  short_description: "Migrate to Bun 1.4+ and initialize Biome 2.5.10"
+  default_prompt: "Use $bun14-migration to migrate active tooling to Bun 1.4+ or initialize Biome 2.5.10, preserving existing Biome configuration except for version updates."
