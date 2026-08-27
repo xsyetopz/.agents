@@ -2,9 +2,9 @@
 
 > Locally authored guidance, not a primary source or generated snapshot; source gap: live verification of standards, provider behavior, and other current claims against the bibliography (see `design-09-bibliography.md`) is required before relying on them.
 
-These mappings help classify a system. They are not prescriptions. The “MVC-like” columns show analogies only; the **preferred primary shape** usually names the stronger architecture.
+These mappings help classify a system. They are not prescriptions. The "MVC-like" columns show analogies only; the **preferred primary shape** usually names the stronger architecture.
 
-| # | Domain | Semantic core / “Model” | Projection / “View” | Control / “Controller” | Preferred primary shape | Critical invariants |
+| # | Domain | Semantic core / "Model" | Projection / "View" | Control / "Controller" | Preferred primary shape | Critical invariants |
 | ---: | --- | --- | --- | --- | --- | --- |
 | 1 | Batch compiler | AST/IR, symbol/type state, target model | diagnostics, object code, IR dumps | driver and pass manager | staged pipeline + verified IR + backend ports | phase ordering, IR validity, deterministic diagnostics |
 | 2 | Incremental compiler | dependency graph, semantic snapshots, cached analyses | diagnostics and partial artifacts | invalidation/recompute scheduler | demand-driven dataflow + incremental cache | cache keys reflect semantics; stale analysis never reused |
@@ -23,7 +23,7 @@ These mappings help classify a system. They are not prescriptions. The “MVC-li
 | 15 | TUI application | immutable or controlled app model | terminal renderer | update/event loop | MVU + effect commands | all state transitions pass through update; resize/input safe |
 | 16 | Desktop GUI | domain model plus presentation state | widgets/windows | controllers, presenters, view-models, or reducers | MVC/MVP/MVVM/MVU + application core | domain state not owned by widgets; UI thread rules |
 | 17 | Mobile app | offline/local domain state, sync state | screens and notifications | navigation/update/use cases | MVU/MVVM + repository/sync workflow | lifecycle recovery, conflict resolution, permission boundaries |
-| 18 | Web frontend | client app state, cache, form state | DOM/UI projection | event handlers/reducers/router | component architecture + MVU/reducer + effect layer | source-of-truth clarity, cancellation, stale response handling |
+| 18 | Web frontend | client app state, cache, form state | DOM/UI projection | event handlers/reducers/router | component architecture + MVU/reducer + effect layer | canonical-state ownership, cancellation, stale response handling |
 | 19 | Server-rendered web app | domain/application state | HTML views | routes/controllers | MVC or page-controller + application services | authorization before use case; view not domain authority |
 | 20 | Web API | domain state and resources | JSON/protobuf representations | transport adapter + application service | hexagonal + command/query boundary | stable contracts, validation, auth, idempotency, versioning |
 | 21 | GraphQL service | domain/application model, schema semantics | typed response graph | resolver execution and request planner | schema boundary + application ports + batching | field auth, N+1 control, consistent error/null semantics |
@@ -61,7 +61,7 @@ These mappings help classify a system. They are not prescriptions. The “MVC-li
 
 ### Compiler and language-development systems
 
-Do not force MVC onto compiler phases. The core concern is usually **representation preservation and transformation**:
+Use a compiler pipeline, pass manager, or IR-centered decomposition when **representation preservation and transformation** dominate; use MVC when an interactive IDE loop owns the design:
 
 ```text
 source -> tokens -> syntax -> semantic model -> IR(s) -> target artifact
@@ -124,12 +124,12 @@ model' -> render -> terminal
 results/errors -> messages -> update
 ```
 
-Critical distinctions:
+Boundary distinctions:
 
 - Parsing command syntax is not domain validation.
 - Exit status is part of the public contract.
 - Human output and machine output need separate formatters.
-- Terminal widgets must not become the authoritative application state.
+- Terminal widgets remain presentation; application state has an explicit owner.
 
 ### Agent harnesses
 
@@ -154,7 +154,7 @@ Required boundaries:
 - Verification/evaluation
 - Output projection
 
-Never use free-form conversation history as the only source of durable workflow state.
+Store durable workflow state in explicit typed state; use conversation history as supporting context.
 
 ### Binary and protocol systems
 
@@ -183,7 +183,7 @@ Required controls:
 
 ### Distributed systems
 
-Do not begin with microservices. Begin with ownership and consistency:
+Begin distributed-system design with ownership and consistency:
 
 1. Which bounded context owns each fact?
 2. Which operation requires atomicity?

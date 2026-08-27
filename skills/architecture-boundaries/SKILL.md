@@ -1,11 +1,13 @@
 ---
 name: architecture-boundaries
-description: Use this skill when making software architecture decisions, auditing or enforcing boundaries and topology, assigning ownership, or performing structural migrations; use ordinary implementation workflows for bounded changes that do not alter architecture.
+description: Use this skill when making software architecture decisions, auditing or enforcing boundaries and topology, assigning ownership, or performing structural migrations; use ordinary implementation workflows for bounded changes that preserve the existing architecture.
 ---
 
 # Architecture Boundaries
 
-Design, audit, and enforce software boundaries from repository evidence while preserving behavior and supported contracts.
+Choose, audit, or enforce software boundaries from repository evidence. Preserve behavior and supported contracts.
+
+Capture the decision, context, owners, constraints, quality scenarios, acceptance evidence, and rollback boundary. Safe local inspection and edits may proceed inside the requested scope. External, destructive, costly, or scope-expanding actions require exact authorization.
 
 ## Workflow
 
@@ -14,6 +16,8 @@ Design, audit, and enforce software boundaries from repository evidence while pr
 3. Load only the matching design or enforcement reference from the direct routes below.
    - [Canonical Vocabulary and Universal Decomposition Model](references/design-01-core-model.md) · [Pattern Catalog](references/design-02-pattern-catalog.md) · [Cross-Domain Mappings](references/design-03-domain-mappings.md) · [Architecture Decision Procedure](references/design-04-decision-procedure.md)
    - [Canonical Flowgraphs](references/design-05-flowgraphs.md) · [Failure Modes and Anti-Patterns](references/design-08-failure-modes.md) · [Bibliography and Primary References](references/design-09-bibliography.md) · [Worked Examples](references/design-10-worked-examples.md)
+   - [Separation of Concerns and GOOD/RED examples](references/separation-of-concerns-examples.md) (read when assigning responsibilities, reviewing topology, or evaluating a proposed split; RED marks a contrast, while GOOD is the implementation pattern)
+   - [Prior-art protocol](references/prior-art-protocol.md) (read before transferring empirical claims; verify each cited ID for the local task and metric)
    - [Rigor Modes](references/design-11-rigor-modes.md) · [Executable architecture tooling](references/enforcement-audit-tooling.md) · [Structural examples](references/enforcement-examples.md) · [Language architecture catalog](references/enforcement-languages.md)
    - [Filename contract](references/enforcement-naming.md) · [Architecture Pattern Selection Catalog](references/enforcement-pattern-catalog.md) · [Architecture fitness rules](references/enforcement-principles.md) · [Authority sources](references/enforcement-sources.md)
    - [Test ownership and placement](references/enforcement-testing.md) · [Toolchain, build, and package ownership](references/enforcement-toolchains.md) · [Architecture verification and evidence](references/enforcement-verification.md)
@@ -25,7 +29,7 @@ Design, audit, and enforce software boundaries from repository evidence while pr
 ## Gotchas
 
 - Nontrivial topology requires explicit alternatives, rejected choices, migration order, and measurable quality scenarios.
-- Warnings and failures remain blocking until repaired at their owner; exclusions, ignores, advisory modes, threshold changes, and reduced tests are not architecture fixes.
+- Warnings and blocking diagnostics remain at their owner until repaired; exclusions, ignores, advisory modes, threshold changes, and reduced tests leave the architecture uncorrected.
 - Keep public contracts stable unless the authorized migration records the change and rollback path.
 - Route repository governance to `$repository-documentation`, pipeline gates to `$git-ci-cd`, and prompt or tool-routing design to a dedicated prompt-audit workflow.
-- Use repository-native checks and formats rather than custom policy files, schemas, registries, provenance files, or generated audit reports.
+- Use repository-native checks and formats; keep policy, evidence, and reports in existing repository-owned forms.

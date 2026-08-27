@@ -4,7 +4,7 @@
 
 Use this catalog after identifying the repository's language, framework, and
 toolchain. Years approximate first public appearance or standard lineage. They
-order the catalog only; they do not rank quality. For build and package
+order the catalog only; they rank no quality dimension. For build and package
 ownership, read `enforcement-toolchains.md`. For filename case, separators,
 reserved names, and suffixes, read `enforcement-naming.md`; its contract applies
 to every row below.
@@ -28,9 +28,9 @@ Apply rules in this order:
 3. Obey framework loader, generator, and test-discovery requirements.
 4. Apply published language guidance and dominant ecosystem convention.
 5. Select one coherent repository convention only where no authority decides.
-6. Apply this skill's defaults only where the first five do not decide.
+6. Apply this skill's defaults when the first five leave the decision open.
 
-A repository convention should not justify long separator-delimited names,
+A repository convention does not by itself justify long separator-delimited names,
 repeated owner prefixes, or a filename taxonomy. Apply the review normalization
 and extraction signals in `enforcement-naming.md` after satisfying higher authorities; make
 them hard gates only through an explicit repository policy.
@@ -72,7 +72,7 @@ src/parser/parser_internal.h
 tests/parser/parser_test.c
 ```
 
-Keep ABI-facing declarations narrow. Do not expose allocation strategy, private
+Keep ABI-facing declarations narrow. Expose allocation strategy and private
 struct layout, platform headers, or third-party types unless they are an
 intentional compatibility contract.
 
@@ -98,7 +98,7 @@ src/parser/lexer.cpp
 tests/parser/parser_test.cpp
 ```
 
-Do not infer that a physical header is public. Confirm install/export rules and
+Classify a physical header as public only after confirming install/export rules and
 target include visibility in the authoritative build model.
 
 ## 4. 1990s: scripting, managed, web, and functional ecosystems
@@ -108,7 +108,7 @@ target include visibility in the authoritative build model.
 | 1990 | **Haskell** | Use Cabal packages/components and modules as boundaries; keep exposed modules minimal and internal modules unexposed. | Follow `src/`, `app/`, and `test/` component roots; structure tests by public module or capability. | An all-exporting Prelude replacement, cyclic module pressure solved with boot files by default, or typeclass abstraction without multiple credible consumers. |
 | 1991 | **Python** | Use distributions and import packages as boundaries. Prefer a `src/` layout for distributable libraries. Organize large framework applications by domain while preserving discovery rules. | Use `src/acme/<capability>/` and mirrored `tests/` or framework-native tests. Keep `__init__.py` as a deliberate facade, not a recursive export dump. | Import-path mutation, top-level `utils.py`, business logic in framework entrypoints, tests importing private filesystem paths, or namespace-package changes without packaging evidence. |
 | 1993 | **Lua** | Use modules, rocks, or host-application plugin units as boundaries; return explicit module tables and isolate host globals at adapters. | Mirror module paths under `spec/` or `test/` according to the selected harness; keep embedded-runtime fixtures owned by their host adapter. | Ambient globals, mutation during `require`, one `init.lua` exporting the whole tree, or assuming standalone Lua conventions inside an engine/plugin host. |
-| 1993 | **R** | Use packages and namespaces as production boundaries; scripts and notebooks consume package code rather than becoming its source of truth. | Follow `R/`, `tests/testthat/`, `inst/`, and `vignettes/`; use `NAMESPACE`/roxygen ownership consistently and isolate generated documentation. | `source()` chains as architecture, `.GlobalEnv` state, analysis notebooks containing unrecoverable production logic, or hand-editing generated `NAMESPACE` under roxygen ownership. |
+| 1993 | **R** | Use packages and namespaces as production boundaries; scripts and notebooks consume package code rather than becoming the canonical production owner. | Follow `R/`, `tests/testthat/`, `inst/`, and `vignettes/`; use `NAMESPACE`/roxygen ownership consistently and isolate generated documentation. | `source()` chains as architecture, `.GlobalEnv` state, analysis notebooks containing unrecoverable production logic, or hand-editing generated `NAMESPACE` under roxygen ownership. |
 | 1995 | **Ruby** | Use gems, Bundler groups, namespaces, and framework engines/components as boundaries. Keep `lib/<gem>.rb` as a deliberate entrypoint. | Mirror `lib/acme/...` under `spec/` or `test/`. In Rails, preserve autoload paths while organizing large systems by bounded feature. | Catch-all `concerns`, `services`, or `helpers`, monkey patches without explicit ownership, callback webs as cross-domain integration, or autoload-name/path mismatches. |
 | 1995 | **Java** | Use JPMS modules where adopted, build modules, packages, and visibility as boundaries. Organize first by domain/capability, then by real internal layer. | Follow build source sets such as `src/main/java` and `src/test/java`; one public top-level class per file remains the default. | Repository-wide `controllers/services/repositories/models` buckets, public classes used to bypass package ownership, split packages, or reflection-based access to internals without an explicit adapter. |
 | 1995 | **JavaScript** | Use packages, export maps, and runtime module mode as boundaries. For Node/Bun, use intentional `index.*` facades only. For browser frameworks, colocate feature-owned components, styles, stories, and tests. | Follow the selected runner's `*.test.*` or `*.spec.*`; separate contract/e2e suites only at real boundaries. | Deep imports around package exports, mixed ESM/CJS without an interop boundary, global `components/hooks/utils` dumping grounds, or framework CLI output reorganized against its loader. |
@@ -124,7 +124,7 @@ tests/<domain>/<capability>/     # mirrored only where ecosystem expects it
 <lockfile>                       # reproducible resolution contract
 ```
 
-Do not apply this literal tree to Rails, Django, Maven, or another framework that
+Apply a literal tree to Rails, Django, Maven, or another framework only when its
 requires a different loader/source-set structure. Preserve the semantic owner,
 not the drawing.
 
@@ -179,10 +179,10 @@ Tests/CheckoutTests/
 ```
 
 For a substantial Go application, use `cmd/` plus `internal/` and reject a
-project-level `src/`. Do not copy every directory from the community layout.
+project-level `src/`. Copy community-layout directories only when repository evidence gives each one a purpose.
 Each directory must own real artifacts, and `pkg/` commits the project to an
 externally consumable package surface. A single-purpose library or small command
-may remain flat. Do not turn a Rust workspace into a crate-per-directory layout
+may remain flat. Use a crate-per-directory layout only when package ownership or build boundaries require it.
 or create a Swift target merely to reduce file count.
 
 ## 7. Mixed-language repositories
@@ -198,7 +198,7 @@ services/
   billing/                 # JVM or .NET service owner
   gateway/                 # Go module owner
 packages/
-  protocol/                # schema source of truth
+  protocol/                # schema definition
   native-parser/           # C/C++/Rust library owner
 generated/
   protocol/{java,swift,ts}/
@@ -207,9 +207,9 @@ generated/
 Enforce all of the following:
 
 1. Give every subtree one authoritative build/package owner; a root orchestrator
-   may invoke it but must not duplicate its dependency graph.
+   may invoke it while the subtree remains the dependency-graph owner.
 2. Put schemas, IDLs, and code generators in a named contract owner. Generate
-   language bindings into isolated paths; never patch generated output directly.
+   language bindings into isolated paths; update generator inputs when generated output changes.
 3. Cross boundaries through versioned APIs, schemas, FFI headers, or package
    exports. Forbid private-path imports and source-level reach-through.
 4. Keep one lockfile per declared resolution domain. Multiple lockfiles are valid
@@ -220,7 +220,7 @@ Enforce all of the following:
 6. Keep vendored third-party code, generated bindings, build output, and authored
    source visibly separate. Apply format/lint only where the generator or vendor
    workflow permits it.
-7. Do not force every language into `src/domain/layer`. Standardize dependency
+7. Map each language to its supported dependency
    policy, ownership metadata, and verification entrypoints instead.
 
 Before moving a cross-language boundary, inspect FFI memory ownership, ABI and

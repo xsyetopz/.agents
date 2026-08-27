@@ -2,7 +2,7 @@
 
 > Locally authored enforcement guidance, not a primary source or generated snapshot; source gap: live verification of current language, provider, and tool claims against authority sources (see `enforcement-sources.md`) is required.
 
-Use the bundled adapter for tool discovery and syntax evidence. It never
+Use the bundled adapter for tool discovery and syntax evidence. It returns
 installs software, executes repository-provided shell commands, rewrites files,
 or treats a missing provider as a clean result.
 
@@ -27,8 +27,8 @@ python3 scripts/providers.py ast-query \
   --severity warning --message 'review unsafe boundary' src
 ```
 
-The adapter invokes `ast-grep run --json=stream --color never` with direct
-arguments and validates every returned range and path against `<repo>`. It
+The adapter invokes `ast-grep run --json=stream` with color output disabled and
+direct arguments, then validates every returned range and path against `<repo>`. It
 returns a versioned envelope with provider version, argv, exit status, timing,
 SHA-256 digests, normalized findings, and diagnostics. Exit codes are `0` for
 clean, `1` for matches, `3` for unavailable, `4` for provider failure, `5` for
@@ -43,9 +43,9 @@ python3 scripts/audit_architecture.py <repo> --format json
 The bundled scanner is supplemental evidence. It reads repository files and
 prints findings to standard output. It has no policy-file input and applies only
 its built-in inventory, naming, topology, suppression, and inline-test rules. It
-must not create a policy, provenance, schema, manifest, or report file in the
-target repository. Keep repository-native architecture, build, lint, and test
-commands as the acceptance authority.
+keeps policy, provenance, schema, manifest, and report files out of the target
+repository. Keep repository-native architecture, build, lint, and test commands
+as the acceptance authority.
 
 ## Package graph
 

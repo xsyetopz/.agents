@@ -77,7 +77,7 @@ Required:
 
 Use where failure may cause serious security, safety, legal, financial, or irreversible data harm.
 
-R4 requires domain-specific assurance standards beyond this skill. This skill may structure the work but SHALL NOT claim certification or sufficiency.
+R4 requires domain-specific assurance standards beyond this skill. This skill may structure the work; certification and sufficiency claims belong to the named assurance authority.
 
 Required in addition to R3:
 

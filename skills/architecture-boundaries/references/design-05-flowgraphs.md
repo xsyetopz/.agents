@@ -32,7 +32,7 @@ target renderer with an `info` diagram as described in the
 GitHub Mermaid compatibility note (see `design-09-bibliography.md#github-mermaid-compatibility`);
 no local render result is claimed here.
 
-All diagrams use Mermaid. Adapt names to the actual system. Do not copy a graph without checking state ownership, control authority, and failure paths.
+All diagrams use Mermaid. Adapt names to the actual system. Copy a graph only after checking state ownership, control authority, and failure paths.
 
 ## 1. Master architecture workflow
 
@@ -393,7 +393,7 @@ flowchart LR
 ```mermaid
 flowchart TD
     CLAIMS["Conflicting claims or designs"] --> SRC{"Independent sources/evidence?"}
-    SRC -->|no| UNKNOWN["Mark unknown; do not vote"]
+    SRC -->|no| UNKNOWN["Mark unknown; withhold a vote"]
     SRC -->|yes| REPRO{"Executable reproduction possible?"}
     REPRO -->|yes| TEST["Run controlled experiment"]
     REPRO -->|no| AUTH["Rank primary authority and scope"]

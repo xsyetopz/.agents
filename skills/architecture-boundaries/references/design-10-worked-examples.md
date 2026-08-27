@@ -264,7 +264,7 @@ Run long software-engineering tasks with model/effort switching, multiple worker
 
 ### Decision
 
-Select the governed orchestrator. Peer swarms may explore in parallel but MUST NOT own independent final goals or irreversible authority.
+Select the governed orchestrator. Peer swarms may explore in parallel; final goals and irreversible authority remain with the governed orchestrator.
 
 ### Structural mapping
 
@@ -360,7 +360,7 @@ The domain contains competing meanings and authorities: catalog price, contractu
 
 ### Decision
 
-Select context-owned state and an explicit long-running process manager. Use events for facts and commands for requested actions. Do not expose internal aggregates between contexts.
+Select context-owned state and an explicit long-running process manager. Use events for facts and commands for requested actions. Expose only context-owned contracts between contexts; keep internal aggregates inside their owning context.
 
 ### Flow
 
@@ -394,7 +394,7 @@ If payment fails after stock reservation, issue `ReleaseReservation` with the wo
 - Published events are durable and idempotently consumable.
 - Process state records completed steps and compensations.
 - External identifiers are translated at context boundaries.
-- “Order confirmed” is emitted only after the configured acceptance policy is satisfied.
+- "Order confirmed" is emitted only after the configured acceptance policy is satisfied.
 
 ### MVC placement
 

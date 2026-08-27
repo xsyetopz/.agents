@@ -18,7 +18,7 @@
 | Component | A runtime or replaceable responsibility unit | Contract and interaction |
 | Boundary | A line across which semantics, ownership, trust, deployment, or failure behavior changes | Explicit reason and contract |
 
-Never treat these as synonyms.
+Keep these terms distinct.
 
 ## 2. Universal four-part decomposition
 
@@ -26,19 +26,19 @@ Many systems can be reasoned about through four roles. These are not mandatory c
 
 1. **Semantic core**
    - Authoritative concepts, rules, state, transformations, and invariants.
-   - Answers: “What is true?” and “What transitions are valid?”
+   - Answers: "What is true?" and "What transitions are valid?"
 
 2. **Control / coordination**
    - Converts stimuli into ordered operations, schedules work, manages transactions or workflows, and selects policies.
-   - Answers: “What happens next, under whose authority?”
+   - Answers: "What happens next, under whose authority?"
 
 3. **Projection / representation**
    - Produces views, diagnostics, serialized forms, reports, read models, telemetry, or generated artifacts.
-   - Answers: “How is state or a result made observable or consumable?”
+   - Answers: "How is state or a result made observable or consumable?"
 
 4. **Ports / effects**
    - Interfaces to files, networks, clocks, databases, processes, devices, models, tools, and external services.
-   - Answers: “Where does the system touch an environment it does not control?”
+   - Answers: "Where does the system touch an environment it does not control?"
 
 A valid architecture may combine or multiply these roles. The model is useful only when it clarifies ownership and flow.
 
@@ -80,7 +80,7 @@ A valid architecture may combine or multiply these roles. The model is useful on
 
 ### Required caution
 
-MVC is not a synonym for “data, logic, output.” The architecture must show independent semantic state, a representation, and a real interaction/control role. For compilers, runtimes, and protocols, pipeline, machine, dataflow, interpreter, or ports-and-adapters models often explain the dominant forces better.
+MVC is not a synonym for "data, logic, output." The architecture must show independent semantic state, a representation, and a real interaction/control role. For compilers, runtimes, and protocols, pipeline, machine, dataflow, interpreter, or ports-and-adapters models often explain the dominant forces better.
 
 ## 4. DDD vocabulary
 
@@ -193,7 +193,7 @@ Common control models:
 | Runtime | Interpreter/JIT/scheduler over machine state |
 | Build system | Dependency scheduler over DAG |
 
-“Distributed control” is not an excuse to omit authority. Specify local authority and coordination protocol.
+"Distributed control" is not an excuse to omit authority. Specify local authority and coordination protocol.
 
 ## 8. Dependency direction
 
@@ -211,12 +211,12 @@ Exceptions are allowed when justified by performance, language/runtime mechanics
 ## 9. Commands, queries, events, and projections
 
 - **Command:** request to perform an operation; may be rejected.
-- **Query:** request for information; should not intentionally change domain state.
+- **Query:** request for information; its contract contains no intentional domain-state mutation.
 - **Event:** statement that something occurred; semantics depend on ownership and delivery guarantees.
 - **Projection:** derived representation optimized for a consumer.
 - **Notification:** signal that may carry less semantic commitment than a domain event.
 
-Do not call every message an event. Do not call a mutable request an event merely because it is placed on a queue.
+Classify a message as an event when it states that something occurred; keep a mutable queued request as a command or request.
 
 ## 10. Invariants and contracts
 
@@ -232,7 +232,7 @@ Examples:
 
 - Compiler IR remains well-typed after every verified pass.
 - A workflow step is committed at most once per idempotency key.
-- A binary decoder never reads beyond the declared frame boundary.
+- A binary decoder reads only within the declared frame boundary.
 - An agent tool call cannot exceed granted capability or budget.
 - A TUI model transition is deterministic for a given message and state.
 

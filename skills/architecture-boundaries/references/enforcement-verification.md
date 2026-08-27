@@ -19,7 +19,7 @@ after editing. Treat command output and exit codes as evidence. The command has
 one acceptance policy: full Git-visible scope (tracked plus non-ignored
 untracked files), fixed thresholds, and failure on every warning or error. It
 exposes no scope, severity, threshold, or exception waiver. Tracked files
-remain visible even when an ignore pattern matches them; never suppress a
+remain visible even when an ignore pattern matches them; keep a
 finding by moving tracked code under an ignored directory or changing the
 checker.
 
@@ -56,7 +56,7 @@ build cannot substitute for an entrypoint smoke when composition changed.
   undeclared project references, and wrong visibility.
 - **Public surface:** compare exports, headers, symbols, routes, schemas,
   events, package contents, and generated clients with intentional compatibility
-  evidence. A baseline comparison identifies change; it never waives a finding.
+  evidence. A baseline comparison identifies change; it records a finding for remediation.
 - **Ownership:** map source/test/fixture/generated paths to a capability and
   detect unowned data, duplicate contracts, or cross-boundary mutations.
 - **Naming:** apply toolchain and public-contract rules first; use semantic
@@ -79,13 +79,13 @@ cannot prove syntax, ownership, dependency direction, or semantic cohesion.
 The bundled inline detector is a conservative lexical gate for registered
 native and framework forms: it masks comments and strings but does not claim
 complete parser coverage. Add AST/compiler-backed rules for forms outside its
-registry; never weaken the bundled gate to accommodate a missed form.
+registry; keep the bundled gate unchanged and fix the missed form.
 
 ## Repository-native audit evidence
 
 Use the target repository's existing dependency, architecture, test, build, and
 lint commands. Keep their configuration unchanged while diagnosing a finding.
-Capture exact commands and exit codes in the response. Do not add a custom
+Capture exact commands and exit codes in the response. Use the repository-owned
 schema, provenance file, suppression baseline, or generated audit report.
 
 ## Check integrity and failure ownership

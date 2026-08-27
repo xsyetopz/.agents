@@ -182,7 +182,7 @@ Recommended criteria:
 | Cognitive load / reviewability | 3 |
 | Reversibility | 2 |
 
-Adjust weights only from explicit priorities. Do not manipulate weights to justify a favorite.
+Adjust weights only from explicit priorities; record the tradeoff for each adjustment.
 
 Formula:
 
@@ -320,7 +320,7 @@ Then specify:
 - Error mapping
 - Observability
 
-Do not introduce queues or events solely to “decouple” code.
+Introduce queues or events when they provide a named delivery, buffering, ordering, or ownership boundary; record that reason.
 
 ## 13. Concurrency decision procedure
 
@@ -346,7 +346,7 @@ Record explicit thresholds that justify a more complex architecture. Examples:
 - Add a plugin boundary when third-party/independent extension cadence is required.
 - Add an IR level when transformations repeatedly lose or reconstruct semantic information.
 
-Without a threshold, “future-proofing” is not sufficient.
+Without a threshold, "future-proofing" is not sufficient.
 
 ## 15. Architecture review verdicts
 
@@ -389,7 +389,7 @@ Extract without embellishment:
 Assign stable identifiers: `OBJ-*`, `REQ-*`, `CON-*`, `EXC-*`, `QA-*`.
 
 **Gate G0 - Goal integrity:** Trace the proposed work to the user's request;
-do not add an invented objective.
+add objectives only when they are present in the task contract.
 
 ### Phase 0a - Candidate tree and topology trigger
 
@@ -409,7 +409,7 @@ the target repository's native capability, dependency, architecture, test, and
 build checks before editing and again after editing. Record each exact command,
 scope, finding, and exit code in the response. If a required tool or provider is
 unavailable, use the narrowest fallback evidence and mark the missing evidence
-`UNVERIFIED`; do not create a custom schema or generated audit report.
+`UNVERIFIED`; use the repository's existing schema and audit-report path.
 
 ### Phase 1 - Evidence and uncertainty
 
@@ -495,7 +495,7 @@ failure cases represented in its flow and contract.
 For every major component define purpose, inputs/outputs, pre/postconditions,
 invariants, owned state/lifetime, allowed and forbidden dependencies, error
 taxonomy, concurrency model, idempotency/replay, observability, security
-assumptions, and test seam. Do not describe a component only as `manager`,
+assumptions, and test seam. Describe each component with its concrete purpose rather than only as `manager`,
 `service`, `handler`, `engine`, or `utils`.
 
 ### Phase 8 - Tradeoff and risk review
@@ -524,7 +524,7 @@ during coding.
 
 Select invariant/property, contract, golden/snapshot, differential,
 state-machine, fault-injection, performance, security, and architecture-
-conformance checks at the correct level. Audit each check's integrity: do not
+conformance checks at the correct level. Audit each check's integrity and keep its
 add ignores/exclusions, disable rules/providers/jobs, lower severity or
 thresholds, alter baselines, allow failure, exclude paths, or weaken/delete
 checks to make results green. Fix the owning cause; if a tool is wrong, leave

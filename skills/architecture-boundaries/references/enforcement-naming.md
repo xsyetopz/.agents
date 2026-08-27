@@ -29,7 +29,7 @@ Resolve names in this order:
 5. one documented repository convention where no authority decides;
 6. the short-name review default below when no higher authority decides.
 
-Do not call a convention "official" unless a language, compiler, standard
+Call a convention "official" only when a language, compiler, standard
 library, or owning tool specifies it. A framework convention is authoritative
 only inside that framework. Dominant practice is a default, not a compiler rule.
 Repository convention can select among undecided case or separator styles; it
@@ -52,7 +52,7 @@ Classify every candidate before enforcement:
 These classifications are visible exemptions. A directory name alone does not
 prove them. The bundled audit recognizes only deterministic built-in evidence,
 such as a reserved framework filename, generated companion pattern, or canonical
-generated header. Exemptions do not make equivalent authored names acceptable
+generated header. Exemptions apply to generated names; authored names still follow the repository convention
 and do not count excluded paths as full-repository proof.
 
 ## 2. Review defaults for authored files
@@ -78,7 +78,7 @@ them repeatedly.
 Do not split CamelCase or PascalCase declaration names to apply the token limit.
 Where a compiler, language guide, loader, or dominant type-per-file convention
 maps a declaration to its file, match the declaration and review whether that
-declaration itself is cohesive. Do not shorten a public type into an opaque
+declaration itself is cohesive. Keep a public type readable instead of shortening it into an opaque
 filename.
 
 Flag the following for review unless a higher authority or a recorded decision
@@ -180,13 +180,13 @@ universal semantic rules still apply.
 | 1958 | **Lisp family / Common Lisp** | ASDF load mapping; dominant lowercase/hyphen practice | Name files by the subsystem loaded by the `.asd`; keep the system definition reserved and avoid package-prefix colonies. |
 | 1959 | **COBOL** | Compiler, dataset, copybook, and build-product rules | Preserve required program/copybook identifiers, dataset constraints, and generated members. Apply short semantic stems only where the platform permits. |
 | 1964 | **BASIC / Visual Basic lineage** | IDE/project/designer rules; dominant type alignment in VB.NET | Preserve form/designer/resource companions. Match a primary public type when the project does so; otherwise select short PascalCase names. |
-| 1970 | **Pascal / Delphi / Object Pascal** | Unit/compiler and IDE form rules | Match unit names and preserve paired form/resource files. Do not rename generated designer companions independently. |
+| 1970 | **Pascal / Delphi / Object Pascal** | Unit/compiler and IDE form rules | Match unit names and preserve paired form/resource files. Keep generated designer companions paired with their generator-controlled names. |
 | 1971 | **Shell (`sh`, Bash, Zsh, PowerShell)** | Entrypoint/platform rules; dominant lowercase practice | Prefer short lowercase executable or capability names; use the repository's established `-`/`_` only after checking invocation contracts. PowerShell commonly uses approved verb-noun command naming, which does not justify long module leaves. |
 | 1972 | **C** | Build/include contracts; repository-selected case | No universal official filename case rule is asserted. Select short lowercase stems; keep `.h`/`.c` logical families and platform suffixes recognized by the build. |
 | 1974 | **SQL and database procedural languages** | Migration/schema tool rules | Preserve ordered timestamps/versions and repeatable-migration prefixes. Use a short descriptive remainder; schema-derived output stays generator-owned. |
 | 1978 | **MATLAB / numerical workspace languages** | MATLAB class/package/function mapping | Preserve `+package`, `@class`, and primary function/class mapping rules. Tests and Simulink/codegen companions follow the selected tool. |
 | 1980 | **Smalltalk** | Image/export tool rules | Names may be image metadata rather than filesystem contracts. Preserve dialect export/package conventions; apply this contract to authored export files when names are selectable. |
-| 1983 | **Ada** | Compiler naming convention and project configuration | Match package hierarchy to compiler/project filename mapping, including body/spec forms. Never substitute a foreign case style for configured GNAT or other compiler rules. |
+| 1983 | **Ada** | Compiler naming convention and project configuration | Match package hierarchy to compiler/project filename mapping, including body/spec forms. Use the case style configured by GNAT or the active compiler rules. |
 | 1984 | **Objective-C** | Xcode/framework/resource rules; dominant type alignment | Commonly match `.h`/`.m`/`.mm` to the primary class and keep test/resource companions. Prefixes required for public collision avoidance are contractual, not architecture. No universal official case claim is made. |
 | 1985 | **C++** | Module/build/include contracts; repository-selected case | No universal official filename case rule is asserted. Keep header/source/template counterparts discoverably aligned and select short lowercase stems unless public type/module mapping decides otherwise. |
 | 1986 | **Erlang** | Compiler module mapping | Match the module atom to the `.erl` filename; preserve OTP application and test-suite conventions such as Common Test `_SUITE`. |
@@ -208,14 +208,14 @@ universal semantic rules still apply.
 | 2007 | **Clojure** | Namespace-to-resource mapping | Match namespace segments to paths using Clojure's hyphen-to-underscore resource mapping. Preserve conventional `core.clj` only as an intentional namespace entry, not a dumping ground. |
 | 2009 | **Go** | Toolchain requirements plus Go package practice | `_test.go` is required for `go test` discovery. Preserve build-constraint OS/architecture suffixes and `doc.go`; use short lowercase/underscore stems without type-per-file ceremony. Follow the official module-layout guidance in `enforcement-languages.md`. |
 | 2010 | **Rust** | Compiler module mapping and Cargo-reserved roots | Module declarations map to `foo.rs`, `foo/mod.rs`, and submodules. Preserve `lib.rs`, `main.rs`, `mod.rs`, Cargo manifests, and selected source-adjacent/integration test structure; use short snake_case module stems. |
-| 2011 | **Kotlin** | Official language guidance and platform tooling | Official guidance uses a filename matching the sole class, or descriptive UpperCamelCase for multiple declarations, and supports platform suffixes. Preserve source-set and test conventions; do not force Java one-type-per-file ceremony. |
+| 2011 | **Kotlin** | Official language guidance and platform tooling | Official guidance uses a filename matching the sole class, or descriptive UpperCamelCase for multiple declarations, and supports platform suffixes. Preserve source-set and test conventions; apply Java one-type-per-file structure only when the Kotlin project requires it. |
 | 2011 | **Dart / Flutter** | Official Dart/library and generator/framework rules | Use lower_snake_case authored library files; preserve package facade, test discovery, and generated companions such as `.g.dart` and `.freezed.dart`. |
 | 2011 | **Elixir** | Mix/compiler mapping and dominant snake_case | Match module paths in snake_case under `lib/`/`test/`; preserve `mix.exs`, `config.exs`, and conventional `_test.exs`. |
 | 2012 | **TypeScript** | Tool/framework rules; repository-selected source case | TypeScript standardizes declaration forms such as `.d.ts`, `.d.mts`, and `.d.cts`, not a universal source filename case. Select one short case style and preserve Node/Bun `.test`/`.spec` or Deno `_test` only for the active runner. |
-| 2012 | **Julia** | Package/module conventions and tool rules | Preserve `src/Package.jl` and `test/runtests.jl`; use declaration-aligned module capitalization and short capability suite names where tools do not decide. |
+| 2012 | **Julia** | Package/module conventions and tool rules | Preserve `src/Package.jl` and `test/runtests.jl`; use declaration-aligned module capitalization and short capability suite names when tools leave the choice open; retain repository-selected names. |
 | 2014 | **Swift** | SwiftPM/Xcode/resource rules; dominant type/capability alignment | No universal official filename case rule is asserted. Commonly use UpperCamelCase matching the primary type/capability; preserve generated resources and test-target conventions. Avoid `Extensions.swift` and taxonomy suffixes. |
-| 2016 | **Zig** | Compiler/build import paths and reserved roots | Preserve `build.zig`, `root.zig`, and `main.zig`; use short lowercase stems selected by the repository where imports do not impose a path. Keep target variants explicit only when the build recognizes them. |
-| 2016 | **Odin** | Package/tool rules; repository-selected case | Select short names consistent with verified package/tool conventions; do not repeat the package in every leaf. Platform suffixes count as markers only when the active build recognizes them. |
+| 2016 | **Zig** | Compiler/build import paths and reserved roots | Preserve `build.zig`, `root.zig`, and `main.zig`; use short lowercase stems selected by the repository where imports leave the path open. Keep target variants explicit only when the build recognizes them. |
+| 2016 | **Odin** | Package/tool rules; repository-selected case | Select short names consistent with verified package/tool conventions; repeat the package in a leaf only when it disambiguates ownership. Use platform suffixes as markers when the active build recognizes them. |
 | 2019 | **C3** | Compiler/build module rules; repository-selected case | Follow the detected C3 toolchain's module and test mapping. Select short semantic stems where undecided; do not import C prefix taxonomies into module-qualified code. |
 
 ## 6. Migration and output
@@ -227,7 +227,7 @@ documentation links, case-insensitive filesystem hazards, and published paths.
 
 Move one logical owner at a time. Use symbol-aware moves where available. Update
 source/header/test/declaration/platform companions, build metadata, generated
-lists, imports/exports, and consumers in the same change. Do not leave aliases,
+lists, imports/exports, and consumers in the same change. Remove aliases,
 barrels, forwarding wrappers, duplicate files, or empty directories unless a
 public compatibility contract requires a time-bounded transition.
 

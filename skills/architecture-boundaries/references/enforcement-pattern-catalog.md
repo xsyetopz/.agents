@@ -18,7 +18,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 - Start with a modular monolith for one product and one deployment unit. It is the default, not a transitional embarrassment.
 - Use language- and ecosystem-idiomatic module systems before introducing generic abstractions, service locators, dependency-injection containers, or repository layers.
 - Treat network calls, durable messages, databases, filesystems, clocks, processes, and third-party SDKs as I/O boundaries with explicit failure and lifecycle semantics.
-- Do not copy a folder layout across language families. Express the same dependency rule with the compiler, package manager, visibility model, and test topology the ecosystem actually supports.
+- Map dependency rules to the compiler, package manager, visibility model, and test topology supported by each language family.
 - A pattern must make a material constraint easier to enforce. If it only adds types, folders, interfaces, handlers, or ceremony, reject it.
 
 ## Modular Monolith
@@ -30,7 +30,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 - Modules align to durable capabilities or bounded contexts, not technical buckets.
 - Each module exposes a narrow public contract; sibling modules never import private paths or mutate each other's persistence directly.
 - Dependency direction is acyclic and is checked by build visibility, package rules, linting, or architecture tests.
-- Composition occurs at an application boundary; modules do not discover each other through globals or registries.
+- Composition occurs at an application boundary; modules use explicit composition rather than globals or registries.
 
 **Operational trade-offs:** simple deployment and observability, inexpensive local transactions, and low latency; releases and resource limits remain coupled, so discipline is required to prevent a distributed-monolith-shaped codebase.
 
@@ -42,7 +42,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 
 **Required invariants:**
 
-- Dependencies point inward: delivery and infrastructure depend on application/domain policy, never the reverse.
+- Dependencies point inward: delivery and infrastructure depend on application/domain policy.
 - Ports are owned by the policy that needs them and describe required behavior, not a database, ORM, HTTP client, or vendor API.
 - Adapters translate protocol, persistence, retry, error, authentication, and lifecycle semantics at the edge.
 - Entrypoints and composition roots wire concrete adapters; domain/application code does not import framework or transport types.
@@ -92,7 +92,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 - CQRS separates command intent from read models without necessarily requiring separate services or datastores.
 - Commands validate against authoritative state and emit explicit outcomes; read models are disposable projections with measured freshness.
 - Event-sourced streams have stable event schemas, stream identity, optimistic concurrency rules, upcasters/migration policy, snapshots where justified, and a recovery/replay procedure.
-- Projection consumers are idempotent, observable, rebuildable, and do not become an untracked source of truth.
+- Projection consumers are idempotent, observable, rebuildable, and remain downstream projections rather than untracked state owners.
 
 **Operational trade-offs:** read optimization, audit history, and temporal reasoning improve; debugging, privacy deletion, schema evolution, backfills, and eventual consistency become expensive operational concerns.
 
@@ -150,7 +150,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 
 **Required invariants:**
 
-- A service owns its data and business capability; other services use published APIs or events, never its database.
+- A service owns its data and business capability; other services use published APIs or events.
 - Every cross-process contract specifies authentication, authorization, timeout, cancellation, retries, idempotency, versioning, rate limits, observability, and failure behavior.
 - Services are independently buildable, deployable, monitored, and recoverable with an accountable operating owner.
 - Distributed consistency is explicit; workflows tolerate partial failure and delayed delivery.
@@ -165,7 +165,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 
 **Use when:** replacing a legacy system incrementally while preserving a stable external contract.
 
-**Required invariants:** route ownership is explicit; each migrated capability has parity criteria and observability; old and new paths do not silently diverge; and each cutover has a rollback or forward-repair procedure.
+**Required invariants:** route ownership is explicit; each migrated capability has parity criteria and observability; old and new paths share an explicit parity rule; and each cutover has a rollback or forward-repair procedure.
 
 **Operational trade-offs:** lowers replacement risk and enables incremental learning, but temporarily increases routing, data synchronization, and operational complexity.
 
@@ -173,7 +173,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 
 ### Anti-Corruption Layer
 
-**Use when:** integrating with a legacy or external model whose terminology, lifecycle, errors, or invariants must not leak into the local context.
+**Use when:** integrating with a legacy or external model while keeping its terminology, lifecycle, errors, and invariants at the boundary.
 
 **Required invariants:** translation is owned at the boundary; foreign types remain outside the local model; mappings preserve failure and data-quality semantics; and changes are contract-tested.
 
@@ -193,7 +193,7 @@ Select an architecture from product constraints, operating model, and enforceabl
 
 ### Transactional Outbox
 
-**Use when:** state changes and published messages must not be lost or diverge under crash/retry conditions.
+**Use when:** state changes and published messages remain durable and consistent under crash/retry conditions.
 
 **Required invariants:** the business write and outbox record commit atomically; relay publication is idempotent; consumers deduplicate; retention and replay are managed; and monitoring detects backlog and publish failure.
 

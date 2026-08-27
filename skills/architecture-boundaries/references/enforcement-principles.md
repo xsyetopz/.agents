@@ -21,7 +21,7 @@ For every repository, deployable, package, module, target, directory, and
 substantial file, answer:
 
 1. What durable product, domain, platform, or pipeline capability does it own?
-2. Which changes belong here, and which explicitly do not?
+2. Which changes belong here, and which belong to another owner?
 3. What is its supported public surface?
 4. Which dependencies may it consume?
 5. Which consumers may depend on it?
@@ -45,7 +45,7 @@ git ls-files --others --exclude-standard
 ```
 
 The second command is required; untracked source is part of the candidate and
-must not be omitted because it is absent from the index. For every changed or
+belongs in the candidate even when it is absent from the index. For every changed or
 new source unit, record a row containing:
 
 | Path | Owner | Change reason | Visibility | Lifecycle | Dependencies | Consolidation rationale |
@@ -57,7 +57,7 @@ owner. A row with no independent contract, lifecycle, dependency boundary,
 visibility boundary, or failure policy is a finding, not an architecture
 decision.
 
-Do not decompose by syntax or procedure: one type, operation, phase, helper,
+Decompose by ownership, lifecycle, dependency, or change reason rather than by syntax or procedure: one type, operation, phase, helper,
 or validation rule per file is forbidden when the units share an owner, change
 reason, visibility, lifecycle, dependency set, or test contract. `Validation`,
 `Helpers`, `Open`, `Reduce`, and `Commit` describe procedural roles in a flow;
@@ -73,7 +73,7 @@ finding.
 
 When evidence is incomplete, use a 0-2 score on each axis as a comparative
 conversation aid. These weights are a local judgment, not an industry
-standard, and never establish acceptance by themselves:
+standard, and establish acceptance only with repository-relevant evidence:
 
 | Axis | 0 | 1 | 2 |
 | --- | --- | --- | --- |
@@ -86,7 +86,7 @@ standard, and never establish acceptance by themselves:
 Use the result to choose the next evidence: inspect imports, public surface,
 change history, lifecycle, and test ownership before preserving, splitting, or
 consolidating. Generated/data-oriented units require artifact provenance, not a
-better score. Never use the score to justify an illegal dependency or
+better score. Keep illegal dependencies and unmet constraints outside score tradeoffs; use the score to compare eligible candidates.
 contractual break.
 
 ## 3. Coupling limits
@@ -128,7 +128,7 @@ across domain boundaries.
 
 Choose when one deployment and transaction boundary is operationally
 sufficient. Require feature/domain modules, restricted internal imports,
-explicit composition, and data ownership. Do not let modules become naming-only
+explicit composition, and data ownership. Keep modules tied to concrete
 folders over a shared global model.
 
 ### Layered
@@ -140,14 +140,14 @@ it only forwards calls or renames data.
 ### Ports and adapters
 
 Choose at unstable I/O or vendor boundaries. The inward owner defines the port
-around required capability, not around the vendor API. Do not create an
+around required capability rather than the vendor API. Create an
 interface for every class.
 
 ### Pipeline/data-oriented
 
 Choose when transformations, stages, scheduling, memory layout, or throughput
 dominate. Make data ownership, mutability, backpressure, stage contracts, and
-failure propagation explicit. Do not force controller/service/repository layers
+failure propagation explicit. Select controller/service/repository layers
 onto it.
 
 ### Plugin
@@ -215,7 +215,7 @@ Promote a flat cluster when it has a durable owner and one or more of:
 
 Promote a directory to a package/project/target only when independent
 visibility, dependencies, build configuration, reuse, deployment, or ownership
-justify the additional graph node. Do not package every directory.
+justify the additional graph node. Package directories when they express a real boundary.
 
 ### Filename fitness
 
@@ -225,7 +225,7 @@ leaves, remove only active-toolchain test, declaration, generated-companion, and
 platform markers. Flag three or more remaining semantic tokens, three or more
 sibling logical units sharing a semantic leading token, and a multi-token leaf
 that repeats an ancestor owner for review. Count source/header/test/declaration/
-platform representations of one unit once. These heuristics do not replace the
+platform representations of one unit once. These heuristics supplement the
 source-topology gate; an inventory label cannot be used as an acceptance waiver,
 and no threshold override may lower the required review.
 
@@ -233,7 +233,7 @@ Extract the repeated owner into a durable directory/module/package and keep a
 one- or two-token leaf. A resulting single-file owner directory is valid when it
 carries package/module identity, visibility, routing, public path, or an
 established extraction boundary; a wrapper directory that only disguises one
-trivial file is not. Do not mechanically split declaration-matching CamelCase or
+trivial file is not. Split declaration-matching CamelCase or
 PascalCase names. See `enforcement-naming.md` for authority and language-specific rules.
 
 ## 9. Composition-root rules
@@ -247,8 +247,8 @@ Executable entrypoints may:
 - start lifecycle and register shutdown;
 - delegate to application orchestration.
 
-They must not own business policy, persistence queries, protocol parsing beyond
-bootstrap, or reusable algorithms. A growing composition root is evidence of
+They own composition and wiring, while business policy, persistence queries,
+protocol parsing beyond bootstrap, and reusable algorithms remain elsewhere. A growing composition root is evidence of
 missing application or platform ownership.
 
 ## 10. Generated and vendor boundaries
@@ -269,8 +269,8 @@ generator, template, patch pipeline, or adapter.
 
 Before moving code:
 
-- capture pre-change build/test/audit results for diagnosis; do not treat a
-  baseline or known failure list as acceptance or a waiver;
+- capture pre-change build/test/audit results for diagnosis; classify a baseline
+  or known failure list as diagnostic context rather than acceptance or a waiver;
 - inventory public paths, manifests, build targets, exports, reflection/config
 references, code generation, CI filters, and documentation;
 - define allowed dependency edges and the target tree;
@@ -284,7 +284,8 @@ During migration:
 - keep path-only and semantic changes separate when practical;
 - use compiler/symbol-aware moves;
 - validate each changed boundary;
-- do not add permanent barrels or aliases to conceal incomplete work.
+- add permanent barrels or aliases only when they represent a supported public
+  boundary.
 
 After migration:
 
@@ -348,8 +349,8 @@ consistency. Define RTO/RPO or availability targets when the system is
 operationally significant. Test dependency loss, partial writes, duplicate
 delivery, stale reads, restart, deploy rollback, and exhausted capacity.
 
-Do not add retries without a bounded deadline, jitter/backoff, duplicate
-semantics, and a decision about which layer owns retry. Do not call a system
+Add retries with a bounded deadline, jitter/backoff, duplicate
+semantics, and a decision about which layer owns retry. Call a system
 resilient because it has a circuit breaker; prove recovery and user-visible
 behavior.
 
@@ -359,7 +360,7 @@ Map trust boundaries, principals, assets, data classifications, and threat
 assumptions. Assign ownership for authentication, authorization, validation,
 secrets, key rotation, audit trails, dependency provenance, and incident
 response. Minimize data movement and retention. Keep identity and policy types
-out of adapters that should not own access decisions.
+out of adapters; access decisions belong to the policy owner.
 
 Verify least privilege, fail-closed behavior, input/output validation, secure
 defaults, dependency and artifact scanning, secret absence, and relevant abuse
@@ -424,7 +425,7 @@ the platform design system when one exists.
 
 An attribute is architecturally addressed only when the scenario has an owner,
 a target, a design invariant, and executable or independently reviewable proof.
-Record unknown targets as risks; do not silently substitute a pattern or a
+Record unknown targets as risks; select a pattern or a
 folder structure for missing requirements.
 
 ## Sources

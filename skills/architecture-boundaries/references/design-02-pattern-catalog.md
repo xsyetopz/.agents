@@ -57,11 +57,11 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Dependencies can be directed; different concerns evolve at different rates; test seams matter.
 
-**Avoid when:** Every request must cross ceremonial layers; performance demands collapse boundaries; layer names hide feature cohesion.
+**Use another pattern when:** Every request must cross ceremonial layers; performance demands collapse boundaries; layer names hide feature cohesion.
 
 **Canonical shape:** interface -> application -> domain -> infrastructure abstractions, with infrastructure adapters implementing ports.
 
-**Invariants:** No forbidden upward dependency; domain semantics do not require presentation or storage frameworks.
+**Invariants:** Dependencies point inward; domain semantics stand independently of presentation and storage frameworks.
 
 **Tests:** Dependency rules, layer contract tests, domain tests without infrastructure.
 
@@ -71,11 +71,11 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Multiple interfaces or infrastructure implementations exist; deterministic tests are valuable; external systems are volatile.
 
-**Avoid when:** The system is a small single-purpose adapter; ports simply duplicate every library API.
+**Use another pattern when:** The system is a small single-purpose adapter; ports simply duplicate every library API.
 
 **Canonical shape:** application core defines purpose-oriented ports; adapters translate protocols and technologies.
 
-**Invariants:** Ports express application conversations, not vendor-specific mechanics; adapters do not own domain policy.
+**Invariants:** Ports express application conversations rather than vendor-specific mechanics; domain policy remains in the application core.
 
 **Tests:** In-memory adapter tests, contract suites shared by adapter implementations.
 
@@ -85,7 +85,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Long-lived business or semantic rules must outlast frameworks.
 
-**Avoid when:** “Use-case” classes become pass-through boilerplate; all code is forced into concentric folders without real boundaries.
+**Use another pattern when:** "Use-case" classes become pass-through boilerplate; all code is forced into concentric folders without real boundaries.
 
 **Invariants:** Inner policy has no compile-time dependency on outer delivery or infrastructure details.
 
@@ -95,7 +95,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Interactive software has multiple views or input modes and a model with independent meaning.
 
-**Avoid when:** There is no persistent/semantic model, no interactive feedback loop, or the dominant structure is a pipeline.
+**Use another pattern when:** There is no persistent/semantic model, no interactive feedback loop, or the dominant structure is a pipeline.
 
 **Invariants:** View representation does not become authoritative state; controller does not absorb all domain logic.
 
@@ -105,7 +105,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Passive view interfaces enable deterministic presenter tests.
 
-**Avoid when:** Presenter becomes an application-wide god object or mirrors widgets one-for-one.
+**Use another pattern when:** Presenter becomes an application-wide god object or mirrors widgets one-for-one.
 
 ## 6. MVVM
 
@@ -113,7 +113,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** The UI platform has real binding semantics and observable state.
 
-**Avoid when:** View-model is merely the domain model renamed; binding hides uncontrolled side effects.
+**Use another pattern when:** View-model is merely the domain model renamed; binding hides uncontrolled side effects.
 
 ## 7. MVU / reducer architecture
 
@@ -121,7 +121,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Event-loop applications, TUIs, frontends, editors, or stateful agents benefit from immutable state and message-driven updates.
 
-**Avoid when:** State is huge and copying is uncontrolled; effects bypass the update loop; message types become an unstructured dumping ground.
+**Use another pattern when:** State is huge and copying is uncontrolled; effects bypass the update loop; message types become an unstructured dumping ground.
 
 **Canonical shape:** `Message + Model -> New Model + Effects`; view is a projection; effect results return as messages.
 
@@ -135,7 +135,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Multiple UI technologies or complex enablement/validation rules exist.
 
-**Avoid when:** It duplicates domain state without a projection reason.
+**Use another pattern when:** It duplicates domain state without a projection reason.
 
 ## 9. PAC (Presentation–Abstraction–Control)
 
@@ -143,7 +143,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Independent interactive regions require local control and recursive composition.
 
-**Avoid when:** A simpler component hierarchy or MVU loop suffices.
+**Use another pattern when:** A simpler component hierarchy or MVU loop suffices.
 
 ## 10. Pipeline / pipe-and-filter
 
@@ -151,7 +151,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Compilers, ETL, codecs, build steps, analysis tools, and media/data processing have stage-local contracts.
 
-**Avoid when:** Stages require uncontrolled shared mutable state; backtracking and global optimization dominate; stage boundaries force repeated expensive conversions.
+**Use another pattern when:** Stages require uncontrolled shared mutable state; backtracking and global optimization dominate; stage boundaries force repeated expensive conversions.
 
 **Invariants:** Stage input/output contracts are explicit; ordering constraints are declared; invalid intermediate state is detected.
 
@@ -163,7 +163,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Multiple compiler/static-analysis passes have dependencies, invalidation rules, nesting, or target-specific pipelines.
 
-**Avoid when:** A fixed three-step transformation needs no reusable analysis or scheduling.
+**Use another pattern when:** A fixed three-step transformation needs no reusable analysis or scheduling.
 
 **Invariants:** Required analyses are available; invalidated analyses are not reused; IR verification occurs at declared points.
 
@@ -173,7 +173,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Semantics must be explicit, inspectable, portable, or dynamically extensible.
 
-**Avoid when:** Direct compilation or table-driven execution is substantially simpler and sufficient.
+**Use another pattern when:** Direct compilation or table-driven execution is substantially simpler and sufficient.
 
 **Canonical shape:** syntax/IR + environment/store + evaluator/dispatcher + effects.
 
@@ -185,7 +185,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Portability, sandboxing, small implementation size, runtime instrumentation, or multi-language hosting matters.
 
-**Avoid when:** The machine abstraction merely wraps host calls without stable semantics.
+**Use another pattern when:** The machine abstraction merely wraps host calls without stable semantics.
 
 **Invariants:** Machine state, instruction semantics, validation, traps, memory model, and embedding boundary are specified.
 
@@ -195,7 +195,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Syntax categories are stable and operations proliferate.
 
-**Avoid when:** Node types change frequently; pattern matching or algebraic data types provide clearer exhaustiveness.
+**Use another pattern when:** Node types change frequently; pattern matching or algebraic data types provide clearer exhaustiveness.
 
 ## 15. Dataflow / DAG
 
@@ -203,7 +203,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Build systems, ML graphs, ETL, spreadsheets, query plans, and schedulers can exploit dependency structure and parallelism.
 
-**Avoid when:** Hidden side effects make dependencies incomplete; cycles lack explicit fixed-point semantics.
+**Use another pattern when:** Hidden side effects make dependencies incomplete; cycles lack explicit fixed-point semantics.
 
 **Invariants:** All material dependencies are represented; cache keys include semantic inputs; cycle behavior is defined.
 
@@ -369,7 +369,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Avoid when:** Shared state cannot be separated and dual writes lack reconciliation.
 
-**Invariants:** Routing ownership, source of truth, migration order, compatibility, rollback, and observability.
+**Invariants:** Routing ownership, canonical state owner, migration order, compatibility, rollback, and observability.
 
 ## 33. Sidecar / adapter process
 
@@ -435,7 +435,7 @@ For every selected pattern, prove its **problem**, **forces**, **preconditions**
 
 **Use when:** Parsing, planning, pricing, compilation, validation, reducers, and agent policy can be tested as pure transformations.
 
-**Avoid when:** Copying or abstraction overhead violates measured constraints; the “core” still hides effects.
+**Avoid when:** Copying or abstraction overhead violates measured constraints; the "core" still hides effects.
 
 ## Pattern-combination rules
 
@@ -448,7 +448,7 @@ Patterns commonly compose at different levels:
 - Distributed service + CQRS + event-driven integration, without necessarily using event sourcing.
 - Binary parser + validator + normalized IR + visitor/pipeline transformations.
 
-Do not combine patterns merely to appear comprehensive. Every added pattern must remove a named risk or satisfy a named quality scenario.
+Combine patterns only when each added pattern removes a named risk or satisfies a named quality scenario.
 
 ## Sources
 

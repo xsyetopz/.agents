@@ -108,10 +108,9 @@ labels where punctuation could be ambiguous, and `A -->|label| B` edge labels.
  3. Chris Richardson, **Microservices patterns** - sagas, transactional outbox, API composition, and related distributed data patterns.
     - <https://microservices.io/patterns/>
 
-## Use rules
+## Source-selection boundary
 
-- Do not cite this bibliography as proof without opening the source and locating the relevant passage.
-- Do not use secondary summaries where a primary specification or paper exists.
-- Do not treat an implementation guide as universal architecture law.
-- Do not import a pattern's vocabulary without importing its preconditions and consequences.
-- Record source version, retrieval date, and exact claim in the evidence ledger when the architecture depends on it.
+Use a primary specification or paper when one exists, open the source, locate the
+relevant passage, and record its version, retrieval date, exact claim,
+preconditions, and consequences in the evidence ledger. Treat implementation
+guides as context-specific evidence rather than universal architecture rules.

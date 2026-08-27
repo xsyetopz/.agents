@@ -4,7 +4,7 @@
 
 - [1. Pattern-first architecture](#1-pattern-first-architecture)
 - [2. Three-box MVC cargo cult](#2-three-box-mvc-cargo-cult)
-- [3. Anemic domain plus “service” sprawl](#3-anemic-domain-plus-service-sprawl)
+- [3. Anemic domain plus "service" sprawl](#3-anemic-domain-plus-service-sprawl)
 - [4. Domain layer contaminated by infrastructure](#4-domain-layer-contaminated-by-infrastructure)
 - [5. Bounded contexts as folder names](#5-bounded-contexts-as-folder-names)
 - [6. Aggregate per table](#6-aggregate-per-table)
@@ -31,7 +31,7 @@
 - [27. Quality adjectives without scenarios](#27-quality-adjectives-without-scenarios)
 - [28. Architecture as folder tree](#28-architecture-as-folder-tree)
 - [29. Abstract factory explosion](#29-abstract-factory-explosion)
-- [30. “Future-proof” without threshold](#30-future-proof-without-threshold)
+- [30. "Future-proof" without threshold](#30-future-proof-without-threshold)
 - [31. Architecture decision without negative consequences](#31-architecture-decision-without-negative-consequences)
 - [32. Validation theatre](#32-validation-theatre)
 - [33. One-file-per-role decomposition](#33-one-file-per-role-decomposition)
@@ -45,7 +45,7 @@
 
 ## 1. Pattern-first architecture
 
-**Symptom:** “Use MVC/microservices/event sourcing/DDD” appears before requirements and forces.
+**Symptom:** "Use MVC/microservices/event sourcing/DDD" appears before requirements and forces.
 
 **Why it fails:** The design optimizes for a label rather than the system.
 
@@ -59,7 +59,7 @@
 
 **Correction:** Use the dominant form: pipeline, abstract machine, state machine, dataflow, application service, parser-validator, or scheduler-executor.
 
-## 3. Anemic domain plus “service” sprawl
+## 3. Anemic domain plus "service" sprawl
 
 **Symptom:** Domain objects are data bags; all rules live in generic services.
 
@@ -143,7 +143,7 @@
 
 **Symptom:** Multiple agents vote on a technical claim.
 
-**Why it fails:** Correlated models can repeat the same error; votes do not create evidence.
+**Why it fails:** Correlated models can repeat the same error; independent evidence comes from distinct sources or controlled tests.
 
 **Correction:** Assign distinct methods: source inspection, execution, formal reasoning, adversarial review. Resolve through evidence.
 
@@ -157,7 +157,7 @@
 
 ## 15. Unbounded autonomous loop
 
-**Symptom:** “Continue until done” with no budget, stop condition, or verifier.
+**Symptom:** "Continue until done" with no budget, stop condition, or verifier.
 
 **Why it fails:** Thrashing, repeated tool use, cost growth, and scope drift.
 
@@ -165,7 +165,7 @@
 
 ## 16. Multi-agent decomposition by persona
 
-**Symptom:** “Architect, coder, reviewer” roles operate without bounded artifacts or independent evidence.
+**Symptom:** "Architect, coder, reviewer" roles operate without bounded artifacts or independent evidence.
 
 **Why it fails:** Work overlaps; the reviewer sees the same assumptions; responsibility is vague.
 
@@ -181,7 +181,7 @@
 
 ## 18. IR proliferation
 
-**Symptom:** Many intermediate representations exist because “compilers have IRs.”
+**Symptom:** Many intermediate representations exist because "compilers have IRs."
 
 **Why it fails:** Conversion cost and semantic loss exceed benefit.
 
@@ -253,7 +253,7 @@
 
 ## 27. Quality adjectives without scenarios
 
-**Symptom:** “Scalable, secure, maintainable, robust.”
+**Symptom:** "Scalable, secure, maintainable" with no workload, threat, maintenance, or operational measure.
 
 **Why it fails:** No decision can be evaluated and no test can pass.
 
@@ -275,7 +275,7 @@
 
 **Correction:** Abstract at volatile effects, published extension points, or meaningful policy seams.
 
-## 30. “Future-proof” without threshold
+## 30. "Future-proof" without threshold
 
 **Symptom:** Complexity is justified by hypothetical scale or future clients.
 

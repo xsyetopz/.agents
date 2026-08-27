@@ -175,7 +175,7 @@ internal/
     invoice_test.go
 ```
 
-Do not add another directory beneath `auth/` merely to place each file in its
+Add a directory beneath `auth/` when it owns a distinct boundary; keep files together when they share the same
 own folder.
 
 For a Go service with these owners, apply the official module/package guidance
@@ -206,8 +206,8 @@ scripts/
 ```
 
 Add `pkg/` only for packages intentionally supported as imports by external Go
-modules. Do not add empty `configs/`, `build/`, `web/`, `website/`, `assets/`, or
-`third_party/` directories merely because the template lists them. Do not put
+modules. Add `configs/`, `build/`, `web/`, `website/`, `assets/`, or
+`third_party/` directories only when they have repository-owned contents. Keep
 Go application source under a project-level `src/`.
 
 ## Oversized orchestrator
@@ -241,7 +241,7 @@ src/deploy/
   progress.ts
 ```
 
-Do not split into `types.ts`, `interfaces.ts`, `constants.ts`, `helpers.ts`,
+Keep declarations together until a distinct ownership, lifecycle, or dependency boundary justifies separate `types.ts`, `interfaces.ts`, `constants.ts`, or `helpers.ts`;
 `validation.ts`, or one file for each operation/phase. Those names classify
 syntax or procedure, not durable responsibilities. Keep each role with its
 nearest owner unless the source-topology map proves an independent lifecycle,
@@ -274,7 +274,7 @@ src/parser/
 Keep options, state, result, and internal context with the parser unless they
 have independent ownership, lifecycle, visibility, dependency contract, or
 reuse. `Validation`, `Helpers`, `Open`, `Reduce`, and `Commit` remain
-procedural roles by default; names alone do not justify one-file-per-role
+procedural roles by default; use one file per role only when ownership or lifecycle gives the split a concrete purpose
 decomposition.
 
 ## Test exile
@@ -402,7 +402,7 @@ tools/
 
 The schema is the authoritative cross-language contract. Generated types remain
 outside domain policy, each language package owns an adapter, and CI regenerates
-then fails on a diff. Do not share source directories or reach across package
+then fails on a diff. Give each package its own source directory and explicit
 manifests with relative imports.
 
 ## Ceremonial enterprise layering
@@ -428,7 +428,7 @@ checkout/
   tests/...
 ```
 
-Create layers only where dependency direction or lifecycle differs. Do not call
+Create layers only where dependency direction or lifecycle differs. Name each
 pass-through files "corporate architecture."
 
 ## Sources

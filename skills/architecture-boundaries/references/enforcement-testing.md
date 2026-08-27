@@ -17,15 +17,14 @@ that ownership visible.
 Place tests where ownership is traceable from test placement and package
 ownership, and where the ecosystem's normal tooling discovers them without
 custom configuration. Test code and benchmark
-code must be separate source units: do not embed test blocks, test functions,
-annotations, macros, or runner DSL calls in authored production modules. A test
+code must be separate source units: place test blocks, test functions,
+annotations, macros, and runner DSL calls in test-owned modules. A test
 file remains a separate source unit even when it shares a package, namespace, or
 target.
 
 The bundled architecture audit rejects native inline forms and framework forms
 for which the file carries explicit runner evidence. Actual test files and
-exact test/benchmark roots are exempt. A custom source set is exempt only when an existing repository-owned build or test configuration defines it and repository evidence confirms its runner, owner, and scope. Do not add a custom schema file for the exemption. A directory whose name merely contains `test` is not a test location. If a runner uses an unrecognized form, improve the repository-native check rather than weakening or
-bypassing the bundled audit.
+exact test/benchmark roots are exempt. A custom source set is exempt only when an existing repository-owned build or test configuration defines it and repository evidence confirms its runner, owner, and scope. Use the repository-owned configuration for the exemption. Classify a directory as a test location from its exact runner convention and improve the repository-native check when a runner uses an unrecognized form; keep the bundled audit active.
 
 Treat a runner-recognized test prefix/suffix as a technical marker for the
 filename rules in `enforcement-naming.md`: `test_parser.py`, `parser_test.go`,
@@ -35,16 +34,16 @@ Semantic words before it still count, so `run-status-codec.test.ts` remains a
 three-token violation. A source file and its test, declaration/header, generated
 companion, or platform variant form one logical family for prefix-colony counts.
 
-A test tree should either sit beside source or mirror it exactly. It should not
-invent a competing architecture.
+A test tree should sit beside source or mirror its ownership exactly. It represents
+the same architecture rather than a competing one.
 
 Benchmarks follow the same separation rule. Use a runner-recognized benchmark
 source set or an exact `bench`/`benches` root; source-adjacent files may use
 `*_bench.*`, `*_benchmarks.*`, `*.bench.*`, or `*.benchmark.*` when the runner
-supports them. Do not place benchmark blocks or benchmark annotations in a
-production module.
+supports them. Place benchmark blocks and benchmark annotations in a test-owned
+module.
 
-Do not infer test ownership or test type from a directory label alone. The
+Classify test ownership and test type from runner evidence and boundary behavior, not a directory label alone. The
 bundled scanner uses exact runner conventions only to avoid false inline-test
 alarms; classify the test itself by the boundary crossed:
 
@@ -84,8 +83,8 @@ src/
     parser_test.ts
 ```
 
-Do not use `*.test.ts` as the house pattern for Deno unless an existing
-framework requires it.
+Use `*.test.ts` as the Deno house pattern when an existing framework requires it;
+otherwise follow the repository's runner convention.
 
 ## Node.js, Bun, pnpm, npm, Yarn, Vitest, Jest
 
@@ -115,8 +114,8 @@ parser/
 ```
 
 Use external test packages (`package parser_test`) for public-contract tests
-and same-package tests for internal behavior when justified. Do not create a
-global unit-test root.
+and same-package tests for internal behavior when justified. Keep unit tests
+with their owning package rather than creating a global unit-test root.
 
 ## Rust
 
@@ -141,8 +140,7 @@ mod tests;
 
 For a module with an owned directory, use `parser/tests.rs` and connect it with
 `mod tests;` or an explicit `#[path]`. Keep the companion discoverable and
-owned by the same package/module; do not create a global detached unit-test
-taxonomy.
+owned by the same package/module; keep the taxonomy attached to that owner.
 
 Also valid and often useful for a unit that already owns an inner directory:
 
@@ -162,7 +160,8 @@ mod tests;
 ```
 
 Reserve top-level `tests/` for integration tests compiled as external crates
-against public APIs. Do not use it as the default home for all tests.
+against public APIs. Reserve it for integration tests rather than using it as
+the default home for all tests.
 
 ## Python
 
@@ -236,7 +235,8 @@ src/Acme.Parser/Parser.{cs,fs}
 tests/Acme.Parser.Tests/ParserTests.{cs,fs}
 ```
 
-Do not mix production and test dependencies in one project merely for proximity.
+Keep production and test dependencies in separate projects unless shared
+ownership and lifecycle make one project appropriate.
 
 ## Declaration and platform companions
 
@@ -244,8 +244,8 @@ Keep test names aligned with the production logical unit after removing
 tool-recognized representation markers. Examples include TypeScript `.d.ts`,
 OCaml `.mli`, F# `.fsi`, C/C++ headers, Kotlin platform suffixes, Go
 OS/architecture filename constraints, Dart generated companions, and Apple or
-Android variants selected by the build. Do not treat arbitrary words such as
-`support`, `runtime`, `service`, `context`, or `v1` as markers.
+Android variants selected by the build. Treat words such as `support`,
+`runtime`, `service`, `context`, or `v1` as markers only with runner evidence.
 
 When renaming a production unit, update every companion and discovery/config
 reference in the same change. Verify test enumeration, not only compilation, so
@@ -253,8 +253,7 @@ a syntactically valid rename cannot silently remove tests from the suite.
 
 ## Zig
 
-Zig `test` blocks are still test code and must not remain in authored production
-modules. Put them in a dedicated test root or source-owned test file and compose
+Zig `test` blocks are test code. Put them in a dedicated test root or source-owned test file and compose
 that file through the build graph. Preserve package ownership and keep the
 production module free of `test { ... }` declarations.
 
@@ -269,8 +268,8 @@ mirrored test package accepted by the selected Dub configuration.
 Follow the package and test-runner conventions available in the repository, but
 keep Nim `unittest`, `suite`, and `test` blocks out of authored implementation
 modules. Prefer source-adjacent test files named consistently by the toolchain,
-and preserve package ownership. Do not invent a global tests hierarchy unless
-required by the build system.
+and preserve package ownership. Create a global tests hierarchy only when the
+build system requires it.
 
 ## Ruby
 
@@ -281,8 +280,8 @@ lib/acme/parser.rb
 spec/acme/parser_spec.rb
 ```
 
-or `test/acme/parser_test.rb` for Minitest. Do not mix RSpec and Minitest
-naming conventions without a migration plan.
+or `test/acme/parser_test.rb` for Minitest. Keep RSpec and Minitest naming
+conventions separate unless a migration plan records the transition.
 
 ## PHP
 
@@ -325,7 +324,7 @@ production code: multiple real consumers, stable semantics, a named owner, and
 no production dependency. Builders should create valid domain objects by
 default; infrastructure fixtures must expose cleanup and isolation behavior.
 
-Do not let mocks reproduce vendor/framework APIs across the product. Prefer a
+Keep mocks narrower than vendor/framework APIs across the product. Prefer a
 port-owned fake for domain/application tests and a contract/integration test for
 the real adapter.
 

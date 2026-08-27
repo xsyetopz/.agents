@@ -1,4 +1,4 @@
 interface:
   display_name: "Architecture Boundaries"
   short_description: "Design, audit, and enforce software boundaries"
-  default_prompt: "Use $architecture-boundaries to decide or enforce this topology from repository evidence, preserve contracts, and verify the result without custom schema or generated output files."
+  default_prompt: "Use $architecture-boundaries to decide or enforce this topology from repository evidence, preserve contracts, and verify the result with repository-owned schemas and generated-output paths."
