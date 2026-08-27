@@ -33,7 +33,7 @@ For each active surface, record:
 7. Remove old lockfiles and dependencies only after the replacement passes.
 8. Run the audit and all applicable repository checks.
 
-Do not hand-edit `bun.lock`. Fix undeclared dependencies instead of preserving accidental hoisting. Keep an explicit linker setting only when repository behavior requires it.
+Regenerate `bun.lock` through Bun. Fix undeclared dependencies instead of preserving accidental hoisting. Keep an explicit linker setting only when repository behavior requires it.
 
 ## Evidence gate
 

@@ -24,7 +24,7 @@ Use this table after inventorying active consumers. **Required** applies when th
 | Existing Biome configuration | Biome 2.5.10 | Version-only | Preserve the file; update only the package version and an existing schema URL |
 | Existing ESLint or Prettier | Biome 2.5.10 | Conditional | Verify rules, plugins, ignores, scripts, editor integration, and formatting before removal |
 
-When a conditional replacement fails, keep the tool and run it under Bun where supported. Do not describe that as a native replacement.
+When a conditional replacement fails, keep the tool and run it under Bun where supported. Describe that as the existing tool running under Bun rather than a native replacement.
 
 ## Primary sources
 

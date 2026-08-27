@@ -12,7 +12,7 @@ Use this policy when initializing a new Bun project or when the repository alrea
    ```
 
 3. Copy the package [Biome template](../assets/biome.json) to the project root as `biome.json`.
-4. Keep the template unchanged unless the repository has an explicit configuration requirement. Do not add the `react` domain.
+4. Keep the template unchanged unless the repository has an explicit configuration requirement. Add the `react` domain only when repository configuration requires it.
 5. Run `bunx biome check .` and the repository's applicable checks.
 
 `biome.json` is an established Biome configuration format, not a custom schema or generated output.
@@ -21,7 +21,7 @@ Use this policy when initializing a new Bun project or when the repository alrea
 
 - Preserve the existing filename, rules, domains, includes, formatter settings, and other behavior.
 - Change only the Biome version: pin `@biomejs/biome` to `2.5.10` and update an existing Biome schema URL to `https://biomejs.dev/schemas/2.5.10/schema.json`.
-- Do not replace an existing file with the template. Do not add missing template fields or remove any existing fields if the repository already owns it.
+- Update an existing file through its repository-owned configuration; preserve fields that the repository already owns.
 - Run `bun install`, `bunx biome check .`, and the repository's applicable lint and format checks.
 
 ## Existing ESLint or Prettier
