@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bun 1.4 / ES2025 / TypeScript 7 Performance"
+  short_description: "Profile and optimize Bun 1.4+ TypeScript hot paths"
+  default_prompt: "Use $bun-es2025-typescript7-performance to set the performance objective, measure the Bun 1.4+ / ES2025 / TypeScript 7+ workload, apply behavior-preserving changes, and report acceptance evidence."

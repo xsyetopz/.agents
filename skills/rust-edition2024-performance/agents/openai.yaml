@@ -1,0 +1,4 @@
+interface:
+  display_name: "Rust 1.98 / Edition 2024 Performance"
+  short_description: "Profile and optimize Rust 1.98+ Edition 2024 hot paths"
+  default_prompt: "Use $rust-edition2024-performance to set the performance objective, measure the Rust 1.98+ Edition 2024 workload, apply behavior-preserving changes, and report safety, portability, and acceptance evidence."
