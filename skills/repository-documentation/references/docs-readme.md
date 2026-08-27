@@ -35,7 +35,7 @@ that omit the project category or audience.
 
 ### 3. Installation
 
-Provide the minimum viable install in one code block. List prerequisites above it. Do not add build-from-source steps when a supported package install exists.
+Provide the minimum viable install in one code block. List prerequisites above it. Use the supported package install and omit build-from-source steps when it exists.
 
 ````markdown
 ## Install
@@ -125,7 +125,7 @@ Treat these as observable conditions with a concrete correction:
 
 1. More than five badges obscure the description; keep only relevant badges.
 2. A table of contents before the description displaces the project summary; move it below the summary.
-3. A “Quick Start” requiring more than two or three commands is not quick; link to the detailed guide.
+3. A "Quick Start" requiring more than two or three commands is not quick; link to the detailed guide.
 4. Platform-specific install instructions without a primary path spread scope; document one supported path and link to the others.
 5. A feature list before the description does not identify the project; write the category and audience first.
 6. A missing license leaves rights unspecified; add a verified license link or state the project policy.
@@ -135,7 +135,7 @@ Treat these as observable conditions with a concrete correction:
 
 ### Description below the fold
 
-A table of contents before the summary hides the answer to “what is it?”:
+A table of contents before the summary hides the answer to "what is it?":
 
 ```markdown
 # MyProject
@@ -221,7 +221,7 @@ features relevant to that audience.
 
 ### Primary language
 
-The primary README is the source of truth. A translation that may be stale links back to the English version:
+The primary README is the canonical English reference. A translation that may be stale links back to the English version:
 
 ```markdown
 # MyProject
@@ -232,7 +232,7 @@ The primary README is the source of truth. A translation that may be stale links
 
 ### Translation scope and checks
 
-- Do not add a translation when no maintainer can review it or when it would
+- Add a translation when a maintainer can review it and when it would
   become stale faster than it can be updated.
 - Monorepo package READMEs use the package name as H1, package-scoped description
   and install command, and a link to the root README.

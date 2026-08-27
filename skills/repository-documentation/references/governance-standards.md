@@ -38,6 +38,6 @@ its current behavior.
 
 ## Formats not used as governance
 
-`llms.txt` is an informal website discovery proposal: <https://llmstxt.org/>. It is not a repository permission or governance format. The proposal does not define `llms-full.txt`; do not scaffold either as part of governance.
+`llms.txt` is an informal website discovery proposal: <https://llmstxt.org/>. It is not a repository permission or governance format. The proposal leaves `llms-full.txt` undefined; governance scaffolding stays within established formats.
 
-Do not copy policy prose from Linux, LLVM, or Apache. Use original language and cite them as precedents. Contributor Covenant 3.0 uses CC BY-SA 4.0 and requires its attribution. The DCO permits verbatim copying but must not be changed.
+Use original policy language and cite Linux, LLVM, or Apache as precedents. Contributor Covenant 3.0 uses CC BY-SA 4.0 and requires its attribution. The DCO permits verbatim copying with its original text unchanged.

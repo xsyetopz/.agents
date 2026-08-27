@@ -5,17 +5,17 @@ provider behavior, and hosted settings before publication or mutation.
 
 ## Purpose
 
-Use recognized community-health files for people. Do not put human conduct, review authority, or contribution ownership in `AGENTS.md`.
+Use recognized community-health files for people. Keep human conduct, review authority, and contribution ownership in those files rather than `AGENTS.md`.
 
 ## Standard files
 
 - `CONTRIBUTING.md`: contribution scope, setup, tests, review, rights, and tool-assistance disclosure.
 - `CODE_OF_CONDUCT.md`: human community behavior and enforcement. Use a named published code, such as Contributor Covenant 3.0, only with the required reporting and enforcement contacts and license attribution.
 - `SECURITY.md`: supported versions and a private vulnerability-reporting route.
-- `SUPPORT.md`: help and usage routes that do not belong in bug reports.
+- `SUPPORT.md`: help and usage routes for questions outside bug reports.
 - `GOVERNANCE.md`: maintainer roles, decisions, and escalation when the project needs them.
 - `.github/pull_request_template.md`: normal PR information and checklist.
-- `.github/ISSUE_TEMPLATE/*.yml`: issue-type forms. Do not create actor-specific forms.
+- `.github/ISSUE_TEMPLATE/*.yml`: issue-type forms organized by issue type rather than actor.
 - `.github/CODEOWNERS`: path-based review ownership using verified users or teams.
 
 GitHub recognizes these files in specific locations. Prefer the repository root for official human documents and `.github/` for provider templates and CODEOWNERS.
@@ -26,8 +26,7 @@ Keep the policy tool-neutral rather than anti-AI. Judge the change by relevance,
 technical quality, rights, security, tests, and human review. AI assistance may
 be used when the contributor understands, reviews, tests, and can defend the
 complete change; require contributor review of changes produced with tool
-assistance. Do not use
-writing style or a detector as proof of tool use.
+assistance. Treat writing style and detectors as insufficient evidence of tool use.
 
 Allow maintainers to define narrower path or task rules. A learning-oriented
 subtree may reject generated patches when contributor practice is the purpose;
@@ -43,7 +42,7 @@ Assisted-by: Tool:Model
 
 Git defines the trailer structure, but `Assisted-by` is a repository convention rather than a universal Git key. Linux and LLVM use this convention. Apache projects may use `Generated-by`. Select one documented convention and use it consistently.
 
-Do not use `Co-authored-by` for a model. GitHub treats that trailer as account attribution. Do not let an agent add `Signed-off-by`; the human may sign only when the repository has adopted the unchanged DCO and the human can certify it.
+Use `Co-authored-by` for human account attribution. A human adds `Signed-off-by` only when the repository has adopted the unchanged DCO and that human can certify it.
 
 ## Hosted controls
 

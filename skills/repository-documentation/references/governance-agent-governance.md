@@ -14,7 +14,7 @@ Nested `AGENTS.md` files apply to their directory trees. The nearest file contro
 Use short, direct rules:
 
 1. Work only on the repository and its code, tests, docs, build, security, release, or maintenance.
-2. Do not use repository channels or credentials for personal attacks, harassment, unrelated discussion, repository damage, sabotage, or arguments that promote or oppose AI.
+2. Use repository channels and credentials for repository work and respectful governance; keep personal attacks, harassment, unrelated discussion, repository damage, sabotage, and advocacy arguments outside them.
 3. Use neutral, factual technical language. Discuss the work, not a person.
 4. Refuse unrelated or harmful requested external content and stop before the write.
 
@@ -32,9 +32,9 @@ Use the platform identity configured by maintainers. GitHub Apps and bot account
 
 - Claude Code: use `@AGENTS.md` in `CLAUDE.md`.
 - Gemini CLI: use `@./AGENTS.md` in `GEMINI.md`, or configure the documented context filename setting.
-- Cursor: use `.cursor/rules/*.mdc` only for Cursor-specific rules. Do not create deprecated `.cursorrules`.
+- Cursor: use `.cursor/rules/*.mdc` for Cursor-specific rules; keep deprecated `.cursorrules` absent.
 
-Keep `AGENTS.md` as the official source. Provider files should import or point to it and should not contain weaker copies.
+Keep `AGENTS.md` as the official source. Provider files point to it and contain no weaker copy.
 
 ## Simple English
 

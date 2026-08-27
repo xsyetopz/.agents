@@ -1,4 +1,4 @@
 interface:
   display_name: "Repository Documentation"
   short_description: "Audit repository docs, policy, scope, and ownership"
-  default_prompt: "Use $repository-documentation to audit or edit repository documentation and governance against source truth, canonical ownership, scope, and actual enforcement without custom generated files."
+  default_prompt: "Use $repository-documentation to audit or edit repository documentation and governance against repository evidence, canonical ownership, scope, and actual enforcement."

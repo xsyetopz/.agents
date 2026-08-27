@@ -88,7 +88,7 @@ At the bottom, link to version comparisons when release history supports it:
    `## [X.Y.Z] - YYYY-MM-DD` heading.
 2. A nonstandard category such as `Additions`, `Changes`, or `Bugfixes` does not
    satisfy the format; use one of the six names.
-3. Implementation language such as “Refactored the parser” does not describe a
+3. Implementation language such as "Refactored the parser" does not describe a
    user-facing change; state the observable behavior or omit the entry.
 4. A non-reverse-chronological list obscures release order; place newest first.
 5. An active project without `[Unreleased]` has no visible staging area; add it at

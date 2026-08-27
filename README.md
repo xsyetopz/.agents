@@ -5,29 +5,13 @@ reusable instruction packages, references, deterministic tools, templates, and
 Codex interface metadata. Copy only the packages needed for a project or user
 account.
 
-## Layout
-
-```text
-.agents/
-├── skills/                 # reusable instruction packages
-│   ├── apple-design-hig/
-│   ├── architecture-boundaries/
-│   ├── bun-migration/
-│   ├── git-actions/
-│   ├── git-ci-cd/
-│   ├── git-workflows/
-│   ├── legacy-cleanup/
-│   └── repository-documentation/
-└── scripts/                # repository checks and install probes
-```
-
 Each package has a `SKILL.md` entrypoint, Codex interface metadata, and a
 package-local `license.txt`. References, scripts, and assets are included only
 when the workflow uses them. Every reference is one level below its package
 root and linked directly from the decision step that needs it; packages contain
 no reference indexes or reference-to-reference Markdown chains. Deterministic
-scripts are executable. Skills must not invent custom schema files or custom
-generated files as outputs.
+scripts are executable. Skills keep outputs in established repository formats; custom schema or generated
+files require an explicit repository contract.
 
 ## Copy a package
 
@@ -132,6 +116,9 @@ RUNNER=bunx-bun SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
 
 ## Check the repository
 
+Prompt-facing repository guidance follows the concise GPT-5.6 rules in
+[GPT-5.6 prompt style](skills/repository-documentation/references/gpt56-prompt-style.md).
+
 ```bash
 for d in skills/*; do
   test -f "$d/SKILL.md" || exit 1
@@ -139,6 +126,7 @@ for d in skills/*; do
   test -f "$d/license.txt" || exit 1
 done
 python3 scripts/check_python_loc.py
+python3 scripts/generate_skill_reports.py --check
 uvx ruff@0.16.1 check --isolated skills scripts
 find skills -name SKILL.md -print | sort
 find skills -type l -print

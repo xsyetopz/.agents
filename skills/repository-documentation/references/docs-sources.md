@@ -1,7 +1,7 @@
 # Repo Docs sources and provenance
 
 This package uses local-policy guidance for repository documentation. Examples
-use placeholders and do not establish facts about a target repository.
+use placeholders and describe no facts about a target repository.
 
 Scope: package-local source routing for standards named by this skill.
 

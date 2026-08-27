@@ -23,9 +23,9 @@ Assisted-by: Tool:Model
 ```
 
 This is a repository convention built on standard Git trailers and current
-Linux/LLVM practice. It is not a universal Git trailer key. Never use
-`Co-authored-by` for a model. Never let an agent add `Signed-off-by`; only the
-human may sign when the repository has adopted the unchanged DCO.
+Linux/LLVM practice rather than a universal Git trailer key. Use
+`Co-authored-by` for human account attribution; a human adds `Signed-off-by`
+only when the repository has adopted the unchanged DCO.
 
 ## Agent execution contract
 
@@ -33,7 +33,7 @@ The agent policy must state all of the following in simple English:
 
 - Work only on the repository and its code, tests, documentation, build,
   security, release, or maintenance.
-- Do not use repository channels or credentials for personal attacks,
+- Use repository channels and credentials for repository work and respectful
   harassment, unrelated discussion, repository damage, sabotage, or arguments
   that promote or oppose AI.
 - Use neutral, factual, professional technical language. Discuss the work,
