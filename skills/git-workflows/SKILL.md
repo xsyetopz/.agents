@@ -20,10 +20,36 @@ Define the requested local or team outcome, affected refs and files, recovery po
    - [Git Workflows source map](references/local-sources.md) · [Stash Guide](references/local-stash-guide.md) · [Submodules and Git LFS](references/local-submodule-lfs.md) · [Worktree Guide](references/local-worktree-guide.md)
    - [Branch Protection Rules](references/policy-branch-protection.md) · [Branching Models](references/policy-branching-models.md) · [Merge Strategies](references/policy-merge-strategies.md) · [Git Workflows source map](references/policy-sources.md)
    - [GOOD/RED recovery examples](references/examples.md) (read before changing history, worktree state, hooks, or delivery policy; RED marks a contrast, while GOOD is the recovery pattern)
-4. Perform the narrowest authorized operation while preserving unrelated changes; obtain exact authorization for force-push, hard reset, clean, destructive deletion, pushed-history rewrite, or remote mutation.
-5. For missing commit guidance, use the Conventional Commits fallback and tracked `assets/commit-msg` only after proving no existing owner; invoke accepted and rejected fixtures and verify `core.hooksPath`.
-6. Run `git diff --check`, applicable repository tests, and final status/history inspection; map policy claims to actual protection, checks, queues, reviews, merges, migration, and rollback evidence.
-7. Return commands, changed state, recovery path, and unavailable hook, signature, LFS, hosted-setting, integration, or remote evidence as `UNVERIFIED`.
+4. Before staging or committing, make and record the required commit-slicing plan below.
+5. Perform the narrowest authorized operation while preserving unrelated changes; obtain exact authorization for force-push, hard reset, clean, destructive deletion, pushed-history rewrite, or remote mutation.
+6. For missing commit guidance, use the Conventional Commits fallback and tracked `assets/commit-msg` only after proving no existing owner; invoke accepted and rejected fixtures and verify `core.hooksPath`.
+7. Run `git diff --check`, applicable repository tests, and final status/history inspection; map policy claims to actual protection, checks, queues, reviews, merges, migration, and rollback evidence.
+8. Return commands, changed state, recovery path, and unavailable hook, signature, LFS, hosted-setting, integration, or remote evidence as `UNVERIFIED`.
+
+## REQUIRED commit-slicing contract
+
+Before staging or committing, record a commit plan for each intended commit:
+
+- **Slice purpose:** the one coherent concern this commit advances.
+- **Included paths/hunks:** the explicit files and, where needed, hunks that belong to the slice.
+- **Dependency/order:** any earlier slice this one requires and the safe revert order; independent revertability is the default.
+- **Validation:** the checks that establish this slice is correct and reviewable.
+- **Revert consequence:** what reverting this commit changes and why it does not leave unrelated behavior half-applied.
+
+Each commit must have an explicit file/hunk set, represent one coherent concern, and be safe to revert without leaving unrelated behavior half-applied. Mixed worktrees use explicit staging; a commit is accepted only when its staged diff matches one slice. Replace giant staging patterns with explicit paths or hunks: use file-based staging for separable files and `git add -p` for separable hunks.
+
+Separate mechanical renames, generated artifacts, behavior changes, tests, documentation, and policy changes whenever they can be reviewed or reverted independently. Keep a file's related change together when splitting it would hide the contract. Put generated source and generated output in a dedicated slice when that is the clearest review and revert boundary. Make PR reviewability observable through an understandable, manageable file set, clear mechanical-versus-semantic separation, and commit order that reviewers can follow.
+
+Immediately before each commit, inspect all of the following and correct the slice if any result includes unrelated work:
+
+```text
+git diff --cached --check
+git diff --cached
+git diff --cached --name-status   # staged path inventory
+<the proposed commit subject>
+```
+
+The subject convention complements this contract; a valid subject never makes a mixed or catch-all staged diff acceptable.
 
 ## Gotchas
 
