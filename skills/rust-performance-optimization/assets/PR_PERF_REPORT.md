@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE. Regenerate with scripts/generate_skill_reports.py. -->
 
-> Generated for `rust-edition2024-performance`. Use this shared report shape for the skill.
+> Generated for `rust-performance-optimization`. Use this shared report shape for the skill.
 
 ## Decision summary
 

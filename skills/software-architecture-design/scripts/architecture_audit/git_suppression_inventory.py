@@ -8,10 +8,10 @@ import subprocess
 from pathlib import Path
 
 from .discovery import GitInventoryError
-from .suppression_rules import _is_ignore_file
+from .suppression_rules import is_ignore_file
 
 
-def _untracked_candidates(repository: Path, root: Path) -> list[Path]:
+def untracked_candidates(repository: Path, root: Path) -> list[Path]:
     paths: set[Path] = set()
     for candidate in _untracked_paths(repository):
         try:
@@ -22,7 +22,7 @@ def _untracked_candidates(repository: Path, root: Path) -> list[Path]:
             except ValueError:
                 continue
         if candidate.is_file() and (
-            _is_ignore_file(candidate) or candidate.name.lower() == ".gitignore"
+            is_ignore_file(candidate) or candidate.name.lower() == ".gitignore"
         ):
             paths.add(candidate)
     return sorted(paths, key=str)

@@ -9,16 +9,16 @@ from pathlib import Path
 
 MARKER = "<!-- GENERATED FILE. Regenerate with scripts/generate_skill_reports.py. -->"
 REPORT_TARGETS = {
-    "bun-es2025-typescript7-performance": Path(
-        "skills/bun-es2025-typescript7-performance/assets/PR_PERF_REPORT.md"
+    "bun-typescript-performance-optimization": Path(
+        "skills/bun-typescript-performance-optimization/assets/PR_PERF_REPORT.md"
     ),
-    "rust-edition2024-performance": Path(
-        "skills/rust-edition2024-performance/assets/PR_PERF_REPORT.md"
+    "rust-performance-optimization": Path(
+        "skills/rust-performance-optimization/assets/PR_PERF_REPORT.md"
     ),
 }
 METRIC_HINTS = {
-    "bun-es2025-typescript7-performance": "Bun-specific metrics: JS heap, native heap, RSS, GC, queue/backpressure, load-generator capacity.",
-    "rust-edition2024-performance": "Rust-specific metrics: allocations/copies, lock/cache/syscall signals, RSS, binary size/i-cache, target CPU/NUMA.",
+    "bun-typescript-performance-optimization": "Bun-specific metrics: JS heap, native heap, RSS, GC, queue/backpressure, load-generator capacity.",
+    "rust-performance-optimization": "Rust-specific metrics: allocations/copies, lock/cache/syscall signals, RSS, binary size/i-cache, target CPU/NUMA.",
 }
 
 

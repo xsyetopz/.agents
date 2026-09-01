@@ -16,21 +16,21 @@ from .suppression_rules import (
     _CODE_SUPPRESSIONS,
     _COMMENT_DIRECTIVES,
     _DISABLED_RULE,
-    _DOCUMENTATION_SUFFIXES,
     _DOWNGRADED_RULE,
     _PACKAGE_BYPASS,
     _RUST_ALLOW,
+    DOCUMENTATION_SUFFIXES,
     _code_without_strings_or_comments,
-    _comment_fragment,
-    _config_suppression,
-    _finding,
     _is_comment_or_blank,
-    _is_ignore_file,
-    _is_linter_config,
-    _is_relevant_gitignore_pattern,
-    _is_workflow,
-    _json_brace_delta,
-    _multiline_disabled_rule,
+    comment_fragment,
+    config_suppression,
+    finding,
+    is_ignore_file,
+    is_linter_config,
+    is_relevant_gitignore_pattern,
+    is_workflow,
+    json_brace_delta,
+    multiline_disabled_rule,
 )
 
 
@@ -43,39 +43,39 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
     if path.is_symlink():
         return []
     suffix = path.suffix.lower()
-    if suffix in _DOCUMENTATION_SUFFIXES:
+    if suffix in DOCUMENTATION_SUFFIXES:
         return []
     try:
         lines = path.read_text(encoding="utf-8").splitlines()
     except (OSError, UnicodeError) as exc:
         return [
-            _finding(
+            finding(
                 path, 1, f"suppression scan failed: {exc}", "suppression-scan-failed"
             )
         ]
 
     findings: list[Finding] = []
-    workflow = _is_workflow(path)
-    linter_config = _is_linter_config(path)
+    workflow = is_workflow(path)
+    linter_config = is_linter_config(path)
     package_manifest = path.name.lower() == "package.json"
     package_script_depth: int | None = None
     section = ""
     if path.name.lower() == ".gitignore":
         for line_number, line in enumerate(lines, 1):
-            if _is_relevant_gitignore_pattern(line):
+            if is_relevant_gitignore_pattern(line):
                 findings.append(
-                    _finding(
+                    finding(
                         path,
                         line_number,
                         f"source/test/check/lint path is ignored: {line.strip()}",
                         "gitignore-source-pattern-added",
                     )
                 )
-    elif _is_ignore_file(path):
+    elif is_ignore_file(path):
         for line_number, line in enumerate(lines, 1):
             if not _is_comment_or_blank(line):
                 findings.append(
-                    _finding(
+                    finding(
                         path,
                         line_number,
                         f"lint/check ignore pattern is active: {line.strip()}",
@@ -86,7 +86,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
         for line_number, line in enumerate(lines, 1):
             if not _is_comment_or_blank(line):
                 findings.append(
-                    _finding(
+                    finding(
                         path,
                         line_number,
                         f"baseline suppression configuration is active: {line.strip()}",
@@ -102,16 +102,16 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             if scripts_match:
                 package_script_line = True
                 package_script_depth = max(
-                    0, _json_brace_delta(line[scripts_match.end() :])
+                    0, json_brace_delta(line[scripts_match.end() :])
                 )
             elif package_script_depth is not None:
-                package_script_depth += _json_brace_delta(line)
+                package_script_depth += json_brace_delta(line)
                 if package_script_depth <= 0:
                     package_script_depth = None
         section_match = re.match(r"^\s*\[([^\]]+)\]", line)
         if section_match:
             section = section_match.group(1).lower()
-        comment = _comment_fragment(line, suffix)
+        comment = comment_fragment(line, suffix)
         if comment is not None and any(
             token in comment.lower()
             for token in (
@@ -126,7 +126,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             for label, pattern in _COMMENT_DIRECTIVES:
                 if pattern.search(comment):
                     findings.append(
-                        _finding(
+                        finding(
                             path,
                             line_number,
                             f"{label} suppression directive: {comment.strip()}",
@@ -135,7 +135,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
                     break
         if suffix == ".rs" and "allow" in line and _RUST_ALLOW.search(line):
             findings.append(
-                _finding(path, line_number, f"Rust lint allowance: {line.strip()}")
+                finding(path, line_number, f"Rust lint allowance: {line.strip()}")
             )
         if (
             "pragma" in line.lower()
@@ -145,7 +145,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             for label, pattern in _CODE_SUPPRESSIONS:
                 if pattern.search(line):
                     findings.append(
-                        _finding(
+                        finding(
                             path, line_number, f"{label} suppression: {line.strip()}"
                         )
                     )
@@ -153,7 +153,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
         code = _code_without_strings_or_comments(line, suffix)
         if "||" in code and _CHECK_BYPASS.search(code):
             findings.append(
-                _finding(
+                finding(
                     path,
                     line_number,
                     f"lint/check/test command is forced successful with `|| true` or `|| :`: {line.strip()}",
@@ -162,7 +162,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             )
         if "exit-zero" in code and _CHECK_EXIT_ZERO.search(code):
             findings.append(
-                _finding(
+                finding(
                     path,
                     line_number,
                     f"lint/check provider is forced successful with `--exit-zero`: {line.strip()}",
@@ -171,7 +171,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             )
         if package_manifest and package_script_line and _PACKAGE_BYPASS.search(line):
             findings.append(
-                _finding(
+                finding(
                     path,
                     line_number,
                     f"package lint/check/test script is forced successful: {line.strip()}",
@@ -182,7 +182,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             context = "\n".join(lines[max(0, index - 8) : index + 9])
             if _CI_CONTEXT.search(context):
                 findings.append(
-                    _finding(
+                    finding(
                         path,
                         line_number,
                         f"CI lint/check/test step allows failure: {line.strip()}",
@@ -193,7 +193,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             context = "\n".join(lines[max(0, index - 8) : index + 9])
             if _CI_CONTEXT.search(context):
                 findings.append(
-                    _finding(
+                    finding(
                         path,
                         line_number,
                         f"CI lint/check/test step is disabled: {line.strip()}",
@@ -211,7 +211,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             and _DISABLED_RULE.search(line)
         ):
             findings.append(
-                _finding(
+                finding(
                     path,
                     line_number,
                     f"linter rule severity is disabled: {line.strip()}",
@@ -225,7 +225,7 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
             and _DOWNGRADED_RULE.search(line)
         ):
             findings.append(
-                _finding(
+                finding(
                     path,
                     line_number,
                     f"linter rule severity is downgraded: {line.strip()}",
@@ -233,19 +233,19 @@ def suppression_findings(path: Path, root: Path | None = None) -> list[Finding]:
                 )
             )
         if linter_config:
-            config_message = _config_suppression(path, line, section)
+            config_message = config_suppression(path, line, section)
             if config_message is not None:
                 findings.append(
-                    _finding(
+                    finding(
                         path,
                         line_number,
                         f"{config_message}: {line.strip()}",
                         "lint-config-suppression",
                     )
                 )
-            if _multiline_disabled_rule(lines, index):
+            if multiline_disabled_rule(lines, index):
                 findings.append(
-                    _finding(
+                    finding(
                         path,
                         line_number,
                         f"linter rule severity is disabled on a continuation line: {line.strip()}",

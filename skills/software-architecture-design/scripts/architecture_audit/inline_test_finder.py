@@ -6,11 +6,11 @@ from __future__ import annotations
 from collections.abc import Sequence
 from pathlib import Path
 
-from .inline_test_rules import _rules
+from .inline_test_rules import rules
 from .inline_test_source import (
-    _javascript_runner_configured,
-    _strip_source,
     is_test_source,
+    javascript_runner_configured,
+    strip_source,
 )
 from .records import Finding
 from .rules import SOURCE_EXTENSIONS
@@ -52,16 +52,16 @@ def inline_test_findings(
                 "tooling",
             )
         ]
-    comments_only = _strip_source(source, suffix, strings=False)
-    clean = _strip_source(source, suffix)
+    comments_only = strip_source(source, suffix, strings=False)
+    clean = strip_source(source, suffix)
     findings: list[Finding] = []
     seen: set[tuple[str, int]] = set()
     visible_inventory = None if inventory is None else tuple(sorted(inventory, key=str))
-    for code, pattern, evidence in _rules(
+    for code, pattern, evidence in rules(
         suffix,
         clean,
         comments_only,
-        js_runner_configured=_javascript_runner_configured(root, visible_inventory),
+        js_runner_configured=javascript_runner_configured(root, visible_inventory),
     ):
         for match in pattern.finditer(clean):
             line = clean.count("\n", 0, match.start()) + 1

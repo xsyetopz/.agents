@@ -1,11 +1,11 @@
 ---
-name: rust-edition2024-performance
-description: Use this skill when profiling, reviewing, or optimizing Rust 1.98+ code using Edition 2024, including hot-path rewrites, allocation/copy removal, data-layout/locality work, concurrency/NUMA tuning, PGO, unsafe optimization, SIMD, FFI, benchmarking, Cargo profile tuning, and performance regression gates.
+name: rust-performance-optimization
+description: Profile, review, or optimize Rust 1.98+ Edition 2024 code using measured hot-path, allocation, data-layout, concurrency, PGO, SIMD, FFI, benchmark, Cargo-profile, and regression-gate evidence.
 ---
 
-# Rust 1.98 / Edition 2024 Performance
+# Rust Performance Optimization
 
-## Compatibility
+## Start with evidence
 
 Rust 1.98.0 or newer; Rust Edition 2024; stable toolchain by default. Optional profiling tools may be platform-specific.
 
@@ -26,13 +26,7 @@ Set the user-visible performance objective, workload, compatibility contract, sa
 For intentionally non-idiomatic optimizations and their tradeoffs, read `references/dirty-optimization-patterns.md`. For Rust 1.98+/Edition 2024 language and toolchain facts, read `references/rust-version-contract.md`. For current version-sensitive source locations, read `references/source-index.md`.
 For the numbered optimization order and all listed performance references, use the mechanically mapped [GOOD/RED performance examples](references/performance-examples.md); each item links to a stable `RUST-OPT-*` example ID and each grouped technique links to a named `RUST-TECH-*` pair. RED marks a contrast; GOOD is the optimization pattern. For evidence transfer limits, read the package-local [prior-art protocol](references/prior-art-protocol.md).
 
-## Measurement boundary
-
-- **Micro:** isolate one local mechanism, use `black_box` for optimizer control, warm up caches/allocators as appropriate, and report distributions plus allocation/copy effects. Use it to support or reject a hypothesis; representative inputs remain the macrobenchmark's responsibility.
-- **Macro:** exercise the real binary/pipeline with representative input-size and access-pattern distributions, concurrency, downstream behavior, cache state, I/O, and batching. Use repeated steady-state trials and a holdout workload; make throughput, p50/p95/p99, errors, CPU, RSS, allocations, binary size/i-cache indicators, and queue/lock/I/O signals the acceptance evidence.
-- Set regression thresholds only after measuring runner noise; preserve raw trials and environment metadata. Gate correctness/errors first, then user-visible latency/throughput and resource budgets. Require macro evidence for an end-to-end performance decision.
-
-## Optimization order
+### Optimization order
 
 1. Remove unnecessary work and repeated computation. ([RUST-OPT-01](references/performance-examples.md#rust-opt-01)) [EXAMPLE: RUST-OPT-01]
 2. Remove allocations, clones, temporary collections, formatting, boxing, and dynamic dispatch from hot paths. ([RUST-OPT-02](references/performance-examples.md#rust-opt-02)) [EXAMPLE: RUST-OPT-02]
@@ -44,7 +38,13 @@ For the numbered optimization order and all listed performance references, use t
 8. Tune Cargo release settings and use instrumentation PGO only with compatible tooling, representative profile training, release-artifact comparison, and a holdout workload. Consider BOLT only as an optional target/toolchain-specific post-link experiment when its support is verified. ([RUST-OPT-08](references/performance-examples.md#rust-opt-08)) [EXAMPLE: RUST-OPT-08]
 9. Use pooling, arenas, custom allocation, SIMD, intrinsics, raw pointers, or FFI-specific tricks only with benchmark evidence and explicit safety invariants. Check vectorization reports/assembly and guard CPU features with a portable fallback. ([RUST-OPT-09](references/performance-examples.md#rust-opt-09)) [EXAMPLE: RUST-OPT-09]
 
-## Gotchas
+## Validation
+
+- **Micro:** isolate one local mechanism, use `black_box` for optimizer control, warm up caches/allocators as appropriate, and report distributions plus allocation/copy effects. Use it to support or reject a hypothesis; representative inputs remain the macrobenchmark's responsibility.
+- **Macro:** exercise the real binary/pipeline with representative input-size and access-pattern distributions, concurrency, downstream behavior, cache state, I/O, and batching. Use repeated steady-state trials and a holdout workload; make throughput, p50/p95/p99, errors, CPU, RSS, allocations, binary size/i-cache indicators, and queue/lock/I/O signals the acceptance evidence.
+- Set regression thresholds only after measuring runner noise; preserve raw trials and environment metadata. Gate correctness/errors first, then user-visible latency/throughput and resource budgets. Require macro evidence for an end-to-end performance decision.
+
+## Boundaries
 
 - `unsafe` does not make code faster by itself. It only enables operations whose safety proof is no longer compiler-enforced.
 - `#[inline]` and `#[inline(always)]` are hints, not guarantees; code-size growth can make instruction-cache behavior worse.
@@ -61,6 +61,6 @@ For the numbered optimization order and all listed performance references, use t
 - NUMA wins must be checked for lock fairness, thread migration, remote-memory traffic, and single-thread performance; a contended benchmark alone is insufficient.
 - A microbenchmark can validate a local hypothesis while worsening end-to-end behavior. Use the representative macrobenchmark and holdout workload as the acceptance boundary.
 
-## Unsafe comment rule
+### Unsafe comments
 
 Every newly introduced raw-pointer dereference, unchecked indexing, `get_unchecked`, `unwrap_unchecked`, transmute, mutable static access, manual allocation/deallocation, `unsafe impl`, or nontrivial `unsafe` block must have a nearby `SAFETY:` comment stating the invariant that makes the operation valid. Add a `PERF:` note when the unsafe operation exists specifically for a measured performance reason.

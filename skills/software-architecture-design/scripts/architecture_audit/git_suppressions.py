@@ -38,20 +38,20 @@ def git_suppression_findings(root: Path) -> list[Finding]:
         if key in seen:
             return
         seen.add(key)
-        findings.append(_rules._finding(path, line_number, message, code))
+        findings.append(_rules.finding(path, line_number, message, code))
 
-    events_by_diff: dict[bool, list[_rules._DiffEvent]] = {}
+    events_by_diff: dict[bool, list[_rules.DiffEvent]] = {}
     accepted_pairs_by_diff: dict[bool, set[tuple[Path, Path]]] = {}
     provider_pairs_by_diff: dict[bool, set[tuple[Path, Path]]] = {}
     try:
         for cached in (False, True):
-            events_by_diff[cached] = _diff._git_diff_events(
-                _diff._run_git_diff(repository, cached=cached), repository
+            events_by_diff[cached] = _diff.git_diff_events(
+                _diff.run_git_diff(repository, cached=cached), repository
             )
-            high_confidence = _diff._git_rename_pairs(
-                _diff._run_git_rename_inventory(repository, cached=cached), repository
+            high_confidence = _diff.git_rename_pairs(
+                _diff.run_git_rename_inventory(repository, cached=cached), repository
             )
-            accepted = high_confidence | _diff._candidate_rename_pairs(
+            accepted = high_confidence | _diff.candidate_rename_pairs(
                 repository, cached=cached, accepted=high_confidence
             )
             provider_pairs_by_diff[cached] = accepted
@@ -90,7 +90,7 @@ def git_suppression_findings(root: Path) -> list[Finding]:
                     )
                 continue
             if event.kind == "added":
-                if _rules._is_ignore_file(
+                if _rules.is_ignore_file(
                     event.path
                 ) and not _rules._is_comment_or_blank(event.text):
                     add(
@@ -101,7 +101,7 @@ def git_suppression_findings(root: Path) -> list[Finding]:
                     )
                 elif (
                     event.path.name.lower() == ".gitignore"
-                    and _rules._is_relevant_gitignore_pattern(event.text)
+                    and _rules.is_relevant_gitignore_pattern(event.text)
                 ):
                     add(
                         "gitignore-source-pattern-added",
@@ -122,7 +122,7 @@ def git_suppression_findings(root: Path) -> list[Finding]:
                     f"lint/check/test provider invocation was removed: {event.text.strip()}",
                 )
 
-        for path, line_number, text in _diff._provider_removals_for_rename(
+        for path, line_number, text in _diff.provider_removals_for_rename(
             repository, cached=cached, pairs=provider_pairs_by_diff[cached]
         ):
             add(
@@ -133,7 +133,7 @@ def git_suppression_findings(root: Path) -> list[Finding]:
             )
 
     try:
-        untracked_candidates = _inventory._untracked_candidates(repository, root)
+        untracked_candidates = _inventory.untracked_candidates(repository, root)
     except GitInventoryError as exc:
         return [
             Finding("error", "git-suppression-scan-failed", root, str(exc), "tooling")
@@ -151,7 +151,7 @@ def git_suppression_findings(root: Path) -> list[Finding]:
                 )
                 continue
             for line_number, line in enumerate(lines, 1):
-                if _rules._is_relevant_gitignore_pattern(line):
+                if _rules.is_relevant_gitignore_pattern(line):
                     add(
                         "gitignore-source-pattern-added",
                         path,

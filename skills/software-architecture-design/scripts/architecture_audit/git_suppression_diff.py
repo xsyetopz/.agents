@@ -20,10 +20,10 @@ from .suppression_rules import (
     _SCRIPT_DIRECTORY_NAMES,
     _SCRIPT_MANIFEST_NAMES,
     _SCRIPT_SUFFIXES,
-    _DiffEvent,
+    DiffEvent,
     _is_comment_or_blank,
-    _is_linter_config,
-    _is_workflow,
+    is_linter_config,
+    is_workflow,
 )
 
 # Git's similarity score is the evidence boundary for suppressing the
@@ -48,10 +48,10 @@ def _decode_git_path(value: str) -> Path | None:
     return Path(value)
 
 
-def _git_diff_events(text: str, repository: Path) -> list[_DiffEvent]:
+def git_diff_events(text: str, repository: Path) -> list[DiffEvent]:
     """Parse zero-context Git diff hunks into added/removed line evidence."""
 
-    events: list[_DiffEvent] = []
+    events: list[DiffEvent] = []
     old_path: Path | None = None
     new_path: Path | None = None
     deleted = False
@@ -63,7 +63,7 @@ def _git_diff_events(text: str, repository: Path) -> list[_DiffEvent]:
             return
         relative = old_path or new_path
         if relative is not None:
-            events.append(_DiffEvent(repository / relative, "deleted", 1))
+            events.append(DiffEvent(repository / relative, "deleted", 1))
 
     for raw in text.splitlines():
         if raw.startswith("diff --git "):
@@ -94,10 +94,10 @@ def _git_diff_events(text: str, repository: Path) -> list[_DiffEvent]:
         if path is None:
             continue
         if raw.startswith("+"):
-            events.append(_DiffEvent(repository / path, "added", new_line, raw[1:]))
+            events.append(DiffEvent(repository / path, "added", new_line, raw[1:]))
             new_line += 1
         elif raw.startswith("-"):
-            events.append(_DiffEvent(repository / path, "removed", old_line, raw[1:]))
+            events.append(DiffEvent(repository / path, "removed", old_line, raw[1:]))
             old_line += 1
         elif raw.startswith(" "):
             old_line += 1
@@ -106,7 +106,7 @@ def _git_diff_events(text: str, repository: Path) -> list[_DiffEvent]:
     return events
 
 
-def _run_git_diff(repository: Path, *, cached: bool) -> str:
+def run_git_diff(repository: Path, *, cached: bool) -> str:
     command = [
         "git",
         "-C",
@@ -132,7 +132,7 @@ def _run_git_diff(repository: Path, *, cached: bool) -> str:
     return result.stdout
 
 
-def _run_git_rename_inventory(repository: Path, *, cached: bool) -> bytes:
+def run_git_rename_inventory(repository: Path, *, cached: bool) -> bytes:
     """Return Git's high-confidence rename status inventory for one diff.
 
     The line-oriented suppression diff intentionally disables rename
@@ -198,7 +198,7 @@ def _run_git_no_rename_inventory(repository: Path, *, cached: bool) -> bytes:
     return result.stdout
 
 
-def _git_rename_pairs(
+def git_rename_pairs(
     payload: bytes,
     repository: Path,
 ) -> set[tuple[Path, Path]]:
@@ -350,7 +350,7 @@ def _relocation_similarity(
     )
 
 
-def _candidate_rename_pairs(
+def candidate_rename_pairs(
     repository: Path,
     *,
     cached: bool,
@@ -399,7 +399,7 @@ def _provider_lines(value: bytes) -> list[tuple[int, str]]:
     ]
 
 
-def _provider_removals_for_rename(
+def provider_removals_for_rename(
     repository: Path,
     *,
     cached: bool,
@@ -432,14 +432,14 @@ def _is_destructive_path(path: Path, repository: Path) -> bool:
         relative = path.as_posix()
     return (
         bool(_DESTRUCTIVE_PATH_TOKEN.search(relative))
-        or _is_workflow(path)
-        or _is_linter_config(path)
+        or is_workflow(path)
+        or is_linter_config(path)
     )
 
 
 def _is_script_path(path: Path) -> bool:
     name = path.name.lower()
-    if name in _SCRIPT_MANIFEST_NAMES or _is_workflow(path):
+    if name in _SCRIPT_MANIFEST_NAMES or is_workflow(path):
         return True
     parts = {part.lower() for part in path.parts}
     if parts & _SCRIPT_DIRECTORY_NAMES:

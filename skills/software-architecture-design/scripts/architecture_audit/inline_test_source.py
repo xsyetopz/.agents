@@ -141,7 +141,7 @@ _BLOCK_COMMENT_DELIMITERS = {
 
 
 @lru_cache(maxsize=64)
-def _javascript_runner_configured(
+def javascript_runner_configured(
     root: Path, inventory: tuple[Path, ...] | None = None
 ) -> bool:
     package = root / "package.json"
@@ -223,7 +223,7 @@ def _nested_block_end(text: str, index: int, start: str, end: str) -> int | None
     return cursor if depth == 0 else None
 
 
-def _strip_source(text: str, suffix: str, *, strings: bool = True) -> str:
+def strip_source(text: str, suffix: str, *, strings: bool = True) -> str:
     """Blank comments and quoted strings while retaining offsets and newlines."""
     output = list(text)
     index = 0

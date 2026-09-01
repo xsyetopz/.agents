@@ -18,7 +18,7 @@ from .records import AuditReport, Finding
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Report deterministic architecture-boundaries risks in a source tree."
+        description="Report deterministic software-architecture-design risks in a source tree."
     )
     parser.add_argument("root", nargs="?", default=".", help="repository root")
     parser.add_argument(
@@ -38,7 +38,9 @@ def should_fail(findings: Sequence[Finding]) -> bool:
 
 
 def render_text(root: Path, files: Sequence[Path], findings: Sequence[Finding]) -> None:
-    print(f"architecture-boundaries audit: {len(files)} architecture-bearing files")
+    print(
+        f"software-architecture-design audit: {len(files)} architecture-bearing files"
+    )
     print("scope: full repository (tracked and non-ignored untracked files)")
     print(
         "gate: fail-on warning (errors also block across every built-in evidence source)"

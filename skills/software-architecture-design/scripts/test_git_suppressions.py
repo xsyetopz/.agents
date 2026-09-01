@@ -132,7 +132,7 @@ class GitSuppressionTests(AuditFixture, unittest.TestCase):
         self.write("README.md", content="baseline\n")
         self.commit()
         with patch(
-            "architecture_audit.git_suppression_diff._run_git_diff",
+            "architecture_audit.git_suppression_diff.run_git_diff",
             side_effect=GitInventoryError("test failure"),
         ):
             findings = git_suppression_findings(self.root)
@@ -363,7 +363,7 @@ class GitSuppressionTests(AuditFixture, unittest.TestCase):
         self.git("rm", "-q", "tests/test_security.py")
         weak_inventory = b"R89\0tests/test_security.py\0tests/test_unrelated.py\0"
         with patch(
-            "architecture_audit.git_suppression_diff._run_git_rename_inventory",
+            "architecture_audit.git_suppression_diff.run_git_rename_inventory",
             return_value=weak_inventory,
         ):
             findings = git_suppression_findings(self.root)
@@ -385,7 +385,7 @@ class GitSuppressionTests(AuditFixture, unittest.TestCase):
         self.git("rm", "-q", "tests/test_security.py")
         malformed_inventory = b"R100\0tests/test_security.py\0tests/test_security.py\0"
         with patch(
-            "architecture_audit.git_suppression_diff._run_git_rename_inventory",
+            "architecture_audit.git_suppression_diff.run_git_rename_inventory",
             return_value=malformed_inventory,
         ):
             findings = git_suppression_findings(self.root)

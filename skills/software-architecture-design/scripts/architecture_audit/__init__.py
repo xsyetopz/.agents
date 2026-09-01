@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Public API for the architecture-boundaries audit."""
+"""Public API for the software-architecture-design audit."""
 
 from .audit import audit, audit_report
 from .cli import main, parse_args, render_json, render_text, should_fail

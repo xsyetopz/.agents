@@ -7,7 +7,7 @@ import re
 from collections.abc import Iterable
 
 
-def _rules(
+def rules(
     suffix: str, clean: str, comments_only: str, *, js_runner_configured: bool = False
 ) -> Iterable[tuple[str, re.Pattern[str], str]]:
     flags = re.MULTILINE

@@ -1,11 +1,11 @@
 ---
-name: bun-es2025-typescript7-performance
-description: Use this skill when profiling, reviewing, or optimizing Bun 1.4+ JavaScript/TypeScript applications using ES2025 and TypeScript 7+, including hot-path rewrites, allocation reduction, Bun-native API adoption, server/CLI performance, bundling, representative benchmarks, CPU/heap profiles, and performance regression gates.
+name: bun-typescript-performance-optimization
+description: Profile, review, or optimize Bun 1.4+ JavaScript or TypeScript 7+ applications using measured hot-path, allocation, Bun-native API, server/CLI, bundling, benchmark, CPU/heap-profile, and regression-gate evidence.
 ---
 
-# Bun 1.4 / ES2025 / TypeScript 7 Performance
+# Bun and TypeScript Performance Optimization
 
-## Compatibility
+## Start with evidence
 
 Bun 1.4.0 or newer; ECMAScript 2025 language baseline; TypeScript 7.0 or newer. This skill targets Bun runtime behavior, not browser-only or Node-only projects.
 
@@ -26,15 +26,7 @@ Set the user-visible performance objective, workload, compatibility contract, an
 
 For the numbered optimization order and all listed performance references, use the mechanically mapped [GOOD/RED performance examples](references/performance-examples.md); each item links to a stable `BUN-OPT-*` example ID and each grouped technique links to a named `BUN-TECH-*` pair. RED marks a contrast; GOOD is the optimization pattern. For evidence transfer limits, read the package-local [prior-art protocol](references/prior-art-protocol.md).
 
-## Measurement boundary
-
-- **Micro:** isolate a local operation, use realistic type/branch mixes, warm up explicitly, report distribution and allocation effects, and use it to reject or support a hypothesis—not to certify the service.
-- **Macro:** exercise the built application through its real protocol and topology with an external load generator, fixed duration, steady-state warm-up, realistic operation/payload distributions, downstream behavior, and p50/p95/p99, throughput, errors, CPU, RSS, JS heap, native heap, and queue/backpressure signals. Make this the merge gate.
-- Record independent trials and noise; select results from the stated aggregation rule rather than the fastest run. A microbenchmark can train an unrealistically monomorphic JSC profile, just as managed-runtime literature documents for JVMs, so validate every hot-path win in application context.
-
-For intentionally non-idiomatic optimizations, read `references/dirty-optimization-patterns.md`. For current version-sensitive source locations, read `references/source-index.md`.
-
-## Optimization order
+### Optimization order
 
 1. Eliminate unnecessary requests, parsing, serialization, copies, dependency work, and repeated initialization. ([BUN-OPT-01](references/performance-examples.md#bun-opt-01)) [EXAMPLE: BUN-OPT-01]
 2. Remove hot-path allocations: temporary arrays/objects, spread copies, repeated encoders/decoders, interpolation, regex construction, closure creation, and avoidable Promise choreography. ([BUN-OPT-02](references/performance-examples.md#bun-opt-02)) [EXAMPLE: BUN-OPT-02]
@@ -47,7 +39,15 @@ For intentionally non-idiomatic optimizations, read `references/dirty-optimizati
 9. Specialize common cases and separate cold validation/error/reporting paths. ([BUN-OPT-09](references/performance-examples.md#bun-opt-09)) [EXAMPLE: BUN-OPT-09]
 10. Tune bundling/minification/splitting, workers, process concurrency, affinity/NUMA, or a supported deployment PGO flow only after application-level waste is addressed. ([BUN-OPT-10](references/performance-examples.md#bun-opt-10)) [EXAMPLE: BUN-OPT-10]
 
-## Gotchas
+## Validation
+
+- **Micro:** isolate a local operation, use realistic type/branch mixes, warm up explicitly, report distribution and allocation effects, and use it to reject or support a hypothesis—not to certify the service.
+- **Macro:** exercise the built application through its real protocol and topology with an external load generator, fixed duration, steady-state warm-up, realistic operation/payload distributions, downstream behavior, and p50/p95/p99, throughput, errors, CPU, RSS, JS heap, native heap, and queue/backpressure signals. Make this the merge gate.
+- Record independent trials and noise; select results from the stated aggregation rule rather than the fastest run. A microbenchmark can train an unrealistically monomorphic JSC profile, just as managed-runtime literature documents for JVMs, so validate every hot-path win in application context.
+
+For intentionally non-idiomatic optimizations, read `references/dirty-optimization-patterns.md`. For current version-sensitive source locations, read `references/source-index.md`.
+
+## Boundaries
 
 - Bun executes TypeScript by transpiling it; TypeScript's compiler remains a separate type-checking/tooling concern. A successful `bun run` is not a substitute for TypeScript 7 type checking.
 - TypeScript 7 uses the native Go compiler line. Preserve repository invocation conventions (`tsc`/tool wrappers) rather than assuming old compiler internals.
@@ -65,6 +65,6 @@ For intentionally non-idiomatic optimizations, read `references/dirty-optimizati
 - A microbenchmark may validate a local hypothesis while worsening production due to JSC profile pollution, GC, queueing, cache behavior, or I/O. Keep the representative macrobenchmark as the acceptance gate.
 - NUMA and CPU-affinity changes are deployment-specific. Use them only when the host topology is visible and relevant, and revalidate after container, allocator, or process-count changes.
 
-## Comment rule
+### Optimization comments
 
 When a performance rewrite intentionally reduces readability, depends on a stable object shape/buffer lifetime, reuses mutable storage, relies on byte-level aliasing/view semantics, or duplicates a specialized hot path, add a short `PERF:` comment stating the measured/structural reason and the invariant future edits must preserve.

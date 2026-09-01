@@ -2,7 +2,7 @@
 
 <!-- GENERATED FILE. Regenerate with scripts/generate_skill_reports.py. -->
 
-> Generated for `bun-es2025-typescript7-performance`. Use this shared report shape for the skill.
+> Generated for `bun-typescript-performance-optimization`. Use this shared report shape for the skill.
 
 ## Decision summary
 

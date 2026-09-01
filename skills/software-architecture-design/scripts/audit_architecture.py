@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the architecture-boundaries audit command."""
+"""Run the software-architecture-design audit command."""
 
 from __future__ import annotations
 

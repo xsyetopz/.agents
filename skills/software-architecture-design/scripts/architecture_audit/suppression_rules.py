@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .records import Finding
 
-_DOCUMENTATION_SUFFIXES = {".adoc", ".md", ".rst", ".txt"}
+DOCUMENTATION_SUFFIXES = {".adoc", ".md", ".rst", ".txt"}
 _HASH_COMMENT_SUFFIXES = {
     ".bash",
     ".cfg",
@@ -219,14 +219,14 @@ _HUNK_HEADER = re.compile(r"^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@")
 
 
 @dataclass(frozen=True)
-class _DiffEvent:
+class DiffEvent:
     path: Path
     kind: str
     line_number: int
     text: str = ""
 
 
-def _comment_fragment(line: str, suffix: str) -> str | None:
+def comment_fragment(line: str, suffix: str) -> str | None:
     """Return a comment portion while ignoring quoted strings."""
 
     markers = ["//", "/*", "<!--"]
@@ -301,7 +301,7 @@ def _code_without_strings_or_comments(line: str, suffix: str) -> str:
     return "".join(output)
 
 
-def _is_workflow(path: Path) -> bool:
+def is_workflow(path: Path) -> bool:
     parts = {part.lower() for part in path.parts}
     name = path.name.lower()
     return (
@@ -324,7 +324,7 @@ def _is_workflow(path: Path) -> bool:
     )
 
 
-def _is_linter_config(path: Path) -> bool:
+def is_linter_config(path: Path) -> bool:
     name = path.name.lower()
     return (
         bool(_LINTER_CONFIG_NAME.search(name))
@@ -342,14 +342,14 @@ def _is_comment_or_blank(line: str) -> bool:
     return not stripped or stripped.startswith(("#", ";", "//", "/*", "<!--", "--"))
 
 
-def _is_ignore_file(path: Path) -> bool:
+def is_ignore_file(path: Path) -> bool:
     """Recognize tool-specific ignore files whose patterns can hide checks."""
 
     name = path.name.lower()
     return name in _IGNORE_FILE_NAMES or bool(_TOOL_IGNORE_FILE.search(name))
 
 
-def _is_relevant_gitignore_pattern(line: str) -> bool:
+def is_relevant_gitignore_pattern(line: str) -> bool:
     """Return whether a Git ignore rule hides an authored/check-bearing path."""
 
     if _is_comment_or_blank(line):
@@ -365,7 +365,7 @@ def _is_relevant_gitignore_pattern(line: str) -> bool:
     )
 
 
-def _config_suppression(path: Path, line: str, section: str) -> str | None:
+def config_suppression(path: Path, line: str, section: str) -> str | None:
     """Recognize common config-level disables without treating all settings as waivers."""
 
     name = path.name.lower()
@@ -418,7 +418,7 @@ def _config_suppression(path: Path, line: str, section: str) -> str | None:
     return None
 
 
-def _multiline_disabled_rule(lines: list[str], index: int) -> bool:
+def multiline_disabled_rule(lines: list[str], index: int) -> bool:
     if not _RULE_KEY_ONLY.match(lines[index]):
         return False
     for offset in range(index + 1, min(len(lines), index + 5)):
@@ -429,12 +429,12 @@ def _multiline_disabled_rule(lines: list[str], index: int) -> bool:
     return False
 
 
-def _json_brace_delta(line: str) -> int:
+def json_brace_delta(line: str) -> int:
     masked = _code_without_strings_or_comments(line, ".json")
     return masked.count("{") - masked.count("}")
 
 
-def _finding(
+def finding(
     path: Path, line_number: int, message: str, code: str = "lint-suppression"
 ) -> Finding:
     return Finding("error", code, path, f"line {line_number}: {message}", "suppression")
