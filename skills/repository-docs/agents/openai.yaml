@@ -1,0 +1,4 @@
+interface:
+  display_name: "Repository Docs"
+  short_description: "Audit repository docs, policy, scope, and ownership"
+  default_prompt: "Use $repository-docs to audit or edit repository documentation and governance against repository evidence, canonical ownership, scope, and actual enforcement."
