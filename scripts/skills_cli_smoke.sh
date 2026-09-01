@@ -5,7 +5,7 @@
 
 set -Eeuo pipefail
 
-readonly CLI_VERSION="1.5.22"
+readonly CLI_VERSION="1.5.23"
 readonly SKILL_NAME="repository-docs"
 readonly TARGET_AGENT="codex"
 
@@ -18,7 +18,7 @@ die() {
 
 usage() {
   cat >&2 <<'EOF'
-Usage: RUNNER=bunx|bunx-bun SOURCE=/path/to/my-agent-skills-btw scripts/skills_cli_smoke.sh
+Usage: RUNNER=bunx|bunx-bun SOURCE=/path/to/.agents scripts/skills_cli_smoke.sh
 
 Runs a network-backed, project-scoped add/list/remove probe with the pinned
 Vercel skills CLI. The fixture installs repository-docs alongside one unrelated
@@ -53,7 +53,7 @@ case "$RUNNER" in
     CLI=(bunx --yes "skills@${CLI_VERSION}")
     ;;
   bunx-bun)
-    # --bun is the verified Bun launcher shape for skills@1.5.22.
+    # --bun is the verified Bun launcher shape for skills.
     CLI=(bunx --bun "skills@${CLI_VERSION}")
     ;;
   *)
@@ -252,7 +252,7 @@ PY
 
 # list --json (without --agent) exposes the display names sharing the target
 # directory. The removal command must enumerate those agents explicitly:
-# skills@1.5.22 accepts --agent '*' in help, but rejects the literal wildcard.
+# skills accepts --agent '*' in help, but rejects the literal wildcard.
 capture_cli "$TMP_ROOT/list-shared-after-add.json" "${CLI[@]}" list --json
 agent_names="$(python3 - "$TMP_ROOT/list-shared-after-add.json" "$SKILL_PATH" <<'PY'
 import json
@@ -344,7 +344,7 @@ PY
 OTHER_DIGEST_AFTER="$(tree_digest "$OTHER_PATH")" || die 4 "could not hash unrelated skill after removal"
 [[ "$OTHER_DIGEST_AFTER" == "$OTHER_DIGEST_BEFORE" ]] || die 4 "unrelated skill files changed during selected removal"
 
-# A verified 1.5.22 probe reported stale selected metadata after a narrow
+# A verified 1.5.23 probe reported stale selected metadata after a narrow
 # Codex-only removal. The matching-agent removal used here must leave the
 # unrelated entry and zero selected lock entries; fail closed if the selected
 # key survives, if the unrelated entry changes, or if the lock disappears.

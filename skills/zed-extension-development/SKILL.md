@@ -18,7 +18,7 @@ Match the extension to Zed's current capability and registry rules. Most declara
    - [Packaging and release](references/packaging-and-release.md) for licenses, registry prerequisites, submodule publication, updates, and maintenance.
    - [Templates and ecosystem examples](references/templates-and-ecosystem.md) before selecting a declarative or Rust/WASM scaffold.
 
-## Implementation contract
+## Workflow
 
 - Use `wasm32-wasip2` for procedural extensions and the latest compatible `zed_extension_api`; do not assume ordinary native Rust behavior inside WASM.
 - Keep `extension.toml`, Cargo package version, registry version, and source commit synchronized.
@@ -30,21 +30,21 @@ Match the extension to Zed's current capability and registry rules. Most declara
 - Scope Tree-sitter queries and snippets narrowly; avoid expensive broad captures and global snippets without justification.
 - Treat currently deprecated agent-server and slash-command extension paths as unavailable for new registry submissions. Treat MCP server extension support as transitional and check the current MCP registry direction before implementation.
 
-## Validation boundary
-
-Run Rust formatting/lint/tests and WASM build when Rust exists; validate TOML/JSON/query assets; install as a Dev Extension; inspect `Zed.log` and foreground output; test all declared platforms and language files; verify registry prerequisites and version synchronization.
-
-Report capability category, manifest/API/schema versions, supported platforms, external downloads/processes, checks, dev-install evidence, registry changes, and any publication step not performed.
-
-## Templates
+### Templates
 
 - Use [the declarative language starter](assets/language-extension-template/) for grammar/query-only support.
 - Use [the Rust LSP starter](assets/lsp-extension-template/) only when executable resolution or procedural configuration is required.
 
 Replace placeholders and verify the latest extension API/schema before building.
 
+## Validation
+
+Run Rust formatting/lint/tests and WASM build when Rust exists; validate TOML/JSON/query assets; install as a Dev Extension; inspect `Zed.log` and foreground output; test all declared platforms and language files; verify registry prerequisites and version synchronization.
+
+Report capability category, manifest/API/schema versions, supported platforms, external downloads/processes, checks, dev-install evidence, registry changes, and any publication step not performed.
+
 ## Boundaries
 
 - Registry PRs, submodule updates, external releases, and hosted publication require explicit authorization.
 - Do not promise unsupported general UI, arbitrary editor commands, or native filesystem/process access beyond the current extension API.
-- Route cross-editor design or LSP/DAP sharing decisions to `$editor-extension-router`.
+- When the request expands into cross-editor architecture or shared protocol design, make that decision from current platform capabilities and repository evidence. Never stop to locate or install a companion skill.

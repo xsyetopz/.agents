@@ -18,7 +18,7 @@ Develop to the plugin's declared minimum Neovim version and test against current
    - [Packaging and release](references/packaging-and-release.md) for help tags, repository layout, versioning, package-manager neutrality, luarocks, and releases.
    - [Templates and ecosystem examples](references/templates-and-ecosystem.md) before selecting modules, tests, health checks, or CI patterns.
 
-## Implementation contract
+## Workflow
 
 - Use documented `vim.*` and API functions available at the declared floor. Check `:help deprecated` and release news before adopting or removing APIs.
 - Keep `plugin/*.lua` startup work limited to guards, commands, lightweight autocmds, and user-facing entrypoints. Defer heavy modules until invoked.
@@ -31,18 +31,18 @@ Develop to the plugin's declared minimum Neovim version and test against current
 - Treat Tree-sitter integration as version-sensitive and validate queries against pinned/current parsers.
 - Add `lua/<plugin>/health.lua` for meaningful environment/configuration diagnostics.
 
-## Validation boundary
+### Templates
+
+Use [the Lua runtimepath starter](assets/plugin-template/) as an adaptation source. It includes a lazy command entrypoint, configuration module, health check, help file, minimal test init, and headless smoke test without requiring a plugin manager.
+
+## Validation
 
 Run formatting/lint/type checks established by the repository, pure Lua tests, headless Neovim tests with a minimal isolated XDG environment, help-tag validation, `:checkhealth`, minimum/current stable matrix tests, and focused startup/performance checks.
 
 Report minimum/current versions, public API changes, runtime files, commands/mappings/autocmds, tests, deprecated API findings, package-manager assumptions, and release actions not performed.
 
-## Templates
-
-Use [the Lua runtimepath starter](assets/plugin-template/) as an adaptation source. It includes a lazy command entrypoint, configuration module, health check, help file, minimal test init, and headless smoke test without requiring a plugin manager.
-
 ## Boundaries
 
 - Do not install plugins into the user's real config or mutate public repositories/releases without authorization.
 - Do not add compatibility for Vim or older Neovim releases outside the declared support scope.
-- Route cross-editor LSP/DAP/core sharing decisions to `$editor-extension-router`.
+- When the request expands into cross-editor architecture or shared protocol design, make that decision from current platform capabilities and repository evidence. Never stop to locate or install a companion skill.

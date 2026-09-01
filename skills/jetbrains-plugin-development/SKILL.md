@@ -18,7 +18,7 @@ Develop against the repository's declared IntelliJ Platform baseline and product
    - [Packaging and release](references/packaging-and-release.md) for archives, signing, Marketplace publishing, channels, credentials, and release gates.
    - [Templates and ecosystem examples](references/templates-and-ecosystem.md) before scaffolding or borrowing a pattern from an existing plugin.
 
-## Implementation contract
+## Workflow
 
 - Use IntelliJ Platform Gradle Plugin 2.x for current projects; treat 1.x as migration-only legacy.
 - Keep compile-time platform/plugin dependencies and runtime declarations in `plugin.xml` or module descriptors consistent.
@@ -31,18 +31,18 @@ Develop against the repository's declared IntelliJ Platform baseline and product
 - Follow existing UI technology. Use Kotlin UI DSL for settings-style forms where appropriate, Swing/platform components for general controls, and platform icons/colors/fonts for theme and accessibility support.
 - Preserve settings and serialized-state compatibility unless a migration is authorized and tested.
 
-## Validation boundary
+### Templates
+
+Use [the Kotlin/Gradle starter](assets/plugin-template/) as an adaptation source, not a fixed-version generator. Replace every `__PLACEHOLDER__`, select real platform/plugin versions, add only required dependencies/extensions, and retain repository-native structure when editing an existing project.
+
+## Validation
 
 Run focused tests, project tests, `verifyPluginProjectConfiguration`, `verifyPluginStructure`, `verifyPlugin`, and `buildPlugin` as applicable. Inspect and install the built archive in a clean development IDE. Do not claim compatibility from compilation alone.
 
 Report targeted IDEs/builds, changed descriptors and source paths, commands and results, verifier warnings, unsupported APIs, compatibility gaps, and any Marketplace or credential step not executed.
 
-## Templates
-
-Use [the Kotlin/Gradle starter](assets/plugin-template/) as an adaptation source, not a fixed-version generator. Replace every `__PLACEHOLDER__`, select real platform/plugin versions, add only required dependencies/extensions, and retain repository-native structure when editing an existing project.
-
 ## Boundaries
 
 - Publishing, Marketplace mutations, certificate creation, secret configuration, and release promotion require explicit authorization.
 - Do not add compatibility shims for IDE branches outside the declared support matrix.
-- Route cross-editor architecture or platform selection to `$editor-extension-router`.
+- When the request expands into cross-editor architecture or shared protocol design, make that decision from current platform capabilities and repository evidence. Never stop to locate or install a companion skill.

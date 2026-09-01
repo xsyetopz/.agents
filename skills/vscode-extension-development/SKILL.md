@@ -18,7 +18,7 @@ Develop to the extension's declared `engines.vscode` floor and host matrix, not 
    - [Packaging and release](references/packaging-and-release.md) for bundling, VSIX inspection, Marketplace/Open VSX publication, signing/provenance, and CI.
    - [Templates and ecosystem examples](references/templates-and-ecosystem.md) before scaffolding or adapting an open-source extension pattern.
 
-## Implementation contract
+## Workflow
 
 - Keep `engines.vscode` aligned with the oldest API actually used. Do not raise it solely because the latest stable is available.
 - Prefer `contributes` declarations over activation-time registration where a contribution point exists.
@@ -33,18 +33,18 @@ Develop to the extension's declared `engines.vscode` floor and host matrix, not 
 - For new scaffolds, pin `packageManager` to `bun@1.4.0`, commit `bun.lock`, use only Bun commands, and pin `@biomejs/biome` plus its configuration schema to `2.5.10`. Do not introduce npm, pnpm, Yarn, or a second lockfile.
 - Use `Bun.build` for the template's desktop and browser bundles, externalize `vscode`, and keep the extension runtime TypeScript configuration separate from build tooling and tests. Adopt a different pipeline only when repository evidence or required compatibility justifies it.
 
-## Validation boundary
+### Templates
+
+Use [the Bun desktop-and-web TypeScript starter](assets/extension-template/) as an adaptation source. It pins Bun 1.4.0 and Biome 2.5.10 and follows the strict TypeScript/build/test shape used by `xsyetopz/versionlens-redux`. Resolve all `__PLACEHOLDER__` values before running it; remove the browser entrypoint when web support is not required.
+
+## Validation
 
 Run Biome's non-mutating check, TypeScript typechecks, focused Bun tests, a clean `Bun.build` check, extension-host tests through the repository's current VS Code test tooling, web-host tests when a browser entrypoint exists, packaging with `vsce package`, and archive inspection. Test minimum and current supported VS Code versions plus relevant local/remote/web and trusted/untrusted modes. Use Biome's write mode only for an explicit fix or formatting operation.
 
 Report host matrix, `engines.vscode`, changed contribution points and activation paths, checks, packaged contents, trust/web limitations, proposed API use, and any registry mutation not performed.
 
-## Templates
-
-Use [the Bun desktop-and-web TypeScript starter](assets/extension-template/) as an adaptation source. It pins Bun 1.4.0 and Biome 2.5.10 and follows the strict TypeScript/build/test shape used by `xsyetopz/versionlens-redux`. Resolve all `__PLACEHOLDER__` values before running it; remove the browser entrypoint when web support is not required.
-
 ## Boundaries
 
 - Publishing, publisher creation, PAT use, registry deletion/unpublish, and production rollout require explicit authorization.
 - Do not widen to Cursor, VSCodium, code-server, or Open VSX unless compatibility is requested and verified.
-- Route platform selection or shared multi-editor design to `$editor-extension-router`.
+- When the request expands into platform selection or shared multi-editor design, make that decision from current platform capabilities and repository evidence. Never stop to locate or install a companion skill.

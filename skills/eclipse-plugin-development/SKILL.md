@@ -18,7 +18,7 @@ Develop against an explicit target platform and OSGi contract. Keep bundle metad
    - [Packaging and release](references/packaging-and-release.md) for Tycho, features, products, p2 repositories, signing, SBOMs, and release gates.
    - [Templates and ecosystem examples](references/templates-and-ecosystem.md) before choosing bundle, test, feature, repository, LSP4E, or RCP patterns.
 
-## Implementation contract
+## Workflow
 
 - Resolve every build through the declared target platform; do not compile against random workspace/install contents.
 - Keep OSGi imports/exports, `Require-Bundle`, execution environment, services, and extension declarations minimal and accurate.
@@ -30,18 +30,18 @@ Develop against an explicit target platform and OSGi contract. Keep bundle metad
 - Maintain semantic OSGi versions, package versioning, and API baseline compatibility. Do not widen version ranges or re-export dependencies casually.
 - Keep NLS strings, icons, accessibility, high-DPI behavior, and platform conventions consistent.
 
-## Validation boundary
+### Templates
+
+Use [the Tycho plug-in/feature/repository starter](assets/tycho-plugin-template/) as an adaptation source. Replace coordinates, target repository, Java/Tycho versions, IDs, and package names before import; remove feature/repository modules when only a bundle is requested.
+
+## Validation
 
 Run manifest/PDE validation, focused unit tests, JUnit Plug-in tests, Tycho build and test phases, API Tools/baseline checks, product/update-site assembly when affected, and clean target/runtime smoke tests. Test minimum and current declared target platforms.
 
 Report target platform, bundle/feature/product metadata changes, API/version impacts, tests, p2 artifacts, signing state, and external release actions not performed.
 
-## Templates
-
-Use [the Tycho plug-in/feature/repository starter](assets/tycho-plugin-template/) as an adaptation source. Replace coordinates, target repository, Java/Tycho versions, IDs, and package names before import; remove feature/repository modules when only a bundle is requested.
-
 ## Boundaries
 
 - Publishing update sites, signing with production keys, Marketplace changes, and release promotion require explicit authorization.
 - Do not convert a plug-in task into a full RCP product or BND migration without scope authorization.
-- Route cross-editor platform selection or shared language-server design to `$editor-extension-router`.
+- When the request expands into cross-editor architecture or shared protocol design, make that decision from current platform capabilities and repository evidence. Never stop to locate or install a companion skill.

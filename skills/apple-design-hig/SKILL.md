@@ -1,6 +1,6 @@
 ---
 name: apple-design-hig
-description: Use this skill when making Apple-platform HIG, native UX, accessibility, or cross-device interface decisions; use SDK documentation for implementation APIs and a generic UX workflow for non-Apple web design.
+description: Make Apple-platform HIG, native UX, accessibility, or cross-device interface decisions. Use for Apple interaction and presentation guidance; not for implementation API lookup or non-Apple web design.
 ---
 
 # Apple Design HIG
@@ -9,10 +9,13 @@ Resolve an Apple-platform interface decision from current Human Interface Guidel
 
 State the decision, platform, device class, input modes, appearances, accessibility needs, constraints, affected users, and acceptance check. Keep product requirements, HIG guidance, SDK facts, and design judgment distinct. Safe local inspection and validation may proceed; live or external checks and product changes follow the user's authorization.
 
-## Workflow
+## Start with evidence
 
 1. Inspect the existing interface and separate product constraints from assumed platform rules.
-2. Load only the matching package references from the direct routes below; use `hig-source-index.md` for source coverage and `audit-workflow.md` for a full review.
+
+## Workflow
+
+1. Load only the matching package references from the direct routes below; use `hig-source-index.md` for source coverage and `audit-workflow.md` for a full review.
    - [GOOD/RED implementation examples](references/examples.md) (read before choosing a native component or accessibility implementation; RED marks a contrast, while GOOD is the implementation pattern)
    - [Accessibility](references/accessibility.md) · [Action button](references/action-button.md) · [Action sheets](references/action-sheets.md) · [Activity rings](references/activity-rings.md)
    - [Activity views](references/activity-views.md) · [AirPlay](references/airplay.md) · [Alerts](references/alerts.md) · [Always On](references/always-on.md)
@@ -58,12 +61,15 @@ State the decision, platform, device class, input modes, appearances, accessibil
    - [Virtual keyboards](references/virtual-keyboards.md) · [VoiceOver](references/voiceover.md) · [Wallet](references/wallet.md) · [Watch faces](references/watch-faces.md)
    - [Web views](references/web-views.md) · [What’s New in Apple Design](references/whats-new.md) · [Widgets](references/widgets.md) · [Windows](references/windows.md)
    - [Workouts](references/workouts.md) · [Writing](references/writing.md)
-3. Verify material guidance against the live Apple HIG and cite the exact pages used.
-4. Recommend the smallest native pattern, state rejected alternatives, and describe accessibility and implementation implications.
-5. When live discovery is needed, run `python3 scripts/hig_catalog.py --help` before the relevant catalog query; run the target project's interface and accessibility checks after edits.
-6. Return the decision, platform differences, evidence, commands, changed paths, and any live HIG, device, SDK, hosted, or behavioral evidence that remains `UNVERIFIED`.
+2. Verify material guidance against the live Apple HIG and cite the exact pages used.
+3. Recommend the smallest native pattern, state rejected alternatives, and describe accessibility and implementation implications.
 
-## Gotchas
+## Validation
+
+1. When live discovery is needed, run `python3 scripts/hig_catalog.py --help` before the relevant catalog query; run the target project's interface and accessibility checks after edits.
+2. Return the decision, platform differences, evidence, commands, changed paths, and any live HIG, device, SDK, hosted, or behavioral evidence that remains `UNVERIFIED`.
+
+## Boundaries
 
 - Bundled references are an offline snapshot; the live Apple HIG provides version-sensitive guidance.
 - Prefer system components unless a concrete product constraint justifies a deviation.

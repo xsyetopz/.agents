@@ -18,7 +18,7 @@ Develop against the package's declared Sublime Text build/Python API environment
    - [Packaging and release](references/packaging-and-release.md) for `.sublime-package`, dependencies, Package Control submission, tags, messages, and release gates.
    - [Templates and ecosystem examples](references/templates-and-ecosystem.md) before adapting command, listener, syntax, LSP, or Package Control patterns.
 
-## Implementation contract
+## Workflow
 
 - Treat current stable and the declared minimum build separately. Sublime Text 4 stable was build 4200 on 2026-09-01; verify APIs by build annotations and runtime capability.
 - Do not call ordinary API functions during module import. Use `plugin_loaded()` after the API is ready and `plugin_unloaded()` for cleanup.
@@ -30,18 +30,18 @@ Develop against the package's declared Sublime Text build/Python API environment
 - Avoid broad event listeners, repeated whole-buffer reads, synchronous resource/network work, and global mutable state without reload cleanup.
 - Support multiple windows, transient/clone sheets, unsaved views, and package reload.
 
-## Validation boundary
+### Templates
+
+Use [the Python package starter](assets/package-template/) as an adaptation source. Replace package/command/settings names, choose the actual Python API environment, and remove example resources that the package does not use.
+
+## Validation
 
 Run Python formatting/lint/unit tests, syntax/schema checks, package/resource load checks, integration smoke tests in a safe or disposable profile, package reload tests, supported build/platform tests, and packaged archive inspection. Validate Package Control metadata without publishing.
 
 Report minimum/current builds, Python environment, commands/listeners/resources changed, tests, package contents, compatibility caveats, and publication actions not performed.
 
-## Templates
-
-Use [the Python package starter](assets/package-template/) as an adaptation source. Replace package/command/settings names, choose the actual Python API environment, and remove example resources that the package does not use.
-
 ## Boundaries
 
 - Package Control PRs, tags/releases, hosted package uploads, and channel/repository mutation require explicit authorization.
 - Do not add `.no-sublime-package`, binary dependencies, or manual hosting unless the package actually requires unpacked/native artifacts.
-- Route cross-editor or shared language-server design to `$editor-extension-router`.
+- When the request expands into cross-editor architecture or shared protocol design, make that decision from current platform capabilities and repository evidence. Never stop to locate or install a companion skill.
