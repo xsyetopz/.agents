@@ -1,0 +1,53 @@
+{
+	"name": "__EXTENSION_NAME__",
+	"displayName": "__DISPLAY_NAME__",
+	"description": "__DESCRIPTION__",
+	"version": "0.1.0",
+	"publisher": "__PUBLISHER__",
+	"license": "__LICENSE__",
+	"packageManager": "bun@1.4.0",
+	"engines": {
+		"vscode": "__VSCODE_ENGINE__"
+	},
+	"categories": [
+		"Other"
+	],
+	"main": "./dist/extension.js",
+	"browser": "./dist/browser.js",
+	"activationEvents": [],
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": true
+		},
+		"virtualWorkspaces": true
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "__EXTENSION_NAME__.hello",
+				"title": "Hello from __DISPLAY_NAME__"
+			}
+		]
+	},
+	"scripts": {
+		"build": "bun scripts/package.mjs",
+		"check": "bun run check:biome && bun run typecheck && bun test && bun run check:build",
+		"check:biome": "biome check --max-diagnostics 16384",
+		"check:build": "bun scripts/package.mjs --check",
+		"format": "biome check --write --max-diagnostics 16384",
+		"package": "bun run check && bun run build && bunx vsce package --no-dependencies",
+		"test": "bun test",
+		"typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.test.json"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.10",
+		"@types/bun": "1.4.0",
+		"@types/node": "__TYPES_NODE_VERSION__",
+		"@types/vscode": "__TYPES_VSCODE_VERSION__",
+		"@vscode/vsce": "3.9.2",
+		"typescript": "7.0.2"
+	},
+	"trustedDependencies": [
+		"@biomejs/biome"
+	]
+}
