@@ -1,0 +1,4 @@
+interface:
+  display_name: "Neovim Plugin Development"
+  short_description: "Build robust Lua and runtimepath plugins"
+  default_prompt: "Use $neovim-plugin-development to implement or audit this plugin against its Neovim floor, runtime lifecycle, public Lua API, isolated tests, health checks, and release contract."
