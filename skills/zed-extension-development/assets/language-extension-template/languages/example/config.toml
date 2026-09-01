@@ -1,0 +1,5 @@
+name = "__LANGUAGE_NAME__"
+grammar = "__GRAMMAR_ID__"
+path_suffixes = ["__FILE_EXTENSION__"]
+line_comments = ["__LINE_COMMENT__ "]
+tab_size = 4

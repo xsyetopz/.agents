@@ -1,0 +1,11 @@
+id = "__EXTENSION_ID__"
+name = "__EXTENSION_NAME__"
+version = "0.1.0"
+schema_version = 1
+authors = ["__AUTHOR__"]
+description = "__DESCRIPTION__"
+repository = "__REPOSITORY_URL__"
+
+[grammars.__GRAMMAR_ID__]
+repository = "__TREE_SITTER_REPOSITORY__"
+rev = "__TREE_SITTER_REVISION__"
