@@ -6,7 +6,7 @@
 set -Eeuo pipefail
 
 readonly CLI_VERSION="1.5.22"
-readonly SKILL_NAME="repository-documentation"
+readonly SKILL_NAME="repository-docs"
 readonly TARGET_AGENT="codex"
 
 die() {
@@ -21,7 +21,7 @@ usage() {
 Usage: RUNNER=bunx|bunx-bun SOURCE=/path/to/my-agent-skills-btw scripts/skills_cli_smoke.sh
 
 Runs a network-backed, project-scoped add/list/remove probe with the pinned
-Vercel skills CLI. The fixture installs repository-documentation alongside one unrelated
+Vercel skills CLI. The fixture installs repository-docs alongside one unrelated
 local skill, then proves targeted removal preserves that unrelated skill.
 SOURCE defaults to the repository containing this script. The fixture, HOME,
 and CODEX_HOME are temporary and are removed on exit.
@@ -125,7 +125,7 @@ name: smoke-unrelated
 description: Disposable unrelated skill used to prove targeted removal preserves neighbors.
 ---
 
-This fixture skill must remain installed while repository-documentation is removed.
+This fixture skill must remain installed while repository-docs is removed.
 EOF
 
 tree_digest() {
@@ -216,11 +216,11 @@ with open(sys.argv[1], encoding="utf-8") as handle:
 if not isinstance(rows, list) or len(rows) != 2:
     raise SystemExit(f"expected two project rows, got {rows!r}")
 by_name = {row.get("name"): row for row in rows}
-if set(by_name) != {"smoke-unrelated", "repository-documentation"}:
+if set(by_name) != {"smoke-unrelated", "repository-docs"}:
     raise SystemExit(f"unexpected project names: {by_name!r}")
 if by_name["smoke-unrelated"] != baseline[0]:
     raise SystemExit("unrelated list row changed during selected install")
-selected = by_name["repository-documentation"]
+selected = by_name["repository-docs"]
 if selected.get("scope") != "project" or selected.get("path") != sys.argv[3]:
     raise SystemExit(f"unexpected selected row: {selected!r}")
 if selected.get("sourceType") != "local" or selected.get("agents") != ["Codex"]:
@@ -241,11 +241,11 @@ with open(sys.argv[2], encoding="utf-8") as handle:
 if data.get("version") != 1:
     raise SystemExit(f"unexpected lock version: {data!r}")
 skills = data.get("skills")
-if not isinstance(skills, dict) or set(skills) != {"smoke-unrelated", "repository-documentation"}:
+if not isinstance(skills, dict) or set(skills) != {"smoke-unrelated", "repository-docs"}:
     raise SystemExit(f"expected exactly two selected skills in lock: {skills!r}")
 if skills["smoke-unrelated"] != baseline["skills"]["smoke-unrelated"]:
     raise SystemExit("unrelated lock entry changed during selected install")
-entry = skills["repository-documentation"]
+entry = skills["repository-docs"]
 if entry.get("sourceType") != "local" or not entry.get("computedHash"):
     raise SystemExit(f"unexpected selected lock entry: {entry!r}")
 PY
@@ -260,7 +260,7 @@ import sys
 
 with open(sys.argv[1], encoding="utf-8") as handle:
     rows = json.load(handle)
-matches = [row for row in rows if row.get("name") == "repository-documentation" and row.get("path") == sys.argv[2]]
+matches = [row for row in rows if row.get("name") == "repository-docs" and row.get("path") == sys.argv[2]]
 if len(matches) != 1:
     raise SystemExit(f"expected one shared-target row, got {matches!r}")
 agents = matches[0].get("agents")

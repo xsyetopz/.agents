@@ -31,5 +31,5 @@ Capture the decision, context, owners, constraints, quality scenarios, acceptanc
 - Nontrivial topology requires explicit alternatives, rejected choices, migration order, and measurable quality scenarios.
 - Warnings and blocking diagnostics remain at their owner until repaired; exclusions, ignores, advisory modes, threshold changes, and reduced tests leave the architecture uncorrected.
 - Keep public contracts stable unless the authorized migration records the change and rollback path.
-- Route repository governance to `$repository-documentation`, pipeline gates to `$git-ci-cd`, and prompt or tool-routing design to a dedicated prompt-audit workflow.
+- Route repository governance to `$repository-docs`, pipeline gates to `$git-ci-cd`, and prompt or tool-routing design to a dedicated prompt-audit workflow.
 - Use repository-native checks and formats; keep policy, evidence, and reports in existing repository-owned forms.

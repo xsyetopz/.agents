@@ -24,5 +24,5 @@ Define the obsolete surface, replacement, consumers, public reach, retained hist
 - A cleanup request authorizes mutation only for the explicit repository and scope.
 - Keyword matches can be active contracts, historical records, fixtures, external terms, or false positives.
 - The canonical replacement must be live before removal; the resulting graph contains one supported path and no new alias, wrapper, fallback, re-export, or shadow path.
-- Route active migration design to `$architecture-boundaries`, documentation history to `$repository-documentation`, and skill-package structure to a dedicated skill-authoring workflow.
+- Route active migration design to `$architecture-boundaries`, documentation history to `$repository-docs`, and skill-package structure to a dedicated skill-authoring workflow.
 - Use established repository formats and canonical inputs; keep new output in existing repository-owned forms.

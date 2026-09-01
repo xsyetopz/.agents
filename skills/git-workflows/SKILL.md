@@ -56,5 +56,5 @@ The subject convention complements this contract; a valid subject never makes a 
 - Existing repository-owned commit and contribution guidance wins over fallback policy.
 - A tracked client hook applies only where installed and cannot establish hosted merge policy or behavior in other clones.
 - Recommend the simplest integration model that meets measured constraints and keep policy distinct from observed enforcement.
-- Route hosted API work to `$git-actions`, pipeline implementation to `$git-ci-cd`, and contributor documentation or CODEOWNERS to `$repository-documentation`.
+- Route hosted API work to `$git-actions`, pipeline implementation to `$git-ci-cd`, and contributor documentation or CODEOWNERS to `$repository-docs`.
 - Use established Git mechanisms and repository-owned formats; keep new output in existing forms.

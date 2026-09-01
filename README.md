@@ -19,31 +19,31 @@ User scope:
 
 ```bash
 mkdir -p ~/.agents/skills
-cp -R skills/repository-documentation ~/.agents/skills/
+cp -R skills/repository-docs ~/.agents/skills/
 ```
 
 Project scope:
 
 ```bash
 mkdir -p .agents/skills
-cp -R skills/repository-documentation .agents/skills/
+cp -R skills/repository-docs .agents/skills/
 ```
 
 The pinned Skills CLI can copy one package from GitHub:
 
 ```bash
 bunx --yes skills@1.5.22 add xsyetopz/.agents \
-  --skill repository-documentation --agent codex --copy -y
+  --skill repository-docs --agent codex --copy -y
 
 bunx --bun skills@1.5.22 add xsyetopz/.agents \
-  --skill repository-documentation --agent codex --copy -y
+  --skill repository-docs --agent codex --copy -y
 ```
 
 GitHub source: [xsyetopz/.agents](https://github.com/xsyetopz/.agents).
 For a local checkout, replace `xsyetopz/.agents` with
 `/path/to/.agents`.
 
-Replace `repository-documentation` with the package name you need.
+Replace `repository-docs` with the package name you need.
 
 To inspect a project-scoped install, list the selected agent in JSON. Use
 either runner; the project list should include the copied package and
@@ -51,25 +51,25 @@ either runner; the project list should include the copied package and
 
 ```bash
 bunx --yes skills@1.5.22 list --agent codex --json
-test -f .agents/skills/repository-documentation/SKILL.md
+test -f .agents/skills/repository-docs/SKILL.md
 test -f skills-lock.json
 python3 - <<'PY'
 import json
 from pathlib import Path
 
 lock = json.loads(Path("skills-lock.json").read_text())
-assert "repository-documentation" in lock.get("skills", {})
+assert "repository-docs" in lock.get("skills", {})
 PY
 
 bunx --bun skills@1.5.22 list --agent codex --json
-test -f .agents/skills/repository-documentation/SKILL.md
+test -f .agents/skills/repository-docs/SKILL.md
 test -f skills-lock.json
 python3 - <<'PY'
 import json
 from pathlib import Path
 
 lock = json.loads(Path("skills-lock.json").read_text())
-assert "repository-documentation" in lock.get("skills", {})
+assert "repository-docs" in lock.get("skills", {})
 PY
 ```
 
@@ -77,24 +77,24 @@ For the disposable project fixture used above, remove the selected package with
 one runner and the pinned command shape `remove --skill <name> --agent codex -y`:
 
 ```bash
-bunx --yes skills@1.5.22 remove --skill repository-documentation --agent codex -y
-bunx --bun skills@1.5.22 remove --skill repository-documentation --agent codex -y
+bunx --yes skills@1.5.22 remove --skill repository-docs --agent codex -y
+bunx --bun skills@1.5.22 remove --skill repository-docs --agent codex -y
 ```
 
 After removal, verify both the list and lock metadata with either runner:
 
 ```bash
 bunx --yes skills@1.5.22 list --agent codex --json
-# In a fixture containing only repository-documentation, the output above is [].
+# In a fixture containing only repository-docs, the output above is [].
 bunx --bun skills@1.5.22 list --agent codex --json
 # The same selected-only fixture also reports [].
-test ! -e .agents/skills/repository-documentation
+test ! -e .agents/skills/repository-docs
 python3 - <<'PY'
 import json
 from pathlib import Path
 
 lock = json.loads(Path("skills-lock.json").read_text())
-assert "repository-documentation" not in lock.get("skills", {})
+assert "repository-docs" not in lock.get("skills", {})
 PY
 ```
 
@@ -115,9 +115,6 @@ RUNNER=bunx-bun SOURCE="$PWD" bash scripts/skills_cli_smoke.sh
 ```
 
 ## Check the repository
-
-Prompt-facing repository guidance follows the concise GPT-5.6 rules in
-[GPT-5.6 prompt style](skills/repository-documentation/references/gpt56-prompt-style.md).
 
 ```bash
 for d in skills/*; do
